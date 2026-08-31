@@ -1,0 +1,3077 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 1,
+  "title": "pity-pawty",
+  "song_version": 2,
+  "source_yaml": "pity-pawty-v2.yaml",
+  "source_audio": "pity-pawty-v2.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "generated_at": "2026-08-31T22:32:47+00:00",
+  "stats": {
+    "lyric_words": 431,
+    "recognised_words": 360,
+    "matched_words": 331,
+    "coverage": 0.768
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "Oh...",
+      "start": 1.492,
+      "end": 1.752,
+      "words": [
+        {
+          "text": "Oh...",
+          "start": 1.492,
+          "end": 1.752,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "Did my invitations disappear...?",
+      "start": 2.412,
+      "end": 5.174,
+      "words": [
+        {
+          "text": "Did",
+          "start": 2.412,
+          "end": 2.593,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 2.653,
+          "end": 2.893,
+          "matched": true
+        },
+        {
+          "text": "invitations",
+          "start": 2.933,
+          "end": 3.893,
+          "matched": true
+        },
+        {
+          "text": "disappear...?",
+          "start": 3.933,
+          "end": 5.174,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "Why'd I put my paws on every cursive letter?",
+      "start": 5.654,
+      "end": 8.916,
+      "words": [
+        {
+          "text": "Why'd",
+          "start": 5.654,
+          "end": 5.914,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 5.974,
+          "end": 6.075,
+          "matched": true
+        },
+        {
+          "text": "put",
+          "start": 6.115,
+          "end": 6.295,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 6.335,
+          "end": 6.475,
+          "matched": true
+        },
+        {
+          "text": "paws",
+          "start": 6.515,
+          "end": 6.815,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 6.915,
+          "end": 6.995,
+          "matched": true
+        },
+        {
+          "text": "every",
+          "start": 7.095,
+          "end": 7.335,
+          "matched": true
+        },
+        {
+          "text": "cursive",
+          "start": 7.395,
+          "end": 7.956,
+          "matched": true
+        },
+        {
+          "text": "letter?",
+          "start": 8.096,
+          "end": 8.916,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "Tell me why the hell no human's here",
+      "start": 9.116,
+      "end": 12.098,
+      "words": [
+        {
+          "text": "Tell",
+          "start": 9.116,
+          "end": 9.417,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 9.437,
+          "end": 9.557,
+          "matched": true
+        },
+        {
+          "text": "why",
+          "start": 9.597,
+          "end": 9.817,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 9.857,
+          "end": 9.997,
+          "matched": true
+        },
+        {
+          "text": "hell",
+          "start": 10.037,
+          "end": 10.277,
+          "matched": true
+        },
+        {
+          "text": "no",
+          "start": 10.337,
+          "end": 10.617,
+          "matched": true
+        },
+        {
+          "text": "human's",
+          "start": 10.717,
+          "end": 11.478,
+          "matched": true
+        },
+        {
+          "text": "here",
+          "start": 11.578,
+          "end": 12.098,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "Tell me what to do to make them all scratch better",
+      "start": 12.598,
+      "end": 15.84,
+      "words": [
+        {
+          "text": "Tell",
+          "start": 12.598,
+          "end": 12.859,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 12.899,
+          "end": 12.999,
+          "matched": true
+        },
+        {
+          "text": "what",
+          "start": 13.079,
+          "end": 13.259,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 13.319,
+          "end": 13.419,
+          "matched": true
+        },
+        {
+          "text": "do",
+          "start": 13.499,
+          "end": 13.739,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 13.779,
+          "end": 13.899,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 13.939,
+          "end": 14.159,
+          "matched": true
+        },
+        {
+          "text": "them",
+          "start": 14.199,
+          "end": 14.319,
+          "matched": true
+        },
+        {
+          "text": "all",
+          "start": 14.48,
+          "end": 14.66,
+          "matched": true
+        },
+        {
+          "text": "scratch",
+          "start": 14.72,
+          "end": 15.12,
+          "matched": true
+        },
+        {
+          "text": "better",
+          "start": 15.24,
+          "end": 15.84,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "Maybe it's a cruel joke on me",
+      "start": 16.1,
+      "end": 18.522,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 16.1,
+          "end": 16.541,
+          "matched": true
+        },
+        {
+          "text": "it's",
+          "start": 16.641,
+          "end": 16.821,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 16.881,
+          "end": 16.921,
+          "matched": true
+        },
+        {
+          "text": "cruel",
+          "start": 16.981,
+          "end": 17.361,
+          "matched": true
+        },
+        {
+          "text": "joke",
+          "start": 17.421,
+          "end": 17.721,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 18.062,
+          "end": 18.242,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 18.322,
+          "end": 18.522,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "Whatever, whatever",
+      "start": 18.602,
+      "end": 19.783,
+      "words": [
+        {
+          "text": "Whatever,",
+          "start": 18.602,
+          "end": 19.162,
+          "matched": true
+        },
+        {
+          "text": "whatever",
+          "start": 19.242,
+          "end": 19.783,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "Just means there's less chunk annoying me",
+      "start": 19.843,
+      "end": 22.004,
+      "words": [
+        {
+          "text": "Just",
+          "start": 19.843,
+          "end": 20.003,
+          "matched": true
+        },
+        {
+          "text": "means",
+          "start": 20.043,
+          "end": 20.243,
+          "matched": true
+        },
+        {
+          "text": "there's",
+          "start": 20.263,
+          "end": 20.423,
+          "matched": true
+        },
+        {
+          "text": "less",
+          "start": 20.463,
+          "end": 20.703,
+          "matched": true
+        },
+        {
+          "text": "chunk",
+          "start": 20.843,
+          "end": 21.143,
+          "matched": true
+        },
+        {
+          "text": "annoying",
+          "start": 21.203,
+          "end": 21.724,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 21.804,
+          "end": 22.004,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "Forever, forever",
+      "start": 22.004,
+      "end": 23.285,
+      "words": [
+        {
+          "text": "Forever,",
+          "start": 22.004,
+          "end": 22.664,
+          "matched": false
+        },
+        {
+          "text": "forever",
+          "start": 22.664,
+          "end": 23.285,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "It's my Paw tea, and I'll bark if I want to",
+      "start": 23.325,
+      "end": 27.226,
+      "words": [
+        {
+          "text": "It's",
+          "start": 23.325,
+          "end": 23.465,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 23.465,
+          "end": 24.012,
+          "matched": false
+        },
+        {
+          "text": "Paw",
+          "start": 24.012,
+          "end": 24.558,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 24.558,
+          "end": 25.105,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 25.105,
+          "end": 25.205,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 25.305,
+          "end": 25.485,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 25.525,
+          "end": 25.945,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 26.025,
+          "end": 26.105,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 26.245,
+          "end": 26.325,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 26.365,
+          "end": 26.886,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 26.966,
+          "end": 27.226,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "Bark if I want to (bark, bark, bark)",
+      "start": 27.266,
+      "end": 28.976,
+      "words": [
+        {
+          "text": "Bark",
+          "start": 27.266,
+          "end": 27.686,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 27.766,
+          "end": 27.846,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 28.006,
+          "end": 28.086,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 28.126,
+          "end": 28.646,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 28.706,
+          "end": 28.946,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 28.946,
+          "end": 28.956,
+          "matched": false
+        },
+        {
+          "text": "bark,",
+          "start": 28.956,
+          "end": 28.966,
+          "matched": false
+        },
+        {
+          "text": "bark)",
+          "start": 28.966,
+          "end": 28.976,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "I'll bark until the chunk's kicked out of my place",
+      "start": 28.976,
+      "end": 31.927,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 28.976,
+          "end": 28.986,
+          "matched": false
+        },
+        {
+          "text": "bark",
+          "start": 28.986,
+          "end": 29.406,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 29.466,
+          "end": 29.846,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 29.886,
+          "end": 29.966,
+          "matched": true
+        },
+        {
+          "text": "chunk's",
+          "start": 30.006,
+          "end": 30.366,
+          "matched": true
+        },
+        {
+          "text": "kicked",
+          "start": 30.446,
+          "end": 30.886,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 31.066,
+          "end": 31.206,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 31.246,
+          "end": 31.326,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 31.346,
+          "end": 31.526,
+          "matched": true
+        },
+        {
+          "text": "place",
+          "start": 31.586,
+          "end": 31.927,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "I'll bark until my pity Paw tea's in flames",
+      "start": 32.087,
+      "end": 35.907,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 32.087,
+          "end": 32.207,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 32.227,
+          "end": 32.447,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 32.507,
+          "end": 32.887,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 32.907,
+          "end": 33.047,
+          "matched": true
+        },
+        {
+          "text": "pity",
+          "start": 33.087,
+          "end": 33.467,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 33.467,
+          "end": 33.977,
+          "matched": false
+        },
+        {
+          "text": "tea's",
+          "start": 33.977,
+          "end": 34.487,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 34.487,
+          "end": 34.627,
+          "matched": true
+        },
+        {
+          "text": "flames",
+          "start": 35.047,
+          "end": 35.907,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "It's my Paw tea, and I'll bark if I want to",
+      "start": 35.987,
+      "end": 39.388,
+      "words": [
+        {
+          "text": "It's",
+          "start": 35.987,
+          "end": 36.127,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 36.167,
+          "end": 36.507,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 36.507,
+          "end": 36.918,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 36.918,
+          "end": 37.328,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 37.328,
+          "end": 37.408,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 37.488,
+          "end": 37.668,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 37.728,
+          "end": 38.128,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 38.208,
+          "end": 38.288,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 38.428,
+          "end": 38.528,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 38.568,
+          "end": 39.068,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 39.148,
+          "end": 39.388,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "bark if I want to (bark, bark, bark)",
+      "start": 39.428,
+      "end": 42.482,
+      "words": [
+        {
+          "text": "bark",
+          "start": 39.428,
+          "end": 39.868,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 39.948,
+          "end": 40.028,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 40.168,
+          "end": 40.268,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 40.328,
+          "end": 40.828,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 40.868,
+          "end": 41.148,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 41.168,
+          "end": 41.588,
+          "matched": true
+        },
+        {
+          "text": "bark,",
+          "start": 41.588,
+          "end": 42.035,
+          "matched": false
+        },
+        {
+          "text": "bark)",
+          "start": 42.035,
+          "end": 42.482,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "I'll bark until the chunk's kicked out of my place",
+      "start": 42.482,
+      "end": 45.829,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 42.482,
+          "end": 42.929,
+          "matched": false
+        },
+        {
+          "text": "bark",
+          "start": 42.929,
+          "end": 43.329,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 43.409,
+          "end": 43.769,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 43.809,
+          "end": 43.889,
+          "matched": true
+        },
+        {
+          "text": "chunk's",
+          "start": 43.929,
+          "end": 44.269,
+          "matched": true
+        },
+        {
+          "text": "kicked",
+          "start": 44.369,
+          "end": 44.809,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 44.989,
+          "end": 45.129,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 45.169,
+          "end": 45.229,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 45.289,
+          "end": 45.449,
+          "matched": true
+        },
+        {
+          "text": "place",
+          "start": 45.509,
+          "end": 45.829,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "I'll bark until my pity Paw tea's in flames",
+      "start": 45.989,
+      "end": 49.91,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 45.989,
+          "end": 46.129,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 46.149,
+          "end": 46.369,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 46.449,
+          "end": 46.809,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 46.829,
+          "end": 46.969,
+          "matched": true
+        },
+        {
+          "text": "pity",
+          "start": 47.009,
+          "end": 47.389,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 47.389,
+          "end": 47.889,
+          "matched": false
+        },
+        {
+          "text": "tea's",
+          "start": 47.889,
+          "end": 48.39,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 48.39,
+          "end": 48.53,
+          "matched": true
+        },
+        {
+          "text": "flames",
+          "start": 48.97,
+          "end": 49.91,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Maybe if I grumble like a bell",
+      "start": 50.91,
+      "end": 53.892,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 50.91,
+          "end": 51.35,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 51.47,
+          "end": 51.591,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 51.691,
+          "end": 51.771,
+          "matched": true
+        },
+        {
+          "text": "grumble",
+          "start": 51.811,
+          "end": 52.311,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 52.671,
+          "end": 52.951,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 53.071,
+          "end": 53.151,
+          "matched": true
+        },
+        {
+          "text": "bell",
+          "start": 53.352,
+          "end": 53.892,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "I wouldn't have been trapped inside this fluffing-hell",
+      "start": 54.332,
+      "end": 56.674,
+      "words": [
+        {
+          "text": "I",
+          "start": 54.332,
+          "end": 54.392,
+          "matched": true
+        },
+        {
+          "text": "wouldn't",
+          "start": 54.432,
+          "end": 54.853,
+          "matched": true
+        },
+        {
+          "text": "have",
+          "start": 54.893,
+          "end": 55.053,
+          "matched": true
+        },
+        {
+          "text": "been",
+          "start": 55.093,
+          "end": 55.233,
+          "matched": true
+        },
+        {
+          "text": "trapped",
+          "start": 55.253,
+          "end": 55.553,
+          "matched": true
+        },
+        {
+          "text": "inside",
+          "start": 55.593,
+          "end": 55.933,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 55.973,
+          "end": 56.093,
+          "matched": true
+        },
+        {
+          "text": "fluffing-hell",
+          "start": 56.113,
+          "end": 56.674,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "Maybe if I barked out a grumbling spell",
+      "start": 57.874,
+      "end": 60.836,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 57.874,
+          "end": 58.335,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 58.355,
+          "end": 58.395,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 58.655,
+          "end": 58.735,
+          "matched": true
+        },
+        {
+          "text": "barked",
+          "start": 58.775,
+          "end": 59.075,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 59.275,
+          "end": 59.475,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 59.515,
+          "end": 59.575,
+          "matched": true
+        },
+        {
+          "text": "grumbling",
+          "start": 59.635,
+          "end": 60.156,
+          "matched": true
+        },
+        {
+          "text": "spell",
+          "start": 60.216,
+          "end": 60.836,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "That chunk would be put back in his ball-less cell",
+      "start": 60.936,
+      "end": 64.098,
+      "words": [
+        {
+          "text": "That",
+          "start": 60.936,
+          "end": 61.276,
+          "matched": true
+        },
+        {
+          "text": "chunk",
+          "start": 61.336,
+          "end": 61.617,
+          "matched": true
+        },
+        {
+          "text": "would",
+          "start": 61.637,
+          "end": 61.817,
+          "matched": true
+        },
+        {
+          "text": "be",
+          "start": 61.837,
+          "end": 61.957,
+          "matched": true
+        },
+        {
+          "text": "put",
+          "start": 62.037,
+          "end": 62.217,
+          "matched": true
+        },
+        {
+          "text": "back",
+          "start": 62.277,
+          "end": 62.537,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 62.597,
+          "end": 62.697,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 62.737,
+          "end": 62.937,
+          "matched": true
+        },
+        {
+          "text": "ball-less",
+          "start": 62.937,
+          "end": 63.758,
+          "matched": false
+        },
+        {
+          "text": "cell",
+          "start": 63.758,
+          "end": 64.098,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "Maybe it's a cruel joke on me",
+      "start": 64.839,
+      "end": 67.24,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 64.839,
+          "end": 65.299,
+          "matched": true
+        },
+        {
+          "text": "it's",
+          "start": 65.399,
+          "end": 65.559,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 65.619,
+          "end": 65.639,
+          "matched": true
+        },
+        {
+          "text": "cruel",
+          "start": 65.719,
+          "end": 66.099,
+          "matched": true
+        },
+        {
+          "text": "joke",
+          "start": 66.159,
+          "end": 66.56,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 66.82,
+          "end": 67.02,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 67.08,
+          "end": 67.24,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "Whatever, whatever",
+      "start": 67.32,
+      "end": 68.521,
+      "words": [
+        {
+          "text": "Whatever,",
+          "start": 67.32,
+          "end": 67.88,
+          "matched": true
+        },
+        {
+          "text": "whatever",
+          "start": 67.96,
+          "end": 68.521,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "Just means there's way more treats for me",
+      "start": 68.581,
+      "end": 70.522,
+      "words": [
+        {
+          "text": "Just",
+          "start": 68.581,
+          "end": 68.741,
+          "matched": true
+        },
+        {
+          "text": "means",
+          "start": 68.801,
+          "end": 69.001,
+          "matched": true
+        },
+        {
+          "text": "there's",
+          "start": 69.021,
+          "end": 69.181,
+          "matched": true
+        },
+        {
+          "text": "way",
+          "start": 69.221,
+          "end": 69.481,
+          "matched": true
+        },
+        {
+          "text": "more",
+          "start": 69.501,
+          "end": 69.761,
+          "matched": true
+        },
+        {
+          "text": "treats",
+          "start": 69.822,
+          "end": 70.242,
+          "matched": true
+        },
+        {
+          "text": "for",
+          "start": 70.302,
+          "end": 70.462,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 70.482,
+          "end": 70.522,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "Forever, forever",
+      "start": 70.522,
+      "end": 71.603,
+      "words": [
+        {
+          "text": "Forever,",
+          "start": 70.522,
+          "end": 71.062,
+          "matched": false
+        },
+        {
+          "text": "forever",
+          "start": 71.062,
+          "end": 71.603,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "It's my Paw tea, and I'll bark if I want to",
+      "start": 71.603,
+      "end": 74.304,
+      "words": [
+        {
+          "text": "It's",
+          "start": 71.603,
+          "end": 72.243,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 72.303,
+          "end": 72.543,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 72.543,
+          "end": 73.194,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 73.194,
+          "end": 73.844,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 73.844,
+          "end": 73.964,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 74.064,
+          "end": 74.264,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 74.264,
+          "end": 74.272,
+          "matched": false
+        },
+        {
+          "text": "if",
+          "start": 74.272,
+          "end": 74.28,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 74.28,
+          "end": 74.288,
+          "matched": false
+        },
+        {
+          "text": "want",
+          "start": 74.288,
+          "end": 74.296,
+          "matched": false
+        },
+        {
+          "text": "to",
+          "start": 74.296,
+          "end": 74.304,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "bark if I want to (bark, bark, bark)",
+      "start": 74.304,
+      "end": 75.985,
+      "words": [
+        {
+          "text": "bark",
+          "start": 74.304,
+          "end": 74.724,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 74.784,
+          "end": 74.884,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 75.004,
+          "end": 75.084,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 75.144,
+          "end": 75.625,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 75.705,
+          "end": 75.925,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 75.925,
+          "end": 75.945,
+          "matched": false
+        },
+        {
+          "text": "bark,",
+          "start": 75.945,
+          "end": 75.965,
+          "matched": false
+        },
+        {
+          "text": "bark)",
+          "start": 75.965,
+          "end": 75.985,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "I'll bark until the chunk's kicked out of my place",
+      "start": 75.985,
+      "end": 80.687,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 75.985,
+          "end": 76.005,
+          "matched": false
+        },
+        {
+          "text": "bark",
+          "start": 76.005,
+          "end": 76.845,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 78.246,
+          "end": 78.606,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 78.646,
+          "end": 78.726,
+          "matched": true
+        },
+        {
+          "text": "chunk's",
+          "start": 78.766,
+          "end": 79.106,
+          "matched": true
+        },
+        {
+          "text": "kicked",
+          "start": 79.207,
+          "end": 79.487,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 79.827,
+          "end": 79.967,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 80.007,
+          "end": 80.087,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 80.127,
+          "end": 80.287,
+          "matched": true
+        },
+        {
+          "text": "place",
+          "start": 80.347,
+          "end": 80.687,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "I'll bark until my pity PAW tea's in flames",
+      "start": 80.827,
+      "end": 84.669,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 80.827,
+          "end": 80.967,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 80.987,
+          "end": 81.228,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 81.268,
+          "end": 81.648,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 81.688,
+          "end": 81.828,
+          "matched": true
+        },
+        {
+          "text": "pity",
+          "start": 81.868,
+          "end": 82.248,
+          "matched": true
+        },
+        {
+          "text": "PAW",
+          "start": 82.248,
+          "end": 82.799,
+          "matched": false
+        },
+        {
+          "text": "tea's",
+          "start": 82.799,
+          "end": 83.349,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 83.349,
+          "end": 83.389,
+          "matched": true
+        },
+        {
+          "text": "flames",
+          "start": 83.809,
+          "end": 84.669,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "It's my Paw tea, and I'll bark if I want to",
+      "start": 84.749,
+      "end": 86.47,
+      "words": [
+        {
+          "text": "It's",
+          "start": 84.749,
+          "end": 84.89,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 84.95,
+          "end": 85.25,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 85.25,
+          "end": 85.67,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 85.67,
+          "end": 86.09,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 86.09,
+          "end": 86.17,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 86.23,
+          "end": 86.43,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 86.43,
+          "end": 86.438,
+          "matched": false
+        },
+        {
+          "text": "if",
+          "start": 86.438,
+          "end": 86.446,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 86.446,
+          "end": 86.454,
+          "matched": false
+        },
+        {
+          "text": "want",
+          "start": 86.454,
+          "end": 86.462,
+          "matched": false
+        },
+        {
+          "text": "to",
+          "start": 86.462,
+          "end": 86.47,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "bark if I want to (bark, bark, bark)",
+      "start": 86.47,
+      "end": 88.171,
+      "words": [
+        {
+          "text": "bark",
+          "start": 86.47,
+          "end": 86.891,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 86.971,
+          "end": 87.051,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 87.191,
+          "end": 87.271,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 87.331,
+          "end": 87.831,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 87.891,
+          "end": 88.111,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 88.111,
+          "end": 88.131,
+          "matched": false
+        },
+        {
+          "text": "bark,",
+          "start": 88.131,
+          "end": 88.151,
+          "matched": false
+        },
+        {
+          "text": "bark)",
+          "start": 88.151,
+          "end": 88.171,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "I'll bark until the chunk's kicked out of my place",
+      "start": 88.171,
+      "end": 94.615,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 88.171,
+          "end": 88.191,
+          "matched": false
+        },
+        {
+          "text": "bark",
+          "start": 88.191,
+          "end": 89.032,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 90.192,
+          "end": 92.534,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 92.574,
+          "end": 92.654,
+          "matched": true
+        },
+        {
+          "text": "chunk's",
+          "start": 92.694,
+          "end": 93.014,
+          "matched": true
+        },
+        {
+          "text": "kicked",
+          "start": 93.134,
+          "end": 93.454,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 93.754,
+          "end": 93.894,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 93.934,
+          "end": 94.014,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 94.054,
+          "end": 94.214,
+          "matched": true
+        },
+        {
+          "text": "place",
+          "start": 94.274,
+          "end": 94.615,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "I'll bark until my pity PAW tea's in flames",
+      "start": 94.755,
+      "end": 98.537,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 94.755,
+          "end": 94.875,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 94.895,
+          "end": 95.155,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 95.215,
+          "end": 95.575,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 95.595,
+          "end": 95.755,
+          "matched": true
+        },
+        {
+          "text": "pity",
+          "start": 95.815,
+          "end": 96.175,
+          "matched": true
+        },
+        {
+          "text": "PAW",
+          "start": 96.175,
+          "end": 96.736,
+          "matched": false
+        },
+        {
+          "text": "tea's",
+          "start": 96.736,
+          "end": 97.296,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 97.296,
+          "end": 97.336,
+          "matched": true
+        },
+        {
+          "text": "flames",
+          "start": 97.736,
+          "end": 98.537,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "I'm laughin', I'm barkin'",
+      "start": 99.457,
+      "end": 102.478,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 99.457,
+          "end": 99.637,
+          "matched": true
+        },
+        {
+          "text": "laughin',",
+          "start": 99.697,
+          "end": 100.718,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 101.178,
+          "end": 101.398,
+          "matched": true
+        },
+        {
+          "text": "barkin'",
+          "start": 101.438,
+          "end": 102.478,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "It feels like I'm dyin'",
+      "start": 102.858,
+      "end": 105.879,
+      "words": [
+        {
+          "text": "It",
+          "start": 102.858,
+          "end": 103.038,
+          "matched": true
+        },
+        {
+          "text": "feels",
+          "start": 103.158,
+          "end": 103.758,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 103.878,
+          "end": 104.379,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 104.639,
+          "end": 104.879,
+          "matched": true
+        },
+        {
+          "text": "dyin'",
+          "start": 104.919,
+          "end": 105.879,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "I'm laughin', I'm barkin'",
+      "start": 106.379,
+      "end": 109.42,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 106.379,
+          "end": 106.619,
+          "matched": true
+        },
+        {
+          "text": "laughin',",
+          "start": 106.659,
+          "end": 107.86,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 108.14,
+          "end": 108.36,
+          "matched": true
+        },
+        {
+          "text": "barkin'",
+          "start": 108.4,
+          "end": 109.42,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "It feels like I'm dyin'",
+      "start": 109.84,
+      "end": 112.681,
+      "words": [
+        {
+          "text": "It",
+          "start": 109.84,
+          "end": 110.02,
+          "matched": true
+        },
+        {
+          "text": "feels",
+          "start": 110.12,
+          "end": 110.74,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 110.861,
+          "end": 111.341,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 111.601,
+          "end": 111.841,
+          "matched": true
+        },
+        {
+          "text": "dyin'",
+          "start": 111.901,
+          "end": 112.681,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "I'm laughin', I'm barkin'",
+      "start": 112.761,
+      "end": 116.622,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 112.761,
+          "end": 113.601,
+          "matched": true
+        },
+        {
+          "text": "laughin',",
+          "start": 113.641,
+          "end": 114.902,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 115.122,
+          "end": 115.282,
+          "matched": true
+        },
+        {
+          "text": "barkin'",
+          "start": 115.382,
+          "end": 116.622,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l39",
+      "text": "It feels like I'm dyin'",
+      "start": 116.722,
+      "end": 121.924,
+      "words": [
+        {
+          "text": "It",
+          "start": 116.722,
+          "end": 116.942,
+          "matched": true
+        },
+        {
+          "text": "feels",
+          "start": 117.142,
+          "end": 117.703,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 117.803,
+          "end": 118.343,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 118.583,
+          "end": 118.763,
+          "matched": true
+        },
+        {
+          "text": "dyin'",
+          "start": 118.903,
+          "end": 121.924,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l40",
+      "text": "I'm dyin', I'm dyin'",
+      "start": 122.084,
+      "end": 125.885,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 122.084,
+          "end": 122.284,
+          "matched": true
+        },
+        {
+          "text": "dyin',",
+          "start": 122.344,
+          "end": 123.284,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 123.784,
+          "end": 124.024,
+          "matched": true
+        },
+        {
+          "text": "dyin'",
+          "start": 124.084,
+          "end": 125.885,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l41",
+      "text": "It's my Paw tea, and I'll bark if I want to",
+      "start": 126.787,
+      "end": 129.032,
+      "words": [
+        {
+          "text": "It's",
+          "start": 126.787,
+          "end": 126.988,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 127.108,
+          "end": 127.389,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 127.389,
+          "end": 128.02,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 128.02,
+          "end": 128.651,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 128.651,
+          "end": 128.731,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 128.751,
+          "end": 128.871,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 128.891,
+          "end": 129.012,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 129.012,
+          "end": 129.017,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 129.017,
+          "end": 129.022,
+          "matched": false
+        },
+        {
+          "text": "want",
+          "start": 129.022,
+          "end": 129.027,
+          "matched": false
+        },
+        {
+          "text": "to",
+          "start": 129.027,
+          "end": 129.032,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l42",
+      "text": "(If I want to, if I want to)",
+      "start": 129.032,
+      "end": 129.954,
+      "words": [
+        {
+          "text": "(If",
+          "start": 129.032,
+          "end": 129.037,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 129.037,
+          "end": 129.042,
+          "matched": false
+        },
+        {
+          "text": "want",
+          "start": 129.042,
+          "end": 129.047,
+          "matched": false
+        },
+        {
+          "text": "to,",
+          "start": 129.047,
+          "end": 129.052,
+          "matched": false
+        },
+        {
+          "text": "if",
+          "start": 129.052,
+          "end": 129.112,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 129.192,
+          "end": 129.272,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 129.312,
+          "end": 129.533,
+          "matched": true
+        },
+        {
+          "text": "to)",
+          "start": 129.573,
+          "end": 129.954,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l43",
+      "text": "It's my PAW tea, and I'll bark if I want to",
+      "start": 130.074,
+      "end": 133.32,
+      "words": [
+        {
+          "text": "It's",
+          "start": 130.074,
+          "end": 130.575,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 130.635,
+          "end": 130.895,
+          "matched": true
+        },
+        {
+          "text": "PAW",
+          "start": 130.895,
+          "end": 131.517,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 131.517,
+          "end": 132.138,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 132.138,
+          "end": 132.218,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 132.238,
+          "end": 132.338,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 132.358,
+          "end": 132.499,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 132.539,
+          "end": 132.619,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 132.679,
+          "end": 132.779,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 132.819,
+          "end": 133.08,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 133.14,
+          "end": 133.32,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l44",
+      "text": "(Ah)",
+      "start": 133.32,
+      "end": 135.346,
+      "words": [
+        {
+          "text": "(Ah)",
+          "start": 133.32,
+          "end": 135.346,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l45",
+      "text": "It's my PAW tea, and I'll bark if I want to",
+      "start": 135.346,
+      "end": 137.567,
+      "words": [
+        {
+          "text": "It's",
+          "start": 135.346,
+          "end": 135.606,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 135.826,
+          "end": 136.166,
+          "matched": true
+        },
+        {
+          "text": "PAW",
+          "start": 136.166,
+          "end": 136.767,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 136.767,
+          "end": 137.367,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 137.367,
+          "end": 137.427,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 137.447,
+          "end": 137.547,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 137.547,
+          "end": 137.551,
+          "matched": false
+        },
+        {
+          "text": "if",
+          "start": 137.551,
+          "end": 137.555,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 137.555,
+          "end": 137.559,
+          "matched": false
+        },
+        {
+          "text": "want",
+          "start": 137.559,
+          "end": 137.563,
+          "matched": false
+        },
+        {
+          "text": "to",
+          "start": 137.563,
+          "end": 137.567,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l46",
+      "text": "bark if I want to (bark, bark, bark)",
+      "start": 137.567,
+      "end": 140.147,
+      "words": [
+        {
+          "text": "bark",
+          "start": 137.567,
+          "end": 137.727,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 137.767,
+          "end": 137.827,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 137.907,
+          "end": 137.967,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 138.007,
+          "end": 138.307,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 138.387,
+          "end": 139.307,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 139.307,
+          "end": 139.587,
+          "matched": false
+        },
+        {
+          "text": "bark,",
+          "start": 139.587,
+          "end": 139.867,
+          "matched": false
+        },
+        {
+          "text": "bark)",
+          "start": 139.867,
+          "end": 140.147,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l47",
+      "text": "I'll bark until the chunk's kicked out of my place",
+      "start": 140.147,
+      "end": 145.108,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 140.147,
+          "end": 140.427,
+          "matched": false
+        },
+        {
+          "text": "bark",
+          "start": 140.427,
+          "end": 140.867,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 142.008,
+          "end": 143.028,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 143.068,
+          "end": 143.148,
+          "matched": true
+        },
+        {
+          "text": "chunk's",
+          "start": 143.188,
+          "end": 143.528,
+          "matched": true
+        },
+        {
+          "text": "kicked",
+          "start": 143.628,
+          "end": 144.068,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 144.228,
+          "end": 144.388,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 144.448,
+          "end": 144.508,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 144.548,
+          "end": 144.708,
+          "matched": true
+        },
+        {
+          "text": "place",
+          "start": 144.768,
+          "end": 145.108,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l48",
+      "text": "I'll bark until my pity Paw tea's in flames",
+      "start": 145.128,
+      "end": 149.089,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 145.128,
+          "end": 145.348,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 145.368,
+          "end": 145.628,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 145.708,
+          "end": 146.049,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 146.089,
+          "end": 146.249,
+          "matched": true
+        },
+        {
+          "text": "pity",
+          "start": 146.309,
+          "end": 146.669,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 146.669,
+          "end": 147.159,
+          "matched": false
+        },
+        {
+          "text": "tea's",
+          "start": 147.159,
+          "end": 147.649,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 147.649,
+          "end": 147.789,
+          "matched": true
+        },
+        {
+          "text": "flames",
+          "start": 148.229,
+          "end": 149.089,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l49",
+      "text": "It's my PAW tea, and I'll bark if I want to",
+      "start": 149.189,
+      "end": 150.91,
+      "words": [
+        {
+          "text": "It's",
+          "start": 149.189,
+          "end": 149.329,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 149.389,
+          "end": 149.669,
+          "matched": true
+        },
+        {
+          "text": "PAW",
+          "start": 149.669,
+          "end": 150.089,
+          "matched": false
+        },
+        {
+          "text": "tea,",
+          "start": 150.089,
+          "end": 150.51,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 150.51,
+          "end": 150.61,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 150.69,
+          "end": 150.85,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 150.85,
+          "end": 150.862,
+          "matched": false
+        },
+        {
+          "text": "if",
+          "start": 150.862,
+          "end": 150.874,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 150.874,
+          "end": 150.886,
+          "matched": false
+        },
+        {
+          "text": "want",
+          "start": 150.886,
+          "end": 150.898,
+          "matched": false
+        },
+        {
+          "text": "to",
+          "start": 150.898,
+          "end": 150.91,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l50",
+      "text": "bark if I want to (bark, bark, bark)",
+      "start": 150.91,
+      "end": 156.081,
+      "words": [
+        {
+          "text": "bark",
+          "start": 150.91,
+          "end": 153.05,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 153.13,
+          "end": 153.21,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 153.37,
+          "end": 153.45,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 153.51,
+          "end": 155.731,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 155.791,
+          "end": 156.051,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 156.051,
+          "end": 156.061,
+          "matched": false
+        },
+        {
+          "text": "bark,",
+          "start": 156.061,
+          "end": 156.071,
+          "matched": false
+        },
+        {
+          "text": "bark)",
+          "start": 156.071,
+          "end": 156.081,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l51",
+      "text": "I'll bark until the chunk's kicked out of my place",
+      "start": 156.081,
+      "end": 159.052,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 156.081,
+          "end": 156.091,
+          "matched": false
+        },
+        {
+          "text": "bark",
+          "start": 156.091,
+          "end": 156.511,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 156.591,
+          "end": 156.951,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 156.991,
+          "end": 157.091,
+          "matched": true
+        },
+        {
+          "text": "chunk's",
+          "start": 157.131,
+          "end": 157.451,
+          "matched": true
+        },
+        {
+          "text": "kicked",
+          "start": 157.551,
+          "end": 157.991,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 158.171,
+          "end": 158.331,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 158.371,
+          "end": 158.431,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 158.491,
+          "end": 158.652,
+          "matched": true
+        },
+        {
+          "text": "place",
+          "start": 158.712,
+          "end": 159.052,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l52",
+      "text": "I'll bark until my pity Paw tea's in flames",
+      "start": 159.072,
+      "end": 163.173,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 159.072,
+          "end": 159.312,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 159.332,
+          "end": 159.572,
+          "matched": true
+        },
+        {
+          "text": "until",
+          "start": 159.652,
+          "end": 159.992,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 160.032,
+          "end": 160.172,
+          "matched": true
+        },
+        {
+          "text": "pity",
+          "start": 160.212,
+          "end": 160.592,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 160.592,
+          "end": 161.082,
+          "matched": false
+        },
+        {
+          "text": "tea's",
+          "start": 161.082,
+          "end": 161.572,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 161.572,
+          "end": 161.712,
+          "matched": true
+        },
+        {
+          "text": "flames",
+          "start": 162.152,
+          "end": 163.173,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l53",
+      "text": "It's my Paw tea",
+      "start": 163.333,
+      "end": 163.538,
+      "words": [
+        {
+          "text": "It's",
+          "start": 163.333,
+          "end": 163.493,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 163.493,
+          "end": 163.508,
+          "matched": false
+        },
+        {
+          "text": "Paw",
+          "start": 163.508,
+          "end": 163.523,
+          "matched": false
+        },
+        {
+          "text": "tea",
+          "start": 163.523,
+          "end": 163.538,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l54",
+      "text": "it's-it's my Paw tea",
+      "start": 163.538,
+      "end": 166.815,
+      "words": [
+        {
+          "text": "it's-it's",
+          "start": 163.538,
+          "end": 163.553,
+          "matched": false
+        },
+        {
+          "text": "my",
+          "start": 163.553,
+          "end": 163.833,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 163.833,
+          "end": 165.324,
+          "matched": false
+        },
+        {
+          "text": "tea",
+          "start": 165.324,
+          "end": 166.815,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l55",
+      "text": "It's my Paw tea",
+      "start": 166.815,
+      "end": 167.035,
+      "words": [
+        {
+          "text": "It's",
+          "start": 166.815,
+          "end": 166.975,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 166.975,
+          "end": 166.995,
+          "matched": false
+        },
+        {
+          "text": "Paw",
+          "start": 166.995,
+          "end": 167.015,
+          "matched": false
+        },
+        {
+          "text": "tea",
+          "start": 167.015,
+          "end": 167.035,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l56",
+      "text": "it's-it's my Paw tea",
+      "start": 167.035,
+      "end": 170.278,
+      "words": [
+        {
+          "text": "it's-it's",
+          "start": 167.035,
+          "end": 167.055,
+          "matched": false
+        },
+        {
+          "text": "my",
+          "start": 167.055,
+          "end": 167.295,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 167.295,
+          "end": 168.786,
+          "matched": false
+        },
+        {
+          "text": "tea",
+          "start": 168.786,
+          "end": 170.278,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l57",
+      "text": "It's my Paw tea and I'll bark if I want to",
+      "start": 170.278,
+      "end": 175.403,
+      "words": [
+        {
+          "text": "It's",
+          "start": 170.278,
+          "end": 170.458,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 170.519,
+          "end": 170.999,
+          "matched": true
+        },
+        {
+          "text": "Paw",
+          "start": 170.999,
+          "end": 171.639,
+          "matched": false
+        },
+        {
+          "text": "tea",
+          "start": 171.639,
+          "end": 172.28,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 172.28,
+          "end": 172.561,
+          "matched": true
+        },
+        {
+          "text": "I'll",
+          "start": 172.621,
+          "end": 172.761,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 172.841,
+          "end": 173.542,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 173.702,
+          "end": 173.862,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 174.222,
+          "end": 174.362,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 174.402,
+          "end": 174.963,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 175.063,
+          "end": 175.403,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l58",
+      "text": "bark if I want to (bark, bark, bark, bark, bark)",
+      "start": 175.463,
+      "end": 180.188,
+      "words": [
+        {
+          "text": "bark",
+          "start": 175.463,
+          "end": 175.724,
+          "matched": true
+        },
+        {
+          "text": "if",
+          "start": 175.804,
+          "end": 175.884,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 176.004,
+          "end": 176.104,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 176.164,
+          "end": 176.545,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 176.585,
+          "end": 176.685,
+          "matched": true
+        },
+        {
+          "text": "(bark,",
+          "start": 176.985,
+          "end": 177.425,
+          "matched": true
+        },
+        {
+          "text": "bark,",
+          "start": 177.425,
+          "end": 178.967,
+          "matched": false
+        },
+        {
+          "text": "bark,",
+          "start": 178.967,
+          "end": 179.327,
+          "matched": true
+        },
+        {
+          "text": "bark,",
+          "start": 179.367,
+          "end": 179.768,
+          "matched": true
+        },
+        {
+          "text": "bark)",
+          "start": 179.808,
+          "end": 180.188,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l59",
+      "text": "(woof!!)",
+      "start": 180.248,
+      "end": 180.589,
+      "words": [
+        {
+          "text": "(woof!!)",
+          "start": 180.248,
+          "end": 180.589,
+          "matched": true
+        }
+      ]
+    }
+  ]
+}
