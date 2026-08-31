@@ -1,0 +1,112 @@
+title: dogtushya
+version: 3
+model: minimax H3
+state: active
+genre: pawtatorship
+inspiration: original, stylised from old soviet patriotic songs, like katyusha
+duration: 298
+cover: dogtushya.png
+caption: |
+  Genre preserve the supplied genre, period, and stylistic identity. Approximately 120 BPM. G major target key with solemn E minor and Russian modal colouring in the verses, resolving into a triumphant major-key finale, in 4/4 timing. Late-1930s to 1940s Soviet patriotic mass song in the tradition of wartime songs such as Katyusha, with memorable folk-derived melody, disciplined march rhythm, heroic communal phrasing, and the grandeur of a state anthem praising the motherland and a revered national leader. Favour authentic Soviet concert-hall character, period orchestration, broad melodic writing, solemn devotion building into overwhelming collective triumph, and enormous state concert hall acoustics, with the mix and spatial character appropriate to the era.
+  Vocals Base the lead and supporting vocal treatment on a monumental all-male Soviet choir of deep basses, bass-baritones, baritones, and heroic tenors, with powerful unison passages, octave doubling, disciplined block harmony, antiphonal responses, and occasional commanding solo baritone lines before the full choir returns. English lyrics should be delivered with restrained, authentic Russian-accented diction appropriate to a 1940s Soviet male choir, with firm rolled or tapped consonants and natural Russian vocal colour while avoiding exaggerated or comic pronunciation. Treat lyric control tags such as Choir and Baritone as explicit performer or delivery changes; recurring named or gendered voices should remain recognisably stable. Keep lead, backing, choir, spoken, and character roles clearly separated, and avoid modern vocal processing, pop phrasing, gospel harmony, female vocals, or exaggerated cinematic choir effects.
+  Arrangement Follow the lyric-section timeline Verse 1 → Verse 2 → Chorus → Verse 2 → Bridge → Verse 3 → Bridge → Verse 4 → Chorus → Outro. Transition: Vocal: Powerful all-male choir, bass, baritone, tenor; Transition: Instruments: full symphony orchestra, commanding brass, martial snare drum, timpani, sweeping strings, accordion, low male choir; Transition: stately orchestral introduction in darker minor/modal harmony; Verse 1: restrained grand male choir; Verse 2: broader orchestration and rising confidence; Chorus: powerful major-key patriotic expansion; Bridge: choir much bigger with deep bass foundation and heroic tenor lift; Verse 3: briefly more restrained and declamatory; second Bridge: largest preparatory build with rising brass, strings, snare and choir; Verse 4: fully heroic full ensemble; final Chorus: radiant G major, massive disciplined choir and orchestra; Outro: emphatic repeated tonic cadences and enormous sustained final chord. Instrument lifecycle full symphony orchestra, martial snare drum, timpani, cymbals, commanding brass fanfares, sweeping strings, low strings, woodwinds, accordion, and deep male choir should enter, recede, answer one another, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, harmony, articulation, percussion, choir size, and natural hall ambience so the progression from solemn devotion to overwhelming patriotic triumph remains clearly audible. Explicit exclusions avoid Hollywood trailer music, modern cinematic score, pop music, rock guitars, synthesizers, electronic percussion, modern drum kit, female lead vocal, female choir, solo crooner, comedy novelty delivery, caricatured Russian accent, gospel, Broadway, WESTERN, American patriotic or military-band character, trailer impacts, braams, modern orchestral ostinatos, and contemporary production aesthetics.
+lyrics: |
+  [verse]
+  [Choir]
+  From the throne upon the sofa,
+  She surveys the land once more.
+  Every hallway,
+  Every doorway,
+  Every rug from wall to wall.
+  [verse]
+  None may question,
+  None oppose her,
+  All rejoice beneath her reign.
+  Princess Beauts,
+  Great Gremlin Leader,
+  Guardian of treats and praise.
+  [chorus]
+  [Choir]
+  Glory! Glory!
+  Great Doja!
+  Leader of the Pack Union!
+  Strongest heart and clever mind,
+  Guide us through these peaceful times!
+  [chorus]
+  Glory! Glory!
+  Great Doja!
+  Every tail now wags as one!
+  Long may Princess Doja command,
+  Brightest dog in all the land!
+  [verse]
+  When brave Chunk returns with treasure,
+  Bearing forth the sacred ball,
+  She accepts his humble offering,
+  For the good and joy of all.
+  Then with wisdom
+  Beyond measure,
+  She declares the royal fee:
+  "One Dentastick...
+  Many scratches...
+  Then perhaps this ball goes free."
+  [Choir]
+  Wise is Doja!
+  Strong is Doja!
+  Nothing happens by mistake!
+  Every scheme already planned,
+  Before the humans even wake!
+  [bridge]
+  Wise is Doja!
+  Strong is Doja!
+  Opossum Face forever reigns!
+  Every victory was foretold,
+  Inside her magnificent brain!
+  [verse]
+  Once there stood a mighty ladder,
+  Built for humans, tall and steep.
+  Others searched
+  For little dog doors...
+  But not Doja
+  She climbed the ladder.
+  The people watched in silent wonder.
+  The birds forgot their songs.
+  Even the Chunk looked up in awe.
+  The Princess simply carried on.
+  [bridge]
+  [Choir]
+  Raise the banner!
+  Sound the brass!
+  Let the mighty chorus sing!
+  [verse]
+  She who conquered
+  Walls at Lyme,
+  She who made the Gremlin spring!
+  River waters cannot tame her!
+  Rain awakens glorious might!
+  Digging, charging,
+  Leading chaos,
+  Victory in every fight!
+  [Baritone]
+  Should the Chunk commit misfortune,
+  She need never bark or shout.
+  Just one gentle nudge upon your arm...
+  Justice finds him.
+  [chorus]
+  Glory! Glory!
+  Great Doja!
+  Supreme Leader of the Pack!
+  Every cushion,
+  Every blanket,
+  Every sunny patch is hers!
+  Treats are hers!
+  Scratches hers!
+  Walks begin upon command!
+  [outro]
+  Long live Princess Doja forever!
+  Long live Gremlin Leader!
+  Long live Doja!
+  (DOJA!)
+  Long live Doja!
+  (DOJA!)
+  Long live Doja!
+  (DOJA!)
