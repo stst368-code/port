@@ -86,3 +86,10 @@ This revision removes automatic MiniMax-folder ingestion.
 - Player fades in only while the showcase wall intersects the viewport, avoiding it floating over the masthead/story sections.
 - Restricted local scrolling to the explicitly opened lyrics/technical drawer.
 - Mobile/tablet retains the responsive sticky-player layout where three-column geometry is not viable.
+
+
+## v5.8 curated-source hardening
+
+- `build_catalogue.py` now reads only generated records under `content-source/tracks/showcase/`.
+- `import_showcase.py` removes stale YAML records left anywhere under `content-source/tracks/` before regenerating the curated set.
+- This fixes upgraded repositories where old demo tracks were still being validated alongside the hand-picked showcase.

@@ -51,6 +51,15 @@ from filenames when present.
 
 Nothing outside `showcase/` is discovered or copied.
 
+
+## Upgrading an older repository
+
+`showcase/` is the only authoritative music source. The importer now removes stale
+generated YAML records left by older versions under `content-source/tracks/`, and
+the catalogue builder reads only `content-source/tracks/showcase/`. This prevents
+old demo/placeholder tracks from reappearing in GitHub Actions after an in-place
+upgrade.
+
 ## Build on Windows
 
 Run:

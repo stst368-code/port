@@ -2,7 +2,7 @@
 """Build the Good Boy Records site from its content sources.
 
 Reads:
-    content-source/tracks/*.yaml    one file per released track
+    content-source/tracks/showcase/*.yaml    generated records from curated showcase only
     content-source/lyrics/*.lrc     one file per track, hand-timed
     templates/*.html                page shells with {{TOKEN}} slots
 
@@ -45,7 +45,7 @@ import build_docs
 
 ROOT = Path(__file__).resolve().parent.parent
 
-TRACK_DIR = ROOT / "content-source" / "tracks"
+TRACK_DIR = ROOT / "content-source" / "tracks" / "showcase"
 LYRIC_DIR = ROOT / "content-source" / "lyrics"
 TEMPLATE_DIR = ROOT / "templates"
 DATA_DIR = ROOT / "data"
@@ -189,7 +189,7 @@ def format_clock(seconds: float | None) -> str:
 def load_tracks(report: Report) -> list[dict[str, Any]]:
     files = sorted(TRACK_DIR.rglob("*.yaml"))
     if not files:
-        report.error("content-source/tracks", "no track definitions found")
+        report.error("content-source/tracks/showcase", "no curated track definitions found")
         return []
 
     tracks: list[dict[str, Any]] = []

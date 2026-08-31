@@ -268,8 +268,15 @@ def clean_previous_generated() -> None:
                 if p.is_file():
                     p.unlink()
 
-    if TRACK_OUT.exists():
-        for p in TRACK_OUT.glob("*.yaml"):
+    # content-source/tracks is generated build state in the curated workflow.
+    # Older GBR versions wrote track YAMLs directly into content-source/tracks/,
+    # so purge all generated YAML records before rebuilding. Otherwise a repository
+    # upgraded in place can accidentally publish/validate obsolete tracks.
+    track_root = ROOT / "content-source" / "tracks"
+    if track_root.exists():
+        for p in track_root.rglob("*.yaml"):
+            p.unlink()
+        for p in track_root.rglob("*.yml"):
             p.unlink()
 
 

@@ -1,0 +1,2609 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 1,
+  "title": "dogtushya",
+  "song_version": 3,
+  "source_yaml": "dogtushya-v3.yaml",
+  "source_audio": "dogtushya-v3.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "generated_at": "2026-08-31T22:12:17+00:00",
+  "stats": {
+    "lyric_words": 321,
+    "recognised_words": 313,
+    "matched_words": 307,
+    "coverage": 0.9564
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "From the throne upon the sofa,",
+      "start": 6.46,
+      "end": 8.741,
+      "words": [
+        {
+          "text": "From",
+          "start": 6.46,
+          "end": 6.66,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 6.74,
+          "end": 6.82,
+          "matched": true
+        },
+        {
+          "text": "throne",
+          "start": 6.88,
+          "end": 7.24,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 7.32,
+          "end": 7.601,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 7.661,
+          "end": 7.761,
+          "matched": true
+        },
+        {
+          "text": "sofa,",
+          "start": 7.821,
+          "end": 8.741,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "She surveys the land once more.",
+      "start": 8.781,
+      "end": 11.183,
+      "words": [
+        {
+          "text": "She",
+          "start": 8.781,
+          "end": 9.021,
+          "matched": true
+        },
+        {
+          "text": "surveys",
+          "start": 9.061,
+          "end": 9.522,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 9.562,
+          "end": 9.662,
+          "matched": true
+        },
+        {
+          "text": "land",
+          "start": 9.702,
+          "end": 10.102,
+          "matched": true
+        },
+        {
+          "text": "once",
+          "start": 10.342,
+          "end": 10.542,
+          "matched": true
+        },
+        {
+          "text": "more.",
+          "start": 10.642,
+          "end": 11.183,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "Every hallway,",
+      "start": 12.283,
+      "end": 13.444,
+      "words": [
+        {
+          "text": "Every",
+          "start": 12.283,
+          "end": 12.503,
+          "matched": true
+        },
+        {
+          "text": "hallway,",
+          "start": 12.543,
+          "end": 13.444,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "Every doorway,",
+      "start": 14.164,
+      "end": 15.285,
+      "words": [
+        {
+          "text": "Every",
+          "start": 14.164,
+          "end": 14.404,
+          "matched": true
+        },
+        {
+          "text": "doorway,",
+          "start": 14.424,
+          "end": 15.285,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "Every rug from wall to wall.",
+      "start": 16.085,
+      "end": 18.967,
+      "words": [
+        {
+          "text": "Every",
+          "start": 16.085,
+          "end": 16.325,
+          "matched": true
+        },
+        {
+          "text": "rug",
+          "start": 16.365,
+          "end": 16.645,
+          "matched": true
+        },
+        {
+          "text": "from",
+          "start": 16.786,
+          "end": 17.186,
+          "matched": true
+        },
+        {
+          "text": "wall",
+          "start": 17.286,
+          "end": 17.706,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 17.766,
+          "end": 18.146,
+          "matched": true
+        },
+        {
+          "text": "wall.",
+          "start": 18.166,
+          "end": 18.967,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "None may question,",
+      "start": 19.627,
+      "end": 20.788,
+      "words": [
+        {
+          "text": "None",
+          "start": 19.627,
+          "end": 19.867,
+          "matched": true
+        },
+        {
+          "text": "may",
+          "start": 19.947,
+          "end": 20.087,
+          "matched": true
+        },
+        {
+          "text": "question,",
+          "start": 20.127,
+          "end": 20.788,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "None oppose her,",
+      "start": 21.568,
+      "end": 22.929,
+      "words": [
+        {
+          "text": "None",
+          "start": 21.568,
+          "end": 21.788,
+          "matched": true
+        },
+        {
+          "text": "oppose",
+          "start": 21.848,
+          "end": 22.369,
+          "matched": true
+        },
+        {
+          "text": "her,",
+          "start": 22.429,
+          "end": 22.929,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "All rejoice beneath her reign.",
+      "start": 23.609,
+      "end": 26.291,
+      "words": [
+        {
+          "text": "All",
+          "start": 23.609,
+          "end": 23.809,
+          "matched": true
+        },
+        {
+          "text": "rejoice",
+          "start": 23.849,
+          "end": 24.45,
+          "matched": true
+        },
+        {
+          "text": "beneath",
+          "start": 24.53,
+          "end": 25.29,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 25.43,
+          "end": 25.75,
+          "matched": true
+        },
+        {
+          "text": "reign.",
+          "start": 25.89,
+          "end": 26.291,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "Princess Beauts,",
+      "start": 27.26,
+      "end": 28.421,
+      "words": [
+        {
+          "text": "Princess",
+          "start": 27.26,
+          "end": 27.78,
+          "matched": true
+        },
+        {
+          "text": "Beauts,",
+          "start": 27.94,
+          "end": 28.421,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "Great Gremlin Leader,",
+      "start": 28.501,
+      "end": 30.522,
+      "words": [
+        {
+          "text": "Great",
+          "start": 28.501,
+          "end": 28.721,
+          "matched": true
+        },
+        {
+          "text": "Gremlin",
+          "start": 28.781,
+          "end": 29.441,
+          "matched": true
+        },
+        {
+          "text": "Leader,",
+          "start": 29.681,
+          "end": 30.522,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "Guardian of treats and praise.",
+      "start": 31.102,
+      "end": 34.885,
+      "words": [
+        {
+          "text": "Guardian",
+          "start": 31.102,
+          "end": 32.123,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 32.223,
+          "end": 32.323,
+          "matched": true
+        },
+        {
+          "text": "treats",
+          "start": 32.483,
+          "end": 32.943,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 33.164,
+          "end": 33.304,
+          "matched": true
+        },
+        {
+          "text": "praise.",
+          "start": 33.444,
+          "end": 34.885,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "Glory! Glory!",
+      "start": 35.365,
+      "end": 37.046,
+      "words": [
+        {
+          "text": "Glory!",
+          "start": 35.365,
+          "end": 36.225,
+          "matched": true
+        },
+        {
+          "text": "Glory!",
+          "start": 36.305,
+          "end": 37.046,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "Great Doja!",
+      "start": 37.706,
+      "end": 39.067,
+      "words": [
+        {
+          "text": "Great",
+          "start": 37.706,
+          "end": 38.186,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 38.226,
+          "end": 39.067,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "Leader of the Pack Union!",
+      "start": 39.207,
+      "end": 40.888,
+      "words": [
+        {
+          "text": "Leader",
+          "start": 39.207,
+          "end": 39.507,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 39.587,
+          "end": 39.647,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 39.687,
+          "end": 39.767,
+          "matched": true
+        },
+        {
+          "text": "Pack",
+          "start": 39.807,
+          "end": 40.048,
+          "matched": true
+        },
+        {
+          "text": "Union!",
+          "start": 40.248,
+          "end": 40.888,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "Strongest heart and clever mind,",
+      "start": 40.988,
+      "end": 42.409,
+      "words": [
+        {
+          "text": "Strongest",
+          "start": 40.988,
+          "end": 41.368,
+          "matched": true
+        },
+        {
+          "text": "heart",
+          "start": 41.388,
+          "end": 41.568,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 41.588,
+          "end": 41.668,
+          "matched": true
+        },
+        {
+          "text": "clever",
+          "start": 41.709,
+          "end": 41.969,
+          "matched": true
+        },
+        {
+          "text": "mind,",
+          "start": 42.029,
+          "end": 42.409,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Guide us through these peaceful times!",
+      "start": 42.469,
+      "end": 44.53,
+      "words": [
+        {
+          "text": "Guide",
+          "start": 42.469,
+          "end": 42.669,
+          "matched": true
+        },
+        {
+          "text": "us",
+          "start": 42.709,
+          "end": 42.769,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 42.809,
+          "end": 42.989,
+          "matched": true
+        },
+        {
+          "text": "these",
+          "start": 43.009,
+          "end": 43.289,
+          "matched": true
+        },
+        {
+          "text": "peaceful",
+          "start": 43.41,
+          "end": 43.87,
+          "matched": true
+        },
+        {
+          "text": "times!",
+          "start": 43.93,
+          "end": 44.53,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "Glory! Glory!",
+      "start": 44.83,
+      "end": 46.551,
+      "words": [
+        {
+          "text": "Glory!",
+          "start": 44.83,
+          "end": 45.691,
+          "matched": true
+        },
+        {
+          "text": "Glory!",
+          "start": 45.791,
+          "end": 46.551,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Great Doja!",
+      "start": 47.212,
+      "end": 48.493,
+      "words": [
+        {
+          "text": "Great",
+          "start": 47.212,
+          "end": 47.672,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 47.712,
+          "end": 48.493,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "Every tail now wags as one!",
+      "start": 48.753,
+      "end": 49.973,
+      "words": [
+        {
+          "text": "Every",
+          "start": 48.753,
+          "end": 48.933,
+          "matched": true
+        },
+        {
+          "text": "tail",
+          "start": 48.973,
+          "end": 49.153,
+          "matched": true
+        },
+        {
+          "text": "now",
+          "start": 49.173,
+          "end": 49.293,
+          "matched": true
+        },
+        {
+          "text": "wags",
+          "start": 49.313,
+          "end": 49.473,
+          "matched": true
+        },
+        {
+          "text": "as",
+          "start": 49.533,
+          "end": 49.613,
+          "matched": true
+        },
+        {
+          "text": "one!",
+          "start": 49.793,
+          "end": 49.973,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "Long may Princess Doja command,",
+      "start": 50.073,
+      "end": 51.874,
+      "words": [
+        {
+          "text": "Long",
+          "start": 50.073,
+          "end": 50.234,
+          "matched": true
+        },
+        {
+          "text": "may",
+          "start": 50.254,
+          "end": 50.374,
+          "matched": true
+        },
+        {
+          "text": "Princess",
+          "start": 50.394,
+          "end": 50.914,
+          "matched": true
+        },
+        {
+          "text": "Doja",
+          "start": 50.914,
+          "end": 51.354,
+          "matched": false
+        },
+        {
+          "text": "command,",
+          "start": 51.354,
+          "end": 51.874,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "Brightest dog in all the land!",
+      "start": 51.955,
+      "end": 54.056,
+      "words": [
+        {
+          "text": "Brightest",
+          "start": 51.955,
+          "end": 52.375,
+          "matched": true
+        },
+        {
+          "text": "dog",
+          "start": 52.435,
+          "end": 52.675,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 52.735,
+          "end": 52.815,
+          "matched": true
+        },
+        {
+          "text": "all",
+          "start": 53.015,
+          "end": 53.195,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 53.255,
+          "end": 53.355,
+          "matched": true
+        },
+        {
+          "text": "land!",
+          "start": 53.415,
+          "end": 54.056,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "When brave Chunk returns with treasure,",
+      "start": 55.674,
+      "end": 57.777,
+      "words": [
+        {
+          "text": "When",
+          "start": 55.674,
+          "end": 55.874,
+          "matched": true
+        },
+        {
+          "text": "brave",
+          "start": 55.934,
+          "end": 56.115,
+          "matched": true
+        },
+        {
+          "text": "Chunk",
+          "start": 56.155,
+          "end": 56.435,
+          "matched": true
+        },
+        {
+          "text": "returns",
+          "start": 56.495,
+          "end": 56.876,
+          "matched": true
+        },
+        {
+          "text": "with",
+          "start": 56.916,
+          "end": 57.056,
+          "matched": true
+        },
+        {
+          "text": "treasure,",
+          "start": 57.116,
+          "end": 57.777,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "Bearing forth the sacred ball,",
+      "start": 58.038,
+      "end": 59.36,
+      "words": [
+        {
+          "text": "Bearing",
+          "start": 58.038,
+          "end": 58.358,
+          "matched": true
+        },
+        {
+          "text": "forth",
+          "start": 58.378,
+          "end": 58.538,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 58.578,
+          "end": 58.639,
+          "matched": true
+        },
+        {
+          "text": "sacred",
+          "start": 58.679,
+          "end": 58.979,
+          "matched": true
+        },
+        {
+          "text": "ball,",
+          "start": 59.019,
+          "end": 59.36,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "She accepts his humble offering,",
+      "start": 59.48,
+      "end": 61.503,
+      "words": [
+        {
+          "text": "She",
+          "start": 59.48,
+          "end": 59.68,
+          "matched": true
+        },
+        {
+          "text": "accepts",
+          "start": 59.8,
+          "end": 60.221,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 60.261,
+          "end": 60.401,
+          "matched": true
+        },
+        {
+          "text": "humble",
+          "start": 60.441,
+          "end": 60.862,
+          "matched": true
+        },
+        {
+          "text": "offering,",
+          "start": 61.002,
+          "end": 61.503,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "For the good and joy of all.",
+      "start": 61.783,
+      "end": 63.185,
+      "words": [
+        {
+          "text": "For",
+          "start": 61.783,
+          "end": 61.944,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 61.984,
+          "end": 62.084,
+          "matched": true
+        },
+        {
+          "text": "good",
+          "start": 62.104,
+          "end": 62.284,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 62.344,
+          "end": 62.404,
+          "matched": true
+        },
+        {
+          "text": "joy",
+          "start": 62.424,
+          "end": 62.625,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 62.665,
+          "end": 62.765,
+          "matched": true
+        },
+        {
+          "text": "all.",
+          "start": 62.805,
+          "end": 63.185,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "Then with wisdom",
+      "start": 63.226,
+      "end": 64.227,
+      "words": [
+        {
+          "text": "Then",
+          "start": 63.226,
+          "end": 63.426,
+          "matched": true
+        },
+        {
+          "text": "with",
+          "start": 63.506,
+          "end": 63.666,
+          "matched": true
+        },
+        {
+          "text": "wisdom",
+          "start": 63.706,
+          "end": 64.227,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "Beyond measure,",
+      "start": 64.347,
+      "end": 65.128,
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 64.347,
+          "end": 64.628,
+          "matched": true
+        },
+        {
+          "text": "measure,",
+          "start": 64.668,
+          "end": 65.128,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "She declares the royal fee:",
+      "start": 65.249,
+      "end": 66.851,
+      "words": [
+        {
+          "text": "She",
+          "start": 65.249,
+          "end": 65.389,
+          "matched": true
+        },
+        {
+          "text": "declares",
+          "start": 65.429,
+          "end": 65.87,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 65.93,
+          "end": 66.03,
+          "matched": true
+        },
+        {
+          "text": "royal",
+          "start": 66.07,
+          "end": 66.41,
+          "matched": true
+        },
+        {
+          "text": "fee:",
+          "start": 66.571,
+          "end": 66.851,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "\"One Dentastick...",
+      "start": 67.071,
+      "end": 68.013,
+      "words": [
+        {
+          "text": "\"One",
+          "start": 67.071,
+          "end": 67.212,
+          "matched": true
+        },
+        {
+          "text": "Dentastick...",
+          "start": 67.252,
+          "end": 68.013,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "Many scratches...",
+      "start": 68.073,
+      "end": 68.894,
+      "words": [
+        {
+          "text": "Many",
+          "start": 68.073,
+          "end": 68.293,
+          "matched": true
+        },
+        {
+          "text": "scratches...",
+          "start": 68.333,
+          "end": 68.894,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "Then perhaps this ball goes free.\"",
+      "start": 68.934,
+      "end": 70.737,
+      "words": [
+        {
+          "text": "Then",
+          "start": 68.934,
+          "end": 69.094,
+          "matched": true
+        },
+        {
+          "text": "perhaps",
+          "start": 69.135,
+          "end": 69.515,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 69.575,
+          "end": 69.735,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 69.816,
+          "end": 70.076,
+          "matched": true
+        },
+        {
+          "text": "goes",
+          "start": 70.116,
+          "end": 70.457,
+          "matched": true
+        },
+        {
+          "text": "free.\"",
+          "start": 70.637,
+          "end": 70.737,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "Wise is Doja!",
+      "start": 73.497,
+      "end": 74.678,
+      "words": [
+        {
+          "text": "Wise",
+          "start": 73.497,
+          "end": 73.817,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 73.877,
+          "end": 73.957,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 73.997,
+          "end": 74.678,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "Strong is Doja!",
+      "start": 74.858,
+      "end": 76.579,
+      "words": [
+        {
+          "text": "Strong",
+          "start": 74.858,
+          "end": 75.418,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 75.518,
+          "end": 75.799,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 75.859,
+          "end": 76.579,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "Nothing happens by mistake!",
+      "start": 76.839,
+      "end": 78.04,
+      "words": [
+        {
+          "text": "Nothing",
+          "start": 76.839,
+          "end": 77.1,
+          "matched": true
+        },
+        {
+          "text": "happens",
+          "start": 77.14,
+          "end": 77.42,
+          "matched": true
+        },
+        {
+          "text": "by",
+          "start": 77.46,
+          "end": 77.56,
+          "matched": true
+        },
+        {
+          "text": "mistake!",
+          "start": 77.6,
+          "end": 78.04,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "Every scheme already planned,",
+      "start": 78.321,
+      "end": 79.982,
+      "words": [
+        {
+          "text": "Every",
+          "start": 78.321,
+          "end": 78.581,
+          "matched": true
+        },
+        {
+          "text": "scheme",
+          "start": 78.641,
+          "end": 79.001,
+          "matched": true
+        },
+        {
+          "text": "already",
+          "start": 79.101,
+          "end": 79.441,
+          "matched": true
+        },
+        {
+          "text": "planned,",
+          "start": 79.521,
+          "end": 79.982,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "Before the humans even wake!",
+      "start": 80.082,
+      "end": 81.903,
+      "words": [
+        {
+          "text": "Before",
+          "start": 80.082,
+          "end": 80.442,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 80.482,
+          "end": 80.582,
+          "matched": true
+        },
+        {
+          "text": "humans",
+          "start": 80.642,
+          "end": 81.123,
+          "matched": true
+        },
+        {
+          "text": "even",
+          "start": 81.243,
+          "end": 81.483,
+          "matched": true
+        },
+        {
+          "text": "wake!",
+          "start": 81.563,
+          "end": 81.903,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "Wise is Doja!",
+      "start": 82.423,
+      "end": 84.105,
+      "words": [
+        {
+          "text": "Wise",
+          "start": 82.423,
+          "end": 82.884,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 83.044,
+          "end": 83.304,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 83.384,
+          "end": 84.105,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "Strong is Doja!",
+      "start": 84.245,
+      "end": 85.766,
+      "words": [
+        {
+          "text": "Strong",
+          "start": 84.245,
+          "end": 84.825,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 84.945,
+          "end": 85.185,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 85.266,
+          "end": 85.766,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l39",
+      "text": "Opossum Face forever reigns!",
+      "start": 85.806,
+      "end": 87.527,
+      "words": [
+        {
+          "text": "Opossum",
+          "start": 85.806,
+          "end": 86.166,
+          "matched": true
+        },
+        {
+          "text": "Face",
+          "start": 86.206,
+          "end": 86.466,
+          "matched": true
+        },
+        {
+          "text": "forever",
+          "start": 86.506,
+          "end": 86.947,
+          "matched": true
+        },
+        {
+          "text": "reigns!",
+          "start": 87.007,
+          "end": 87.527,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l40",
+      "text": "Every victory was foretold,",
+      "start": 87.687,
+      "end": 89.288,
+      "words": [
+        {
+          "text": "Every",
+          "start": 87.687,
+          "end": 87.867,
+          "matched": true
+        },
+        {
+          "text": "victory",
+          "start": 87.907,
+          "end": 88.348,
+          "matched": true
+        },
+        {
+          "text": "was",
+          "start": 88.388,
+          "end": 88.508,
+          "matched": true
+        },
+        {
+          "text": "foretold,",
+          "start": 88.548,
+          "end": 89.288,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l41",
+      "text": "Inside her magnificent brain!",
+      "start": 89.368,
+      "end": 92.19,
+      "words": [
+        {
+          "text": "Inside",
+          "start": 89.368,
+          "end": 89.689,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 89.709,
+          "end": 89.809,
+          "matched": true
+        },
+        {
+          "text": "magnificent",
+          "start": 89.829,
+          "end": 90.509,
+          "matched": true
+        },
+        {
+          "text": "brain!",
+          "start": 90.609,
+          "end": 92.19,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l42",
+      "text": "Once there stood a mighty ladder,",
+      "start": 95.113,
+      "end": 96.815,
+      "words": [
+        {
+          "text": "Once",
+          "start": 95.113,
+          "end": 95.253,
+          "matched": true
+        },
+        {
+          "text": "there",
+          "start": 95.293,
+          "end": 95.473,
+          "matched": true
+        },
+        {
+          "text": "stood",
+          "start": 95.513,
+          "end": 95.794,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 95.814,
+          "end": 95.834,
+          "matched": true
+        },
+        {
+          "text": "mighty",
+          "start": 96.034,
+          "end": 96.394,
+          "matched": true
+        },
+        {
+          "text": "ladder,",
+          "start": 96.494,
+          "end": 96.815,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l43",
+      "text": "Built for humans, tall and steep.",
+      "start": 96.955,
+      "end": 98.676,
+      "words": [
+        {
+          "text": "Built",
+          "start": 96.955,
+          "end": 97.175,
+          "matched": true
+        },
+        {
+          "text": "for",
+          "start": 97.215,
+          "end": 97.355,
+          "matched": true
+        },
+        {
+          "text": "humans,",
+          "start": 97.415,
+          "end": 97.835,
+          "matched": true
+        },
+        {
+          "text": "tall",
+          "start": 97.895,
+          "end": 98.176,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 98.196,
+          "end": 98.296,
+          "matched": true
+        },
+        {
+          "text": "steep.",
+          "start": 98.356,
+          "end": 98.676,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l44",
+      "text": "Others searched",
+      "start": 98.676,
+      "end": 99.637,
+      "words": [
+        {
+          "text": "Others",
+          "start": 98.676,
+          "end": 99.357,
+          "matched": false
+        },
+        {
+          "text": "searched",
+          "start": 99.357,
+          "end": 99.637,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l45",
+      "text": "For little dog doors...",
+      "start": 99.657,
+      "end": 100.998,
+      "words": [
+        {
+          "text": "For",
+          "start": 99.657,
+          "end": 99.797,
+          "matched": true
+        },
+        {
+          "text": "little",
+          "start": 99.837,
+          "end": 100.077,
+          "matched": true
+        },
+        {
+          "text": "dog",
+          "start": 100.117,
+          "end": 100.518,
+          "matched": true
+        },
+        {
+          "text": "doors...",
+          "start": 100.578,
+          "end": 100.998,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l46",
+      "text": "But not Doja",
+      "start": 100.998,
+      "end": 101.479,
+      "words": [
+        {
+          "text": "But",
+          "start": 100.998,
+          "end": 101.078,
+          "matched": false
+        },
+        {
+          "text": "not",
+          "start": 101.078,
+          "end": 101.158,
+          "matched": false
+        },
+        {
+          "text": "Doja",
+          "start": 101.158,
+          "end": 101.479,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l47",
+      "text": "She climbed the ladder.",
+      "start": 101.479,
+      "end": 102.44,
+      "words": [
+        {
+          "text": "She",
+          "start": 101.479,
+          "end": 101.519,
+          "matched": false
+        },
+        {
+          "text": "climbed",
+          "start": 101.519,
+          "end": 101.979,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 102.019,
+          "end": 102.099,
+          "matched": true
+        },
+        {
+          "text": "ladder.",
+          "start": 102.139,
+          "end": 102.44,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l48",
+      "text": "The people watched in silent wonder.",
+      "start": 102.5,
+      "end": 104.441,
+      "words": [
+        {
+          "text": "The",
+          "start": 102.5,
+          "end": 102.58,
+          "matched": true
+        },
+        {
+          "text": "people",
+          "start": 102.62,
+          "end": 103.0,
+          "matched": true
+        },
+        {
+          "text": "watched",
+          "start": 103.08,
+          "end": 103.36,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 103.42,
+          "end": 103.481,
+          "matched": true
+        },
+        {
+          "text": "silent",
+          "start": 103.561,
+          "end": 103.961,
+          "matched": true
+        },
+        {
+          "text": "wonder.",
+          "start": 104.021,
+          "end": 104.441,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l49",
+      "text": "The birds forgot their songs.",
+      "start": 104.802,
+      "end": 106.543,
+      "words": [
+        {
+          "text": "The",
+          "start": 104.802,
+          "end": 104.902,
+          "matched": true
+        },
+        {
+          "text": "birds",
+          "start": 104.962,
+          "end": 105.342,
+          "matched": true
+        },
+        {
+          "text": "forgot",
+          "start": 105.402,
+          "end": 105.763,
+          "matched": true
+        },
+        {
+          "text": "their",
+          "start": 105.803,
+          "end": 106.003,
+          "matched": true
+        },
+        {
+          "text": "songs.",
+          "start": 106.103,
+          "end": 106.543,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l50",
+      "text": "Even the Chunk looked up in awe.",
+      "start": 106.623,
+      "end": 108.105,
+      "words": [
+        {
+          "text": "Even",
+          "start": 106.623,
+          "end": 106.804,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 106.804,
+          "end": 106.884,
+          "matched": false
+        },
+        {
+          "text": "Chunk",
+          "start": 106.884,
+          "end": 107.184,
+          "matched": true
+        },
+        {
+          "text": "looked",
+          "start": 107.224,
+          "end": 107.444,
+          "matched": true
+        },
+        {
+          "text": "up",
+          "start": 107.524,
+          "end": 107.604,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 107.684,
+          "end": 107.764,
+          "matched": true
+        },
+        {
+          "text": "awe.",
+          "start": 107.965,
+          "end": 108.105,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l51",
+      "text": "The Princess simply carried on.",
+      "start": 108.145,
+      "end": 110.167,
+      "words": [
+        {
+          "text": "The",
+          "start": 108.145,
+          "end": 108.245,
+          "matched": true
+        },
+        {
+          "text": "Princess",
+          "start": 108.305,
+          "end": 108.745,
+          "matched": true
+        },
+        {
+          "text": "simply",
+          "start": 108.785,
+          "end": 109.166,
+          "matched": true
+        },
+        {
+          "text": "carried",
+          "start": 109.246,
+          "end": 109.686,
+          "matched": true
+        },
+        {
+          "text": "on.",
+          "start": 110.046,
+          "end": 110.167,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l52",
+      "text": "Raise the banner!",
+      "start": 110.567,
+      "end": 111.988,
+      "words": [
+        {
+          "text": "Raise",
+          "start": 110.567,
+          "end": 110.987,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 111.047,
+          "end": 111.428,
+          "matched": true
+        },
+        {
+          "text": "banner!",
+          "start": 111.508,
+          "end": 111.988,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l53",
+      "text": "Sound the brass!",
+      "start": 112.409,
+      "end": 113.81,
+      "words": [
+        {
+          "text": "Sound",
+          "start": 112.409,
+          "end": 112.909,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 112.949,
+          "end": 113.269,
+          "matched": true
+        },
+        {
+          "text": "brass!",
+          "start": 113.349,
+          "end": 113.81,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l54",
+      "text": "Let the mighty chorus sing!",
+      "start": 113.87,
+      "end": 115.872,
+      "words": [
+        {
+          "text": "Let",
+          "start": 113.87,
+          "end": 114.07,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 114.13,
+          "end": 114.25,
+          "matched": true
+        },
+        {
+          "text": "mighty",
+          "start": 114.31,
+          "end": 114.711,
+          "matched": true
+        },
+        {
+          "text": "chorus",
+          "start": 114.751,
+          "end": 115.151,
+          "matched": true
+        },
+        {
+          "text": "sing!",
+          "start": 115.211,
+          "end": 115.872,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l55",
+      "text": "She who conquered",
+      "start": 117.067,
+      "end": 118.989,
+      "words": [
+        {
+          "text": "She",
+          "start": 117.067,
+          "end": 117.448,
+          "matched": true
+        },
+        {
+          "text": "who",
+          "start": 117.548,
+          "end": 117.828,
+          "matched": true
+        },
+        {
+          "text": "conquered",
+          "start": 117.988,
+          "end": 118.989,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l56",
+      "text": "Walls at Lyme,",
+      "start": 119.41,
+      "end": 120.471,
+      "words": [
+        {
+          "text": "Walls",
+          "start": 119.41,
+          "end": 119.73,
+          "matched": true
+        },
+        {
+          "text": "at",
+          "start": 119.79,
+          "end": 119.83,
+          "matched": true
+        },
+        {
+          "text": "Lyme,",
+          "start": 119.89,
+          "end": 120.471,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l57",
+      "text": "She who made the Gremlin spring!",
+      "start": 120.791,
+      "end": 124.054,
+      "words": [
+        {
+          "text": "She",
+          "start": 120.791,
+          "end": 121.191,
+          "matched": true
+        },
+        {
+          "text": "who",
+          "start": 121.292,
+          "end": 121.612,
+          "matched": true
+        },
+        {
+          "text": "made",
+          "start": 121.752,
+          "end": 122.152,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 122.233,
+          "end": 122.533,
+          "matched": true
+        },
+        {
+          "text": "Gremlin",
+          "start": 122.673,
+          "end": 123.354,
+          "matched": true
+        },
+        {
+          "text": "spring!",
+          "start": 123.494,
+          "end": 124.054,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l58",
+      "text": "River waters cannot tame her!",
+      "start": 124.535,
+      "end": 126.277,
+      "words": [
+        {
+          "text": "River",
+          "start": 124.535,
+          "end": 124.835,
+          "matched": true
+        },
+        {
+          "text": "waters",
+          "start": 124.855,
+          "end": 125.176,
+          "matched": true
+        },
+        {
+          "text": "cannot",
+          "start": 125.196,
+          "end": 125.456,
+          "matched": true
+        },
+        {
+          "text": "tame",
+          "start": 125.476,
+          "end": 125.876,
+          "matched": true
+        },
+        {
+          "text": "her!",
+          "start": 125.976,
+          "end": 126.277,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l59",
+      "text": "Rain awakens glorious might!",
+      "start": 126.397,
+      "end": 127.738,
+      "words": [
+        {
+          "text": "Rain",
+          "start": 126.397,
+          "end": 126.617,
+          "matched": true
+        },
+        {
+          "text": "awakens",
+          "start": 126.657,
+          "end": 127.017,
+          "matched": true
+        },
+        {
+          "text": "glorious",
+          "start": 127.017,
+          "end": 127.418,
+          "matched": false
+        },
+        {
+          "text": "might!",
+          "start": 127.418,
+          "end": 127.738,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l60",
+      "text": "Digging, charging,",
+      "start": 127.818,
+      "end": 128.719,
+      "words": [
+        {
+          "text": "Digging,",
+          "start": 127.818,
+          "end": 128.179,
+          "matched": true
+        },
+        {
+          "text": "charging,",
+          "start": 128.239,
+          "end": 128.719,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l61",
+      "text": "Leading chaos,",
+      "start": 128.759,
+      "end": 129.62,
+      "words": [
+        {
+          "text": "Leading",
+          "start": 128.759,
+          "end": 129.12,
+          "matched": true
+        },
+        {
+          "text": "chaos,",
+          "start": 129.18,
+          "end": 129.62,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l62",
+      "text": "Victory in every fight!",
+      "start": 129.68,
+      "end": 133.965,
+      "words": [
+        {
+          "text": "Victory",
+          "start": 129.68,
+          "end": 130.161,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 130.301,
+          "end": 130.621,
+          "matched": true
+        },
+        {
+          "text": "every",
+          "start": 130.701,
+          "end": 130.942,
+          "matched": true
+        },
+        {
+          "text": "fight!",
+          "start": 131.082,
+          "end": 133.965,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l63",
+      "text": "Should the Chunk commit misfortune,",
+      "start": 135.182,
+      "end": 137.304,
+      "words": [
+        {
+          "text": "Should",
+          "start": 135.182,
+          "end": 135.462,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 135.522,
+          "end": 135.622,
+          "matched": true
+        },
+        {
+          "text": "Chunk",
+          "start": 135.662,
+          "end": 135.963,
+          "matched": true
+        },
+        {
+          "text": "commit",
+          "start": 135.983,
+          "end": 136.363,
+          "matched": true
+        },
+        {
+          "text": "misfortune,",
+          "start": 136.383,
+          "end": 137.304,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l64",
+      "text": "She need never bark or shout.",
+      "start": 137.504,
+      "end": 138.765,
+      "words": [
+        {
+          "text": "She",
+          "start": 137.504,
+          "end": 137.664,
+          "matched": true
+        },
+        {
+          "text": "need",
+          "start": 137.704,
+          "end": 137.864,
+          "matched": true
+        },
+        {
+          "text": "never",
+          "start": 137.884,
+          "end": 138.124,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 138.164,
+          "end": 138.385,
+          "matched": true
+        },
+        {
+          "text": "or",
+          "start": 138.405,
+          "end": 138.445,
+          "matched": true
+        },
+        {
+          "text": "shout.",
+          "start": 138.485,
+          "end": 138.765,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l65",
+      "text": "Just one gentle nudge upon your arm...",
+      "start": 138.945,
+      "end": 141.187,
+      "words": [
+        {
+          "text": "Just",
+          "start": 138.945,
+          "end": 139.165,
+          "matched": true
+        },
+        {
+          "text": "one",
+          "start": 139.285,
+          "end": 139.405,
+          "matched": true
+        },
+        {
+          "text": "gentle",
+          "start": 139.425,
+          "end": 139.846,
+          "matched": true
+        },
+        {
+          "text": "nudge",
+          "start": 139.886,
+          "end": 140.186,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 140.266,
+          "end": 140.586,
+          "matched": true
+        },
+        {
+          "text": "your",
+          "start": 140.626,
+          "end": 140.826,
+          "matched": true
+        },
+        {
+          "text": "arm...",
+          "start": 141.007,
+          "end": 141.187,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l66",
+      "text": "Justice finds him.",
+      "start": 141.267,
+      "end": 143.608,
+      "words": [
+        {
+          "text": "Justice",
+          "start": 141.267,
+          "end": 141.987,
+          "matched": true
+        },
+        {
+          "text": "finds",
+          "start": 142.187,
+          "end": 142.668,
+          "matched": true
+        },
+        {
+          "text": "him.",
+          "start": 142.768,
+          "end": 143.608,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l67",
+      "text": "Glory! Glory!",
+      "start": 144.069,
+      "end": 145.83,
+      "words": [
+        {
+          "text": "Glory!",
+          "start": 144.069,
+          "end": 144.929,
+          "matched": true
+        },
+        {
+          "text": "Glory!",
+          "start": 145.01,
+          "end": 145.83,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l68",
+      "text": "Great Doja!",
+      "start": 145.95,
+      "end": 147.291,
+      "words": [
+        {
+          "text": "Great",
+          "start": 145.95,
+          "end": 146.411,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 146.451,
+          "end": 147.291,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l69",
+      "text": "Supreme Leader of the Pack!",
+      "start": 147.672,
+      "end": 149.073,
+      "words": [
+        {
+          "text": "Supreme",
+          "start": 147.672,
+          "end": 148.112,
+          "matched": true
+        },
+        {
+          "text": "Leader",
+          "start": 148.172,
+          "end": 148.472,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 148.532,
+          "end": 148.612,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 148.652,
+          "end": 148.732,
+          "matched": true
+        },
+        {
+          "text": "Pack!",
+          "start": 148.772,
+          "end": 149.073,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l70",
+      "text": "Every cushion,",
+      "start": 149.313,
+      "end": 149.873,
+      "words": [
+        {
+          "text": "Every",
+          "start": 149.313,
+          "end": 149.493,
+          "matched": true
+        },
+        {
+          "text": "cushion,",
+          "start": 149.513,
+          "end": 149.873,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l71",
+      "text": "Every blanket,",
+      "start": 149.933,
+      "end": 150.654,
+      "words": [
+        {
+          "text": "Every",
+          "start": 149.933,
+          "end": 150.113,
+          "matched": true
+        },
+        {
+          "text": "blanket,",
+          "start": 150.153,
+          "end": 150.654,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l72",
+      "text": "Every sunny patch is hers!",
+      "start": 150.734,
+      "end": 154.297,
+      "words": [
+        {
+          "text": "Every",
+          "start": 150.734,
+          "end": 150.954,
+          "matched": true
+        },
+        {
+          "text": "sunny",
+          "start": 151.054,
+          "end": 151.434,
+          "matched": true
+        },
+        {
+          "text": "patch",
+          "start": 151.494,
+          "end": 151.875,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 152.135,
+          "end": 152.315,
+          "matched": true
+        },
+        {
+          "text": "hers!",
+          "start": 152.455,
+          "end": 154.297,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l73",
+      "text": "Treats are hers!",
+      "start": 155.177,
+      "end": 156.338,
+      "words": [
+        {
+          "text": "Treats",
+          "start": 155.177,
+          "end": 155.538,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 155.718,
+          "end": 155.858,
+          "matched": true
+        },
+        {
+          "text": "hers!",
+          "start": 155.898,
+          "end": 156.338,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l74",
+      "text": "Scratches hers!",
+      "start": 156.959,
+      "end": 158.32,
+      "words": [
+        {
+          "text": "Scratches",
+          "start": 156.959,
+          "end": 157.419,
+          "matched": true
+        },
+        {
+          "text": "hers!",
+          "start": 157.739,
+          "end": 158.32,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l75",
+      "text": "Walks begin upon command!",
+      "start": 158.86,
+      "end": 162.583,
+      "words": [
+        {
+          "text": "Walks",
+          "start": 158.86,
+          "end": 159.26,
+          "matched": true
+        },
+        {
+          "text": "begin",
+          "start": 159.36,
+          "end": 160.321,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 160.541,
+          "end": 161.502,
+          "matched": true
+        },
+        {
+          "text": "command!",
+          "start": 161.642,
+          "end": 162.583,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l76",
+      "text": "Long live Princess Doja forever!",
+      "start": 166.169,
+      "end": 168.471,
+      "words": [
+        {
+          "text": "Long",
+          "start": 166.169,
+          "end": 166.449,
+          "matched": true
+        },
+        {
+          "text": "live",
+          "start": 166.509,
+          "end": 166.75,
+          "matched": true
+        },
+        {
+          "text": "Princess",
+          "start": 166.79,
+          "end": 167.11,
+          "matched": true
+        },
+        {
+          "text": "Doja",
+          "start": 167.11,
+          "end": 167.53,
+          "matched": false
+        },
+        {
+          "text": "forever!",
+          "start": 167.53,
+          "end": 168.471,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l77",
+      "text": "Long live Gremlin Leader!",
+      "start": 169.852,
+      "end": 171.453,
+      "words": [
+        {
+          "text": "Long",
+          "start": 169.852,
+          "end": 170.112,
+          "matched": true
+        },
+        {
+          "text": "live",
+          "start": 170.172,
+          "end": 170.432,
+          "matched": true
+        },
+        {
+          "text": "Gremlin",
+          "start": 170.472,
+          "end": 170.793,
+          "matched": true
+        },
+        {
+          "text": "Leader!",
+          "start": 170.813,
+          "end": 171.453,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l78",
+      "text": "Long live Doja!",
+      "start": 171.453,
+      "end": 172.324,
+      "words": [
+        {
+          "text": "Long",
+          "start": 171.453,
+          "end": 171.743,
+          "matched": false
+        },
+        {
+          "text": "live",
+          "start": 171.743,
+          "end": 172.034,
+          "matched": false
+        },
+        {
+          "text": "Doja!",
+          "start": 172.034,
+          "end": 172.324,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l79",
+      "text": "(DOJA!)",
+      "start": 172.324,
+      "end": 172.614,
+      "words": [
+        {
+          "text": "(DOJA!)",
+          "start": 172.324,
+          "end": 172.614,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l80",
+      "text": "Long live Doja!",
+      "start": 172.614,
+      "end": 175.156,
+      "words": [
+        {
+          "text": "Long",
+          "start": 172.614,
+          "end": 173.454,
+          "matched": true
+        },
+        {
+          "text": "live",
+          "start": 173.555,
+          "end": 173.975,
+          "matched": true
+        },
+        {
+          "text": "Doja!",
+          "start": 174.015,
+          "end": 175.156,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l81",
+      "text": "(DOJA!)",
+      "start": 175.816,
+      "end": 176.557,
+      "words": [
+        {
+          "text": "(DOJA!)",
+          "start": 175.816,
+          "end": 176.557,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l82",
+      "text": "Long live Doja!",
+      "start": 176.557,
+      "end": 178.378,
+      "words": [
+        {
+          "text": "Long",
+          "start": 176.557,
+          "end": 176.867,
+          "matched": false
+        },
+        {
+          "text": "live",
+          "start": 176.867,
+          "end": 177.177,
+          "matched": false
+        },
+        {
+          "text": "Doja!",
+          "start": 177.177,
+          "end": 178.378,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l83",
+      "text": "(DOJA!)",
+      "start": 179.039,
+      "end": 180.299,
+      "words": [
+        {
+          "text": "(DOJA!)",
+          "start": 179.039,
+          "end": 180.299,
+          "matched": true
+        }
+      ]
+    }
+  ]
+}
