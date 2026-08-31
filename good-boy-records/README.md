@@ -89,6 +89,11 @@ There is no external object-storage requirement in this build.
 - Click the currently latched cassette again: play/pause toggles in place.
 - Only the selected playing cassette spins its own reels.
 - Selecting a cassette never calls `scrollIntoView()` and never relocates it.
+- On desktop the central transport is genuinely `position: fixed` at viewport centre.
+  The cassette wall owns the page scroll and moves past it on both sides.
+- The player itself is not a scroll container; wheel/trackpad scrolling over the
+  machine continues to move the page. Only the explicitly opened lyrics/technical
+  drawer has a small internal scrolling region.
 - The lower monitor rack is information/transport UI only. It does not contain a
   duplicate inserted cassette.
 - Tape/Vinyl remains a persisted appearance switch using the same player state.

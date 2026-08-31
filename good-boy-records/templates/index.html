@@ -28,7 +28,7 @@
     <div>
       <p class="eyebrow">Private listening room / public evidence locker</p>
       <h1>Music made by machines.<br><em>Mostly about dogs.</em></h1>
-      <p class="masthead__lede">Songs rise in vertical version stacks around a central transport. Scroll the wall while the player stays put; click any cassette and that exact tape latches and glows where it lives.</p>
+      <p class="masthead__lede">Songs rise in vertical version stacks around a central transport. Scroll the wall past a transport that is physically fixed to the centre of the viewport; click any cassette and that exact tape latches and glows where it lives.</p>
     </div>
     <div class="hero-console" aria-hidden="true">
       <div class="hero-console__vents"></div>
@@ -59,14 +59,14 @@
         </div>
       </div>
 
-      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> songs stack vertically by version <span aria-hidden="true">/</span> player remains centred</p>
+      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> songs stack vertically by version <span aria-hidden="true">/</span> player is viewport-mounted</p>
 
       <div class="showcase-stage">
         <div class="genre-shelves">
 {{SHELF}}
         </div>
 
-        <div class="player-rail">
+        <div class="player-rail" id="player-rail" data-visible="false">
           <section class="deck" id="deck" data-state="idle" aria-labelledby="deck-title">
             <div class="deck__header">
               <div>

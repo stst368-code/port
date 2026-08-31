@@ -24,7 +24,8 @@
     monitorTitle: document.getElementById("wall-monitor-title"), monitorCode: document.getElementById("wall-monitor-code"),
     inspiration: document.getElementById("deck-inspiration"),
     vuLeft: document.getElementById("vu-left"), vuRight: document.getElementById("vu-right"),
-    eqPanel: document.getElementById("eq-panel"), eqReset: document.getElementById("eq-reset"), eqNote: document.getElementById("eq-note")
+    eqPanel: document.getElementById("eq-panel"), eqReset: document.getElementById("eq-reset"), eqNote: document.getElementById("eq-note"),
+    playerRail: document.getElementById("player-rail"), stage: document.querySelector(".showcase-stage")
   };
   if (!el.deck || !el.audio) return;
 
@@ -522,6 +523,30 @@
   audio.addEventListener("seeked", function () { cueIndex = -1; highlight(audio.currentTime); say(audio.paused ? "Paused" : "Playing"); });
   audio.addEventListener("ratechange", function () { cueIndex = -1; });
 
+
+  /* ------------------------------------------------------ viewport player */
+  function initViewportPlayer() {
+    if (!el.playerRail || !el.stage) return;
+    var desktop = window.matchMedia("(min-width:1121px)");
+
+    function setVisible(visible) {
+      el.playerRail.dataset.visible = visible ? "true" : "false";
+    }
+    function configure() {
+      if (!desktop.matches) { setVisible(true); return; }
+      if (!("IntersectionObserver" in window)) { setVisible(true); return; }
+      if (el.playerRail._gbrObserver) el.playerRail._gbrObserver.disconnect();
+      var observer = new IntersectionObserver(function (entries) {
+        setVisible(entries.some(function (entry) { return entry.isIntersecting; }));
+      }, { root:null, threshold:0, rootMargin:"-52px 0px 0px 0px" });
+      observer.observe(el.stage);
+      el.playerRail._gbrObserver = observer;
+    }
+    configure();
+    if (desktop.addEventListener) desktop.addEventListener("change", configure);
+    else if (desktop.addListener) desktop.addListener(configure);
+  }
+
   /* ------------------------------------------------------------- controls */
   el.toggle.addEventListener("click", function () {
     if (!current) return;
@@ -582,6 +607,7 @@
   });
 
   /* ----------------------------------------------------------------- boot */
+  initViewportPlayer();
   audio.removeAttribute("controls");
   var storedVolume = recall("gbr:volume"); audio.volume = storedVolume === null ? .9 : Number(storedVolume); el.volume.value = audio.volume;
   var requested = new URLSearchParams(location.search).get("track");

@@ -76,3 +76,13 @@ This revision removes automatic MiniMax-folder ingestion.
 - The browser lazy-loads word timing only for the selected cassette. Missing/invalid timing files fall back to ordinary line/raw lyrics without affecting playback.
 - Live lyric animation now runs from `requestAnimationFrame()` while audio is playing, so the current word can change smoothly rather than at the coarse `timeupdate` event cadence.
 - Current word glows amber; completed words stay warm/dim; upcoming words remain subdued. Line following and click-to-seek continue to work.
+
+
+## v5.7 viewport-player correction
+
+- Replaced the desktop sticky player with a true fixed viewport-centred transport.
+- Removed `overflow:auto` from the player chassis so wheel/trackpad input scrolls the cassette wall, not the machine.
+- Kept a reserved central corridor in every genre wall so cassette stacks pass cleanly around the fixed transport.
+- Player fades in only while the showcase wall intersects the viewport, avoiding it floating over the masthead/story sections.
+- Restricted local scrolling to the explicitly opened lyrics/technical drawer.
+- Mobile/tablet retains the responsive sticky-player layout where three-column geometry is not viable.
