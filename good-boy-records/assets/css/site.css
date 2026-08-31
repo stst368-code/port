@@ -398,9 +398,10 @@ body[data-format=vinyl] .cassette__label{inset:0;height:100%;border-radius:2px}b
 }
 .lyrics[data-mode="word"] .lyrics__list li.is-active .lyrics__word.is-next{color:#a8a398;opacity:.9}
 .lyrics[data-mode="word"] .lyrics__list li.is-past .lyrics__word{color:#4b463a;opacity:.72}
-.lyrics[data-loading="true"]:before,.lyrics[data-loading="error"]:before{
+.lyrics[data-loading="true"]:before,.lyrics[data-loading="error"]:before,.lyrics[data-loading="review"]:before{
   display:block;margin:0 0 .35rem;color:#6b6f69;font:700 .48rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase
 }
 .lyrics[data-loading="true"]:before{content:"Loading word timing…"}
 .lyrics[data-loading="error"]:before{content:"Word timing unavailable — using transcript";color:#806b4b}
+.lyrics[data-loading="review"]:before{content:"Word timing awaiting review — using transcript";color:#9b7437}
 @media (prefers-reduced-motion:reduce){.lyrics__word{transition:none}}

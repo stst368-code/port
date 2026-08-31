@@ -49,7 +49,8 @@
     },
     "artwork": {
       "base": "dogtushya-v2",
-      "alt": "Cover artwork for dogtushya."
+      "alt": "Cover artwork for dogtushya.",
+      "placeholder": false
     },
     "links": {
       "experiment": null,

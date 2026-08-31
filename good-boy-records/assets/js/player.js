@@ -155,12 +155,17 @@
   function renderLyrics(track) {
     lyricsLoadToken += 1;
     var token = lyricsLoadToken;
+    el.lyrics.dataset.loading = "false";
     var fallback = (track.lyrics && track.lyrics.cues) || [];
     if (!renderCueSet(fallback, "line")) renderRawLyrics(track);
     el.lyricsNote.hidden = !(track.lyrics && track.lyrics.status === "placeholder");
 
     var timing = track.lyrics && track.lyrics.wordTiming;
     if (!timing || !timing.src) return;
+    if ((timing.reviewRequired || timing.usable === false) && !timing.approved) {
+      el.lyrics.dataset.loading = "review";
+      return;
+    }
     el.lyrics.dataset.loading = "true";
     fetch(timing.src, {cache:"force-cache"})
       .then(function (response) {

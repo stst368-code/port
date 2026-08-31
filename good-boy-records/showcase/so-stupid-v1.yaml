@@ -1,0 +1,106 @@
+title: ashnikko-03-so-stupid
+version: 1
+model: acestep 1.5 XL turbo BF16
+state: active
+genre: doo-wop
+inspiration: Ashnikko - Stupid
+duration: 220.032
+cover: so-stupid-v1.png
+caption: |
+  1950s doo-wop, retro soul, 6/8 triplet sway, sweet group harmony backing vocals, finger snaps, warm tremolo guitar, vintage tape, playful sassy female lead, malt-shop nostalgia
+lyrics: |
+  [Intro - group harmony, finger snaps]
+  (group) Sha-la-la... doo-wop...
+  (Woof)
+  Oh, two little goldens...
+
+  [Verse 1 - sweet lead, group answers]
+  There's a golden girl with a cold little stare (ooh-ooh)
+  Copper-coated princess and she hasn't a care (sha-la-la)
+  She won't chase the ball, no, she's much too refined
+  The prettiest, pettiest golden you'll find
+
+  [Chorus - sweet group harmony, sway]
+  Two goldens (doo-wop) one little home (bom-bom)
+  One is a princess on her velvet throne (sha-la-la)
+  One is a sweetheart, all slobber and sun (ooh-ooh)
+  Two golden hearts beating, two beating as one
+  (Woof)
+
+  [Verse 2 - lead, group fills]
+  Here's her big chunk with the heart open wide (ooh-ooh)
+  One thought, go fetch, and he's off on the ride (bom-bom)
+  He loves every soul that he ever did see
+  But Teddy, oh Teddy, no friend will he be (why-y-y?)
+
+  [Bridge - dreamy, harmonized]
+  Two sides of a golden, one heart down below (ahhh)
+  She's the brains and the beauty, he's the heart and the glow
+  (group) Doo-wop... Doja... Bam Bam...
+
+  [Outro - ritard, harmony]
+  Two goldens, one home, and they have it all (sha-la-la)
+  (slowing) Go on, sweethearts... fetch the ball...
+  (group) Bom... bom... (Woof)
+generation:
+  source_file: ashnikko__03_so_stupid-CFG7-Seed-1120919971691864_00001_.mp3
+  source_title: ashnikko__03_so_stupid
+  source_sha256: c141b1be00aa30a58fceeb30828d9fa7441dd444f42e6c40bbba2b1b534b1a95
+  actual_audio_duration_seconds: 220.032
+  model_file: acestepv15xlturbobf16.safetensors
+  model_weight_dtype: default
+  vae_file: ace_1.5_vae.safetensors
+  clip_models:
+  - qwen_0.6b_ace15.safetensors
+  - qwen_4b_ace15.safetensors
+  clip_type: ace
+  clip_device: default
+  model_shift: 3.0
+  bpm: 72
+  time_signature: '6'
+  keyscale: C major
+  language: en
+  text_encoder_requested_duration_seconds: 165.0
+  latent_duration_seconds: 220.0
+  batch_size: 1
+  seeds:
+    filename_seed: -1120919971691864
+    text_encoder_seed: 492498941988985
+    sampler_seed: 0
+  text_conditioning:
+    generate_audio_codes: true
+    cfg_scale: 7.0
+    temperature: 0.95
+    top_p: 0.9
+    top_k: 0
+    min_p: 0.0
+  sampler:
+    steps: 8
+    cfg: 1.0
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: mp3
+    duration: 220.032
+    container_bit_rate: 242124
+    encoder: Lavf62.3.100
+    codec: mp3
+    codec_long_name: MP3 (MPEG audio layer 3)
+    sample_rate_hz: 48000
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: null
+    stream_bit_rate: 229536
+    quality: V0
+  comfyui:
+    workflow_id: 16e1f40f-67dc-4210-b4c3-9825a75d377d
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.42.11
+    workflow_renderer_version: null
+  selected_graph_branch:
+    save_node_id: 303:1362
+    text_encoder_node_id: 303:1361
+    sampler_node_id: 303:1364:158
+    latent_node_id: 303:1364:148

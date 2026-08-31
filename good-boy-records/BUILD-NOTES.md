@@ -93,3 +93,20 @@ This revision removes automatic MiniMax-folder ingestion.
 - `build_catalogue.py` now reads only generated records under `content-source/tracks/showcase/`.
 - `import_showcase.py` removes stale YAML records left anywhere under `content-source/tracks/` before regenerating the curated set.
 - This fixes upgraded repositories where old demo tracks were still being validated alongside the hand-picked showcase.
+
+## v5.9 — lyric alignment quality gate
+
+- Consumes the standalone aligner's `quality.review_required`, `approved`, and `usable_for_live_lyrics` fields.
+- Low-confidence sidecars remain available as generated data but do not activate word-level karaoke until approved.
+- Player falls back to ordinary lyrics and shows `Word timing awaiting review` rather than presenting interpolated words as authoritative.
+- Build output reports coverage for review-gated sidecars.
+
+## v5.10 — non-fatal artwork fallback
+
+Missing or broken cover artwork no longer blocks deployment.
+
+- `import_showcase.py` switches a track to the built-in `gbr-placeholder` sleeve when its referenced cover cannot be found in `showcase/`.
+- `prepare_artwork.py` always generates 640/1280 WebP + JPEG placeholder derivatives, even when there are no valid masters at all.
+- Individual corrupt/unreadable cover masters now emit warnings rather than terminating the artwork pass.
+- `build_catalogue.py` performs a second safety check: if a track-specific derivative is absent but the built-in placeholder exists, it rewrites that track to the placeholder and continues with a warning.
+- A deployment fails for artwork only if both the requested derivatives and the built-in placeholder derivatives are unavailable.

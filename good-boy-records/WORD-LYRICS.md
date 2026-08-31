@@ -1,45 +1,53 @@
 # Word-timed lyric sidecars
 
-Good Boy Records **consumes** word-timing files but does not generate them. The
-heavy alignment tool is deliberately separate from this Git repository.
+Good Boy Records **consumes** word-timing files but does not generate them. The heavy WhisperX/Demucs alignment tool lives outside this Git repository.
 
-For an audio file such as:
-
-```text
-showcase/pity-pawty/pity-pawty-v2_CFG-1.70_STEP-31_SEED-7.flac
-```
-
-the optional timing file must have the same stem:
+For:
 
 ```text
-showcase/pity-pawty/pity-pawty-v2_CFG-1.70_STEP-31_SEED-7.lyrics.json
+showcase/pity-pawty-v2.flac
 ```
 
-The accepted format identifier is:
+the optional sidecar is:
+
+```text
+showcase/pity-pawty-v2.lyrics.json
+```
+
+The format remains `gbr-word-lyrics-v1`. New aligner sidecars also contain a quality gate:
 
 ```json
 {
   "format": "gbr-word-lyrics-v1",
-  "lines": [
-    {
-      "text": "It's my Paw tea",
-      "start": 12.34,
-      "end": 13.74,
-      "words": [
-        {"text": "It's", "start": 12.34, "end": 12.62},
-        {"text": "my", "start": 12.62, "end": 12.88},
-        {"text": "Paw", "start": 12.88, "end": 13.21},
-        {"text": "tea", "start": 13.21, "end": 13.74}
-      ]
-    }
-  ]
+  "stats": {
+    "coverage": 0.846
+  },
+  "quality": {
+    "rating": "fair",
+    "review_required": false,
+    "approved": false,
+    "usable_for_live_lyrics": true
+  },
+  "lines": []
 }
 ```
 
-During a normal build, `tools/import_showcase.py` validates matching sidecars and
-copies them to generated `data/live-lyrics/`. The catalogue stores only a small
-URL pointer. The browser fetches the file on cassette selection rather than
-embedding every song's word grid into the homepage.
+The external aligner defaults to requiring review below 80% direct-match coverage. A low-confidence sidecar is still copied into the generated site, but the browser will **not** use its word-level karaoke timing unless it has been explicitly approved. Until then the normal line/raw lyric display remains active.
 
-If the sidecar is absent, malformed or fails to load, normal line/raw lyrics are
-used instead. Audio playback never depends on this file.
+This means a difficult track can safely produce:
+
+```json
+"quality": {
+  "review_required": true,
+  "approved": false,
+  "usable_for_live_lyrics": false
+}
+```
+
+without publishing interpolated timing as if it were word-perfect.
+
+After listening through the sidecar, use the standalone aligner's `APPROVE.bat`. Rebuild/push the site and that sidecar becomes eligible for live word highlighting.
+
+During a normal site build, `tools/import_showcase.py` validates matching sidecars and copies them to `data/live-lyrics/`. The catalogue stores only a small URL pointer. The browser fetches the sidecar only when the cassette is selected.
+
+If the file is absent, malformed, awaiting review or fails to load, normal lyrics are used instead. Audio playback never depends on the timing file.

@@ -56,6 +56,7 @@ TRACK_AUDIO_DIR = ROOT / "assets" / "audio" / "tracks"
 PREVIEW_AUDIO_DIR = ROOT / "assets" / "audio" / "previews"
 
 SLEEVE_WIDTHS = (640, 1280)
+PLACEHOLDER_ART_BASE = "gbr-placeholder"
 LRC_LINE = re.compile(r"^((?:\[\d{1,3}:\d{2}(?:[.:]\d{1,3})?\])+)(.*)$")
 LRC_STAMP = re.compile(r"\[(\d{1,3}):(\d{2})(?:[.:](\d{1,3}))?\]")
 LRC_META = re.compile(r"^\[([a-z]{2,}):(.*)\]$", re.IGNORECASE)
@@ -277,7 +278,28 @@ def validate_artwork(track: dict[str, Any], where: str, report: Report) -> None:
         if not (SLEEVE_DIR / f"{base}-{width}.{extension}").exists()
     ]
     if missing:
-        report.error(where, f"artwork derivatives missing: {', '.join(missing)} — run tools/prepare_artwork.py")
+        placeholder_missing = [
+            f"{PLACEHOLDER_ART_BASE}-{width}.{extension}"
+            for width in SLEEVE_WIDTHS
+            for extension in ("webp", "jpg")
+            if not (SLEEVE_DIR / f"{PLACEHOLDER_ART_BASE}-{width}.{extension}").exists()
+        ]
+        if placeholder_missing:
+            report.error(
+                where,
+                "artwork derivatives missing and built-in placeholder is unavailable: "
+                + ", ".join(missing),
+            )
+        else:
+            report.warn(
+                where,
+                f"artwork derivatives missing: {', '.join(missing)}; using built-in placeholder",
+            )
+            track["artwork"]["requestedBase"] = base
+            track["artwork"]["base"] = PLACEHOLDER_ART_BASE
+            track["artwork"]["placeholder"] = True
+            if not track["artwork"].get("alt") or str(track["artwork"].get("alt")).startswith("Cover artwork for"):
+                track["artwork"]["alt"] = f"Placeholder artwork for {track.get('title') or where}."
     if not track["artwork"].get("alt"):
         report.error(where, "artwork has no alt description")
 
@@ -346,7 +368,18 @@ def attach_lyrics(track: dict[str, Any], where: str, report: Report) -> None:
                 report.warn(where, f"word-timing file {source} is missing; falling back to line/raw lyrics")
                 track["lyrics"].pop("wordTiming", None)
             else:
-                track["lyrics"]["synchronisation"] = "word"
+                review_required = bool(word_timing.get("reviewRequired", False))
+                approved = bool(word_timing.get("approved", False))
+                usable = bool(word_timing.get("usable", approved or not review_required))
+                if usable or approved:
+                    track["lyrics"]["synchronisation"] = "word"
+                else:
+                    track["lyrics"]["synchronisation"] = "none"
+                    coverage = word_timing.get("coverage")
+                    if isinstance(coverage, (int, float)):
+                        report.warn(where, f"word timing is awaiting review ({coverage * 100:.1f}% direct-match coverage); using line/raw lyrics")
+                    else:
+                        report.warn(where, "word timing is awaiting review; using line/raw lyrics")
 
     name = track["lyrics"].get("file")
     raw = track["lyrics"].get("raw")

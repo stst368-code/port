@@ -1,0 +1,128 @@
+title: new-mills-new-mills
+version: 1
+model: MiniMax Music 3 FP16
+state: active
+genre: classic
+inspiration: Frank Sinatra - New York New York
+duration: 173.278912
+cover: new-mills-new-mills-v1.png
+caption: |
+  Global Metadata: Target tempo: approximately 109 BPM. Target tonal centre: D major. Target metre: 4/4. Genre and sonic identity: traditional pop, 1950s big band, Neumann U47 microphone warmth, and cinematic orchestrations. Emotional arc: proper theatrical performance. Production profile: favour mid-century swing and high fidelity analog studio recording, with the mix and spatial character appropriate to the stated era. Vocal Details: Base the lead and supporting vocal treatment on vocal jazz and rich baritone crooner. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style. Arrangement: Follow the lyric-section timeline Intro → Verse 1 → Verse 2 → Chorus → Verse 3 → Chorus → Verse 4 → Verse 5 → Bridge → Chorus → Outro. Section directives: Intro: Soft piano chords, walking upright bass, and a smoky muted trumpet solo; Verse 1: Smooth, relaxed baritone vocals; Verse 2: Playful, swinging delivery; Chorus: Vocals building with confidence, strings enter; Chorus: Full brass section kicks in, driving swing tempo; Verse 4: Slightly spoken, charismatic Sinatra swagger; Verse 5: Strings swell, building tension; Bridge: orchestral; Bridge: Explosive big band horn section, dramatic sweeping strings crescendo, drum roll; Chorus: Belting, powerful climax, maximum energy; Outro: Sustained final vocal note, huge brass flourish, closing drum hit. Instrument lifecycle: lush sweeping strings, muted trumpet, walking upright bass, brushed snare drums, and crisp brass section should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible.
+lyrics: |
+  [Intro]
+
+  [Verse 1]
+  Start spreadin' the toys
+  I'm leavin' today
+  I want to be a part of it
+  New Mills, New Mills
+
+  [Verse 2]
+  These vagabond paws
+  Are longin' to stray
+  Right through the very heart of it
+  New Mills, New Mills
+
+  [Chorus]
+  I wanna wake up
+  In a town that's half a-sleep
+  And find I'm king of the hill
+  Top of the heap
+
+  [Verse 3]
+  These little town blues
+  Are melting away
+  I'll make a brand new start of it
+  In old New Mills
+
+  [Chorus]
+  If I can make it there
+  I'll make it anywhere
+  It's up to you
+  New Mills, New Mills
+  New Mills, New Mills
+
+  [Verse 4]
+  I want to wake up
+  In a town that's half a-sleep
+  And find I'm A-number one
+  Top of the list
+  King of the hill
+  A-number one
+
+  [Verse 5]
+  These little town blues
+  Are melting away
+  I'll make a brand new start of it
+  In old New Mills
+
+  [Bridge]
+
+  [Chorus]
+  Annddd-uh if I can make it there
+  I'm gonna make it anywhere
+
+  It's-up-to-you
+  New Millssss!
+  New Millssss!
+  New Mills!
+
+  [Outro]
+generation:
+  source_file: new-mills-new-mills_V1_P0_S-860340301445264_B-0_00001.flac
+  source_sha256: 5a6cad73f89023b7598bb0bc7f96e5101f0c4748d114a750367a275d3c697115
+  source_file_mtime_utc: '2026-08-24T19:43:48Z'
+  actual_audio_duration_seconds: 173.278912
+  max_duration_seconds: 206.0
+  model_file: minimax_music3_dit_fp16.safetensors
+  model_weight_dtype: default
+  vae_file: minimax_music3_dav.safetensors
+  clip_model: minimax_music3_text_encoder_pruned_int8_convrot.safetensors
+  clip_type: minimax
+  clip_device: default
+  batch_size: 1
+  text_conditioning:
+    cfg_scale: 1.7
+    top_k: 50
+  sampler:
+    steps: 30
+    cfg: 1.7
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: flac
+    duration: 173.278912
+    container_bit_rate: 836829
+    encoder: Lavf62.12.102
+    codec: flac
+    codec_long_name: FLAC (Free Lossless Audio Codec)
+    sample_rate_hz: 44100
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: 16
+    stream_bit_rate: null
+  comfyui:
+    workflow_id: d0315e3e-da4d-4a0b-b9fa-009950f02c41
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.49.6
+    workflow_renderer_version: null
+  selected_graph_branch:
+    save_node_id: 30:263
+    text_encoder_node_id: 30:252
+    sampler_node_id: 30:255
+    latent_node_id: 30:254
+    prompt_cycler_node_id: 30:243
+    random_number_node_id: 30:251
+  source_filename_version_label: 1
+  seeds:
+    generation_seed_from_output_filename: 860340301445264
+    graph_random_node_seed_parameter: 876245384094943
+  prompt_variant:
+    index: 0
+    batch_index: 0
+    cycler_node_id: 30:243
+    cycler_seed: 195
+    cycle_mode: sequential
+    variant_count: 4

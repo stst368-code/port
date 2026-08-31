@@ -36,6 +36,7 @@ AUDIO_OUT = ROOT / "assets" / "audio" / "tracks"
 MANIFEST = ROOT / "content-source" / "showcase-manifest.json"
 LIVE_LYRICS_OUT = ROOT / "data" / "live-lyrics"
 LIVE_LYRICS_FORMAT = "gbr-word-lyrics-v1"
+PLACEHOLDER_ART_BASE = "gbr-placeholder"
 AUDIO_EXTS = {".flac", ".wav", ".mp3", ".opus", ".ogg", ".m4a"}
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp"}
 
@@ -183,7 +184,7 @@ def format_key(path: Path) -> str:
     }.get(ext, ext.lstrip("."))
 
 
-def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, index: int, art_base: str, live_lyrics: dict[str, Any] | None = None) -> Path:
+def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, index: int, art_base: str, live_lyrics: dict[str, Any] | None = None, artwork_placeholder: bool = False) -> Path:
     title = str(raw.get("title") or source_yaml.stem)
     composition = slugify(title)
     version = raw.get("version")
@@ -228,11 +229,15 @@ def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, inde
         },
         "lyrics": {
             "raw": str(raw.get("lyrics") or "").rstrip(),
-            "synchronisation": "word" if live_lyrics else "none",
+            "synchronisation": "word" if live_lyrics and live_lyrics.get("usable", True) else "none",
             "status": "source",
             "wordTiming": live_lyrics,
         },
-        "artwork": {"base": art_base, "alt": f"Cover artwork for {title}."},
+        "artwork": {
+            "base": art_base,
+            "alt": f"Placeholder artwork for {title}." if artwork_placeholder else f"Cover artwork for {title}.",
+            "placeholder": artwork_placeholder,
+        },
         "prompt": {"caption": str(raw.get("caption") or "").strip()},
         "links": {"experiment": None, "songDefinition": None},
         "notes": {"short": inspiration},
@@ -311,11 +316,17 @@ def main() -> int:
 
         cover = resolve_cover(source_yaml, raw.get("cover"))
         copied_cover = None
+        artwork_placeholder = False
         if cover:
             copied_cover = MASTERS / f"{art_base}{cover.suffix.lower()}"
             shutil.copy2(cover, copied_cover)
         else:
-            print(f"warn {source_yaml.relative_to(DROP)}: cover {raw.get('cover')!r} not found in showcase/")
+            artwork_placeholder = True
+            art_base = PLACEHOLDER_ART_BASE
+            print(
+                f"warn {source_yaml.relative_to(DROP)}: cover {raw.get('cover')!r} not found in showcase/; "
+                f"using built-in {PLACEHOLDER_ART_BASE} artwork"
+            )
 
         selected = discover_audio(source_yaml, title)
         staged_audio: list[Path] = []
@@ -344,15 +355,28 @@ def main() -> int:
                     shutil.copy2(sidecar, LIVE_LYRICS_OUT / runtime_name)
                     staged_live_lyrics.append(runtime_name)
                     stats = sidecar_data.get("stats") if isinstance(sidecar_data.get("stats"), dict) else {}
+                    quality = sidecar_data.get("quality") if isinstance(sidecar_data.get("quality"), dict) else {}
+                    coverage = stats.get("coverage")
+                    # Backward-compatible safety gate: v1 sidecars from the original
+                    # aligner had stats.coverage but no quality object. Treat <80%
+                    # as review-required rather than blindly enabling karaoke.
+                    inferred_review = isinstance(coverage, (int, float)) and float(coverage) < 0.80
+                    review_required = bool(quality.get("review_required", inferred_review))
+                    approved = bool(quality.get("approved", False))
+                    usable = bool(quality.get("usable_for_live_lyrics", approved or not review_required))
                     live_info = {
                         "src": f"data/live-lyrics/{runtime_name}",
                         "format": LIVE_LYRICS_FORMAT,
-                        "coverage": stats.get("coverage"),
+                        "coverage": coverage,
                         "source": sidecar.name,
+                        "rating": quality.get("rating"),
+                        "reviewRequired": review_required,
+                        "approved": approved,
+                        "usable": usable,
                     }
-                records.append(write_track(raw, source_yaml, audio, index, art_base, live_info).name)
+                records.append(write_track(raw, source_yaml, audio, index, art_base, live_info, artwork_placeholder).name)
         else:
-            records.append(write_track(raw, source_yaml, None, 0, art_base, None).name)
+            records.append(write_track(raw, source_yaml, None, 0, art_base, None, artwork_placeholder).name)
 
         manifest.append({
             "source": str(source_yaml.relative_to(DROP)).replace("\\", "/"),
@@ -370,7 +394,19 @@ def main() -> int:
                 print(f"  + {p.name}")
                 live_name = f"{slugify(p.stem)}.json"
                 if live_name in staged_live_lyrics:
-                    print(f"    ~ word sync {live_name}")
+                    original_audio = next((item for item in selected if item.name == p.name), None)
+                    _sidecar, _sidecar_data = live_lyrics_sidecar(original_audio)
+                    _quality = _sidecar_data.get("quality") if isinstance((_sidecar_data or {}).get("quality"), dict) else {}
+                    _stats = _sidecar_data.get("stats") if isinstance((_sidecar_data or {}).get("stats"), dict) else {}
+                    _cov = _stats.get("coverage")
+                    _inferred_review = isinstance(_cov, (int, float)) and float(_cov) < 0.80
+                    _review_required = bool(_quality.get("review_required", _inferred_review))
+                    _approved = bool(_quality.get("approved", False))
+                    if _review_required and not _approved:
+                        _cov_text = f"{float(_cov) * 100:.1f}%" if isinstance(_cov, (int, float)) else "unknown coverage"
+                        print(f"    ! word sync {live_name} awaiting review ({_cov_text}); site will use fallback lyrics")
+                    else:
+                        print(f"    ~ word sync {live_name}")
                 else:
                     print("    . no word-timing sidecar (raw/line lyrics will be used)")
         else:
