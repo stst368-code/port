@@ -8,6 +8,14 @@ not move the cassette into a second deck or scroll the visitor elsewhere.
 There is deliberately no catalogue search box. This is a curated showcase, not
 Spotify after a minor electrical fire.
 
+## No generated `music/` catalogue
+
+The cassette wall and central player are the catalogue. Older builds generated
+`music/<slug>/index.html` permanent track pages; that subsystem has been removed.
+`showcase/` is the only human-managed music source, and the deployment no longer
+stages a `music/` directory. Lyrics and technical metadata open inside the central
+player instead.
+
 ## The `showcase/` folder is the only music source
 
 The site does **not** scan your MiniMax project, output folder, OneDrive, or any
@@ -59,6 +67,29 @@ generated YAML records left by older versions under `content-source/tracks/`, an
 the catalogue builder reads only `content-source/tracks/showcase/`. This prevents
 old demo/placeholder tracks from reappearing in GitHub Actions after an in-place
 upgrade.
+
+
+## GitHub workflow location
+
+This project lives at `good-boy-records/` inside the `port` repository. GitHub only
+loads workflow files from the repository-root `.github/workflows/` directory.
+
+Copy `GITHUB-WORKFLOW-static.yml` to this exact repository path:
+
+```text
+port/
+├── .github/
+│   └── workflows/
+│       └── static.yml
+└── good-boy-records/
+    ├── showcase/
+    ├── tools/
+    └── ...
+```
+
+Do not put `.github/workflows/` inside `good-boy-records/`. The supplied workflow
+uses the explicit path `$GITHUB_WORKSPACE/good-boy-records`; it does not auto-detect
+or guess which copy of the project to build.
 
 ## Build on Windows
 
@@ -113,7 +144,7 @@ There is no external object-storage requirement in this build.
 
 The desktop wall is arranged around a centre transport that remains vertically centred while the collection scrolls. Each song appears once as a titled vertical stack. Its versions sit directly beneath that title, and each cassette gets only a small `V1`, `V2`, `V3` marker to its left. Genre sections remain the outer grouping.
 
-The centre column is intentionally reserved for the sticky player, so cassettes pass on the left and right rather than disappearing underneath it. Lyrics and technical metadata live in a collapsible drawer on the player to keep the permanent centre hardware compact. On narrower screens the player becomes a sticky top-centred transport and the two wall lanes collapse responsively.
+The centre column is intentionally reserved for the fixed desktop player, so cassettes pass on the left and right rather than disappearing underneath it. Lyrics and technical metadata live in a collapsible drawer on the player to keep the permanent centre hardware compact. On narrower screens the player becomes a sticky top-centred transport and the two wall lanes collapse responsively.
 
 ## Wall grouping and player EQ
 

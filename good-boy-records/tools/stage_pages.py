@@ -22,7 +22,7 @@ def main() -> int:
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir()
-    for name in ["index.html", "assets", "data", "music"]:
+    for name in ["index.html", "assets", "data"]:
         copy_item(ROOT / name)
     docs = ROOT / "content-source" / "docs"
     if docs.exists():

@@ -13,7 +13,7 @@
   var el = {
     deck: document.getElementById("deck"), title: document.getElementById("deck-title"),
     catalogue: document.getElementById("deck-catalogue"), meta: document.getElementById("deck-meta"),
-    detailsLink: document.getElementById("deck-details"), status: document.getElementById("deck-status"),
+    detailsLink: document.getElementById("deck-details"), drawer: document.getElementById("player-drawer"), status: document.getElementById("deck-status"),
     audio: document.getElementById("showcase-player"), toggle: document.getElementById("transport-toggle"),
     scrub: document.getElementById("transport-scrub"), elapsed: document.getElementById("time-elapsed"),
     total: document.getElementById("time-total"), volume: document.getElementById("transport-volume"),
@@ -81,6 +81,16 @@
     button.addEventListener("click", function () { setFormat(button.dataset.formatChoice); });
   });
   setFormat(recall("gbr:format") || "cassette");
+
+  if (el.detailsLink && el.drawer) {
+    el.detailsLink.addEventListener("click", function () {
+      el.drawer.open = !el.drawer.open;
+      el.detailsLink.setAttribute("aria-expanded", el.drawer.open ? "true" : "false");
+    });
+    el.drawer.addEventListener("toggle", function () {
+      el.detailsLink.setAttribute("aria-expanded", el.drawer.open ? "true" : "false");
+    });
+  }
 
   /* --------------------------------------------------------------- lyrics */
   function renderCueSet(nextCues, mode) {
@@ -441,8 +451,7 @@
       var inspiration = (track.style && track.style.inspiration) || (track.notes && track.notes.short) || "No inspiration note stored for this version.";
       el.inspiration.textContent = inspiration;
     }
-    el.detailsLink.href = "music/" + track.slug + "/";
-    el.detailsLink.textContent = "Technical record";
+    el.detailsLink.textContent = "Lyrics + technical";
     el.meta.innerHTML = metaMarkup(track);
     el.scrub.max = track.audio.duration || 0; el.scrub.value = 0;
     el.total.textContent = clock(track.audio.duration); el.elapsed.textContent = "0:00";

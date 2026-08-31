@@ -311,11 +311,7 @@ def nav_html(sections: list[Section], root: str, current: str | None = None) -> 
     """One navigation, generated once, identical on every page."""
     if not sections:
         return ""
-    items = [
-        f'<li><a href="{root}music/"'
-        + (' aria-current="page"' if current == "music" else "")
-        + ">Catalogue</a></li>"
-    ]
+    items = []
     for section in sections:
         mark = ' aria-current="page"' if current == section.slug else ""
         items.append(f'<li><a href="{root}{section.slug}/"{mark}>{section.title}</a></li>')

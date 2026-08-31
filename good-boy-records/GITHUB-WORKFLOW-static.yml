@@ -1,0 +1,123 @@
+name: Build and deploy Good Boy Records
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify Good Boy Records source
+        shell: bash
+        run: |
+          PROJECT_DIR="$GITHUB_WORKSPACE/good-boy-records"
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+
+          if [ ! -f "$PROJECT_DIR/tools/import_showcase.py" ]; then
+            echo "ERROR: Good Boy Records was not found at:"
+            echo "  $PROJECT_DIR"
+            echo
+            echo "Repository files near the root:"
+            find "$GITHUB_WORKSPACE" -maxdepth 3 -type f | sort | head -300
+            exit 1
+          fi
+
+          echo "Building exactly from: $PROJECT_DIR"
+          echo
+          echo "Showcase files committed to this run:"
+          find "$PROJECT_DIR/showcase" -maxdepth 3 -type f | sort
+
+          echo
+          echo "Dogtushya cover field, if present:"
+          if [ -f "$PROJECT_DIR/showcase/dogtushya-v3.yaml" ]; then
+            grep -n '^cover:' "$PROJECT_DIR/showcase/dogtushya-v3.yaml" || true
+          fi
+
+      - name: Install build dependencies
+        shell: bash
+        run: python -m pip install -r "$PROJECT_DIR/requirements.txt"
+
+      - name: Remove legacy generated output
+        shell: bash
+        run: |
+          rm -rf "$PROJECT_DIR/music"
+          rm -rf "$PROJECT_DIR/_site"
+
+      - name: Import curated showcase
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/import_showcase.py
+
+      - name: Prepare artwork
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/prepare_artwork.py masters assets/img/sleeves
+
+      - name: Build cassette wall and player data
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/build_catalogue.py
+
+      - name: Check internal links
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/check_links.py
+
+      - name: Stage GitHub Pages runtime
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/stage_pages.py
+
+          echo
+          echo "Published artifact contents:"
+          find _site -maxdepth 3 -type f | sort | head -300
+
+          if [ -d _site/music ]; then
+            echo "ERROR: legacy music/ directory reached the Pages artifact"
+            exit 1
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: good-boy-records/_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

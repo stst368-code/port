@@ -11,7 +11,6 @@ Writes:
     data/lyrics/<id>.json           normalised cues, end times calculated
     data/lyrics/<id>.vtt            the same cues as WebVTT
     index.html                      shelf, deck and liner notes
-    music/<slug>/index.html         one permanent page per track
 
 A malformed track should break the build, not the site. Anything that would
 leave a visitor with a dead play button is an error; anything that only leaves
@@ -50,7 +49,7 @@ LYRIC_DIR = ROOT / "content-source" / "lyrics"
 TEMPLATE_DIR = ROOT / "templates"
 DATA_DIR = ROOT / "data"
 LYRIC_OUT_DIR = DATA_DIR / "lyrics"
-MUSIC_DIR = ROOT / "music"
+LEGACY_MUSIC_DIR = ROOT / "music"
 SLEEVE_DIR = ROOT / "assets" / "img" / "sleeves"
 TRACK_AUDIO_DIR = ROOT / "assets" / "audio" / "tracks"
 PREVIEW_AUDIO_DIR = ROOT / "assets" / "audio" / "previews"
@@ -575,80 +574,16 @@ def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
     return "\n".join(chunks)
 
 
-def track_page(track: dict[str, Any], template: str, cues: list[dict[str, Any]], nav: str) -> str:
-    root = "../../"
-    if cues:
-        lyric_lines = "".join(
-            f'<li><span class="stamp">{format_clock(cue["start"])}</span>{esc(cue["text"])}</li>' for cue in cues
-        )
-    else:
-        raw_lyrics = str(track.get("lyrics", {}).get("raw") or "")
-        lyric_lines = "".join(
-            f'<li class="transcript__raw">{esc(line)}</li>'
-            for line in raw_lyrics.splitlines() if line.strip()
-        )
-    sources = track["audio"].get("sources") or {}
-    source_tags = ""
-    flac = sources.get("flac") or sources.get("lossless")
-    if flac:
-        source_tags += f'<source src="{esc(media_url(str(flac), root))}" type="audio/flac">'
-    if sources.get("opus"):
-        source_tags += f'<source src="{esc(media_url(str(sources["opus"]), root))}" type="audio/ogg; codecs=opus">'
-    if sources.get("mp3"):
-        source_tags += f'<source src="{esc(media_url(str(sources["mp3"]), root))}" type="audio/mpeg">'
-    if sources.get("wav"):
-        source_tags += f'<source src="{esc(media_url(str(sources["wav"]), root))}" type="audio/wav">'
-
-    unavailable = ""
-    if not track["audio"].get("available"):
-        unavailable = (
-            '<p class="notice">No hand-picked audio has been supplied for this cassette yet. '
-            'Drop the chosen render into <code>showcase/</code> beside its YAML and rebuild.</p>'
-        )
-
-    notes = track["notes"].get("short")
-    tags = track["style"].get("tags") or []
-
-    return render(
-        template,
-        {
-            "ROOT": root,
-            "NAV": nav,
-            "TITLE": esc(track["title"]),
-            "SUBTITLE": f'<p class="detail__subtitle">{esc(track["subtitle"])}</p>' if track.get("subtitle") else "",
-            "CATALOGUE": esc(track.get("catalogueNumber") or ""),
-            "RELEASED": esc(track.get("released") or "unreleased"),
-            "RUNNING": format_clock(track["audio"].get("duration")),
-            "SLEEVE": sleeve_picture(track, root, "(max-width: 50rem) 90vw, 30rem", lazy=False),
-            "META": meta_rows(track),
-            "TAGS": "".join(f'<li>{esc(tag)}</li>' for tag in tags),
-            "SOURCES": source_tags,
-            "UNAVAILABLE": unavailable,
-            "LYRICS": lyric_lines,
-            "LYRIC_NOTE": (
-                '<p class="notice">These lyrics are a placeholder.</p>'
-                if track["lyrics"].get("status") == "placeholder"
-                else ""
-            ),
-            "NOTES": f'<p class="detail__notes">{esc(notes)}</p>' if notes else "",
-            "PROMPT": (
-                '<h2 class="detail__heading">Generation prompt</h2><div class="prose prompt-copy"><p>'
-                + esc(track.get("prompt", {}).get("caption") or "").replace("\n", "</p><p>")
-                + '</p></div>'
-                if track.get("prompt", {}).get("caption") else ""
-            ),
-            "DISCLOSURE": (
-                "Generated with an AI music model." if track.get("aiGenerated") else "Recorded without AI generation."
-            ),
-            "YEAR": str(date.today().year),
-        },
-    )
-
 
 # --------------------------------------------------------------------------
 
 
 def build(strict: bool) -> int:
+    # /music was legacy generated output from the earlier per-track-page design.
+    # The cassette wall/player is now the catalogue, so stale pages are deleted.
+    if LEGACY_MUSIC_DIR.exists():
+        shutil.rmtree(LEGACY_MUSIC_DIR)
+
     report = Report()
     print("Reading content sources")
     tracks = load_tracks(report)
@@ -657,8 +592,6 @@ def build(strict: bool) -> int:
 
     sections = build_docs.discover(report)
     nav_root = build_docs.nav_html(sections, "")
-    nav_music = build_docs.nav_html(sections, "../", "music")
-    nav_track = build_docs.nav_html(sections, "../../", "music")
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     LYRIC_OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -667,14 +600,9 @@ def build(strict: bool) -> int:
     # replacing a hand-written track with a MiniMax-synced release leaves ghost
     # pages and lyric JSON behind in the deployed site.
     valid_ids = {track["id"] for track in tracks}
-    valid_slugs = {track["slug"] for track in tracks}
     for old in LYRIC_OUT_DIR.glob("*"):
         if old.is_file() and old.stem not in valid_ids:
             old.unlink()
-    if MUSIC_DIR.exists():
-        for old in MUSIC_DIR.iterdir():
-            if old.is_dir() and old.name not in valid_slugs:
-                shutil.rmtree(old)
 
     catalogue: list[dict[str, Any]] = []
 
@@ -723,7 +651,6 @@ def build(strict: bool) -> int:
     (DATA_DIR / "catalogue.json").write_text(json.dumps(catalogue, indent=2) + "\n", encoding="utf-8")
 
     index_template = (TEMPLATE_DIR / "index.html").read_text(encoding="utf-8")
-    track_template = (TEMPLATE_DIR / "track.html").read_text(encoding="utf-8")
 
     shelf = grouped_shelf(tracks)
     (ROOT / "index.html").write_text(
@@ -741,39 +668,6 @@ def build(strict: bool) -> int:
         encoding="utf-8",
     )
 
-    rows = "".join(
-        '<li><span class="stamp">{number}</span>'
-        '<span><a href="{slug}/">{title}</a> — {running}{subtitle}</span></li>'.format(
-            number=esc(track.get("catalogueNumber") or ""),
-            slug=esc(track["slug"]),
-            title=esc(track["title"]),
-            running=format_clock(track["audio"].get("duration")),
-            subtitle=f' · {esc(track["subtitle"])}' if track.get("subtitle") else "",
-        )
-        for track in tracks
-    )
-    MUSIC_DIR.mkdir(parents=True, exist_ok=True)
-    (MUSIC_DIR / "index.html").write_text(
-        render(
-            (TEMPLATE_DIR / "music-index.html").read_text(encoding="utf-8"),
-            {
-                "ROOT": "../",
-                "ROWS": rows,
-                "TRACK_COUNT": str(len(tracks)),
-                "NAV": nav_music,
-                "YEAR": str(date.today().year),
-            },
-        ),
-        encoding="utf-8",
-    )
-
-    for track in tracks:
-        directory = MUSIC_DIR / track["slug"]
-        directory.mkdir(parents=True, exist_ok=True)
-        (directory / "index.html").write_text(
-            track_page(track, track_template, track["lyrics"]["cues"], nav_track), encoding="utf-8"
-        )
-
     doc_pages = build_docs.build(sections, render, report)
 
     catalogue_bytes = (DATA_DIR / "catalogue.json").stat().st_size
@@ -781,7 +675,6 @@ def build(strict: bool) -> int:
     print(f"Built {len(tracks)} tracks")
     print(f"  index.html      {index_bytes / 1024:.0f} KB (catalogue embedded, no runtime fetch)")
     print(f"  catalogue.json  {catalogue_bytes / 1024:.0f} KB")
-    print(f"  track pages     {len(tracks)} + /music/ index")
     print(f"  note pages      {doc_pages} across {len(sections)} sections")
 
     if index_bytes > 250 * 1024:

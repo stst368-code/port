@@ -21,7 +21,7 @@
     <span class="numitron numitron--small">1 RELEASES</span>
   </div>
 </div>
-<nav class="nav" aria-label="Sections"><ul><li><a href="music/">Catalogue</a></li><li><a href="working-solution/">Working solution</a></li><li><a href="journey/">Journey</a></li><li><a href="acestep/">ACE-Step</a></li><li><a href="minimax/">MiniMax</a></li><li><a href="experiments/">Experiments</a></li><li><a href="tools/">Tools</a></li><li><a href="failures/">Failures</a></li></ul></nav>
+<nav class="nav" aria-label="Sections"><ul><li><a href="working-solution/">Working solution</a></li><li><a href="journey/">Journey</a></li><li><a href="acestep/">ACE-Step</a></li><li><a href="minimax/">MiniMax</a></li><li><a href="experiments/">Experiments</a></li><li><a href="tools/">Tools</a></li><li><a href="failures/">Failures</a></li></ul></nav>
 
 <header class="masthead masthead--night">
   <div class="shell masthead__grid">
@@ -85,7 +85,7 @@
                 <h2 class="deck__title" id="deck-title">NO TAPE SELECTED</h2>
                 <p class="deck__catalogue" id="deck-catalogue">Select a cassette from either wall</p>
               </div>
-              <a class="deck__details" id="deck-details" href="music/">Technical record</a>
+              <button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Lyrics + technical</button>
             </div>
 
             <div class="machine-shell">
@@ -138,7 +138,7 @@
               <p class="deck__status" id="deck-status" role="status"></p>
               <audio id="showcase-player" controls preload="none">Your browser cannot play this audio.</audio>
 
-              <details class="player-drawer">
+              <details class="player-drawer" id="player-drawer">
                 <summary><span>LYRICS + TECHNICAL</span><span class="listening-panel__lamp" aria-hidden="true"></span></summary>
                 <div class="listening-panel">
                   <div class="lyrics" id="lyrics" data-following="true">
@@ -156,7 +156,7 @@
         </div>
       </div>
 
-      <noscript><p class="notice">The theatrical deck needs JavaScript. Every track still has a permanent page with ordinary audio controls and the complete transcript.</p></noscript>
+      <noscript><p class="notice">The cassette wall player requires JavaScript. Track source files remain in the curated showcase repository.</p></noscript>
     </div>
   </section>
 

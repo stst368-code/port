@@ -110,3 +110,13 @@ Missing or broken cover artwork no longer blocks deployment.
 - Individual corrupt/unreadable cover masters now emit warnings rather than terminating the artwork pass.
 - `build_catalogue.py` performs a second safety check: if a track-specific derivative is absent but the built-in placeholder exists, it rewrites that track to the placeholder and continues with a warning.
 - A deployment fails for artwork only if both the requested derivatives and the built-in placeholder derivatives are unavailable.
+
+## v5.11 — remove legacy music pages + deterministic GitHub workflow
+
+- Removed generation and templates for the old `music/<slug>/index.html` detail pages.
+- `build_catalogue.py` deletes any stale legacy `music/` directory before every build.
+- `stage_pages.py` publishes only `index.html`, `assets/`, `data/`, and documentation sections; `music/` is never staged.
+- Removed the nested `.github` workflow from the project folder because GitHub would not discover it there when the project lives under `port/good-boy-records`.
+- Added `GITHUB-WORKFLOW-static.yml` as the exact workflow source to copy to repository-root `.github/workflows/static.yml`.
+- The workflow uses the deterministic `$GITHUB_WORKSPACE/good-boy-records` path and prints the committed showcase files before building.
+- The workflow fails if a legacy `_site/music` directory somehow reaches the deployment artifact.
