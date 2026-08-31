@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+_site/
+
+# Large lossless files are ignored everywhere EXCEPT the deliberately curated
+# showcase source folder. This prevents accidental commits from working dirs
+# while allowing the hand-picked FLACs you actually want on GitHub Pages.
+*.wav
+*.flac
+*.aiff
+!showcase/**/*.wav
+!showcase/**/*.flac
+!showcase/**/*.aiff
+!showcase/*.wav
+!showcase/*.flac
+!showcase/*.aiff
+
+# Build products. GitHub Actions regenerates these from showcase/.
+assets/audio/tracks/*
+assets/img/sleeves/*
+masters/*
+content-source/tracks/showcase/*
+content-source/showcase-manifest.json

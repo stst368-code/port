@@ -1,0 +1,61 @@
+id: new-mills-new-mills
+composition: new-mills-new-mills
+catalogueNumber: GBR-002
+
+title: New Mills New Mills
+subtitle: b/w Easy Walkin' Home
+slug: new-mills-new-mills
+
+status: featured
+released: "2026-07-02"
+
+model:
+  provider: null
+  name: null
+
+provenance:
+  songVersion: null
+  generationNumber: null
+
+generation:
+  cfg: null
+  steps: null
+  seed: null
+
+style:
+  summary: Mono 45, close-mic'd acoustic, one voice and a room
+  tags:
+    - folk
+    - mono
+    - single
+
+audio:
+  duration: 104
+  placeholder: true
+  sources:
+    mp3: new-mills-new-mills.mp3
+    opus: null
+  preview:
+    src: new-mills-new-mills.mp3
+    start: 0
+    duration: 12
+
+lyrics:
+  file: new-mills-new-mills.lrc
+  synchronisation: line
+  status: placeholder
+
+artwork:
+  base: new-mills-new-mills
+  alt: >-
+    High-contrast black and white portrait of a golden retriever in the style of
+    a screen print, on a matte black sleeve with condensed poster lettering.
+
+links:
+  experiment: null
+  songDefinition: null
+
+notes:
+  short: Catalogue number on the sleeve art reads GBR 45-001; the label started here.
+
+aiGenerated: true

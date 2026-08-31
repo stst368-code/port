@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — Good Boy Records</title>
+<meta name="description" content="{{EYEBROW}}">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="{{ROOT}}assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the text</a>
+
+<div class="spine">
+  <div class="spine__inner">
+    <span><a href="{{ROOT}}">Good Boy Records</a></span>
+    <span>Notes</span>
+  </div>
+</div>
+{{NAV}}
+
+<main id="main" class="shell">
+  <article class="doc">
+    <p class="eyebrow">{{EYEBROW}}</p>
+    <h1>{{TITLE}}</h1>
+    {{STATUS}}
+    <div class="prose doc__body">{{BODY}}</div>
+    {{CHILDREN}}
+    {{PARENT}}
+    <p class="detail__back"><a href="{{ROOT}}">Back to the catalogue</a></p>
+  </article>
+</main>
+
+<footer class="colophon">
+  <div class="shell"><p>Good Boy Records · {{YEAR}}{{UPDATED}}</p></div>
+</footer>
+</body>
+</html>

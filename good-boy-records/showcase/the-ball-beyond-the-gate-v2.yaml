@@ -1,0 +1,132 @@
+title: the-ball-beyond-the-gate
+version: 2
+model: minimax H3
+state: active
+genre: metal
+inspiration: original
+duration: 298
+cover: the-ball-beyond-the-gate.png
+caption: |
+  Genre epic 1980s heavy metal, power metal, NWOBHM, huge tom fills, massive singalong chorus, dynamic storytelling arrangement, and minor-key verses. Approximately 172 BPM. E minor target key, in 4/4 timing. Heroic fantasy metal, triumphant harmonic lift, and dramatic key change final chorus, opening into heroic and theatrical. Half-time breakdown should define the pocket and motion. Favour analog metal production, with the mix and spatial character appropriate to the stated era.
+  Vocals Base the lead and supporting vocal treatment on soaring clean male tenor vocals, commanding female rock vocals, theatrical character duet, twin lead guitar harmonies, dramatic gang vocals, and ominous choir. Treat lyric control tags such as Backing Vocals, Whispered, Doja, Choir, Both, Group Vocals, and Bam Bam as explicit performer or delivery changes; recurring named or gendered voices should remain recognisably stable. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style.
+  Arrangement Follow the lyric-section timeline Intro → Verse 1 → Pre-Chorus → Chorus → Post-Chorus → Verse 2 → Pre-Chorus → Chorus → Solo → Instrumental → Bridge → Instrumental → Chorus → Outro. Intro distant thunder, clean arpeggiated guitar, tolling bell; Intro Spoken - deep theatrical voice; Intro Massive Guitar Riff - galloping bass and drums; Verse 1: powerful clean male vocals; Pre-Chorus rising twin guitars; Chorus huge soaring vocals, gang harmonies; Post-Chorus twin guitar harmony; Verse 2: galloping rhythm; Verse 2: Heavy Guitar Hit; Pre-Chorus Doja - spoken; Solo: Guitar Solo - fast melodic twin-lead harmonies; Instrumental: Breakdown - half-time drums, ominous choir; Bridge: Doja, commanding female vocals; Bridge: Pause; Bridge: Drum Fill; Instrumental: double-kick drums, ascending twin guitars; Final Chorus key change, maximum intensity; Outro: sustained guitar harmonies, thunder; Outro: Doja - distant; Outro: Bam Bam - distant; Outro: Final power chord. Instrument lifecycle galloping electric guitar riffs, melodic shredding guitar solo, driving distorted bass, thunderous acoustic drums, and rapid double kick should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible. Explicit exclusions avoid death metal, death growls, metalcore, djent, industrial metal, synthwave, pop-punk, modern polished metal, low baritone lead, electronic drums.
+lyrics: |
+  [intro]
+  Beyond the garden...
+  Beyond the gate...
+  There lies...
+  The ball.
+  [verse]
+  At first light she rises
+  Golden fire upon her crown
+  Doja surveys her kingdom
+  Not a pawprint goes unfound
+  From the fortress of the sofa
+  To the borders of the lawn
+  Every treat belongs unto her
+  By the ancient golden law
+  But a shadow shakes the hallway
+  Something mighty has awoke
+  Bam Bam comes like rolling thunder
+  Through a table made of oak
+  [Backing Vocals]
+  BAM! BAM!
+  One thought burns within him
+  One command controls his fate
+  [pre-chorus]
+  He has heard the sacred bouncing
+  From somewhere beyond the gate!
+  [chorus]
+  THE BALL BEYOND THE GATE!
+  He can hear it calling!
+  THE BALL BEYOND THE GATE!
+  Through the darkness falling!
+  Rain and thunder!
+  Wind and flame!
+  Throw it once
+  He'll run again!
+  No wall can hold him!
+  No law can wait!
+  BAM BAM RIDES
+  FOR THE BALL BEYOND THE GATE!
+  [post-chorus]
+  Woah-oh-oh!
+  Woah-oh-oh!
+  [verse]
+  Doja watches from her kingdom
+  With contempt upon her face
+  "Have some dignity, you creature,
+  There are standards in this place."
+  Bam Bam hears but does not answer
+  For his destiny is clear
+  There are tennis balls in peril
+  And a retriever knows no fear
+  Then a name comes through the darkness
+  And the music falls away
+  [Whispered]
+  Teddy...
+  Bam Bam freezes
+  Doja rises
+  Someone's gonna pay
+  [pre-chorus]
+  Golden fur stands in the moonlight
+  Ancient rivals meet once more
+  Doja sighs and shows her daggers
+  [Doja]
+  Boys are such a fucking chore.
+  [chorus]
+  THE BALL BEYOND THE GATE!
+  He can hear it calling!
+  THE BALL BEYOND THE GATE!
+  Through the darkness falling!
+  Rain and thunder!
+  Wind and flame!
+  Lose the ball
+  He'll find again!
+  No wall can hold him!
+  No law can wait!
+  BAM BAM RIDES
+  FOR THE BALL BEYOND THE GATE!
+  [solo]
+  [instrumental]
+  [Choir]
+  Do-ja...
+  Do-ja...
+  [bridge]
+  I need no prophecy
+  I need no throne
+  Every chair within this house
+  Is already mine alone
+  I do not beg for glory
+  I do not chase or wait
+  But Mama has the treat bag...
+  So open up the gate.
+  [Both]
+  OPEN THE GATE!
+  [instrumental]
+  [chorus]
+  THE BALL BEYOND THE GATE!
+  NOW THE GOLDENS ARE RUNNING!
+  THE BALL BEYOND THE GATE!
+  AND THE MORNING IS COMING!
+  Golden thunder!
+  Flying mane!
+  Throw it once!
+  THROW IT AGAIN!
+  Doja leads them!
+  Bam won't wait!
+  TWO GOLDENS RIDE
+  FOR THE BALL BEYOND THE GATE!
+  [Group Vocals]
+  THROW!
+  IT!
+  AGAIN!
+  THROW!
+  IT!
+  AGAIN!
+  [outro]
+  [Doja]
+  Bam Bam, bring it back.
+  [Bam Bam]
+  BALL!
+  Woof.

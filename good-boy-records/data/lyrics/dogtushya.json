@@ -1,0 +1,74 @@
+[
+  {
+    "id": "l1",
+    "start": 10.0,
+    "end": 15.5,
+    "text": "She rose before the morning bell"
+  },
+  {
+    "id": "l2",
+    "start": 15.5,
+    "end": 21.0,
+    "text": "She read the orders through"
+  },
+  {
+    "id": "l3",
+    "start": 21.0,
+    "end": 26.5,
+    "text": "The corridor, the empty hall"
+  },
+  {
+    "id": "l4",
+    "start": 26.5,
+    "end": 32.0,
+    "text": "The work that no one else would do"
+  },
+  {
+    "id": "l5",
+    "start": 36.0,
+    "end": 41.5,
+    "text": "Dogtushya! Dogtushya!"
+  },
+  {
+    "id": "l6",
+    "start": 41.5,
+    "end": 47.0,
+    "text": "Steady at the door"
+  },
+  {
+    "id": "l7",
+    "start": 47.0,
+    "end": 52.5,
+    "text": "Dogtushya! Dogtushya!"
+  },
+  {
+    "id": "l8",
+    "start": 52.5,
+    "end": 58.0,
+    "text": "Ask her for a little, she will give you more"
+  },
+  {
+    "id": "l9",
+    "start": 64.0,
+    "end": 69.5,
+    "text": "They gave her rank, they gave her braid"
+  },
+  {
+    "id": "l10",
+    "start": 69.5,
+    "end": 75.0,
+    "text": "They gave her half the floor"
+  },
+  {
+    "id": "l11",
+    "start": 75.0,
+    "end": 80.5,
+    "text": "She traded every one of them"
+  },
+  {
+    "id": "l12",
+    "start": 80.5,
+    "end": 92.0,
+    "text": "For a biscuit and a walk at four"
+  }
+]

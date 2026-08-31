@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Good Boy Records — late-night canine audio laboratory</title>
+<meta name="description" content="Good Boy Records: AI-assisted songs about two golden retrievers, presented as a late-night cassette archive with synchronised lyrics and generation notes.">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="{{ROOT}}assets/css/site.css">
+<meta property="og:title" content="Good Boy Records">
+<meta property="og:description" content="Every song here is about a dog. The machinery is needlessly serious.">
+<meta property="og:type" content="website">
+</head>
+<body data-format="cassette">
+<a class="skip" href="#shelf">Skip to the catalogue</a>
+
+<div class="topline">
+  <div class="shell topline__inner">
+    <a class="brand" href="{{ROOT}}"><span class="brand__lamp" aria-hidden="true"></span>GOOD BOY RECORDS</a>
+    <span class="topline__status">WAGGING TAIL CORP. / ARCHIVE TERMINAL 01</span>
+    <span class="numitron numitron--small">{{TRACK_COUNT}} RELEASES</span>
+  </div>
+</div>
+{{NAV}}
+
+<header class="masthead masthead--night">
+  <div class="shell masthead__grid">
+    <div>
+      <p class="eyebrow">Private listening room / public evidence locker</p>
+      <h1>Music made by machines.<br><em>Mostly about dogs.</em></h1>
+      <p class="masthead__lede">A dense wall of tapes under late-night light. Click one and that exact cassette depresses into its wall channel, wakes in warm amber and plays from where it sits.</p>
+    </div>
+    <div class="hero-console" aria-hidden="true">
+      <div class="hero-console__vents"></div>
+      <div class="hero-console__display numitron">GBR / 2026</div>
+      <div class="hero-console__lamps"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section library" id="shelf" aria-labelledby="shelf-heading">
+    <div class="shell">
+      <div class="library__bar">
+        <div>
+          <p class="eyebrow">Tape wall</p>
+          <h2 id="shelf-heading">The wall</h2>
+        </div>
+        <div class="hardware-controls">
+          <fieldset class="format-switch" aria-label="Playback format appearance">
+            <legend>FORMAT</legend>
+            <button type="button" data-format-choice="cassette" aria-pressed="true">TAPE</button>
+            <button type="button" data-format-choice="vinyl" aria-pressed="false">VINYL</button>
+          </fieldset>
+          <label class="toggle" id="preview-field" hidden>
+            <input type="checkbox" id="preview-toggle">
+            <span>HOVER PREVIEW</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="library__count">{{TRACK_COUNT}} cassettes mounted <span aria-hidden="true">/</span> select a tape to latch it in place</p>
+
+      <div class="genre-shelves">
+{{SHELF}}
+      </div>
+      <noscript><p class="notice">The theatrical deck needs JavaScript. Every track still has a permanent page with ordinary audio controls and the complete transcript.</p></noscript>
+    </div>
+  </section>
+
+  <section class="section deck" id="deck" data-state="idle" hidden aria-labelledby="deck-title">
+    <div class="shell">
+      <div class="deck__header">
+        <div>
+          <p class="eyebrow">Wall transport monitor / now playing</p>
+          <h2 class="deck__title" id="deck-title"></h2>
+          <p class="deck__catalogue" id="deck-catalogue"></p>
+        </div>
+        <a class="deck__details" id="deck-details" href="{{ROOT}}music/">Technical record</a>
+      </div>
+
+      <div class="deck__grid">
+        <div class="machine-shell">
+          <div class="machine-shell__topline"><span>GBR WALL TRANSPORT / CHANNEL MONITOR</span><span class="machine-shell__serial">SER 0001</span></div>
+          <div class="wall-monitor" aria-hidden="true">
+            <span class="wall-monitor__lamp"></span>
+            <div><small>ACTIVE CHANNEL</small><strong id="wall-monitor-title">NO TAPE LATCHED</strong></div>
+            <span class="numitron" id="wall-monitor-code">---- </span>
+          </div>
+
+          <div class="inspiration-readout">
+            <span>INSPIRATION</span>
+            <p id="deck-inspiration">Select a cassette to load its source inspiration.</p>
+          </div>
+
+          <div class="meter-bank" aria-label="Audio level meters">
+            <div class="vu"><span class="vu__label">L</span><div class="vu__scale"><span class="vu__needle" id="vu-left"></span></div></div>
+            <div class="vu"><span class="vu__label">R</span><div class="vu__scale"><span class="vu__needle" id="vu-right"></span></div></div>
+          </div>
+
+          <div class="eq-panel" id="eq-panel">
+            <div class="eq-panel__head"><span>5-BAND PROGRAM EQ</span><button type="button" id="eq-reset">FLAT</button></div>
+            <div class="eq-bands" aria-label="Five band equalizer">
+              <label class="eq-band"><output for="eq-60">0 dB</output><input id="eq-60" data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0"><span>60</span></label>
+              <label class="eq-band"><output for="eq-250">0 dB</output><input id="eq-250" data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0"><span>250</span></label>
+              <label class="eq-band"><output for="eq-1000">0 dB</output><input id="eq-1000" data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0"><span>1K</span></label>
+              <label class="eq-band"><output for="eq-4000">0 dB</output><input id="eq-4000" data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0"><span>4K</span></label>
+              <label class="eq-band"><output for="eq-12000">0 dB</output><input id="eq-12000" data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0"><span>12K</span></label>
+            </div>
+            <p class="eq-panel__note" id="eq-note">EQ is applied live to the shared player.</p>
+          </div>
+
+          <div class="transport-panel">
+            <button type="button" class="transport__button" id="transport-toggle" aria-label="Play or pause">
+              <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
+            </button>
+            <div class="numitron clock-display"><span id="time-elapsed">0:00</span><b>/</b><span id="time-total">--:--</span></div>
+            <div class="transport__scrub">
+              <label class="visually-hidden" for="transport-scrub">Seek within the track</label>
+              <input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0">
+            </div>
+          </div>
+
+          <div class="machine-footer">
+            <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
+            <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
+            <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
+          </div>
+          <p class="deck__status" id="deck-status" role="status"></p>
+
+          <audio id="showcase-player" controls preload="none">Your browser cannot play this audio.</audio>
+        </div>
+
+        <aside class="listening-panel">
+          <div class="listening-panel__head"><span>LYRIC MONITOR</span><span class="listening-panel__lamp" aria-hidden="true"></span></div>
+          <div class="lyrics" id="lyrics" data-following="true">
+            <p class="notice" id="lyrics-note" hidden>These lyrics are a placeholder.</p>
+            <div class="lyrics__scroll" id="lyrics-scroll" tabindex="0" role="region" aria-label="Lyrics">
+              <ol class="lyrics__list" id="lyrics-list"></ol>
+            </div>
+            <button type="button" class="lyrics__return" id="lyrics-return">Return to current line</button>
+          </div>
+          <div id="deck-meta"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section story" aria-labelledby="story-heading">
+    <div class="shell">
+      <div class="section__head"><p class="eyebrow">The project behind the racket</p><h2 id="story-heading">From experiments to records</h2></div>
+      <div class="story-grid">
+        <a href="journey/" class="story-card"><span>01</span><h3>Journey</h3><p>ACE-Step, reference experiments, the Spotify-style app, MiniMax and the assorted engineering detours between them.</p></a>
+        <a href="working-solution/" class="story-card"><span>02</span><h3>Working solution</h3><p>The practical current setup: what runs, what settings matter, and what has already broken loudly enough to document.</p></a>
+        <a href="experiments/" class="story-card"><span>03</span><h3>Experiments</h3><p>Generation sweeps, comparisons, failures and the evidence behind promoted versions rather than just the shiny survivors.</p></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon"><div class="shell"><p>GOOD BOY RECORDS / {{YEAR}} / STATIC BY DESIGN / NO ACCOUNT REQUIRED / DOGS REMAIN UNIMPRESSED</p></div></footer>
+
+<script type="application/json" id="catalogue-data">{{CATALOGUE_JSON}}</script>
+<script src="{{ROOT}}assets/js/player.js" defer></script>
+</body>
+</html>
