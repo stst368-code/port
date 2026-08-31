@@ -1,8 +1,8 @@
-name: Build and deploy
+name: Build and deploy Good Boy Records
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -11,55 +11,102 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      - name: Locate Good Boy Records
+        shell: bash
+        run: |
+          MATCH="$(find . -type f -path '*/tools/import_showcase.py' -print -quit)"
+
+          if [ -z "$MATCH" ]; then
+            echo "ERROR: Could not find tools/import_showcase.py"
+            echo
+            echo "Repository contents:"
+            find . -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
+          PROJECT_DIR="$(dirname "$(dirname "$MATCH")")"
+
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+          echo "Found Good Boy Records at: $PROJECT_DIR"
+          echo
+          ls -la "$PROJECT_DIR"
+
       - name: Install build dependencies
-        run: pip install -r requirements.txt
+        shell: bash
+        run: |
+          if [ -f "$PROJECT_DIR/requirements.txt" ]; then
+            python -m pip install -r "$PROJECT_DIR/requirements.txt"
+          else
+            echo "requirements.txt not found - installing required packages directly"
+            python -m pip install PyYAML Pillow
+          fi
 
-      - name: Import deliberately selected showcase files
-        run: python tools/import_showcase.py
+      - name: Import showcase
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/import_showcase.py
 
-      - name: Rebuild artwork derivatives
-        run: python tools/prepare_artwork.py masters assets/img/sleeves
+      - name: Build artwork
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/prepare_artwork.py masters assets/img/sleeves
 
-      # A broken track definition fails here rather than reaching a visitor.
-      # Warnings are allowed on main: a track with lyrics but no CFG number is
-      # incomplete, not broken. Add --strict once the catalogue is written up.
       - name: Build catalogue and pages
-        run: python tools/build_catalogue.py
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/build_catalogue.py
 
-      - name: Check every internal link resolves
-        run: python tools/check_links.py
+      - name: Check internal links
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/check_links.py
 
-      - name: Stage runtime site and enforce Pages size limits
-        run: python tools/stage_pages.py
+      - name: Stage GitHub Pages site
+        shell: bash
+        run: |
+          cd "$PROJECT_DIR"
+          python tools/stage_pages.py
 
-      - uses: actions/configure-pages@v5
+          rm -rf "$GITHUB_WORKSPACE/_site_deploy"
+          cp -a _site "$GITHUB_WORKSPACE/_site_deploy"
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Runtime only. Hand-picked FLACs are copied from showcase/ into
-          # assets/audio during the build; source YAML and build tooling are not
-          # included in the published Pages artifact.
-          path: _site
+          path: _site_deploy
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - id: deployment
+      - name: Deploy
+        id: deployment
         uses: actions/deploy-pages@v4
