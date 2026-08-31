@@ -1,0 +1,157 @@
+title: lie-by-the-fire
+version: 3
+model: MiniMax Music 3 FP16
+state: active
+genre: folk
+inspiration: original
+duration: 236.309478
+cover: lie-by-the-fire-v2.png
+caption: |
+  Global Metadata: Target tempo: approximately 64 BPM. Target tonal centre: D minor. Target metre: 6/8. Genre and sonic identity: medieval bardcore, English medieval folk ballad, Dorian mode, acoustic chamber arrangement, historically inspired instrumentation, and natural unprocessed performance. Emotional arc: warm tavern ambience, pastoral storytelling, and solemn but affectionate atmosphere. Rhythmic character: gentle 6/8 rhythm should define the pocket and motion. Production profile: keep the sound stylistically coherent, dynamically believable, and free of unnecessary modernisation. Vocal Details: Base the lead and supporting vocal treatment on intimate bard vocals, modal harmony, and rustic ensemble vocals. Treat lyric control tags such as Soft Vocal as explicit performer or delivery changes; recurring named or gendered voices should remain recognisably stable. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style. Arrangement: Follow the lyric-section timeline Intro → Verse 1 → Verse 2 → Refrain → Instrumental → Verse 3 → Refrain → Bridge → Instrumental → Refrain → Outro. Section directives: Intro: solo lute; Verse 1: gentle bard vocal; Verse 2: vielle enters; Refrain: soft harmony; Instrumental: lute and recorder; Refrain: additional voices; Bridge: hurdy-gurdy drone enters; Instrumental: build frame drum, lute, vielle, recorder; Final Refrain: tavern ensemble harmonies; Outro: instruments gradually disappear; Outro: Quiet lute cadence. Instrument lifecycle: lute, vielle, recorder, hurdy-gurdy drone, medieval harp, frame drum, and hand percussion should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible. Explicit exclusions: avoid modern cinematic orchestra, folk rock, power metal, symphonic metal, synthesizers, piano, modern drum kit, electric guitar, modern pop vocals, glossy studio production.
+lyrics: |
+  [Intro]
+
+  [Verse 1]
+  Lay down beside me
+  The daylight is done
+  Rest now your paws
+  By the fire, everyone
+
+  No need for kingdoms
+  No battles tonight
+  Only two goldens
+  Asleep by the light
+
+  [Verse 2]
+  Doja, my lady
+  So watchful and wise
+  Firelight dancing
+  Like stars in your eyes
+
+  Bam Bam, brave hunter
+  Your quest is complete
+  The ball has been captured
+  Now rest at my feet
+
+  [Refrain]
+  Stay by the fire
+  Stay here awhile
+  Dream of the meadows
+  And morning's first mile
+
+  Wherever we wander
+  Whatever we see
+  Home is wherever
+  You both are with me
+
+  [Instrumental]
+
+  [Verse 3]
+  Tomorrow the pathway
+  Will call us once more
+  Bam will stand waiting
+  Beside the old door
+
+  Doja will linger
+  And judge us all first
+  Then follow behind us
+  When curiosity wins
+
+  [Refrain]
+  Stay by the fire
+  Stay here awhile
+  Dream of the meadows
+  And morning's first mile
+
+  Wherever we wander
+  Whatever we see
+  Home is wherever
+  You both are with me
+
+  [Bridge]
+  No gold from the mountain
+  No jewel from the sea
+  Could purchase the hours
+  You've given to me
+
+  So sleep without worry
+  The watch I shall keep
+  While two golden guardians
+  Lie dreaming in sleep
+
+  [Instrumental]
+
+  [Refrain]
+  Stay by the fire
+  Stay here awhile
+  Tomorrow we'll wander
+  Another good mile
+
+  Through forest and meadows
+  Wherever we roam
+  Two golden companions
+  Will always come home
+
+  [Outro]
+
+  [Soft Vocal]
+  Rest now, Doja
+  Rest, Bam Bam
+
+  The fire burns low
+  And morning will come
+
+  Woof.
+generation:
+  source_file: lie-by-the-fire_V2_CFG1.7_STP30_LMSD102044854598591_SPSD618237416104067_00001.flac
+  source_sha256: 2c6be0d40bf0291c35e909467013600ca0db5d05b8fbfee2eb70cbda49b935e0
+  source_file_mtime_utc: '2026-08-26T22:19:52Z'
+  actual_audio_duration_seconds: 236.309478
+  max_duration_seconds: 298.0
+  model_file: minimax_music3_dit_fp16.safetensors
+  model_weight_dtype: default
+  vae_file: minimax_music3_dav.safetensors
+  clip_model: minimax_music3_text_encoder_pruned_int8_convrot.safetensors
+  clip_type: minimax
+  clip_device: default
+  batch_size: 1
+  text_conditioning:
+    cfg_scale: 1.7
+    top_k: 50
+  sampler:
+    steps: 30
+    cfg: 1.7
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: flac
+    duration: 236.309478
+    container_bit_rate: 738876
+    encoder: Lavf62.12.102
+    codec: flac
+    codec_long_name: FLAC (Free Lossless Audio Codec)
+    sample_rate_hz: 44100
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: 16
+    stream_bit_rate: null
+  comfyui:
+    workflow_id: d0315e3e-da4d-4a0b-b9fa-009950f02c41
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.49.6
+    workflow_renderer_version: null
+  selected_graph_branch:
+    save_node_id: '1837'
+    text_encoder_node_id: 1836:1807:1819
+    sampler_node_id: 1836:1806:1817
+    latent_node_id: 1836:1806:1811
+  source_filename_version_label: 2
+  seeds:
+    language_model_seed: 102044854598591
+    sampler_seed: 618237416104067
+  song_workflow_inputs:
+    song_name: lie-by-the-fire
+    song_version: V2
+    requested_duration_seconds: 298.0

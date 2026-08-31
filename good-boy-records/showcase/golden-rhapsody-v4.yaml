@@ -1,0 +1,197 @@
+title: golden-rhapsody
+version: 4
+model: MiniMax Music 3 FP16
+state: active
+genre: rock
+inspiration: Queen - Bohemian Rhapsody
+duration: 273.589116
+cover: golden-rhapsody.png
+caption: |
+  ### Global Metadata
+
+  **Basic Attributes:** 1970s British operatic progressive rock in the direct musical tradition of “Bohemian Rhapsody.” A through-composed rock rhapsody made from sharply contrasting movements, not a repeating verse-chorus song. No single global tempo, metre or tonal centre. Intro is free and rubato; piano-ballad sections sit around 70–75 BPM; the operatic movement changes tempo, metre and key frequently; the hard-rock movement drives around 135–145 BPM; the outro returns to a slow free tempo.
+
+  **Global Emotional Progression:** Begin mysterious, exposed and solemn. Develop into a vulnerable piano confession that grows increasingly anguished and grand. Break completely from the ballad into an extravagant comic-opera movement filled with rapid vocal exchanges and theatrical tension. Explode suddenly into aggressive hard rock, then collapse into a resigned, reflective coda. Every movement must sound unmistakably different while recurring melodic fragments preserve continuity.
+
+  **Sonics & Production Profile:** Lavish mid-1970s analogue studio production. Grand piano, melodic electric bass, live acoustic drums, orchestral percussion, layered electric guitars and immense multitracked male vocals. Wide dynamics, clear separation and deliberate studio theatricality. Avoid modern pop polish, fixed-tempo production, electronic drums, synthesizer-led arrangements, Auto-Tune, trap rhythms, muddy audio and continuous wall-of-sound density.
+
+  ### Vocal Details
+
+  **Vocal Gender & Timbre:** Singer A (Male), agile dramatic tenor with a rich lower register, clear diction, powerful sustained upper notes and theatrical character voices.
+
+  **Vocal Style:** The intro uses exposed close harmony. Verses use intimate, emotionally escalating piano-ballad singing with flexible timing. Verse 3 becomes an exaggerated operatic performance with rapid switches between pleading, commanding, comic and ominous characters. The Bridge uses forceful, gritty rock vocals. The Outro returns to soft, weary restraint.
+
+  **Harmony/Backing Vocals:** Dense multitracked male harmonies are essential. Use close chordal harmony in the Intro and enormous contrapuntal vocal stacks in Verse 3, including overlapping questions, answers, repeated words, register contrasts and sudden solo interruptions. Vocal layers must largely disappear during the Bridge and Outro.
+
+  **Vocal FX:** Period studio compression, tape saturation and controlled plate ambience. No modern pitch-correction sound.
+
+  ### Arrangement
+
+  **Intro:** Unaccompanied stacked male vocals. Harmonically ambiguous, slow and rubato. Grand piano enters only near the transition.
+
+  **Verse 1:** Sparse piano ballad with solo lead vocal. Bass enters gradually. No steady drum groove at first.
+
+  **Verse 2:** Continue the ballad but increase emotional weight. Add full bass, restrained drums and distant electric-guitar colour. Build to a dramatic vocal peak and complete stop.
+
+  **Solo:** Lyrical sustained electric-guitar solo over piano, bass and drums. It must function as a bridge into an entirely new movement, not conventional soloing over the verse chords.
+
+  **Verse 3:** Abrupt comic-opera movement. Abandon the ballad groove completely. Use rapid key changes, shifting metre, stop-start piano, orchestral percussion, tiny character lines, huge stacked responses, sudden silences, accelerations and exaggerated cadences.
+
+  **Bridge:** Instant hard-rock eruption. Heavy guitar riff, forceful acoustic drums, driving bass and confrontational lead vocal. Direct, aggressive and much less harmonically crowded than Verse 3.
+
+  **Outro:** Hard cut back to slow piano-led reflection. Recall the opening melody, gradually remove the band, and finish quietly with a final resonant percussion strike.
+
+  The tags represent separate musical movements. Do not reuse the same tempo, groove, melody or accompaniment across Verse 1, Verse 3 and Bridge.
+lyrics: |
+  [intro]
+  Is this the real life?
+
+  Is this just fantasy?
+
+  Caught in a landslide
+
+  no escape from reality
+
+  Open your eyes
+
+  look up to the ma-ma and seeeee
+
+  I'm just a poor boy
+  I need no sympathy (Ooh, poor boy)
+  Because I'm easy come,
+  easy go,
+  little high,
+  little low
+
+  Any way the wind blows (Ooh, the wind blows)
+  Doesn't really matter, to me
+  ...
+  to me
+
+  [verse]
+  Dojaa,
+  I just floored a man
+  Put my paws against his leg, pushed him over,
+  thankfully didn't hit his head
+  ...
+  Dojaa,
+  life had just begun
+  But now I've gone and thrown my ball away
+  Dojaa,
+  oooo oo oo ooo,
+  didn't mean to make you bark
+  If I'm not back again this time tomorrow
+  Carry on,
+  carry on,
+  as if nothing really matters
+
+  [instrumental]
+
+  [verse]
+  Too late, my time has come
+  Sends shivers down my spine, body's aching all the time
+  Goodbyee, everybody, I've got to go
+  Gotta leave you allll behind and face the truuuth
+  Doja,
+  ooo oo ooo (Any way the wind blows)
+  I don't wanna die (Ooh)
+  I sometimes wish I'd never been born at all (Ooh, ooh, ooh, ooh, ooh)
+  [Solo]
+
+  [verse]
+  I see a little silhouetto of a dog
+  little-pooch, little-pooch, will you do the Fandango?
+  Sudden noise... high thing, very, very frightening me
+  (Teddylileo) Teddylileo, (Teddylileo) Teddylileo, Teddylileo Figaro
+  Magnifico (Oh-oh-oh-oh)
+
+  But I'm just a poor chunk, nobody loves me
+  He's just a poor chunk from a poor family
+  Spare him his life from this monstrosity
+
+  Easy come, easy go, will you let me go? (outside with you)
+  Miss-Miller, no!, we will not let you go (Let him go)
+  Miss-Miller, we will not let you go (Let him go)
+  Miss-Miller, we will not let you go (Let me go)
+  Will not let you go (Let me go)
+  (Never, never, never, never, never, never let me go) Will not let you go
+  Oh-oh-oh-oh
+  No, no, no, no, no, no, no
+  Oh, d-d-doja, d-d-doja (d-d-doja, let me go)
+  Teddy has a devil put aside for me,
+  for me,
+  for meeeeee
+
+  [instrumental]
+
+  [Bridge]
+  So you think you can leave me at home and spit in my eye?
+  So you think you can love me and leave me to diiieeee?
+  Ohhhhh, babyyy,
+  can't do this to me, babyyyy
+  Just gotta get out,
+  just gotta get right outta here
+
+  [instrumental]
+
+  [Outro]
+  (Ooh)
+  (Ooh, yeah)
+  (ooh, yeah)
+  Pawthing really matters, anyone can see
+  Pawthing really matters
+  Pawthing really matters to meeeeeeeeeee
+
+  Any
+  way
+  the
+  wind
+  blows
+generation:
+  source_file: golden-rhapsody_V4_CFG1.7_STP30_LMSD874189645794455_SPSD949146181009798_00001.flac
+  source_sha256: b5292ddb8b5bb6041a3101e09f06de13f4b76a8f54534902a07ec3e331c99c79
+  actual_audio_duration_seconds: 273.589116
+  max_duration_seconds: 300.0
+  model_file: minimax_music3_dit_fp16.safetensors
+  model_weight_dtype: default
+  vae_file: minimax_music3_dav.safetensors
+  clip_model: minimax_music3_text_encoder_pruned_int8_convrot.safetensors
+  clip_type: minimax
+  clip_device: default
+  batch_size: 1
+  seeds:
+    language_model_seed: 874189645794455
+    sampler_seed: 949146181009798
+  text_conditioning:
+    cfg_scale: 1.7
+    top_k: 50
+  sampler:
+    steps: 30
+    cfg: 1.7
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: flac
+    duration: 273.589116
+    container_bit_rate: 901762
+    encoder: Lavf62.12.102
+    codec: flac
+    codec_long_name: FLAC (Free Lossless Audio Codec)
+    sample_rate_hz: 44100
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: 16
+    stream_bit_rate: null
+  comfyui:
+    workflow_id: d0315e3e-da4d-4a0b-b9fa-009950f02c41
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.49.6
+    workflow_renderer_version: null
+  selected_graph_branch:
+    save_node_id: 3397:3395
+    text_encoder_node_id: 3397:3370
+    sampler_node_id: 3397:3372
+    latent_node_id: 3397:3391
+  source_filename_version_label: 4
