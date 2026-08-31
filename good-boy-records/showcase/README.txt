@@ -28,3 +28,15 @@ Recommended YAML fields for wall/player metadata:
 
 Genre creates the wall section. YAMLs with the same title stay together as
 adjacent versions inside that genre. Missing genre becomes Unclassified.
+
+
+OPTIONAL WORD-TIMED LYRICS
+--------------------------
+Generate timing with the separate GBR-LyricAligner tool kept OUTSIDE this repo.
+It writes exactly one tiny sidecar beside the selected audio:
+  song-v2_CFG-...flac
+  song-v2_CFG-...lyrics.json
+
+Keep that JSON with the song in git. The web build notices it automatically.
+No sidecar = ordinary raw/line lyrics; playback still works.
+No ML environment, models or caches belong in this repository.

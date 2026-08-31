@@ -32,7 +32,7 @@
   var preview = new Audio();
   preview.preload = "none";
   preview.volume = 0.55;
-  var current = null, cues = [], cueIndex = -1, scrubbing = false, following = true;
+  var current = null, cues = [], cueIndex = -1, wordIndex = -1, wordTimed = false, lyricsLoadToken = 0, lyricFrame = null, scrubbing = false, following = true;
   var audioUnlocked = false, previewTimer = null, previewStop = null;
   var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -82,13 +82,53 @@
   setFormat(recall("gbr:format") || "cassette");
 
   /* --------------------------------------------------------------- lyrics */
-  function renderLyrics(track) {
-    cues = (track.lyrics && track.lyrics.cues) || [];
+  function renderCueSet(nextCues, mode) {
+    cues = Array.isArray(nextCues) ? nextCues : [];
     cueIndex = -1;
+    wordIndex = -1;
+    wordTimed = mode === "word";
+    el.lyrics.dataset.mode = wordTimed ? "word" : "line";
     el.lyricsList.innerHTML = "";
-    if (!cues.length && track.lyrics && track.lyrics.raw) {
+    if (!cues.length) return false;
+
+    var fragment = document.createDocumentFragment();
+    cues.forEach(function (cue, index) {
+      var line = document.createElement("li");
+      line.id = "cue-" + index;
+      line.tabIndex = 0;
+      line.dataset.time = cue.start;
+      line.title = "Seek to " + clock(cue.start);
+      if (wordTimed && Array.isArray(cue.words) && cue.words.length) {
+        cue.words.forEach(function (word, wordNumber) {
+          if (wordNumber) line.appendChild(document.createTextNode(" "));
+          var span = document.createElement("span");
+          span.className = "lyrics__word";
+          span.textContent = word.text;
+          span.dataset.start = word.start;
+          span.dataset.end = word.end;
+          line.appendChild(span);
+        });
+      } else {
+        line.textContent = cue.text;
+      }
+      line.addEventListener("click", function () { if (audio.src) audio.currentTime = cue.start; });
+      line.addEventListener("keydown", function (event) {
+        if ((event.key === "Enter" || event.key === " ") && audio.src) { event.preventDefault(); audio.currentTime = cue.start; }
+      });
+      fragment.appendChild(line);
+    });
+    el.lyricsList.appendChild(fragment);
+    setFollowing(true);
+    el.lyricsScroll.scrollTop = 0;
+    return true;
+  }
+
+  function renderRawLyrics(track) {
+    var raw = track.lyrics && track.lyrics.raw;
+    el.lyricsList.innerHTML = "";
+    if (raw) {
       var rawFragment = document.createDocumentFragment();
-      track.lyrics.raw.split(/\r?\n/).forEach(function (text) {
+      raw.split(/\r?\n/).forEach(function (text) {
         text = text.trim();
         if (!text) return;
         var line = document.createElement("li");
@@ -97,31 +137,52 @@
         rawFragment.appendChild(line);
       });
       el.lyricsList.appendChild(rawFragment);
-    } else if (!cues.length) {
+    } else {
       var empty = document.createElement("li");
       empty.textContent = "No lyrics stored for this one yet.";
       el.lyricsList.appendChild(empty);
-    } else {
-      var fragment = document.createDocumentFragment();
-      cues.forEach(function (cue, index) {
-        var line = document.createElement("li");
-        line.textContent = cue.text;
-        line.id = "cue-" + index;
-        line.tabIndex = 0;
-        line.dataset.time = cue.start;
-        line.title = "Seek to " + clock(cue.start);
-        line.addEventListener("click", function () { if (audio.src) audio.currentTime = cue.start; });
-        line.addEventListener("keydown", function (event) {
-          if ((event.key === "Enter" || event.key === " ") && audio.src) { event.preventDefault(); audio.currentTime = cue.start; }
-        });
-        fragment.appendChild(line);
-      });
-      el.lyricsList.appendChild(fragment);
     }
-    el.lyricsNote.hidden = !(track.lyrics && track.lyrics.status === "placeholder");
-    setFollowing(cues.length > 0);
+    cues = [];
+    cueIndex = -1;
+    wordIndex = -1;
+    wordTimed = false;
+    el.lyrics.dataset.mode = "raw";
+    setFollowing(false);
     el.lyricsScroll.scrollTop = 0;
   }
+
+  function renderLyrics(track) {
+    lyricsLoadToken += 1;
+    var token = lyricsLoadToken;
+    var fallback = (track.lyrics && track.lyrics.cues) || [];
+    if (!renderCueSet(fallback, "line")) renderRawLyrics(track);
+    el.lyricsNote.hidden = !(track.lyrics && track.lyrics.status === "placeholder");
+
+    var timing = track.lyrics && track.lyrics.wordTiming;
+    if (!timing || !timing.src) return;
+    el.lyrics.dataset.loading = "true";
+    fetch(timing.src, {cache:"force-cache"})
+      .then(function (response) {
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response.json();
+      })
+      .then(function (data) {
+        if (token !== lyricsLoadToken || !current || current.id !== track.id) return;
+        if (!data || data.format !== "gbr-word-lyrics-v1" || !Array.isArray(data.lines) || !data.lines.length) {
+          throw new Error("unsupported word-timing file");
+        }
+        renderCueSet(data.lines, "word");
+        el.lyrics.dataset.loading = "false";
+        highlight(audio.currentTime || 0);
+      })
+      .catch(function () {
+        if (token !== lyricsLoadToken || !current || current.id !== track.id) return;
+        el.lyrics.dataset.loading = "error";
+        /* Timed lyrics are an enhancement. Never let a missing sidecar break the
+           ordinary transcript or, more importantly, playback. */
+      });
+  }
+
   function findCue(time) {
     if (cueIndex >= 0 && cueIndex < cues.length) {
       var active = cues[cueIndex], next = cues[cueIndex + 1];
@@ -137,18 +198,73 @@
     }
     return found;
   }
+
+  function findWord(words, time) {
+    if (!Array.isArray(words) || !words.length) return -1;
+    var low = 0, high = words.length - 1;
+    while (low <= high) {
+      var mid = (low + high) >> 1;
+      if (time < Number(words[mid].start)) high = mid - 1;
+      else if (time >= Number(words[mid].end)) low = mid + 1;
+      else return mid;
+    }
+    return -1;
+  }
+
+  function paintWords(line, cue, time) {
+    if (!wordTimed || !line || !cue || !Array.isArray(cue.words)) return;
+    var activeWord = findWord(cue.words, time);
+    if (activeWord === wordIndex && cueIndex >= 0) return;
+    wordIndex = activeWord;
+    var spans = line.querySelectorAll(".lyrics__word");
+    spans.forEach(function (span, index) {
+      var word = cue.words[index];
+      var start = word ? Number(word.start) : Infinity;
+      var end = word ? Number(word.end) : Infinity;
+      span.classList.toggle("is-current", index === activeWord);
+      span.classList.toggle("is-sung", time >= end && index !== activeWord);
+      span.classList.toggle("is-next", activeWord >= 0 && index === activeWord + 1);
+      if (activeWord < 0 && time >= start && time < end) span.classList.add("is-current");
+    });
+  }
+
   function highlight(time) {
     if (!cues.length) return;
     var index = findCue(time);
-    if (index === cueIndex) return;
-    cueIndex = index;
-    var lines = el.lyricsList.children;
-    for (var i = 0; i < lines.length; i++) {
-      lines[i].classList.toggle("is-active", i === index);
-      lines[i].classList.toggle("is-past", index >= 0 && i < index);
+    var changed = index !== cueIndex;
+    if (changed) {
+      cueIndex = index;
+      wordIndex = -1;
+      var lines = el.lyricsList.children;
+      for (var i = 0; i < lines.length; i++) {
+        lines[i].classList.toggle("is-active", i === index);
+        lines[i].classList.toggle("is-past", index >= 0 && i < index);
+        if (i !== index) {
+          lines[i].querySelectorAll(".lyrics__word").forEach(function (span) {
+            span.classList.remove("is-current", "is-next");
+            span.classList.toggle("is-sung", i < index);
+          });
+        }
+      }
+      if (index >= 0 && following) centre(lines[index]);
     }
-    if (index >= 0 && following) centre(lines[index]);
+    if (index >= 0 && wordTimed) paintWords(el.lyricsList.children[index], cues[index], time);
   }
+
+  function startLyricClock() {
+    if (lyricFrame) cancelAnimationFrame(lyricFrame);
+    function tick() {
+      highlight(audio.currentTime || 0);
+      if (!audio.paused && !audio.ended) lyricFrame = requestAnimationFrame(tick);
+      else lyricFrame = null;
+    }
+    lyricFrame = requestAnimationFrame(tick);
+  }
+  function stopLyricClock() {
+    if (lyricFrame) cancelAnimationFrame(lyricFrame);
+    lyricFrame = null;
+  }
+
   function centre(line) {
     if (!line) return;
     var box = el.lyricsScroll;
@@ -395,11 +511,11 @@
   function select(track, shouldPlay) { stopPreview(); dress(track); loadCurrentSource(shouldPlay); }
 
   /* --------------------------------------------------------- audio events */
-  audio.addEventListener("playing", function () { setState("playing"); say("Playing"); audioUnlocked = true; revealPreviewToggle(); resumeAnalyser(); startMeters(); });
-  audio.addEventListener("pause", function () { if (!audio.ended) { setState("paused"); say("Paused"); } restMeters(); });
+  audio.addEventListener("playing", function () { setState("playing"); say("Playing"); audioUnlocked = true; revealPreviewToggle(); resumeAnalyser(); startMeters(); startLyricClock(); });
+  audio.addEventListener("pause", function () { if (!audio.ended) { setState("paused"); say("Paused"); } restMeters(); stopLyricClock(); highlight(audio.currentTime || 0); });
   audio.addEventListener("waiting", function () { setState("buffering"); say("Buffering"); });
-  audio.addEventListener("ended", function () { setState("ended"); say("End of side"); setFollowing(true); restMeters(); });
-  audio.addEventListener("error", function () { setState("error"); say("That file would not load", "alert"); restMeters(); });
+  audio.addEventListener("ended", function () { setState("ended"); say("End of side"); setFollowing(true); restMeters(); stopLyricClock(); highlight(audio.currentTime || 0); });
+  audio.addEventListener("error", function () { setState("error"); say("That file would not load", "alert"); restMeters(); stopLyricClock(); });
   audio.addEventListener("loadedmetadata", function () { if (isFinite(audio.duration) && audio.duration > 0) { el.scrub.max = audio.duration; el.total.textContent = clock(audio.duration); } });
   audio.addEventListener("timeupdate", function () { if (!scrubbing) { el.scrub.value = audio.currentTime; el.elapsed.textContent = clock(audio.currentTime); } highlight(audio.currentTime); });
   audio.addEventListener("seeking", function () { say("Seeking"); });

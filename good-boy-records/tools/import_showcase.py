@@ -34,6 +34,8 @@ TRACK_OUT = ROOT / "content-source" / "tracks" / "showcase"
 MASTERS = ROOT / "masters"
 AUDIO_OUT = ROOT / "assets" / "audio" / "tracks"
 MANIFEST = ROOT / "content-source" / "showcase-manifest.json"
+LIVE_LYRICS_OUT = ROOT / "data" / "live-lyrics"
+LIVE_LYRICS_FORMAT = "gbr-word-lyrics-v1"
 AUDIO_EXTS = {".flac", ".wav", ".mp3", ".opus", ".ogg", ".m4a"}
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp"}
 
@@ -90,6 +92,30 @@ def discover_audio(source_yaml: Path, title: str) -> list[Path]:
 
     rank = {".flac": 0, ".wav": 1, ".opus": 2, ".ogg": 3, ".mp3": 4, ".m4a": 5}
     return sorted(found, key=lambda p: (rank.get(p.suffix.lower(), 99), p.name.lower()))
+
+
+
+def live_lyrics_sidecar(audio: Path | None) -> tuple[Path | None, dict[str, Any] | None]:
+    """Return the exact per-audio word-timing sidecar, if the user generated one."""
+    if not audio:
+        return None, None
+    candidates = [
+        audio.with_name(audio.stem + ".lyrics.json"),
+        audio.with_name(audio.stem + ".live-lyrics.json"),
+    ]
+    for path in candidates:
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            print(f"warn {path.relative_to(DROP)}: invalid live-lyrics JSON ({exc})")
+            return None, None
+        if not isinstance(data, dict) or data.get("format") != LIVE_LYRICS_FORMAT or not isinstance(data.get("lines"), list):
+            print(f"warn {path.relative_to(DROP)}: not a {LIVE_LYRICS_FORMAT} file")
+            return None, None
+        return path, data
+    return None, None
 
 
 def generation_from_name(name: str) -> dict[str, Any]:
@@ -157,7 +183,7 @@ def format_key(path: Path) -> str:
     }.get(ext, ext.lstrip("."))
 
 
-def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, index: int, art_base: str) -> Path:
+def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, index: int, art_base: str, live_lyrics: dict[str, Any] | None = None) -> Path:
     title = str(raw.get("title") or source_yaml.stem)
     composition = slugify(title)
     version = raw.get("version")
@@ -202,8 +228,9 @@ def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, inde
         },
         "lyrics": {
             "raw": str(raw.get("lyrics") or "").rstrip(),
-            "synchronisation": "none",
+            "synchronisation": "word" if live_lyrics else "none",
             "status": "source",
+            "wordTiming": live_lyrics,
         },
         "artwork": {"base": art_base, "alt": f"Cover artwork for {title}."},
         "prompt": {"caption": str(raw.get("caption") or "").strip()},
@@ -231,6 +258,10 @@ def clean_previous_generated() -> None:
                 p = AUDIO_OUT / Path(str(name)).name
                 if p.is_file():
                     p.unlink()
+            for name in item.get("liveLyrics", []):
+                p = LIVE_LYRICS_OUT / Path(str(name)).name
+                if p.is_file():
+                    p.unlink()
             cover_name = item.get("master")
             if cover_name:
                 p = MASTERS / Path(str(cover_name)).name
@@ -247,6 +278,7 @@ def main() -> int:
     TRACK_OUT.mkdir(parents=True, exist_ok=True)
     MASTERS.mkdir(parents=True, exist_ok=True)
     AUDIO_OUT.mkdir(parents=True, exist_ok=True)
+    LIVE_LYRICS_OUT.mkdir(parents=True, exist_ok=True)
     clean_previous_generated()
 
     yaml_files = sorted([*DROP.rglob("*.yaml"), *DROP.rglob("*.yml")])
@@ -291,11 +323,29 @@ def main() -> int:
             staged_audio.append(target)
 
         records = []
+        staged_live_lyrics: list[str] = []
         if staged_audio:
             for index, audio in enumerate(staged_audio):
-                records.append(write_track(raw, source_yaml, audio, index, art_base).name)
+                # Use the original showcase audio to locate its exact sidecar; the
+                # staged audio has the same basename but lives outside showcase/.
+                original_audio = next((item for item in selected if item.name == audio.name), None)
+                sidecar, sidecar_data = live_lyrics_sidecar(original_audio)
+                live_info = None
+                if sidecar and sidecar_data:
+                    release_id = slugify(audio.stem)
+                    runtime_name = f"{release_id}.json"
+                    shutil.copy2(sidecar, LIVE_LYRICS_OUT / runtime_name)
+                    staged_live_lyrics.append(runtime_name)
+                    stats = sidecar_data.get("stats") if isinstance(sidecar_data.get("stats"), dict) else {}
+                    live_info = {
+                        "src": f"data/live-lyrics/{runtime_name}",
+                        "format": LIVE_LYRICS_FORMAT,
+                        "coverage": stats.get("coverage"),
+                        "source": sidecar.name,
+                    }
+                records.append(write_track(raw, source_yaml, audio, index, art_base, live_info).name)
         else:
-            records.append(write_track(raw, source_yaml, None, 0, art_base).name)
+            records.append(write_track(raw, source_yaml, None, 0, art_base, None).name)
 
         manifest.append({
             "source": str(source_yaml.relative_to(DROP)).replace("\\", "/"),
@@ -303,6 +353,7 @@ def main() -> int:
             "version": version,
             "master": copied_cover.name if copied_cover else None,
             "audio": [p.name for p in staged_audio],
+            "liveLyrics": staged_live_lyrics,
             "records": records,
         })
 
@@ -310,6 +361,11 @@ def main() -> int:
         if staged_audio:
             for p in staged_audio:
                 print(f"  + {p.name}")
+                live_name = f"{slugify(p.stem)}.json"
+                if live_name in staged_live_lyrics:
+                    print(f"    ~ word sync {live_name}")
+                else:
+                    print("    . no word-timing sidecar (raw/line lyrics will be used)")
         else:
             print("  ! no chosen audio beside/in showcase")
         print(f"  -> {len(records)} cassette(s)")

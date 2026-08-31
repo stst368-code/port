@@ -23,3 +23,7 @@ assets/img/sleeves/*
 masters/*
 content-source/tracks/showcase/*
 content-source/showcase-manifest.json
+
+# Generated runtime copy of optional word-timing sidecars. The source
+# showcase/*.lyrics.json files are intentionally NOT ignored.
+data/live-lyrics/

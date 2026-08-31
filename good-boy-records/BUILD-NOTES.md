@@ -1,3 +1,11 @@
+# v5.6 - external lyric aligner split
+
+- Removed WhisperX/Demucs setup and generation scripts from the website repository.
+- The repository now only consumes optional `showcase/*.lyrics.json` sidecars.
+- Added `WORD-LYRICS.md` describing the stable sidecar contract.
+- Runtime word timing remains lazy-loaded and keeps the raw/line lyric fallback.
+- The standalone `GBR-LyricAligner` is a separate deliverable and writes only the finished sidecar back into `showcase/`.
+
 # Build notes - curated showcase revision
 
 This revision removes automatic MiniMax-folder ingestion.
@@ -43,3 +51,28 @@ This revision removes automatic MiniMax-folder ingestion.
 - VU meters now analyse the post-EQ signal.
 - Cassette shell changed to a near-square 1.14:1 format with a true square artwork panel, so square album covers are no longer cropped into a wide tape label.
 - Missing genre is deliberately labelled `Unclassified`; the importer does not guess a category from the prompt.
+
+
+## v5.4 centre-player / vertical-stack revision
+
+- Song versions are vertical stacks under one shared song title.
+- Small V1/V2/V3 markers sit to the left of each cassette.
+- Genre remains the primary shelf grouping.
+- Desktop wall reserves a centre corridor for the player.
+- Player uses sticky vertical centring, so tapes scroll past on both sides.
+- Lyrics and technical metadata moved into a collapsible drawer to keep the centre transport compact.
+- Mobile/tablet fall back to a sticky top-centred player with responsive wall lanes.
+
+## v5.5 word-timed live lyrics
+
+- Added `SETUP-LIVE-LYRICS.bat` with a completely separate gitignored ML environment.
+- Added `GENERATE-LIVE-LYRICS.bat` and `tools/generate_live_lyrics.py`.
+- The aligner scans only curated YAML/audio pairs already present under `showcase/`.
+- Demucs vocal isolation is used by default, followed by WhisperX word timing.
+- The exact YAML lyric text remains authoritative: recognised words are sequence-aligned back onto the YAML words, with missing words interpolated between timing anchors.
+- One `<audio-stem>.lyrics.json` sidecar is written beside each selected render and is intended to be committed with that song.
+- Existing current sidecars are skipped unless the YAML/audio changed or `--force` is supplied.
+- The normal GitHub Pages workflow does not install or run any ML dependency. `import_showcase.py` copies only existing sidecars into the tiny runtime `data/live-lyrics/` folder.
+- The browser lazy-loads word timing only for the selected cassette. Missing/invalid timing files fall back to ordinary line/raw lyrics without affecting playback.
+- Live lyric animation now runs from `requestAnimationFrame()` while audio is playing, so the current word can change smoothly rather than at the coarse `timeupdate` event cadence.
+- Current word glows amber; completed words stay warm/dim; upcoming words remain subdued. Line following and click-to-seek continue to work.

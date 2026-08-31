@@ -95,12 +95,18 @@ There is no external object-storage requirement in this build.
 - Native MiniMax lyrics are displayed even when no separately timed LRC exists.
 
 
+## Centre-player wall layout
+
+The desktop wall is arranged around a centre transport that remains vertically centred while the collection scrolls. Each song appears once as a titled vertical stack. Its versions sit directly beneath that title, and each cassette gets only a small `V1`, `V2`, `V3` marker to its left. Genre sections remain the outer grouping.
+
+The centre column is intentionally reserved for the sticky player, so cassettes pass on the left and right rather than disappearing underneath it. Lyrics and technical metadata live in a collapsible drawer on the player to keep the permanent centre hardware compact. On narrower screens the player becomes a sticky top-centred transport and the two wall lanes collapse responsively.
+
 ## Wall grouping and player EQ
 
 The wall is generated as `genre -> song -> version`. Genre sections are visible
-as slim hardware shelf labels, while versions of one song are kept as a single
-adjacent run of cassettes. Nothing is alphabetically or technically filtered at
-runtime; the grouping is resolved at build time.
+as slim hardware shelf labels, while versions of one song are kept as one
+vertical cassette stack under a single shared title. Nothing is alphabetically
+or technically filtered at runtime; the grouping is resolved at build time.
 
 The player exposes the YAML `inspiration` field as its own readout and includes a
 real five-band Web Audio EQ (60 Hz, 250 Hz, 1 kHz, 4 kHz and 12 kHz, +/-9 dB).
@@ -112,6 +118,30 @@ where the EQ operates normally.
 The cassette shell is intentionally squarer than a physical Compact Cassette.
 Its art panel is genuinely square, so 1:1 album covers fit without the old wide
 label crop; the reel window and lower mechanics sit over the artwork.
+
+## Word-timed live lyrics
+
+The website contains **no WhisperX, Demucs, PyTorch, model cache or alignment
+environment**. Word timing is produced by the separate `GBR-LyricAligner` tool,
+which should live outside this Git repository.
+
+Point that tool at this repository's `showcase/` folder. For each selected audio
+file it may write one tiny sidecar beside the source media:
+
+```text
+pity-pawty-v2_CFG-1.70_STEP-31_SEED-7.flac
+pity-pawty-v2_CFG-1.70_STEP-31_SEED-7.lyrics.json
+```
+
+That JSON is the only alignment artefact the website needs. `BUILD-SHOWCASE.bat`
+automatically validates and copies an exact matching sidecar into generated
+`data/live-lyrics/`. The browser lazy-loads it only when that cassette is
+selected, scrolls the current lyric line, and gives the currently sung word the
+incandescent amber highlight.
+
+No sidecar is required. If one is absent or invalid, the player falls back to
+the existing line-timed LRC/raw YAML lyrics and playback is unaffected. See
+`WORD-LYRICS.md` for the small file contract consumed by the site.
 
 ## Included example
 

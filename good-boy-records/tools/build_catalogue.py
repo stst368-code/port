@@ -334,6 +334,20 @@ def validate_audio(track: dict[str, Any], where: str, report: Report) -> None:
 
 
 def attach_lyrics(track: dict[str, Any], where: str, report: Report) -> None:
+    word_timing = track["lyrics"].get("wordTiming")
+    if word_timing:
+        if not isinstance(word_timing, dict) or not word_timing.get("src"):
+            report.warn(where, "has malformed lyrics.wordTiming metadata; falling back to line/raw lyrics")
+            track["lyrics"].pop("wordTiming", None)
+        else:
+            source = str(word_timing.get("src"))
+            timing_path = ROOT / source
+            if not timing_path.is_file():
+                report.warn(where, f"word-timing file {source} is missing; falling back to line/raw lyrics")
+                track["lyrics"].pop("wordTiming", None)
+            else:
+                track["lyrics"]["synchronisation"] = "word"
+
     name = track["lyrics"].get("file")
     raw = track["lyrics"].get("raw")
     if not name:
@@ -426,28 +440,32 @@ def meta_rows(track: dict[str, Any]) -> str:
     return f'<dl class="meta">{cells}</dl>'
 
 
+def version_badge(track: dict[str, Any]) -> str:
+    """Small wall marker shown to the left of each cassette.
+
+    The source YAML's version is the primary identity. If it is absent, retain a
+    short useful release label rather than inventing a version number.
+    """
+    value = (track.get("provenance") or {}).get("songVersion")
+    if value is not None:
+        text = str(value).strip()
+        return text.upper() if text.lower().startswith("v") else f"V{text}"
+    label = str(track.get("versionLabel") or "").strip()
+    match = re.search(r"(?:^|[ ·_-])v(\d+(?:\.\d+)?)", label, re.IGNORECASE)
+    if match:
+        return f"V{match.group(1)}"
+    return "VER"
+
+
 def shelf_card(track: dict[str, Any], index: int) -> str:
     title = esc(track["title"])
-    subtitle = f'<p class="card__subtitle">{esc(track["subtitle"])}</p>' if track.get("subtitle") else ""
-    catalogue = esc(track.get("catalogueNumber") or "")
-    label_code = catalogue or esc(track.get("versionLabel") or "")
-    running = format_clock(track["audio"].get("duration"))
     picture = sleeve_picture(track, "", "(max-width: 40rem) 76vw, (max-width: 70rem) 38vw, 18rem", lazy=index > 5)
-    model = " ".join(filter(None, [track.get("model", {}).get("provider"), track.get("model", {}).get("name")]))
-    style = track.get("style", {}).get("summary") or ""
-    generation = track.get("generation", {})
-    tech_bits = [model]
-    if generation.get("cfg") is not None: tech_bits.append(f"CFG {generation['cfg']}")
-    if generation.get("steps") is not None: tech_bits.append(f"S{generation['steps']}")
-    release_line = track.get("versionLabel") or " · ".join(bit for bit in tech_bits if bit)
-    release_html = f'<p class="card__version">{esc(release_line)}</p>' if release_line else ""
-    search = esc(" ".join([track["title"], str(track.get("subtitle") or ""), catalogue, model, style, release_line]).lower())
-    provider = esc((track.get("model", {}).get("provider") or "unknown").lower())
-    status = esc(track.get("status") or "")
     composition = esc(track.get("composition") or track["id"])
+    badge = esc(version_badge(track))
 
     return f"""          <li class="card" data-track="{esc(track['id'])}" data-composition="{composition}">
-            <button type="button" class="card__play" data-play="{esc(track['id'])}" aria-label="Latch and play {title}">
+            <span class="version-tag" aria-hidden="true">{badge}</span>
+            <button type="button" class="card__play" data-play="{esc(track['id'])}" aria-label="Latch and play {title}, {badge}">
               <span class="cassette" aria-hidden="true">
                 <span class="cassette__screw cassette__screw--1"></span><span class="cassette__screw cassette__screw--2"></span>
                 <span class="cassette__screw cassette__screw--3"></span><span class="cassette__screw cassette__screw--4"></span>
@@ -460,8 +478,13 @@ def shelf_card(track: dict[str, Any], index: int) -> str:
 
 
 def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
-    """Render one physical wall section per genre, with versions of the same
-    composition kept immediately adjacent inside a single composition run."""
+    """Render genre sections around the fixed centre player.
+
+    Each composition is one vertical stack with a single shared title. Versions
+    travel downward within that stack and carry only a small V1/V2/V3 marker to
+    the cassette's left. Whole song stacks are balanced between the left and
+    right wall lanes without breaking a song across the centre player.
+    """
     genres: dict[str, dict[str, list[dict[str, Any]]]] = {}
     genre_labels: dict[str, str] = {}
     for track in tracks:
@@ -478,26 +501,42 @@ def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
         compositions = genres[genre_key]
         tape_count = sum(len(items) for items in compositions.values())
         song_count = len(compositions)
-        runs: list[str] = []
-        for composition in sorted(compositions, key=str.casefold):
-            items = compositions[composition]
+        lanes: list[list[str]] = [[], []]
+        lane_weights = [0, 0]
+
+        # Longest stacks first gives a much better balance when a genre has one
+        # song with many versions and several one-offs.
+        ordered = sorted(
+            compositions.items(),
+            key=lambda pair: (-len(pair[1]), str(pair[0]).casefold()),
+        )
+        for composition, items in ordered:
             cards = []
             for track in items:
                 cards.append(shelf_card(track, card_index))
                 card_index += 1
             title = items[0].get("title") or composition
             label = f"{title}, {len(items)} version" + ("s" if len(items) != 1 else "")
-            runs.append(
-                f'<div class="composition-run" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
-                f'<ul class="composition-run__tapes">{"".join(cards)}</ul></div>'
+            run = (
+                f'<article class="composition-stack" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
+                f'<h4 class="composition-stack__title">{esc(title)}</h4>'
+                f'<ul class="composition-stack__tapes">{"".join(cards)}</ul></article>'
             )
+            lane = 0 if lane_weights[0] <= lane_weights[1] else 1
+            lanes[lane].append(run)
+            lane_weights[lane] += max(2, len(items))
+
         chunks.append(
             '<section class="genre-cluster" data-genre="' + esc(genre_labels[genre_key]) + '">'
             '<header class="genre-cluster__header">'
             '<h3>' + esc(genre_labels[genre_key]) + '</h3>'
             '<span>' + str(tape_count) + ' tape' + ('s' if tape_count != 1 else '') + ' / ' + str(song_count) + ' song' + ('s' if song_count != 1 else '') + '</span>'
             '</header>'
-            '<div class="genre-wall">' + ''.join(runs) + '</div>'
+            '<div class="genre-wall">'
+            '<div class="genre-lane genre-lane--left">' + ''.join(lanes[0]) + '</div>'
+            '<div class="genre-wall__player-gap" aria-hidden="true"></div>'
+            '<div class="genre-lane genre-lane--right">' + ''.join(lanes[1]) + '</div>'
+            '</div>'
             '</section>'
         )
     return "\n".join(chunks)
@@ -640,6 +679,7 @@ def build(strict: bool) -> int:
                 "status": track["lyrics"].get("status"),
                 "raw": track["lyrics"].get("raw"),
                 "vtt": f"data/lyrics/{track_id}.vtt",
+                "wordTiming": track["lyrics"].get("wordTiming"),
                 "cues": cues,
             },
         }
