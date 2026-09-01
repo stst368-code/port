@@ -40,3 +40,10 @@ Do not judge the Web Audio EQ/spectrum via `file://`; browsers can mute or block
 ## GitHub Pages
 
 `GITHUB-WORKFLOW-static.yml` contains a complete root-repository workflow reference. In the `port` repository it belongs at `.github/workflows/gbr-pages.yml`. The project itself remains at `good-boy-records/`.
+
+
+## v6.1 scaling fixes
+- Cassette cover pictures are explicitly contained inside each cassette label.
+- Wheel diameter derives from 200% of the left column, so its visible half matches the column width.
+- Rack rows now use explicit proportions instead of allowing artwork to consume the remaining height.
+- Mobile uses the same geometry with smaller tape/control sizing.
