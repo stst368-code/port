@@ -63,6 +63,20 @@
 
               <div class="cassette-carousel-shell" id="cassette-carousel-shell">
                 <div class="carousel-pickup" aria-hidden="true"><span></span><b>PICKUP</b></div>
+                <div class="ring-copy" aria-hidden="true">
+                  <svg class="ring-copy__svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <path id="ring-title-path" d="M 290 420 A 210 210 0 0 1 710 420" />
+                      <path id="ring-meta-path" d="M 320 455 A 175 175 0 0 1 680 455" />
+                      <path id="ring-lyric-path-a" d="M 685 630 A 185 185 0 0 1 315 630" />
+                      <path id="ring-lyric-path-b" d="M 655 675 A 150 150 0 0 1 345 675" />
+                    </defs>
+                    <text class="ring-copy__title"><textPath href="#ring-title-path" id="deck-title-arc" startOffset="50%" text-anchor="middle">NO TAPE LATCHED</textPath></text>
+                    <text class="ring-copy__meta"><textPath href="#ring-meta-path" id="deck-catalogue-arc" startOffset="50%" text-anchor="middle">Rotate the magazine or press shuffle</textPath></text>
+                    <text class="ring-copy__lyric ring-copy__lyric--a"><textPath href="#ring-lyric-path-a" id="deck-lyric-arc-a" startOffset="50%" text-anchor="middle">Select a cassette to load lyrics.</textPath></text>
+                    <text class="ring-copy__lyric ring-copy__lyric--b"><textPath href="#ring-lyric-path-b" id="deck-lyric-arc-b" startOffset="50%" text-anchor="middle"></textPath></text>
+                  </svg>
+                </div>
                 <button type="button" class="carousel-step carousel-step--prev" id="carousel-prev" aria-label="Rotate cassette carousel backwards">‹</button>
                 <div class="cassette-carousel" id="cassette-carousel" role="region" aria-label="Rotary cassette storage carousel" tabindex="0">
                   <div class="carousel-platter" id="carousel-platter">

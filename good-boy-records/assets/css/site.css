@@ -1825,3 +1825,202 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
   .home .stage-right .volume{grid-template-columns:18px minmax(0,1fr)!important;gap:.1rem!important;font-size:.22rem!important}
   .home .stage-right .volume span{font-size:.22rem!important}
 }
+
+
+/* v5.24 — carousel becomes the machine: centred wheel, inner title/lyrics, bottom instrumentation strip. */
+.machine-shell--carousel-layout{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  grid-template-areas:"top" "carousel" "meters" !important;
+  row-gap:1rem !important;
+  padding:1rem 1.1rem 1.2rem !important;
+}
+.machine-shell--carousel-layout .machine-shell__topline{
+  grid-area:top;
+  position:relative;
+  padding:.55rem .45rem .7rem;
+  margin-bottom:.15rem;
+  border-bottom:1px solid rgba(212,117,23,.42);
+  background:linear-gradient(180deg, rgba(96,45,8,.22), rgba(9,6,3,0));
+}
+.machine-shell--carousel-layout .machine-shell__topline::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:100%;
+  background:repeating-linear-gradient(90deg, transparent 0 19px, rgba(183,108,29,.07) 19px 20px);
+  pointer-events:none;
+}
+.machine-shell--carousel-layout .machine-shell__serial,
+.machine-shell--carousel-layout .machine-shell__actions{ position:relative; z-index:1; }
+.machine-shell--carousel-layout .stage-left{
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+}
+.machine-shell--carousel-layout .stage-left .wall-monitor{
+  position:absolute !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+.machine-shell--carousel-layout .cassette-carousel-shell{
+  grid-area:carousel !important;
+  position:relative !important;
+  width:min(92vw, 50rem) !important;
+  aspect-ratio:1 / 1 !important;
+  margin:0 auto !important;
+  display:block !important;
+}
+.machine-shell--carousel-layout .cassette-carousel,
+.machine-shell--carousel-layout .carousel-platter,
+.machine-shell--carousel-layout .cassette-shelves{
+  position:absolute;
+  inset:0;
+}
+.machine-shell--carousel-layout .carousel-pickup{
+  top:.8rem !important;
+  z-index:9;
+}
+.machine-shell--carousel-layout .carousel-step{ z-index:14; }
+.machine-shell--carousel-layout .ring-copy{
+  position:absolute;
+  inset:0;
+  z-index:8;
+  pointer-events:none;
+}
+.machine-shell--carousel-layout .ring-copy__svg{
+  width:100%; height:100%; overflow:visible;
+  filter:drop-shadow(0 0 10px rgba(255,170,56,.06));
+}
+.machine-shell--carousel-layout .ring-copy__title,
+.machine-shell--carousel-layout .ring-copy__meta,
+.machine-shell--carousel-layout .ring-copy__lyric{ fill:var(--gbr-paper,#e2d0b0); }
+.machine-shell--carousel-layout .ring-copy__title{
+  font-size:60px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.machine-shell--carousel-layout .ring-copy__meta{
+  font-size:20px;
+  letter-spacing:3px;
+  opacity:.8;
+  text-transform:uppercase;
+}
+.machine-shell--carousel-layout .ring-copy__lyric--a{ font-size:26px; font-weight:700; }
+.machine-shell--carousel-layout .ring-copy__lyric--b{ font-size:24px; opacity:.92; }
+.machine-shell--carousel-layout .program-art{
+  position:absolute !important;
+  top:50% !important;
+  left:50% !important;
+  width:22% !important;
+  aspect-ratio:1 / 1 !important;
+  transform:translate(-50%, -50%) !important;
+  z-index:12 !important;
+  padding:.35rem !important;
+  background:linear-gradient(180deg, rgba(18,12,7,.92), rgba(7,5,3,.96)) !important;
+  box-shadow:0 0 0 1px rgba(210,124,31,.55), inset 0 0 24px rgba(196,110,26,.12), 0 0 24px rgba(0,0,0,.38) !important;
+}
+.machine-shell--carousel-layout .program-art::after{
+  content:"";
+  position:absolute;
+  inset:-.4rem;
+  border-radius:.2rem;
+  box-shadow:0 0 0 1px rgba(122,64,13,.75), inset 0 0 0 1px rgba(246,167,70,.18);
+  pointer-events:none;
+}
+.machine-shell--carousel-layout .program-art__cover,
+.machine-shell--carousel-layout .program-art__cover img{ width:100%; height:100%; display:block; }
+.machine-shell--carousel-layout .program-art__cover img{ object-fit:cover; border:1px solid rgba(229,151,52,.5); }
+.machine-shell--carousel-layout .cassette-bay{
+  position:absolute !important;
+  inset:0 !important;
+  border:none !important;
+  background:none !important;
+}
+.machine-shell--carousel-layout .cassette-bay__slot{ display:none !important; }
+.machine-shell--carousel-layout .cassette-bay__tape{
+  position:absolute;
+  inset:.2rem;
+  background:transparent !important;
+  border:1px solid rgba(220,131,37,.44);
+  box-shadow:inset 0 0 0 1px rgba(22,14,8,.82);
+}
+.machine-shell--carousel-layout .cassette-bay__art,
+.machine-shell--carousel-layout .cassette-bay__label,
+.machine-shell--carousel-layout #cassette-bay-label{
+  display:none !important;
+}
+.machine-shell--carousel-layout .stage-right{
+  grid-area:meters !important;
+  display:grid !important;
+  grid-template-columns:minmax(0, 1.8fr) minmax(0, .7fr) minmax(18rem, 1.1fr) !important;
+  gap:.75rem !important;
+  width:min(96vw, 78rem) !important;
+  margin:0 auto !important;
+  align-items:stretch !important;
+}
+.machine-shell--carousel-layout .stage-right > *{ min-width:0; }
+.machine-shell--carousel-layout .meter-bank,
+.machine-shell--carousel-layout .spectrum-panel,
+.machine-shell--carousel-layout .transport-stack{ min-height:9rem; }
+.machine-shell--carousel-layout .meter-bank{
+  order:2;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:.55rem;
+  align-items:stretch;
+}
+.machine-shell--carousel-layout .spectrum-panel{ order:1; }
+.machine-shell--carousel-layout .transport-stack{ order:3; display:flex !important; flex-direction:column !important; justify-content:space-between; }
+.machine-shell--carousel-layout .transport-panel{ gap:.6rem !important; }
+.machine-shell--carousel-layout .machine-footer{ padding-top:.65rem !important; }
+.machine-shell--carousel-layout .lyrics--fixed{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  overflow:hidden !important;
+  clip-path:inset(50%) !important;
+  white-space:nowrap !important;
+  margin:-1px !important;
+  border:0 !important;
+  padding:0 !important;
+}
+.machine-shell--carousel-layout .player-drawer{ margin-top:.35rem !important; }
+.machine-shell--carousel-layout .deck__status{ margin-top:.1rem !important; min-height:1.2em; }
+@media (max-width: 900px){
+  .machine-shell--carousel-layout{ padding:.85rem .7rem 1rem !important; }
+  .machine-shell--carousel-layout .cassette-carousel-shell{ width:min(96vw, 41rem) !important; }
+  .machine-shell--carousel-layout .ring-copy__title{ font-size:46px; }
+  .machine-shell--carousel-layout .ring-copy__meta{ font-size:17px; }
+  .machine-shell--carousel-layout .ring-copy__lyric--a{ font-size:21px; }
+  .machine-shell--carousel-layout .ring-copy__lyric--b{ font-size:19px; }
+  .machine-shell--carousel-layout .stage-right{
+    grid-template-columns:minmax(0, 1.3fr) minmax(0, .7fr) minmax(0, 1fr) !important;
+    width:min(97vw, 58rem) !important;
+  }
+}
+@media (max-width: 640px){
+  .machine-shell--carousel-layout{ row-gap:.75rem !important; }
+  .machine-shell--carousel-layout .machine-shell__topline{ padding:.5rem .35rem .65rem; }
+  .machine-shell--carousel-layout .machine-shell__serial{ font-size:.63rem !important; }
+  .machine-shell--carousel-layout .cassette-carousel-shell{ width:min(98vw, 30rem) !important; }
+  .machine-shell--carousel-layout .program-art{ width:28% !important; }
+  .machine-shell--carousel-layout .ring-copy__title{ font-size:34px; }
+  .machine-shell--carousel-layout .ring-copy__meta{ font-size:13px; letter-spacing:2px; }
+  .machine-shell--carousel-layout .ring-copy__lyric--a{ font-size:15px; }
+  .machine-shell--carousel-layout .ring-copy__lyric--b{ font-size:14px; }
+  .machine-shell--carousel-layout .stage-right{
+    grid-template-columns:1fr 1fr !important;
+    grid-template-areas:"spectrum spectrum" "meters transport" !important;
+    width:min(98vw, 30rem) !important;
+    gap:.55rem !important;
+  }
+  .machine-shell--carousel-layout .spectrum-panel{ grid-area:spectrum; min-height:7rem; }
+  .machine-shell--carousel-layout .meter-bank{ grid-area:meters; min-height:7rem; }
+  .machine-shell--carousel-layout .transport-stack{ grid-area:transport; min-height:7rem; }
+  .machine-shell--carousel-layout .transport-panel{ flex-wrap:wrap; }
+  .machine-shell--carousel-layout .transport__scrub{ min-width:100% !important; }
+}
