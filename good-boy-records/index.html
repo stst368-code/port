@@ -36,75 +36,73 @@
       <div class="showcase-stage">
         <div class="player-rail" id="player-rail" data-visible="false">
           <section class="deck" id="deck" data-state="idle" aria-labelledby="deck-title">
-            <div class="machine-shell machine-shell--carousel-layout">
+            <div class="machine-shell machine-shell--split-rack">
               <div class="machine-shell__topline">
                 <span class="machine-shell__serial">SER 0001 / GOOD BOY RECORDS</span>
                 <span class="machine-shell__actions"><button type="button" class="deck__details" id="eq-toggle" aria-controls="eq-popover" aria-expanded="false">EQ</button><button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button></span>
               </div>
-              <div class="cassette-carousel-shell" id="cassette-carousel-shell">
-                <div class="carousel-pickup" aria-hidden="true"><span></span><b>PICKUP</b></div>
-                <div class="ring-copy" aria-hidden="true">
-                  <svg class="ring-copy__svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                      <path id="ring-title-path" d="M 270 500 A 230 230 0 0 1 730 500" />
-                      <path id="ring-meta-path" d="M 300 500 A 200 200 0 0 1 700 500" />
-                      <path id="ring-lyric-path-a" d="M 735 520 A 235 235 0 0 1 265 520" />
-                      <path id="ring-lyric-path-b" d="M 705 535 A 205 205 0 0 1 295 535" />
-                    </defs>
-                    <text class="ring-copy__title"><textPath href="#ring-title-path" id="deck-title-arc" startOffset="50%" text-anchor="middle">NO TAPE LATCHED</textPath></text>
-                    <text class="ring-copy__meta"><textPath href="#ring-meta-path" id="deck-catalogue-arc" startOffset="50%" text-anchor="middle">Rotate the magazine or press shuffle</textPath></text>
-                    <text class="ring-copy__lyric ring-copy__lyric--a"><textPath href="#ring-lyric-path-a" id="deck-lyric-arc-a" startOffset="50%" text-anchor="middle">Select a cassette to load lyrics.</textPath></text>
-                    <text class="ring-copy__lyric ring-copy__lyric--b"><textPath href="#ring-lyric-path-b" id="deck-lyric-arc-b" startOffset="50%" text-anchor="middle"></textPath></text>
-                  </svg>
-                </div>
-<div class="program-art stage-card" id="program-art">
-                  <div class="program-art__cover"><img id="deck-artwork" src="assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
-                  <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
-                    <span class="cassette-bay__slot"></span>
-                    <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
+
+              <div class="split-layout">
+                <div class="carousel-viewport">
+                  <div class="cassette-carousel-shell" id="cassette-carousel-shell">
+                    <div class="carousel-pickup" aria-hidden="true"><span></span><b>PICKUP</b></div>
+                    <button type="button" class="carousel-step carousel-step--prev" id="carousel-prev" aria-label="Rotate cassette carousel backwards">‹</button>
+                    <div class="cassette-carousel" id="cassette-carousel" role="region" aria-label="Rotary cassette storage carousel" tabindex="0">
+                      <div class="carousel-platter" id="carousel-platter">
+                        <div class="carousel-hub" aria-hidden="true"><span>GBR</span><small>ROTARY MAGAZINE</small></div>
+                        <div class="cassette-shelves">
+<div class="track-wall"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="button" class="carousel-step carousel-step--next" id="carousel-next" aria-label="Rotate cassette carousel forwards">›</button>
                   </div>
                 </div>
-                <button type="button" class="carousel-step carousel-step--prev" id="carousel-prev" aria-label="Rotate cassette carousel backwards">‹</button>
-                <div class="cassette-carousel" id="cassette-carousel" role="region" aria-label="Rotary cassette storage carousel" tabindex="0">
-                  <div class="carousel-platter" id="carousel-platter">
-                    <div class="carousel-hub" aria-hidden="true"><span>GBR</span><small>ROTARY MAGAZINE</small></div>
-                    <div class="cassette-shelves">
-<div class="track-wall"></div>
+
+                <div class="player-stack">
+                  <div class="spectrum-panel rack-module rack-module--spectrum" aria-label="Frequency spectrum">
+                    <div class="spectrum-panel__head"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
+                    <div class="spectrum" id="spectrum" aria-hidden="true"></div>
+                  </div>
+
+                  <div class="program-art rack-module rack-module--art" id="program-art">
+                    <div class="program-art__cover"><img id="deck-artwork" src="assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
+                    <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
+                      <span class="cassette-bay__slot"></span>
+                      <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
                     </div>
                   </div>
+
+                  <div class="transport-stack rack-module rack-module--transport">
+                    <div class="transport-panel">
+                      <button type="button" class="transport__button transport__button--shuffle" id="transport-shuffle" aria-label="Shuffle play" aria-pressed="false" title="Shuffle play">
+                        <svg class="icon-shuffle" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M21 3l-7.2 7.2M4 6h3.3c2 0 3.5.8 4.8 2.2l5.6 6.2c.9 1 1.8 1.6 3.3 1.6M16 16h5v5M21 21l-2.8-2.8M4 18h3.2c1.5 0 2.5-.5 3.4-1.4l1.2-1.3"/></svg>
+                      </button>
+                      <button type="button" class="transport__button" id="transport-toggle" aria-label="Play or pause">
+                        <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>
+                        <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
+                      </button>
+                      <div class="numitron clock-display"><span id="time-elapsed">0:00</span><b>/</b><span id="time-total">--:--</span></div>
+                      <div class="transport__scrub"><label class="visually-hidden" for="transport-scrub">Seek within the track</label><input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0"></div>
+                    </div>
+                    <div class="machine-footer">
+                      <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
+                      <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
+                      <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
+                    </div>
+                  </div>
+
+                  <div class="lyric-focus rack-module rack-module--lyrics" id="lyric-focus" aria-live="polite">
+                    <span class="lyric-focus__word" id="lyric-focus-word">READY</span>
+                  </div>
                 </div>
-                <button type="button" class="carousel-step carousel-step--next" id="carousel-next" aria-label="Rotate cassette carousel forwards">›</button>
               </div>
 
-              <div class="stage-right">
-                <div class="meter-bank stage-card" aria-label="Audio level meters">
-                  <div class="vu"><span class="vu__label">L</span><div class="vu__scale"><span class="vu__needle" id="vu-left"></span></div></div>
-                  <div class="vu"><span class="vu__label">R</span><div class="vu__scale"><span class="vu__needle" id="vu-right"></span></div></div>
-                </div>
-
-                <div class="spectrum-panel stage-card" aria-label="Post-EQ frequency spectrum">
-                  <div class="spectrum-panel__head"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
-                  <div class="spectrum" id="spectrum" aria-hidden="true"></div>
-                </div>
-
-                <div class="transport-stack stage-card">
-                  <div class="transport-panel">
-                    <button type="button" class="transport__button" id="transport-toggle" aria-label="Play or pause">
-                      <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>
-                      <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
-                    </button>
-                    <button type="button" class="transport__button transport__button--shuffle" id="transport-shuffle" aria-label="Shuffle play" aria-pressed="false" title="Shuffle play">
-                      <svg class="icon-shuffle" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M21 3l-7.2 7.2M4 6h3.3c2 0 3.5.8 4.8 2.2l5.6 6.2c.9 1 1.8 1.6 3.3 1.6M16 16h5v5M21 21l-2.8-2.8M4 18h3.2c1.5 0 2.5-.5 3.4-1.4l1.2-1.3"/></svg>
-                    </button>
-                    <div class="numitron clock-display"><span id="time-elapsed">0:00</span><b>/</b><span id="time-total">--:--</span></div>
-                    <div class="transport__scrub"><label class="visually-hidden" for="transport-scrub">Seek within the track</label><input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0"></div>
-                  </div>
-                  <div class="machine-footer">
-                    <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
-                    <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
-                    <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
-                  </div>
-                </div>
+              <div class="player-internals visually-hidden" aria-hidden="true">
+                <strong id="deck-title">NO TAPE LATCHED</strong>
+                <span id="deck-catalogue">Rotate the magazine or press shuffle</span>
+                <span id="wall-monitor-code">----</span>
+                <div class="meter-bank"><span id="vu-left"></span><span id="vu-right"></span></div>
               </div>
 
               <div class="eq-popover" id="eq-popover" hidden>
@@ -121,9 +119,9 @@
                 </div>
               </div>
 
-              <div class="lyrics lyrics--fixed" id="lyrics" data-following="true">
+              <div class="lyrics lyrics--timing-source visually-hidden" id="lyrics" data-following="true">
                 <p class="notice" id="lyrics-note" hidden>These lyrics are a placeholder.</p>
-                <div class="lyrics__scroll" id="lyrics-scroll" tabindex="0" role="region" aria-label="Live lyrics, two lines visible">
+                <div class="lyrics__scroll" id="lyrics-scroll" tabindex="-1">
                   <ol class="lyrics__list" id="lyrics-list"><li>Select a cassette to load lyrics.</li></ol>
                 </div>
                 <button type="button" class="lyrics__return" id="lyrics-return">Return to current line</button>

@@ -36,7 +36,8 @@
     carouselSong: document.getElementById("carousel-song"), carouselVersion: document.getElementById("carousel-version"),
     playerRail: document.getElementById("player-rail"), stage: document.querySelector(".showcase-stage"),
     titleArc: document.getElementById("deck-title-arc"), catalogueArc: document.getElementById("deck-catalogue-arc"),
-    lyricArcA: document.getElementById("deck-lyric-arc-a"), lyricArcB: document.getElementById("deck-lyric-arc-b")
+    lyricArcA: document.getElementById("deck-lyric-arc-a"), lyricArcB: document.getElementById("deck-lyric-arc-b"),
+    lyricFocus: document.getElementById("lyric-focus"), lyricFocusWord: document.getElementById("lyric-focus-word")
   };
   if (!el.deck || !el.audio) return;
 
@@ -205,8 +206,45 @@
     setFollowing(false);
     el.lyricsScroll.scrollTop = 0;
     updateArcLyrics(0);
+    updateLyricFocus(0);
   }
 
+
+
+  var lyricFocusLast = "";
+  function setLyricFocus(value) {
+    if (!el.lyricFocusWord) return;
+    value = String(value || "").replace(/\s+/g, " ").trim();
+    if (!value) value = "…";
+    if (value === lyricFocusLast) return;
+    lyricFocusLast = value;
+    el.lyricFocusWord.textContent = value;
+    if (el.lyricFocus) {
+      el.lyricFocus.dataset.state = "";
+      void el.lyricFocus.offsetWidth;
+      el.lyricFocus.dataset.state = "pulse";
+    }
+  }
+  function updateLyricFocus(time) {
+    if (!el.lyricFocusWord) return;
+    if (!cues.length) { setLyricFocus(current ? "…" : "READY"); return; }
+    var index = findCue(time);
+    if (index < 0) {
+      var past = findPastCue(time);
+      index = Math.min(cues.length - 1, Math.max(0, past + 1));
+    }
+    var cue = cues[index];
+    if (!cue) { setLyricFocus("…"); return; }
+    if (wordTimed && Array.isArray(cue.words) && cue.words.length) {
+      var word = findWord(cue.words, time);
+      if (word >= 0 && cue.words[word]) { setLyricFocus(cue.words[word].text); return; }
+      var candidate = cue.words.find(function (item) { return Number(item.start) >= time; }) || cue.words[cue.words.length - 1];
+      setLyricFocus(candidate && candidate.text ? candidate.text : cue.text);
+      return;
+    }
+    var clean = String(cue.text || "").replace(/^\[[^\]]+\]$/, "").trim();
+    setLyricFocus(clean || "…");
+  }
 
   function setArcCopy(target, value) {
     if (target) target.textContent = value || "";
@@ -365,6 +403,7 @@
     }
     if (index >= 0 && wordTimed) paintWords(el.lyricsList.children[index], cues[index], time);
     updateArcLyrics(time);
+    updateLyricFocus(time);
   }
 
   function startLyricClock() {
@@ -848,7 +887,7 @@
       el.qualityToggle.disabled = !hasLossless(track);
       el.qualityToggle.checked = hasLossless(track) && recall("gbr:lossless") === "on";
     }
-    markSelected(track.id); renderLyrics(track); updateArcLyrics(0); setMediaSession(track); latchCassette(track.id);
+    markSelected(track.id); renderLyrics(track); updateArcLyrics(0); updateLyricFocus(0); setMediaSession(track); latchCassette(track.id);
     try { history.replaceState(null, "", "?track=" + encodeURIComponent(track.slug)); } catch (_) {}
   }
   function metaMarkup(track) {
