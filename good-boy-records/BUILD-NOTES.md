@@ -1,4 +1,4 @@
-# v5.19 - rotary magazine / single responsive hi-fi
+# v5.20 - rotary magazine / single responsive hi-fi
 
 - Replaced the scrolling cassette wall with one rotary cassette magazine inspired by slide-projector carousels.
 - The same magazine/player design is used at desktop, tablet and mobile widths; responsive CSS only rescales/reflows the same hardware.

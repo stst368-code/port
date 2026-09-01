@@ -1360,3 +1360,124 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
   .home .carousel-readout{width:calc(100% - 5rem);padding:.45rem .6rem}
 }
 @media (prefers-reduced-motion:reduce){.cassette-flyer{transition:none!important}}
+
+/* v5.20 — stabilise the now-playing title across desktop and mobile.
+   The artwork and title area is one simple physical faceplate: artwork left,
+   one vertically-centred text block right. Old wall-monitor grid rules no
+   longer get to allocate phantom rows and push the title out of view. */
+.home .program-panel{
+  grid-template-columns:clamp(112px,24%,162px) minmax(0,1fr);
+  align-items:stretch;
+}
+.home .program-panel .wall-monitor{
+  min-width:0;
+  height:100%;
+  padding:.72rem .86rem;
+  display:flex;
+  align-items:center;
+  gap:.62rem;
+  overflow:hidden;
+}
+.home .program-panel .wall-monitor__lamp{
+  flex:0 0 11px;
+  width:11px;
+  height:11px;
+  margin:0;
+  align-self:center;
+}
+.home .program-panel .wall-monitor__copy{
+  flex:1 1 auto;
+  min-width:0;
+  height:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  overflow:hidden;
+}
+.home .program-panel .wall-monitor small{
+  flex:0 0 auto;
+  margin:0 0 .46rem;
+  font-size:.58rem;
+  line-height:1;
+}
+.home .program-panel .wall-monitor strong{
+  display:-webkit-box;
+  width:100%;
+  max-width:100%;
+  margin:0;
+  color:#eadcc0;
+  font-size:clamp(1.75rem,2.55vw,3.1rem);
+  line-height:.96;
+  letter-spacing:-.035em;
+  overflow:hidden;
+  overflow-wrap:break-word;
+  word-break:normal;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  text-wrap:balance;
+}
+.home .program-panel .deck__catalogue{
+  flex:0 0 auto;
+  width:100%;
+  min-width:0;
+  margin:.5rem 0 0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:clamp(.62rem,.76vw,.8rem);
+  line-height:1.15;
+}
+.home .program-panel .wall-monitor>.numitron{display:none!important}
+
+@media (max-width:820px){
+  .home{--gbr-player-height:530px}
+  .home .player-rail .machine-shell{
+    grid-template-rows:20px 138px 86px 58px 56px 104px 17px;
+  }
+  .home .program-panel{
+    grid-template-columns:clamp(84px,23vw,104px) minmax(0,1fr);
+    gap:.34rem;
+    padding:.34rem;
+  }
+  .home .program-panel .wall-monitor{padding:.55rem .62rem;gap:.48rem}
+  .home .program-panel .wall-monitor small{margin-bottom:.34rem;font-size:.48rem}
+  .home .program-panel .wall-monitor strong{
+    font-size:clamp(1.35rem,5.25vw,2.15rem);
+    line-height:.96;
+  }
+  .home .program-panel .deck__catalogue{
+    margin-top:.38rem;
+    font-size:clamp(.54rem,2vw,.65rem);
+  }
+}
+
+@media (max-width:430px){
+  .home{--gbr-player-height:536px}
+  .home .player-rail .machine-shell{
+    grid-template-rows:18px 132px 84px 56px 54px 101px 16px;
+  }
+  .home .program-panel{
+    grid-template-columns:74px minmax(0,1fr);
+    gap:.28rem;
+    padding:.28rem;
+  }
+  .home .program-art{padding:.14rem}
+  .home .program-panel .wall-monitor{padding:.46rem .5rem;gap:.38rem}
+  .home .program-panel .wall-monitor__lamp{flex-basis:9px;width:9px;height:9px}
+  /* On very narrow screens the title outranks a redundant status label. */
+  .home .program-panel .wall-monitor small{display:none}
+  .home .program-panel .wall-monitor strong{
+    font-size:clamp(1.18rem,6.3vw,1.7rem);
+    line-height:.98;
+    -webkit-line-clamp:2;
+  }
+  .home .program-panel .deck__catalogue{
+    margin-top:.38rem;
+    font-size:.5rem;
+    white-space:normal;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+}
