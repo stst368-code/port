@@ -68,7 +68,7 @@
                   <div class="carousel-platter" id="carousel-platter">
                     <div class="carousel-hub" aria-hidden="true"><span>GBR</span><small>ROTARY MAGAZINE</small></div>
                     <div class="cassette-shelves">
-{SHELF}
+<div class="track-wall"></div>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@
                   <div class="spectrum" id="spectrum" aria-hidden="true"></div>
                 </div>
 
-                <div class="transport-stack">
+                <div class="transport-stack stage-card">
                   <div class="transport-panel">
                     <button type="button" class="transport__button" id="transport-toggle" aria-label="Play or pause">
                       <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>
@@ -98,7 +98,6 @@
                     <div class="numitron clock-display"><span id="time-elapsed">0:00</span><b>/</b><span id="time-total">--:--</span></div>
                     <div class="transport__scrub"><label class="visually-hidden" for="transport-scrub">Seek within the track</label><input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0"></div>
                   </div>
-
                   <div class="machine-footer">
                     <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
                     <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
@@ -132,9 +131,7 @@
               <p class="deck__status" id="deck-status" role="status"></p>
               <details class="player-drawer" id="player-drawer">
                 <summary><span>TECHNICAL</span><span class="listening-panel__lamp" aria-hidden="true"></span></summary>
-                <div class="listening-panel">
-                  <div id="deck-meta"></div>
-                </div>
+                <div class="listening-panel"><div id="deck-meta"></div></div>
               </details>
               <audio id="showcase-player" controls preload="none">Your browser cannot play this audio.</audio>
             </div>
@@ -142,7 +139,6 @@
         </div>
       </div>
 
-      
       <noscript><p class="notice">The cassette wall player requires JavaScript. Track source files remain in the curated showcase repository.</p></noscript>
     </div>
   </section>

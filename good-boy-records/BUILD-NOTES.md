@@ -180,3 +180,12 @@ Missing or broken cover artwork no longer blocks deployment.
 - Cassette loading bay moved into the artwork half; carousel cassette flies into that side.
 - Cover art uses an amber scan/materialisation reveal after the cassette latch completes.
 - Removed the incomplete bundled sample track and all sample-specific build diagnostics/examples.
+
+
+### v5.23
+- Rebuilt carousel layout from the source template, not generated index output.
+- Exact left/centre/right desktop proportions with right rail 30/50/20 VU/spectrum/transport split.
+- Same physical layout retained on mobile with scaled controls and no horizontal overflow.
+- Removed carousel track readout.
+- Lyrics span the full chassis below the carousel.
+- Bundled showcase remains sample-free.

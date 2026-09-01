@@ -248,7 +248,6 @@ Selecting a cassette now arms continuous random playback. At the end of a track 
 The player now randomises whole song groups on each refresh, includes a hardware-style shuffle-play button, keeps already-sung lyrics visually dark through pauses, and uses a corrected live EQ/analyser signal path. Positive EQ movement is an audible boost; peak protection is handled after the EQ rather than by reducing the whole mix. The spectrum uses higher FFT resolution so low-frequency columns respond independently.
 
 
-## v5.22 layout note
-- Carousel centered between a left programme column and right control column.
-- Lyrics run full width beneath the player.
-- Carousel readout removed; active title lives in the left display.
+## v5.23 layout
+
+The player is one three-column hi-fi chassis at every viewport width: title/art left, centered rotary cassette magazine, VU/spectrum/transport right, with live lyrics across the full width below. The old fixed-player grid is explicitly neutralised so legacy CSS cannot reorder the new components.
