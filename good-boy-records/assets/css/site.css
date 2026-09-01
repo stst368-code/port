@@ -525,3 +525,164 @@ body[data-format=vinyl] .cassette__label{inset:0;height:100%;border-radius:2px}b
   .composition-row__tapes{gap:3px}.composition-row .card{width:min(46vw,160px);grid-template-columns:24px minmax(0,1fr)}
   .home .player-drawer .listening-panel{grid-template-columns:1fr}.home .player-drawer[open] .listening-panel{max-height:210px}
 }
+
+/* v5.13 — permanent two-line lyric ribbon + dense cassette wall.
+   The player is important hardware; the wall is tightly organised media, not a set of cards. */
+.home{--gbr-player-height:356px}
+
+/* Larger, more legible fixed console typography. */
+.home .deck__header{margin-bottom:.28rem;padding-bottom:.28rem}
+.home .deck__header .eyebrow{font-size:.56rem;letter-spacing:.13em}
+.home .deck__title{font-size:clamp(1.35rem,2.15vw,2rem);line-height:.92}
+.home .deck__catalogue{font-size:.62rem;line-height:1.2}
+.home .deck__details{font-size:.58rem;padding:.42rem .68rem}
+.home .player-rail .machine-shell{
+  grid-template-columns:minmax(260px,1.12fr) minmax(245px,.82fr) minmax(370px,1.2fr);
+  grid-template-areas:
+    "top top top"
+    "monitor meters eq"
+    "inspiration transport eq"
+    "inspiration footer eq"
+    "lyrics lyrics lyrics"
+    "status status status";
+  row-gap:.3rem;
+}
+.home .player-rail .machine-shell__topline{font-size:.53rem}
+.home .player-rail .wall-monitor small{font-size:.51rem}
+.home .player-rail .wall-monitor strong{font-size:1.08rem}
+.home .player-rail .wall-monitor .numitron{font-size:.62rem}
+.home .player-rail .inspiration-readout>span{font-size:.51rem}
+.home .player-rail .inspiration-readout p{font-size:.78rem;line-height:1.28}
+.home .player-rail .vu__label{font-size:.52rem}
+.home .player-rail .eq-panel__head{font-size:.52rem}
+.home .player-rail .eq-panel__head button{font-size:.5rem}
+.home .player-rail .eq-band{font-size:.5rem}
+.home .player-rail .eq-band output{font-size:.48rem}
+.home .player-rail .clock-display{font-size:.86rem}
+.home .player-rail .machine-footer{font-size:.57rem}
+.home .player-rail .deck__status{font-size:.52rem}
+
+/* Lyrics are always present, full-width, and deliberately limited to two visible lines. */
+.home .lyrics--fixed{
+  grid-area:lyrics;
+  position:relative;
+  min-width:0;
+  border:1px solid #2d302c;
+  border-radius:4px;
+  background:linear-gradient(180deg,#0e100d,#070807);
+  box-shadow:inset 0 0 18px rgba(0,0,0,.72);
+  padding:.18rem .35rem;
+}
+.home .lyrics--fixed .notice{position:absolute;right:.45rem;top:.22rem;z-index:2;margin:0;font-size:.48rem}
+.home .lyrics--fixed .lyrics__scroll{
+  height:5.15rem;
+  overflow-y:auto;
+  overflow-x:hidden;
+  border:0;
+  padding:.12rem 2.7rem .12rem .25rem;
+  scrollbar-width:none;
+  scroll-snap-type:y proximity;
+}
+.home .lyrics--fixed .lyrics__scroll::-webkit-scrollbar{display:none}
+.home .lyrics--fixed .lyrics__list li{
+  min-height:2.42rem;
+  display:flex;
+  align-items:center;
+  padding:.18rem .45rem;
+  font-size:clamp(1.12rem,1.7vw,1.48rem);
+  line-height:1.28;
+  font-weight:650;
+  scroll-snap-align:center;
+}
+.home .lyrics--fixed .lyrics__list li.lyrics__raw{padding:.18rem .45rem;font-size:clamp(1.12rem,1.7vw,1.48rem)}
+.home .lyrics--fixed .lyrics__list li.lyrics__direction{min-height:2.42rem;padding:.18rem .45rem;font-size:.7rem}
+.home .lyrics--fixed[data-mode="word"] .lyrics__list li{line-height:1.28}
+.home .lyrics--fixed .lyrics__return{
+  position:absolute;right:.38rem;bottom:.36rem;margin:0;padding:.32rem .42rem;
+  font-size:.48rem;z-index:3;background:#0b0d0d;
+}
+.home .lyrics--fixed[data-following=true] .lyrics__return{visibility:hidden}
+.home .lyrics--fixed[data-following=false] .lyrics__return{visibility:visible}
+
+/* Technical remains optional and no longer owns the lyric surface. */
+.home .player-drawer .listening-panel{grid-template-columns:1fr}
+.home .player-drawer[open] .listening-panel{max-height:220px}
+
+/* Dense wall. Strip away card-like breathing room and hard row dividers. */
+.home .genre-shelves{gap:.28rem}
+.home .genre-cluster{margin:0;padding:0}
+.home .genre-cluster__header{margin:0;padding:.18rem .34rem .12rem}
+.home .genre-wall{
+  gap:0;
+  padding:2px 3px 3px;
+  background:linear-gradient(180deg,#0e0f0d,#080907);
+}
+.composition-row{
+  grid-template-columns:clamp(92px,9vw,132px) minmax(0,1fr);
+  gap:3px;
+  padding:2px 0;
+  border-bottom:0;
+}
+.composition-row__title{
+  margin:1px 0 0;
+  padding:.18rem .24rem;
+  border-left:1px solid #383229;
+  color:#98988f;
+  font-size:.61rem;
+  line-height:1.08;
+}
+.composition-row__tapes{gap:2px;row-gap:2px}
+.composition-row .card{
+  grid-template-columns:23px minmax(0,1fr);
+  gap:1px;
+  width:clamp(142px,11.5vw,178px);
+}
+.composition-row .version-tag{
+  min-height:24px;
+  border-color:#292923;
+  font-size:.49rem;
+}
+.composition-row .cassette{
+  box-shadow:0 5px 8px rgba(0,0,0,.72),inset 0 0 0 3px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.13);
+}
+.composition-row .card[data-selected=true] .cassette{
+  box-shadow:0 5px 10px #000,0 0 15px rgba(255,179,26,.34),inset 0 0 18px rgba(255,179,26,.08);
+}
+.home .library__count{margin:0 0 .35rem}
+
+@media (max-width:980px){
+  .home{--gbr-player-height:418px}
+  .home .player-rail .machine-shell{
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "top top"
+      "monitor meters"
+      "inspiration inspiration"
+      "transport eq"
+      "footer eq"
+      "lyrics lyrics"
+      "status status";
+  }
+  .composition-row{grid-template-columns:84px minmax(0,1fr)}
+  .composition-row .card{width:clamp(138px,19vw,170px)}
+}
+@media (max-width:650px){
+  .home{--gbr-player-height:474px}
+  .home .player-rail .machine-shell{
+    grid-template-areas:
+      "top top"
+      "monitor monitor"
+      "transport transport"
+      "eq eq"
+      "inspiration inspiration"
+      "footer footer"
+      "lyrics lyrics"
+      "status status";
+  }
+  .home .lyrics--fixed .lyrics__scroll{height:4.85rem;padding-right:2.2rem}
+  .home .lyrics--fixed .lyrics__list li,.home .lyrics--fixed .lyrics__list li.lyrics__raw{font-size:1.05rem;min-height:2.25rem}
+  .composition-row{grid-template-columns:72px minmax(0,1fr);gap:2px;padding:1px 0}
+  .composition-row__title{border-left:0;padding:.13rem .15rem;font-size:.54rem}
+  .composition-row__tapes{gap:1px;row-gap:1px}
+  .composition-row .card{width:min(43vw,156px);grid-template-columns:20px minmax(0,1fr)}
+}

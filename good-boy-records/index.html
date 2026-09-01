@@ -85,7 +85,7 @@
                 <h2 class="deck__title" id="deck-title">NO TAPE SELECTED</h2>
                 <p class="deck__catalogue" id="deck-catalogue">Select a cassette from the wall</p>
               </div>
-              <button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Lyrics + technical</button>
+              <button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button>
             </div>
 
             <div class="machine-shell">
@@ -135,19 +135,20 @@
                 <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
                 <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
               </div>
+              <div class="lyrics lyrics--fixed" id="lyrics" data-following="true">
+                <p class="notice" id="lyrics-note" hidden>These lyrics are a placeholder.</p>
+                <div class="lyrics__scroll" id="lyrics-scroll" tabindex="0" role="region" aria-label="Live lyrics, two lines visible">
+                  <ol class="lyrics__list" id="lyrics-list"><li>Select a cassette to load lyrics.</li></ol>
+                </div>
+                <button type="button" class="lyrics__return" id="lyrics-return">Return to current line</button>
+              </div>
+
               <p class="deck__status" id="deck-status" role="status"></p>
               <audio id="showcase-player" controls preload="none">Your browser cannot play this audio.</audio>
 
               <details class="player-drawer" id="player-drawer">
-                <summary><span>LYRICS + TECHNICAL</span><span class="listening-panel__lamp" aria-hidden="true"></span></summary>
+                <summary><span>TECHNICAL</span><span class="listening-panel__lamp" aria-hidden="true"></span></summary>
                 <div class="listening-panel">
-                  <div class="lyrics" id="lyrics" data-following="true">
-                    <p class="notice" id="lyrics-note" hidden>These lyrics are a placeholder.</p>
-                    <div class="lyrics__scroll" id="lyrics-scroll" tabindex="0" role="region" aria-label="Lyrics">
-                      <ol class="lyrics__list" id="lyrics-list"><li>Select a cassette to load lyrics.</li></ol>
-                    </div>
-                    <button type="button" class="lyrics__return" id="lyrics-return">Return to current line</button>
-                  </div>
                   <div id="deck-meta"></div>
                 </div>
               </details>

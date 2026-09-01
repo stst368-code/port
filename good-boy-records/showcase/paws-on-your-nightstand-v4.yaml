@@ -1,0 +1,149 @@
+title: paws-on-your-nightstand
+version: 4
+model: MiniMax Music 3 FP16
+state: active
+genre: pop
+inspiration: original
+duration: 157.675102
+cover: paws-on-your-nightstand-v4.png
+caption: |
+  Global Metadata: Target tempo: approximately 105 BPM. Target tonal centre: G# major. Target metre: 4/4. Genre and sonic identity: bratty hyperpop, glitch pop, pop-punk trap, chaotic electro-pop, exaggerated attitude, huge bratty chorus, and chaotic but catchy. Emotional arc: bright candy-coated melodies, sarcastic playful energy, and confident defiant energy. Rhythmic character: sudden beat cuts should define the pocket and motion. Production profile: favour maximalist production, with the mix and spatial character appropriate to the stated era. Vocal Details: Base the lead and supporting vocal treatment on cocky female rap vocals, snarling playful delivery, pitched-up vocal ad-libs, layered vocal chops, cartoonish character vocals, and vocal stutters. Secondary vocal behaviour may use shout-along gang vocals. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style. Arrangement: Follow the lyric-section timeline Intro → Verse 1 → Chorus → Verse 2 → Chorus → Bridge → Outro. Section directives: Verse 1: Doja; Verse 2: Bam Bam. Instrument lifecycle: distorted synth bass, crushing 808s, glitchy digital synths, trap hi-hat rolls, punchy electronic drums, and crunchy pop-punk guitars should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible. Keep melodic, harmonic, and rhythmic motifs recognisable across repeated sections, but vary orchestration and intensity enough that later returns feel developed rather than copied. Preserve natural dynamics and believable ensemble interaction, and let the arrangement breathe around the lead performance instead of filling every register continuously.
+lyrics: |
+  [Intro]
+  (pitched-up) Woof, woof
+  Yeah, it's Doja
+  Bam Bam, get off the couch
+  Ugh
+  Let's go
+
+  [Verse 1]
+  I'm that golden girl, blonde hair, cold stare
+  Walk in the room and you better beware
+  I don't chase the ball, I make the ball chase me
+  Princess of the house and the whole world's my pantry
+  Scratch behind my ears? You can earn that, peasant
+  Bring me a treat and maybe you'll be present
+  Eyes like a sniper, posture like a queen
+  Prettiest, pettiest golden you ever seen
+  Opossum face if it don't go my way
+  (yeah)
+  Then here come Bam Bam, big dumb and golden
+  Brain the size of a pea but his heart wide open
+  One neuron firing and it only says "FETCH"
+  Slobber on the floor, that's my Bam Bam, what a catch
+  (Woof!)
+
+  [Chorus]
+  Golden girl, don't test me
+  Run this whole house, you can't arrest me
+  Pretty and petty, I do what I want
+  Princess with the teeth, watch me flaunt
+  (Woof!)
+  Doja, Doja, run it
+  Bam Bam, Bam Bam, golden
+  Two of us, one throne
+  Move, this whole house is my own
+  (Woof!)
+
+  [Verse 2]
+  BALL! Did somebody say ball?
+  I'm Bam Bam, I love everybody, that's all
+  Big soft mouth, fit your neck inside it
+  I'm not a threat, I'm just happy, can't hide it
+  Rain or shine, I'm answering the call
+  Wreckin' ball baby, bouncin' off the wall
+  Love every human, love every friend
+  Except Teddy (why?) nobody comprehend
+  Fluff Teddy, fluff Teddy
+  (Doja: ugh, focus)
+  Heard "ready set go" and forgot my own name
+  Stick me on repeat, I'll do it all again
+  (Woof!)
+
+  [Chorus]
+  Golden girl, don't test me
+  Run this whole house, you can't arrest me
+  Pretty and petty, I do what I want
+  Princess with the teeth, watch me flaunt
+  (Woof!)
+  Doja, Doja, run it
+  Bam Bam, Bam Bam, golden
+  Two of us, one throne
+  Move, this whole house is my own
+  (Woof!)
+
+  [Bridge]
+  Two sides of a golden, same heart underneath
+  She's the brains and the beauty, he's the chaos and teeth
+  One's a little gremlin, one's a slobber machine
+  Prettiest, dumbest, sweetest team you've seen
+  Doja! Bam Bam!
+  One girl, one boy
+  Same breed, different toy
+  (Woof!)
+
+  [Outro]
+  Doja the princess, Bam Bam the chunk
+  One holds it down, one's a golden drunk
+  Two goldens, one home, we got it all
+  Twenty twenty six, hear the golden call
+  Go get that treat!
+  Walk it on repeat!
+  (Woof! Woof!)
+  Ugh, I'm outside
+  Bye
+generation:
+  source_file: paws-on-your-nightstand_V2_CFG1.7_STP30_LMSD882807984830508_SPSD860248311583571_00001.flac
+  source_sha256: 72022c894bc644f0585d6e506195383ca990f02c338665ad1d5e26dd1611f667
+  source_file_mtime_utc: '2026-08-28T10:26:41Z'
+  source_filename_version_label: 2
+  actual_audio_duration_seconds: 157.675102
+  max_duration_seconds: 298.0
+  model_file: minimax_music3_dit_fp16.safetensors
+  model_weight_dtype: default
+  vae_file: minimax_music3_dav.safetensors
+  clip_model: minimax_music3_text_encoder_pruned_int8_convrot.safetensors
+  clip_type: minimax
+  clip_device: default
+  batch_size: 1
+  seeds:
+    text_encoder_seed: 882807984830508
+    sampler_seed: 860248311583571
+  text_conditioning:
+    cfg_scale: 1.7
+    top_k: 50
+  sampler:
+    steps: 30
+    cfg: 1.7
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: flac
+    duration: 157.675102
+    container_bit_rate: 1028937
+    encoder: Lavf62.12.102
+    codec: flac
+    codec_long_name: FLAC (Free Lossless Audio Codec)
+    sample_rate_hz: 44100
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: 16
+    stream_bit_rate: null
+    stream_encoder: null
+  comfyui:
+    workflow_id: d0315e3e-da4d-4a0b-b9fa-009950f02c41
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.49.6
+    workflow_renderer_version: null
+  selected_graph_branch:
+    title_node_id: 2363:2267
+    version_node_id: 2363:2266
+    caption_node_id: 2363:2270
+    lyrics_node_id: 2363:2269
+    text_encoder_node_id: 2366:2278:2344
+    sampler_node_id: 2366:2277:2342
+    save_node_id: '2369'
+  caption_source: embedded_literal
+  lyrics_source: embedded_literal

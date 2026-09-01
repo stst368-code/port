@@ -1,0 +1,215 @@
+title: the-golden-court
+version: 3
+model: MiniMax Music 3 FP16
+state: active
+genre: epic
+inspiration: original
+duration: 218.476553
+cover: the-golden-court-v3.png
+caption: |
+  Global Metadata: Target tempo: approximately 72 BPM. Target tonal centre: D major. Target metre: 4/4. Genre and sonic identity: grand British symphonic opera, comic opera influences, and majestic royal atmosphere. Emotional arc: dramatic recitative and monumental choral finale. Production profile: favour Royal Albert Hall gala performance, enormous natural concert hall acoustics, and prestigious live performance, with the mix and spatial character appropriate to the stated era. Vocal Details: Base the lead and supporting vocal treatment on operatic baritone, dramatic tenor, soaring soprano, enormous classical choir, and theatrical character vocals. Treat lyric control tags such as Choir, Female, Baritone, Tenor, and Soprano as explicit performer or delivery changes; recurring named or gendered voices should remain recognisably stable. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style. Arrangement: Follow the lyric-section timeline Verse 1 → Verse 2 → Chorus → Instrumental → Verse 3 → Verse 4 → Bridge → Chorus. Section directives: Transition: Overture - full symphony, ceremonial brass fanfare; Current section: Choir - distant; Verse 1: operatic baritone; Verse 1: Female Operatic Response; Verse 1: Orchestral Flourish; Verse 2: tenor, playful orchestration; Chorus: full operatic company; Instrumental: harp, strings, solo French horn; Verse 3: soprano as Doja; Verse 3: Orchestra - comic flourish; Verse 4: tenor as Bam Bam; Verse 4: Orchestra suddenly stops; Verse 4: Choir - ominous whisper; Verse 4: Massive orchestral hit; Bridge: Middle Section - 6/8, sweeping strings; Bridge: Duet - soprano and tenor; Bridge: Choir gradually enters; Bridge: Orchestral Build; Final Chorus: full orchestra, organ and massed choir; Final Chorus: Final Cadence - enormous orchestra and pipe organ; Final Chorus: Very quiet solo voice; Final Chorus: Final orchestral chord. Instrument lifecycle: full romantic symphony orchestra, ceremonial brass fanfares, sweeping strings, French horns, timpani, concert harp, and pipe organ should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible. Explicit exclusions: avoid Broadway musical, modern musical theatre, pop-opera crossover, film trailer music, rock opera, drum kit, synthesizers, electric guitar, close-mic pop vocals, contemporary soundtrack.
+lyrics: |
+  [Choir]
+  Golden...
+  Golden...
+
+  [Verse 1]
+  Within these halls of crimson and gold
+  A tale of two companions shall be told
+  One walks in splendour, sovereign and serene
+  Doja the Golden, magnificent queen
+
+  She raises her head
+  The whole court stands
+  No crown is required
+  She already commands
+
+  [Female]
+  Her eyes survey the kingdom
+  Her judgment swift and true
+
+  [Baritone]
+  And should you cease the scratching...
+
+  [Female]
+  God have mercy upon you
+
+  [Verse 2]
+  But hark!
+  What thunder shakes the palace floor?
+  What golden beast comes charging through the door?
+
+  Bam Bam!
+  Great champion!
+  Defender of the ball!
+  A heart as vast as England
+  And scarcely thoughts at all!
+
+  [Choir]
+  BAM BAM!
+  BAM BAM!
+
+  [Tenor]
+  Cast forth the sacred tennis ball
+  Across the royal green
+  No knight has ever travelled
+  With such velocity!
+
+  [Chorus]
+  GLORY TO THE GOLDEN COURT!
+  LET EVERY VOICE PROCLAIM!
+  DOJA HOLDS THE GOLDEN CROWN!
+  AND BAM BAM CHASES AGAIN!
+
+  One rules with grace!
+  One runs with joy!
+  Golden lady!
+  Golden boy!
+
+  Let trumpets sound from wall to wall
+  For Doja and for Bam Bam
+  Beloved above them all!
+
+  [Instrumental]
+
+  [Verse 3]
+  I ask for little from this world
+  A comfortable throne
+  A human hand to scratch my ears
+  And time to sleep alone
+
+  Yet everywhere I wander
+  That creature follows me
+
+  [Tenor]
+  BALL!
+
+  [Soprano]
+  Precisely.
+
+  Could somebody remove him, please?
+
+  [Verse 4]
+  I love the rain!
+  I love the snow!
+  I heard somebody shout, "Let's go!"
+
+  I love my Mama!
+  I love my friends!
+  I bring the ball
+  And then...
+
+  AGAIN!
+
+  [Choir]
+  AGAIN!
+  AGAIN!
+  AGAIN!
+
+  [Tenor]
+  There is but one upon this Earth
+  Whose friendship I decline...
+
+  Teddy.
+
+  [Choir]
+  Teddy...
+
+  [Tenor]
+  Fluff Teddy.
+
+  [Bridge]
+
+  Two golden hearts
+  Two different souls
+  Together they make one home whole
+
+  One quiet flame
+  One blazing sun
+  Two lives entwined
+  Forever one
+
+  Through every year
+  Through every day
+  May golden paws still lead the way
+
+  [Chorus]
+  GLORY TO THE GOLDEN COURT!
+  LET BELLS AND TRUMPETS RING!
+
+  DOJA, QUEEN OF EVERYTHING!
+  BAM BAM, FETCHING FOR THE KING!
+
+  One rules with grace!
+  One runs with joy!
+  Golden lady!
+  Golden boy!
+
+  From New Mills unto Albert Hall
+  Let every voice proclaim them:
+
+  THE GREATEST GOLDENS OF THEM ALL!
+
+  [Choir]
+  DO-JA!
+
+  BAM-BAM!
+
+  Woof.
+generation:
+  source_file: the-golden-court_V2_CFG1.7_STP30_LMSD721940094095256_SPSD894151988226147_00001.flac
+  source_sha256: e482068ec0ff0ac7af4e65f9f536677f95e8b88e95de888e9b69247c6b253a30
+  source_file_mtime_utc: '2026-08-27T01:39:29Z'
+  source_filename_version_label: 2
+  actual_audio_duration_seconds: 218.476553
+  max_duration_seconds: 298.0
+  model_file: minimax_music3_dit_fp16.safetensors
+  model_weight_dtype: default
+  vae_file: minimax_music3_dav.safetensors
+  clip_model: minimax_music3_text_encoder_pruned_int8_convrot.safetensors
+  clip_type: minimax
+  clip_device: default
+  batch_size: 1
+  seeds:
+    text_encoder_seed: 721940094095256
+    sampler_seed: 894151988226147
+  text_conditioning:
+    cfg_scale: 1.7
+    top_k: 50
+  sampler:
+    steps: 30
+    cfg: 1.7
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: flac
+    duration: 218.476553
+    container_bit_rate: 931720
+    encoder: Lavf62.12.102
+    codec: flac
+    codec_long_name: FLAC (Free Lossless Audio Codec)
+    sample_rate_hz: 44100
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: 16
+    stream_bit_rate: null
+    stream_encoder: null
+  comfyui:
+    workflow_id: d0315e3e-da4d-4a0b-b9fa-009950f02c41
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.49.6
+    workflow_renderer_version: null
+  selected_graph_branch:
+    title_node_id: 1742:1738
+    version_node_id: 1742:1737
+    duration_node_id: 1742:1739
+    lyrics_node_id: 1742:1740
+    caption_node_id: 1742:1741
+    text_encoder_node_id: 1900:1871:1883
+    sampler_node_id: 1900:1870:1881
+    latent_node_id: 1900:1870:1875
+    save_node_id: '1901'
+  caption_source: embedded_literal
+  lyrics_source: embedded_literal

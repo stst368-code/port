@@ -1,0 +1,101 @@
+title: smooth-pawterator
+version: 3
+model: MiniMax Music 3 FP16
+state: active
+genre: pop
+inspiration: Sade - Smooth Operator
+duration: 146.192834
+cover: smooth-pawterator-v3.png
+caption: |
+  Global Metadata: Target tempo: approximately 100 BPM. Target tonal centre: B minor. Target metre: 4/4. Genre and sonic identity: understated and elegant, 80s sophisti-soul, and restrained dynamics. Emotional arc: smooth sophisti-pop quiet storm and romantic and cool. Rhythmic character: soft brushed groove should define the pocket and motion. Production profile: favour polished analog-digital 1980s studio sound, with the mix and spatial character appropriate to the stated era. Vocal Details: Base the lead and supporting vocal treatment on sultry breathy female vocals and intimate close vocal. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style. Arrangement: Follow the lyric-section timeline Intro → Verse 1 → Chorus → Verse 2 → Bridge → Outro. Section directives: Intro: soft sax, mellow; Verse 1: smooth, breathy; Chorus: understated groove; Verse 2: laid-back; Bridge: sultry sax break; Outro: fading, smooth. Instrument lifecycle: mellow jazzy electric piano and smooth saxophone should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible. Explicit exclusions: avoid disco, funk, slap bass, synthwave, trap, EDM, rock guitar, powerful belting, gospel choir, busy percussion, aggressive drums. Keep melodic, harmonic, and rhythmic motifs recognisable across repeated sections, but vary orchestration and intensity enough that later returns feel developed rather than copied. Preserve natural dynamics and believable ensemble interaction, and let the arrangement breathe around the lead performance instead of filling every register continuously.
+lyrics: |
+  [Intro]
+  (Woof, soft)
+  Mmm... two goldens...
+
+  [Verse 1]
+  She moves through the room like she's made out of silk
+  Cool as the morning, calm as the milk
+  She won't chase a thing,
+  what she wants, It comes to her
+  A golden-eyed lady, with that regal glow
+
+  [Chorus]
+  She's a smooth paw-ter-arator, running your home
+  Cool little princess on her velvet throne
+  And her chunk's all heart, all sunshine and sway
+  Two goldens, one home, at the end of the day
+  (mmm)
+
+  [Verse 2]
+  He's a big gentle giant with a mouth soft and wide
+  Loves every stranger, takes them all in his stride
+  But Teddy, sweet Teddy, he just cannot abide
+  And nobody knows what he's feeling inside
+
+  [Bridge]
+  Two sides of a golden, one cool and one warm
+  She's the calm in the quiet, he's the joy in the storm
+  (soft) Doja... Bam Bam...
+
+  [Outro]
+  Two goldens, one home, and they've got it all
+  (whispered) Go on... fetch the ball...
+  (Woof)
+generation:
+  source_file: smooth-pawterator_V2_CFG1.7_STP30_LMSD763007517625196_SPSD358525734779851_00001.flac
+  source_sha256: 769d92c7d7ab28ce8792bd177dda09b41a5d851e9c6373f2ce0dac9172e9cb7a
+  source_file_mtime_utc: '2026-08-26T23:05:25Z'
+  source_filename_version_label: 2
+  actual_audio_duration_seconds: 146.192834
+  max_duration_seconds: 298.0
+  model_file: minimax_music3_dit_fp16.safetensors
+  model_weight_dtype: default
+  vae_file: minimax_music3_dav.safetensors
+  clip_model: minimax_music3_text_encoder_pruned_int8_convrot.safetensors
+  clip_type: minimax
+  clip_device: default
+  batch_size: 1
+  seeds:
+    text_encoder_seed: 763007517625196
+    sampler_seed: 358525734779851
+  text_conditioning:
+    cfg_scale: 1.7
+    top_k: 50
+  sampler:
+    steps: 30
+    cfg: 1.7
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+  audio_encoding:
+    format: flac
+    duration: 146.192834
+    container_bit_rate: 901546
+    encoder: Lavf62.12.102
+    codec: flac
+    codec_long_name: FLAC (Free Lossless Audio Codec)
+    sample_rate_hz: 44100
+    channels: 2
+    channel_layout: stereo
+    bits_per_sample: 16
+    stream_bit_rate: null
+    stream_encoder: null
+  comfyui:
+    workflow_id: d0315e3e-da4d-4a0b-b9fa-009950f02c41
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.49.6
+    workflow_renderer_version: null
+  selected_graph_branch:
+    title_node_id: 2816:2811
+    version_node_id: 2816:2810
+    duration_node_id: 2816:2812
+    lyrics_node_id: 2816:2813
+    caption_node_id: 2816:2814
+    text_encoder_node_id: 2815:2804
+    sampler_node_id: 2815:2790
+    latent_node_id: 2815:2784
+    save_node_id: 2815:2809
+  caption_source: embedded_literal
+  lyrics_source: embedded_literal

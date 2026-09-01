@@ -122,7 +122,7 @@ Missing or broken cover artwork no longer blocks deployment.
 - The workflow fails if a legacy `_site/music` directory somehow reaches the deployment artifact.
 
 
-## v5.12
+## v5.13
 
 - Moved the stationary transport/mixer to a fixed full-width top console.
 - Removed the split left/right cassette lanes and centre corridor.

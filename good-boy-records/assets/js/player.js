@@ -451,7 +451,7 @@
       var inspiration = (track.style && track.style.inspiration) || (track.notes && track.notes.short) || "No inspiration note stored for this version.";
       el.inspiration.textContent = inspiration;
     }
-    el.detailsLink.textContent = "Lyrics + technical";
+    el.detailsLink.textContent = "Technical";
     el.meta.innerHTML = metaMarkup(track);
     el.scrub.max = track.audio.duration || 0; el.scrub.value = 0;
     el.total.textContent = clock(track.audio.duration); el.elapsed.textContent = "0:00";
