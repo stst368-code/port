@@ -2024,3 +2024,141 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
   .machine-shell--carousel-layout .transport-panel{ flex-wrap:wrap; }
   .machine-shell--carousel-layout .transport__scrub{ min-width:100% !important; }
 }
+
+
+/* v5.25 — fully centered carousel, controls wrapped around the machine. */
+.home .machine-shell--carousel-layout{
+  --carousel-size:min(78vmin, 760px) !important;
+  --carousel-radius:calc(var(--carousel-size) * 0.39) !important;
+  --carousel-tape:calc(var(--carousel-size) * 0.16) !important;
+  display:block !important;
+  width:min(96vw, 1100px) !important;
+  margin:0 auto !important;
+  padding:.9rem 1rem 8.8rem !important;
+  min-height:calc(var(--carousel-size) + 9.5rem) !important;
+  overflow:visible !important;
+}
+.home .machine-shell--carousel-layout .machine-shell__topline{
+  margin-bottom:.5rem !important;
+}
+.home .machine-shell--carousel-layout .stage-left{
+  display:none !important;
+}
+.home .machine-shell--carousel-layout .cassette-carousel-shell{
+  position:relative !important;
+  width:var(--carousel-size) !important;
+  height:var(--carousel-size) !important;
+  margin:0 auto !important;
+  aspect-ratio:1/1 !important;
+  overflow:visible !important;
+  border:0 !important;
+  background:none !important;
+  box-shadow:none !important;
+}
+.home .machine-shell--carousel-layout .cassette-carousel-shell::before{
+  content:"";
+  position:absolute;
+  inset:4.5% !important;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 46%, rgba(255,139,20,.08), transparent 42%), linear-gradient(180deg, rgba(27,17,10,.96), rgba(8,5,3,.98));
+  box-shadow:inset 0 0 0 1px rgba(112,61,17,.88), inset 0 0 55px rgba(0,0,0,.78), 0 10px 34px rgba(0,0,0,.38);
+}
+.home .machine-shell--carousel-layout .cassette-carousel,
+.home .machine-shell--carousel-layout .carousel-platter,
+.home .machine-shell--carousel-layout .cassette-shelves,
+.home .machine-shell--carousel-layout .track-wall{ overflow:visible !important; }
+.home .machine-shell--carousel-layout .carousel-platter{
+  position:absolute !important;
+  width:100% !important;
+  height:100% !important;
+  left:50% !important;
+  top:50% !important;
+  transform:translate(-50%, -50%) !important;
+}
+.home .machine-shell--carousel-layout .carousel-pickup{ top:1% !important; }
+.home .machine-shell--carousel-layout .ring-copy{ z-index:18 !important; }
+.home .machine-shell--carousel-layout .ring-copy__title{ font-size:56px !important; letter-spacing:1.5px !important; }
+.home .machine-shell--carousel-layout .ring-copy__meta{ font-size:18px !important; }
+.home .machine-shell--carousel-layout .ring-copy__lyric--a{ font-size:26px !important; }
+.home .machine-shell--carousel-layout .ring-copy__lyric--b{ font-size:24px !important; }
+.home .machine-shell--carousel-layout .program-art{
+  width:23% !important;
+  z-index:20 !important;
+}
+.home .machine-shell--carousel-layout .program-art .cassette-bay__tape{ transform:translateY(100%) scale(.96) !important; }
+.home .machine-shell--carousel-layout .program-art .cassette-bay__tape[data-loaded="true"]{ transform:translateY(0) scale(1) !important; }
+.home .machine-shell--carousel-layout .stage-right{
+  display:contents !important;
+}
+.home .machine-shell--carousel-layout .stage-right > .spectrum-panel,
+.home .machine-shell--carousel-layout .stage-right > .meter-bank,
+.home .machine-shell--carousel-layout .stage-right > .transport-stack{
+  position:absolute !important;
+  bottom:.8rem !important;
+  min-height:0 !important;
+  z-index:25 !important;
+}
+.home .machine-shell--carousel-layout .stage-right > .transport-stack{
+  left:2% !important;
+  width:30% !important;
+  height:6.6rem !important;
+}
+.home .machine-shell--carousel-layout .stage-right > .spectrum-panel{
+  left:34% !important;
+  width:36% !important;
+  height:6.6rem !important;
+}
+.home .machine-shell--carousel-layout .stage-right > .meter-bank{
+  right:2% !important;
+  width:26% !important;
+  height:6.6rem !important;
+}
+.home .machine-shell--carousel-layout .stage-right .transport-panel,
+.home .machine-shell--carousel-layout .stage-right .machine-footer,
+.home .machine-shell--carousel-layout .stage-right > .spectrum-panel,
+.home .machine-shell--carousel-layout .stage-right > .meter-bank{
+  background:linear-gradient(180deg, rgba(16,10,6,.94), rgba(7,4,2,.96)) !important;
+  box-shadow:inset 0 0 0 1px rgba(112,66,20,.85), inset 0 0 18px rgba(255,142,30,.08) !important;
+  border-radius:.3rem !important;
+}
+.home .machine-shell--carousel-layout .stage-right .transport-stack{padding:0 !important; gap:.3rem !important;}
+.home .machine-shell--carousel-layout .stage-right .transport-panel{padding:.5rem !important; height:auto !important;}
+.home .machine-shell--carousel-layout .stage-right .machine-footer{padding:.3rem .45rem !important;}
+.home .machine-shell--carousel-layout .stage-right .spectrum-panel{padding:.35rem .45rem !important;}
+.home .machine-shell--carousel-layout .stage-right .meter-bank{padding:.35rem !important; gap:.35rem !important;}
+.home .machine-shell--carousel-layout .stage-right .vu{padding:.1rem !important;}
+.home .machine-shell--carousel-layout .stage-right .vu__scale{inset:10px 10px 0 !important;}
+.home .machine-shell--carousel-layout .lyrics--fixed{display:none !important;}
+@media (max-width: 900px){
+  .home .machine-shell--carousel-layout{ --carousel-size:min(84vw, 620px) !important; padding:.7rem .6rem 8.2rem !important; min-height:calc(var(--carousel-size) + 8.8rem) !important; }
+  .home .machine-shell--carousel-layout .ring-copy__title{ font-size:43px !important; }
+  .home .machine-shell--carousel-layout .ring-copy__meta{ font-size:14px !important; }
+  .home .machine-shell--carousel-layout .ring-copy__lyric--a{ font-size:20px !important; }
+  .home .machine-shell--carousel-layout .ring-copy__lyric--b{ font-size:18px !important; }
+  .home .machine-shell--carousel-layout .stage-right > .transport-stack{ left:1.5% !important; width:32% !important; }
+  .home .machine-shell--carousel-layout .stage-right > .spectrum-panel{ left:35% !important; width:34% !important; }
+  .home .machine-shell--carousel-layout .stage-right > .meter-bank{ right:1.5% !important; width:29% !important; }
+}
+@media (max-width: 640px){
+  .home .machine-shell--carousel-layout{ --carousel-size:min(96vw, 430px) !important; padding:.6rem .35rem 10.8rem !important; min-height:calc(var(--carousel-size) + 10.8rem) !important; }
+  .home .machine-shell--carousel-layout .machine-shell__actions{ gap:.22rem !important; }
+  .home .machine-shell--carousel-layout .ring-copy__title{ font-size:28px !important; }
+  .home .machine-shell--carousel-layout .ring-copy__meta{ font-size:10px !important; }
+  .home .machine-shell--carousel-layout .ring-copy__lyric--a{ font-size:13px !important; }
+  .home .machine-shell--carousel-layout .ring-copy__lyric--b{ font-size:12px !important; }
+  .home .machine-shell--carousel-layout .program-art{ width:28% !important; }
+  .home .machine-shell--carousel-layout .stage-right > .transport-stack,
+  .home .machine-shell--carousel-layout .stage-right > .spectrum-panel,
+  .home .machine-shell--carousel-layout .stage-right > .meter-bank{ height:4.8rem !important; bottom:.45rem !important; }
+  .home .machine-shell--carousel-layout .stage-right > .transport-stack{ left:1% !important; width:37% !important; }
+  .home .machine-shell--carousel-layout .stage-right > .spectrum-panel{ left:39% !important; width:32% !important; }
+  .home .machine-shell--carousel-layout .stage-right > .meter-bank{ right:1% !important; width:27% !important; }
+  .home .machine-shell--carousel-layout .stage-right .transport-panel{ grid-template-columns:22px 22px minmax(0,1fr) !important; grid-template-rows:auto auto !important; gap:.14rem !important; padding:.18rem !important; }
+  .home .machine-shell--carousel-layout .stage-right .transport__button{ height:22px !important; }
+  .home .machine-shell--carousel-layout .stage-right .transport__scrub{ grid-column:1/-1 !important; }
+  .home .machine-shell--carousel-layout .stage-right .clock-display{ font-size:.34rem !important; padding:.08rem .1rem !important; }
+  .home .machine-shell--carousel-layout .stage-right .machine-footer{ grid-template-columns:1fr !important; gap:.1rem !important; padding:.16rem .2rem !important; }
+  .home .machine-shell--carousel-layout .stage-right .volume{ grid-template-columns:18px minmax(0,1fr) !important; }
+  .home .machine-shell--carousel-layout .stage-right .spectrum-panel__head{ font-size:.28rem !important; }
+  .home .machine-shell--carousel-layout .stage-right .spectrum{ padding:2px !important; }
+}
