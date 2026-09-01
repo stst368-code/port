@@ -15,6 +15,7 @@
     catalogue: document.getElementById("deck-catalogue"), meta: document.getElementById("deck-meta"),
     detailsLink: document.getElementById("deck-details"), drawer: document.getElementById("player-drawer"), status: document.getElementById("deck-status"),
     audio: document.getElementById("showcase-player"), toggle: document.getElementById("transport-toggle"),
+    shuffle: document.getElementById("transport-shuffle"),
     scrub: document.getElementById("transport-scrub"), elapsed: document.getElementById("time-elapsed"),
     total: document.getElementById("time-total"), volume: document.getElementById("transport-volume"),
     lyrics: document.getElementById("lyrics"), lyricsScroll: document.getElementById("lyrics-scroll"),
@@ -34,7 +35,7 @@
   var preview = new Audio();
   preview.preload = "none";
   preview.volume = 0.55;
-  var current = null, cues = [], cueIndex = -1, wordIndex = -1, wordTimed = false, lyricsLoadToken = 0, lyricFrame = null, scrubbing = false, following = true;
+  var current = null, cues = [], cueIndex = -1, pastCueIndex = -1, wordIndex = -1, wordTimed = false, lyricsLoadToken = 0, lyricFrame = null, scrubbing = false, following = true;
   var audioUnlocked = false, previewTimer = null, previewStop = null;
   var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -42,7 +43,8 @@
   var fxContext = null, cycleArmed = false, cycleInProgress = false;
   var spectrumBars = [], spectrumLevels = [];
   var spectrumBandCount = 18, spectrumSegmentCount = 10;
-  var eqFilters = [], eqHeadroom = null;
+  var spectrumCentres = [55, 80, 115, 160, 225, 315, 440, 620, 870, 1220, 1700, 2400, 3400, 4800, 6800, 9600, 13500, 17500];
+  var eqFilters = [], eqHeadroom = null, eqLimiter = null;
   var eqInputs = Array.prototype.slice.call(document.querySelectorAll("[data-eq-frequency]"));
   var eqFrequencies = [60, 250, 1000, 4000, 12000];
 
@@ -70,7 +72,10 @@
   function paintSpectrum(levels) {
     if (!spectrumBars.length) return;
     for (var band = 0; band < spectrumBars.length; band++) {
-      var lit = Math.round(Math.max(0, Math.min(1, levels[band] || 0)) * spectrumSegmentCount);
+      var normalized = Math.max(0, Math.min(1, levels[band] || 0));
+      /* Floor rather than round so a nearly-full band does not sit on all ten
+         lamps continuously. The top segment is reserved for genuine peaks. */
+      var lit = normalized >= .995 ? spectrumSegmentCount : Math.floor(normalized * spectrumSegmentCount);
       spectrumBars[band].forEach(function (segment) {
         var level = Number(segment.dataset.level) || 0;
         segment.classList.toggle("is-lit", level <= lit);
@@ -123,6 +128,7 @@
   function renderCueSet(nextCues, mode) {
     cues = Array.isArray(nextCues) ? nextCues : [];
     cueIndex = -1;
+    pastCueIndex = -1;
     wordIndex = -1;
     wordTimed = mode === "word";
     el.lyrics.dataset.mode = wordTimed ? "word" : "line";
@@ -181,6 +187,7 @@
     }
     cues = [];
     cueIndex = -1;
+    pastCueIndex = -1;
     wordIndex = -1;
     wordTimed = false;
     el.lyrics.dataset.mode = "raw";
@@ -241,6 +248,17 @@
     return found;
   }
 
+  function findPastCue(time) {
+    if (!cues.length) return -1;
+    var low = 0, high = cues.length - 1, found = -1;
+    while (low <= high) {
+      var mid = (low + high) >> 1;
+      if (Number(cues[mid].end) <= time) { found = mid; low = mid + 1; }
+      else high = mid - 1;
+    }
+    return found;
+  }
+
   function findWord(words, time) {
     if (!Array.isArray(words) || !words.length) return -1;
     var low = 0, high = words.length - 1;
@@ -273,18 +291,26 @@
   function highlight(time) {
     if (!cues.length) return;
     var index = findCue(time);
-    var changed = index !== cueIndex;
+    var pastIndex = findPastCue(time);
+    var changed = index !== cueIndex || pastIndex !== pastCueIndex;
     if (changed) {
       cueIndex = index;
+      pastCueIndex = pastIndex;
       wordIndex = -1;
       var lines = el.lyricsList.children;
       for (var i = 0; i < lines.length; i++) {
+        var cue = cues[i];
+        /* During a pause between lines findCue() correctly returns -1. Past
+           lyrics must nevertheless remain past, instead of springing back to
+           the same bright colour as words that have not been sung yet. */
+        var isPast = i <= pastIndex;
         lines[i].classList.toggle("is-active", i === index);
-        lines[i].classList.toggle("is-past", index >= 0 && i < index);
+        lines[i].classList.toggle("is-past", i !== index && isPast);
         if (i !== index) {
           lines[i].querySelectorAll(".lyrics__word").forEach(function (span) {
+            var wordEnd = Number(span.dataset.end);
             span.classList.remove("is-current", "is-next");
-            span.classList.toggle("is-sung", i < index);
+            span.classList.toggle("is-sung", isFinite(wordEnd) ? wordEnd <= time : isPast);
           });
         }
       }
@@ -360,11 +386,11 @@
       maxBoost = Math.max(maxBoost, gain);
       try { filter.gain.setTargetAtTime(gain, now, .025); } catch (_) { filter.gain.value = gain; }
     });
-    /* Preserve some headroom when bands are boosted, rather than turning the
-       equalizer into an accidental clipping machine. */
+    /* Do not counteract a positive EQ move by turning the entire programme
+       down by the same number of dB. That made a boost feel perversely like a
+       cut. The downstream limiter catches true output peaks instead. */
     if (eqHeadroom) {
-      var linear = Math.pow(10, -maxBoost / 20);
-      try { eqHeadroom.gain.setTargetAtTime(linear, now, .03); } catch (_) { eqHeadroom.gain.value = linear; }
+      try { eqHeadroom.gain.setTargetAtTime(1, now, .03); } catch (_) { eqHeadroom.gain.value = 1; }
     }
   }
   function setEqAvailability(available) {
@@ -395,16 +421,27 @@
         return filter;
       });
       analyser = audioContext.createAnalyser();
-      analyser.fftSize = 512;
-      analyser.smoothingTimeConstant = .68;
+      /* 2048 gives the low end enough FFT resolution that several visual
+         bands no longer collapse onto the same one or two bins. */
+      analyser.fftSize = 2048;
+      analyser.smoothingTimeConstant = .34;
+      analyser.minDecibels = -88;
+      analyser.maxDecibels = -18;
       analyserData = new Uint8Array(analyser.fftSize);
       frequencyData = new Uint8Array(analyser.frequencyBinCount);
+      eqLimiter = audioContext.createDynamicsCompressor();
+      eqLimiter.threshold.value = -3;
+      eqLimiter.knee.value = 0;
+      eqLimiter.ratio.value = 20;
+      eqLimiter.attack.value = .003;
+      eqLimiter.release.value = .12;
 
       mediaSource.connect(eqHeadroom);
       var node = eqHeadroom;
       eqFilters.forEach(function (filter) { node.connect(filter); node = filter; });
       node.connect(analyser);
-      analyser.connect(audioContext.destination);
+      analyser.connect(eqLimiter);
+      eqLimiter.connect(audioContext.destination);
       setEqAvailability(true);
       applyEq();
     } catch (_) { analyser = null; eqFilters = []; setEqAvailability(false); }
@@ -417,14 +454,17 @@
     if (!analyser || !frequencyData || !spectrumBars.length) return;
     analyser.getByteFrequencyData(frequencyData);
     var nyquist = (audioContext ? audioContext.sampleRate : 48000) / 2;
-    var minHz = 45, maxHz = Math.min(16000, nyquist);
+    var raw = [];
+    var framePeak = 0;
+
     for (var band = 0; band < spectrumBandCount; band++) {
-      var loRatio = band / spectrumBandCount;
-      var hiRatio = (band + 1) / spectrumBandCount;
-      var lowHz = minHz * Math.pow(maxHz / minHz, loRatio);
-      var highHz = minHz * Math.pow(maxHz / minHz, hiRatio);
+      var centre = spectrumCentres[band] || 1000;
+      var lowHz = band === 0 ? 45 : Math.sqrt(spectrumCentres[band - 1] * centre);
+      var highHz = band === spectrumBandCount - 1
+        ? Math.min(19500, nyquist * .94)
+        : Math.sqrt(centre * spectrumCentres[band + 1]);
       var lowBin = Math.max(1, Math.floor(lowHz / nyquist * frequencyData.length));
-      var highBin = Math.min(frequencyData.length - 1, Math.max(lowBin + 1, Math.ceil(highHz / nyquist * frequencyData.length)));
+      var highBin = Math.min(frequencyData.length - 1, Math.max(lowBin, Math.ceil(highHz / nyquist * frequencyData.length)));
       var total = 0, peak = 0, count = 0;
       for (var i = lowBin; i <= highBin; i++) {
         var value = frequencyData[i] / 255;
@@ -432,12 +472,26 @@
         peak = Math.max(peak, value);
         count += 1;
       }
-      var target = count ? ((total / count) * .68 + peak * .32) : 0;
-      target = Math.max(0, Math.min(1, (target - .025) * 1.42));
-      var currentLevel = spectrumLevels[band] || 0;
-      /* Fast attack, visible short decay: old illuminated blocks hang around
-         just long enough to read as analogue hardware rather than flicker. */
-      spectrumLevels[band] = target >= currentLevel ? target : Math.max(target, currentLevel - .055);
+      var mean = count ? total / count : 0;
+      var level = mean * .78 + peak * .22;
+      /* Remove analyser floor, then compensate gently for the normal spectral
+         downward slope of music. This keeps bass alive without letting the
+         first two columns weld themselves permanently to the ceiling. */
+      level = Math.max(0, (level - .075) / .925);
+      level *= .76 + .28 * (band / Math.max(1, spectrumBandCount - 1));
+      level = Math.pow(Math.max(0, Math.min(1, level)), 1.22);
+      raw.push(level);
+      framePeak = Math.max(framePeak, level);
+    }
+
+    var ceiling = Math.max(.38, framePeak);
+    for (var b = 0; b < spectrumBandCount; b++) {
+      var relative = Math.min(1, raw[b] / ceiling);
+      var loudness = Math.min(.96, .18 + framePeak * .82);
+      var target = relative * loudness;
+      var currentLevel = spectrumLevels[b] || 0;
+      /* Fast attack, short analogue-looking decay. */
+      spectrumLevels[b] = target >= currentLevel ? target : Math.max(target, currentLevel - .075);
     }
     paintSpectrum(spectrumLevels);
   }
@@ -528,6 +582,13 @@
     }
     return pool[Math.floor(Math.random() * pool.length)] || null;
   }
+  function setCycleArmed(value) {
+    cycleArmed = !!value;
+    if (el.shuffle) {
+      el.shuffle.setAttribute("aria-pressed", cycleArmed ? "true" : "false");
+      el.shuffle.classList.toggle("is-active", cycleArmed);
+    }
+  }
   function cycleToRandomTrack() {
     if (!cycleArmed || cycleInProgress) return false;
     var next = randomNextTrack();
@@ -613,6 +674,11 @@
     try {
       navigator.mediaSession.setActionHandler("play", function () { audio.play().catch(function () {}); });
       navigator.mediaSession.setActionHandler("pause", function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler("nexttrack", function () {
+        setCycleArmed(true);
+        var next = randomNextTrack();
+        if (next) select(next, true, true);
+      });
     } catch (_) {}
   }
   function sourceIsCrossOrigin(source) {
@@ -670,8 +736,8 @@
   audio.addEventListener("loadedmetadata", function () { if (isFinite(audio.duration) && audio.duration > 0) { el.scrub.max = audio.duration; el.total.textContent = clock(audio.duration); } });
   audio.addEventListener("timeupdate", function () { if (!scrubbing) { el.scrub.value = audio.currentTime; el.elapsed.textContent = clock(audio.currentTime); } highlight(audio.currentTime); });
   audio.addEventListener("seeking", function () { say("Seeking"); });
-  audio.addEventListener("seeked", function () { cueIndex = -1; highlight(audio.currentTime); say(audio.paused ? "Paused" : "Playing"); });
-  audio.addEventListener("ratechange", function () { cueIndex = -1; });
+  audio.addEventListener("seeked", function () { cueIndex = -2; pastCueIndex = -2; highlight(audio.currentTime); say(audio.paused ? "Paused" : "Playing"); });
+  audio.addEventListener("ratechange", function () { cueIndex = -2; pastCueIndex = -2; });
 
 
   /* ------------------------------------------------------ viewport player */
@@ -688,6 +754,13 @@
     if (!current) return;
     if (audio.paused) beginPlayback();
     else audio.pause();
+  });
+  if (el.shuffle) el.shuffle.addEventListener("click", function () {
+    setCycleArmed(true);
+    var next = randomNextTrack();
+    if (!next) { say("No playable cassette available for shuffle", "alert"); return; }
+    select(next, true, true);
+    say("Shuffle play");
   });
   el.scrub.addEventListener("pointerdown", function () { scrubbing = true; });
   el.scrub.addEventListener("input", function () { el.elapsed.textContent = clock(Number(el.scrub.value)); });
@@ -727,11 +800,22 @@
     setEqAvailability(location.protocol !== "file:" && !!(window.AudioContext || window.webkitAudioContext));
   })();
 
+  function shuffleSongGroups() {
+    var wall = document.querySelector(".track-wall");
+    if (!wall) return;
+    var groups = Array.prototype.slice.call(wall.children).filter(function (child) { return child.classList.contains("track-group"); });
+    for (var i = groups.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = groups[i]; groups[i] = groups[j]; groups[j] = tmp;
+    }
+    groups.forEach(function (group) { wall.appendChild(group); });
+  }
+
   /* ---------------------------------------------------------------- shelf */
   document.querySelectorAll("[data-play]").forEach(function (button) {
     var track = byId[button.dataset.play]; if (!track) return;
     button.addEventListener("click", function () {
-      cycleArmed = true;
+      setCycleArmed(true);
       if (current && current.id === track.id) {
         if (audio.paused) beginPlayback();
         else audio.pause();
@@ -745,6 +829,7 @@
 
   /* ----------------------------------------------------------------- boot */
   initSpectrum();
+  shuffleSongGroups();
   initViewportPlayer();
   audio.removeAttribute("controls");
   var storedVolume = recall("gbr:volume"); audio.volume = storedVolume === null ? .9 : Number(storedVolume); el.volume.value = audio.volume;

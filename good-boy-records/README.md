@@ -235,3 +235,7 @@ The player/mixer is fixed across the top of the viewport as a warm black/brown/a
 ## v5.17 cassette cycle
 
 Selecting a cassette now arms continuous random playback. At the end of a track the player chooses another playable song (avoiding the current song where possible), latches that cassette in the wall, plays a short mechanical insert sound, and continues automatically.
+
+### v5.18 player behaviour
+
+The player now randomises whole song groups on each refresh, includes a hardware-style shuffle-play button, keeps already-sung lyrics visually dark through pauses, and uses a corrected live EQ/analyser signal path. Positive EQ movement is an audible boost; peak protection is handled after the EQ rather than by reducing the whole mix. The spectrum uses higher FFT resolution so low-frequency columns respond independently.

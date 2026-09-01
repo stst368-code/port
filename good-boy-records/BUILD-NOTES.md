@@ -154,3 +154,11 @@ Missing or broken cover artwork no longer blocks deployment.
 - The chooser prefers a different song title and avoids an immediate repeat when alternatives exist.
 - Cassette selection now triggers a short synthesized mechanical insert/latch sound; automatic tape changes use the same effect.
 - The effect is generated in-browser with Web Audio, so there is no extra sound asset or external dependency.
+
+## v5.18 — transport/lyrics/EQ/spectrum corrections
+
+- Completed lyric lines and words now remain dark during gaps between timed cues instead of reverting to the unsung colour.
+- Whole song/version groups are shuffled in the browser on every page refresh while versions inside each group remain ordered.
+- Added a dedicated illuminated shuffle-play transport button. Cassette selection still arms continuous random playback, and shuffle can now be started directly from the stereo.
+- Removed the previous equal-and-opposite master attenuation on positive EQ boosts. A downstream Web Audio limiter now protects output peaks, so moving a band upward actually boosts that band rather than making the programme quieter overall.
+- Increased the analyser FFT from 512 to 2048 samples and switched the 18 display bands to explicit log-spaced centres with per-frame relative scaling. This prevents the first low-frequency columns from sharing the same coarse FFT bins and sitting permanently full.

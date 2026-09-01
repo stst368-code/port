@@ -1106,3 +1106,55 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
   .home .lyrics--fixed .lyrics__scroll{height:5rem;padding-right:2.4rem;padding-left:2.4rem}
   .home .lyrics--fixed .lyrics__list li,.home .lyrics--fixed .lyrics__list li.lyrics__raw{font-size:1.12rem;min-height:2.35rem}
 }
+
+/* v5.18 — shuffle transport, corrected EQ gain behaviour and clearer analyser. */
+.home .player-rail .transport-panel{
+  grid-template-columns:48px 48px 125px 1fr;
+}
+.home .player-rail .transport__button--shuffle{
+  color:#8a6642;
+}
+.home .player-rail .transport__button--shuffle .icon-shuffle{
+  fill:none!important;
+  stroke:currentColor;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.home .player-rail .transport__button--shuffle.is-active,
+.home .player-rail .transport__button--shuffle[aria-pressed="true"]{
+  color:#ffae35;
+  border-color:#a66325;
+  box-shadow:inset 0 1px rgba(255,224,158,.18),0 0 8px rgba(255,139,15,.3),0 0 18px rgba(255,121,8,.12);
+}
+.home .player-rail .transport__button--shuffle.is-active svg,
+.home .player-rail .transport__button--shuffle[aria-pressed="true"] svg{
+  filter:drop-shadow(0 0 3px rgba(255,155,36,.55));
+}
+
+/* Native vertical ranges are intentionally kept max-at-top. The audible EQ
+   path no longer applies an equal-and-opposite master attenuation when a band
+   is boosted; a downstream limiter handles genuine peaks instead. */
+.home .player-rail .eq-band input{
+  writing-mode:vertical-lr;
+  direction:rtl;
+}
+
+/* Completed lyric lines remain visibly receded during gaps between cues. */
+.home .lyrics--fixed .lyrics__list li.is-past,
+.home .lyrics--fixed[data-mode="word"] .lyrics__list li.is-past .lyrics__word{
+  color:#4b4032;
+  opacity:.62;
+  text-shadow:none;
+}
+
+@media (max-width:700px){
+  .home .player-rail .transport-panel{
+    grid-template-columns:44px 44px 105px 1fr;
+  }
+}
+.home .lyrics--fixed[data-mode="word"] .lyrics__list li.is-active .lyrics__word.is-sung{
+  color:#4b4032;
+  opacity:.62;
+  text-shadow:none;
+}
