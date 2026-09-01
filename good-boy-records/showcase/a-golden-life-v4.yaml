@@ -1,0 +1,160 @@
+title: a-golden-life
+version: 4
+model: acestep 1.5 XL turbo BF16
+state: active
+genre: hip-hop
+inspiration: original
+duration: 350
+cover: a-golden-life-v4
+caption: |
+  Late Night Trap, 95 BPM, Heavy 808 Bass, Wet Synths, Female Background Vocals, Male Rap Vocals + Seductive Female Vocals, Dark Bedroom Production, Atmospheric Club Vibes, Breathy Whispers, Slap Bass, Deep Sub Bass, Cinematic R&B Soundtrack Feel
+lyrics: |
+  [Verse 1]
+  Yeah, two goldens in the house but they built different
+  Doja move silent, got that cold ambition
+  Working line princess, never askin' permission
+  Head high, eyes sharp, always on her mission
+  Manipulate the crowd, she extorting scratches
+  Bathe in golden rays, never overheating
+  Independent energy, but always chasing the attention
+
+  Meanwhile Bam Bam crashing through the scene
+  Big fluff,
+  big smile,
+  big hips energy
+  When a ball bounce he gone like a missile
+  Single neuron mind
+  only got a single focus
+  Mantle-piece going crazy
+  tongue flapping in the wind
+  Bring it back once, he'll do it all again
+  Stick that boy on repeat and the retrieving never ends
+  Golden-hearted giant
+  Trying so hard just to keep everyone safe
+  But he can fit ya neck in his mouth
+  Woof
+  [Chorus]
+  Doja got that boss walk, lone wolf, regal vibe
+  Bam Bam got that good boy, don't cry, down-for-the-ride
+  One runs her kingdom, one living life for mama
+  Different type of legends, side by side
+  Doja barking orders, Bam Bam toy circling with pride
+  One stays cool, one plays all night
+  From the break of dawn to the nights moonlight
+  That's the golden retriever life, yeah that's their life
+  Woof
+
+  [Verse 2]
+  Doja like, "I got this,
+  this universe-is mine,
+  you can stop scratchin' where I call time"
+  Reading every situation like you owe her your life
+  Calculated movements, cold maturity
+  Running every field with total authority
+  If she wants affection then she'll let you know
+  Otherwise she's busy with her beauty sleep
+  A golden girls-gotta-glow
+  Never been a follower
+  That's not her role
+  Opossum face burned into her soul
+  Tail never stops wagging
+  If you offer her a treat, your hand she'll take it all
+
+  Bam Bam bursts in like a wrecking ball
+  Heard somebody say-
+  ready, set,
+  go
+  and he forgot it all
+  Could be rain, could be snow, could be spring, could be fall
+  When the ball gets touched-he's answering the call
+  Living every moment, giving it his all
+  Got enough love in him for every human and friend, except Teddy,
+  fluff Teddy
+  nobody knows why, fluff Teddy
+
+  Woof
+
+  [Chorus]
+  Doja got that boss walk, lone wolf, regal vibe
+  Bam Bam got that good boy, don't cry, down-for-the-ride
+  One runs her kingdom, one living life for mama
+  Different type of legends, side by side
+  Doja barking orders, Bam Bam toy circling with pride
+  One stays cool, one plays all night
+  From the break of dawn to the nights moonlight
+  That's the golden retriever life, yeah that's their life
+  Woof
+
+  [Bridge]
+  Two sides of a golden, same heart underneath
+  One brings the wisdom, one brings never ending energy
+  Doja bein gremlin
+  Bam-Bam spreadin' slobber
+  Perfect fluffy team, one girl, one boy
+  Different paths, same breed
+  Different ways to play the game
+  Woof
+
+  [Outro]
+  Yeah...
+  Doja the princess, Bam Bam the chunk
+  One holds it steady, one can't get enough
+  Two goldens, one home, they got it all
+  Doja and Bam Bam, living life in full
+
+  Yeah...
+
+  And I'm out- side
+
+  2026
+
+  Go get that treat!
+  Walk this on repeat!
+
+
+
+  Woof
+generation:
+  source_file: ACE_Step1.5_xl_turbo_00070_.mp3
+  source_sha256: 2a313fa093d43306b12ce4ac955aebbf53555990e1616c95624b458f01bf0103
+  actual_audio_duration_seconds: 350.04
+  model_file: acestepv15xlturbobf16.safetensors
+  model_weight_dtype: default
+  vae_file: ace_1.5_vae.safetensors
+  clip_models:
+  - qwen_0.6b_ace15.safetensors
+  - qwen_4b_ace15.safetensors
+  clip_type: ace
+  clip_device: default
+  bpm: 95
+  time_signature: '4'
+  keyscale: E minor
+  language: en
+  duration_seconds: 350
+  batch_size: 1
+  seed: -20040217992577
+  text_conditioning:
+    generate_audio_codes: true
+    cfg_scale: 2.0
+    temperature: 0.85
+    top_p: 0.9
+    top_k: 0
+    min_p: 0.0
+  sampler:
+    steps: 8
+    cfg: 1.0
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+    model_shift: 3.0
+  audio_encoding:
+    format: mp3
+    quality: V0
+    encoder: Lavf62.3.100
+  comfyui:
+    workflow_id: 88ac5dad-efd7-40bb-84fe-fbaefdee1fa9
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.42.11
+    workflow_renderer_version: LG
+  caption_source: embedded_literal

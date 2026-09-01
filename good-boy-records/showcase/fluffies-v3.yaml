@@ -1,0 +1,138 @@
+title: fluffies
+version: 3
+model: acestep 1.5 XL turbo BF16
+state: active
+genre: hyperpop
+inspiration: original, stylised from ashnikko
+duration: 220
+cover: fluffies-v3
+caption: |
+  Bratty hyperpop, pop-punk trap, female rap vocals, snarling playful attitude, pitch-shifted layered vocals, distorted bass, abrasive glitchy synths, hard-hitting 808s, trap hi-hats, big shout-along chorus, maximalist and chaotic, candy-coated but aggressive, confident defiant monster-girl energy, cartoonish
+lyrics: |
+  [Intro]
+  (pitched-up) Woof, woof
+  Yeah, it's Doja
+  Bam Bam, get off the couch
+  Ugh
+  Let's go
+
+  [Verse 1 - Doja]
+  I'm that golden girl, blonde hair, cold stare
+  Walk in the room and you better beware
+  I don't chase the ball, I make the ball chase me
+  Princess of the house and the whole world's my pantry
+  Scratch behind my ears? You can earn that, peasant
+  Bring me a treat and maybe you'll be present
+  Eyes like a sniper, posture like a queen
+  Prettiest, pettiest golden you ever seen
+  Opossum face if it don't go my way
+  (yeah)
+  Then here come Bam Bam, big dumb and golden
+  Brain the size of a pea but his heart wide open
+  One neuron firing and it only says "FETCH"
+  Slobber on the floor, that's my Bam Bam, what a catch
+  (Woof!)
+
+  [Chorus]
+  Golden girl, don't test me
+  Run this whole house, you can't arrest me
+  Pretty and petty, I do what I want
+  Princess with the teeth, watch me flaunt
+  (Woof!)
+  Doja, Doja, run it
+  Bam Bam, Bam Bam, golden
+  Two of us, one throne
+  Move, this whole house is my own
+  (Woof!)
+
+  [Verse 2 - Bam Bam]
+  BALL! Did somebody say ball?
+  I'm Bam Bam, I love everybody, that's all
+  Big soft mouth, fit your neck inside it
+  I'm not a threat, I'm just happy, can't hide it
+  Rain or shine, I'm answering the call
+  Wreckin' ball baby, bouncin' off the wall
+  Love every human, love every friend
+  Except Teddy (why?) nobody comprehend
+  Fluff Teddy, fluff Teddy
+  (Doja: ugh, focus)
+  Heard "ready set go" and forgot my own name
+  Stick me on repeat, I'll do it all again
+  (Woof!)
+
+  [Chorus]
+  Golden girl, don't test me
+  Run this whole house, you can't arrest me
+  Pretty and petty, I do what I want
+  Princess with the teeth, watch me flaunt
+  (Woof!)
+  Doja, Doja, run it
+  Bam Bam, Bam Bam, golden
+  Two of us, one throne
+  Move, this whole house is my own
+  (Woof!)
+
+  [Bridge]
+  Two sides of a golden, same heart underneath
+  She's the brains and the beauty, he's the chaos and teeth
+  One's a little gremlin, one's a slobber machine
+  Prettiest, dumbest, sweetest team you've seen
+  Doja! Bam Bam!
+  One girl, one boy
+  Same breed, different toy
+  (Woof!)
+
+  [Outro]
+  Doja the princess, Bam Bam the chunk
+  One holds it down, one's a golden drunk
+  Two goldens, one home, we got it all
+  Twenty twenty six, hear the golden call
+  Go get that treat!
+  Walk it on repeat!
+  (Woof! Woof!)
+  Ugh, I'm outside
+  Bye
+generation:
+  source_file: ACE_Step1.5_xl_turbo_00083_.mp3
+  source_sha256: 2e6ea81dd61e0ab1b4d57b178d724589d5c81df993933f85e73a3d5f2e28be6d
+  actual_audio_duration_seconds: 220.032
+  model_file: acestepv15xlturbobf16.safetensors
+  model_weight_dtype: default
+  vae_file: ace_1.5_vae.safetensors
+  clip_models:
+  - qwen_0.6b_ace15.safetensors
+  - qwen_4b_ace15.safetensors
+  clip_type: ace
+  clip_device: default
+  bpm: 105
+  time_signature: '4'
+  keyscale: G# major
+  language: en
+  duration_seconds: 220
+  batch_size: 1
+  seed: 870891597605343
+  text_conditioning:
+    generate_audio_codes: true
+    cfg_scale: 3.0
+    temperature: 0.95
+    top_p: 0.9
+    top_k: 0
+    min_p: 0.0
+  sampler:
+    steps: 8
+    cfg: 1.0
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+    model_shift: 3.0
+  audio_encoding:
+    format: mp3
+    quality: V0
+    encoder: Lavf62.3.100
+  comfyui:
+    workflow_id: 88ac5dad-efd7-40bb-84fe-fbaefdee1fa9
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.42.11
+    workflow_renderer_version: LG
+  caption_source: embedded_literal

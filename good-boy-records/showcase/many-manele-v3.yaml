@@ -1,0 +1,126 @@
+title: many-manele
+version: 3
+model: acestep 1.5 XL turbo BF16
+state: active
+genre: romanian folk
+inspiration: 50 Cent - Many Men
+duration: 500
+cover: many-manele-v3
+caption: |
+  Traditional Romanian Folk, taraf ensemble, cimbalom, violin, accordion, cobza, pan flute, village wedding music, lively folk dance, authentic Romanian musicians, acoustic recording, Balkan folk traditions, natural room acoustics, no electronic instruments
+lyrics: |
+  [Intro]
+  Mulți oameni vor să mă vadă căzut
+  Cu ochii pe mine, dar eu am trecut
+  Dumnezeu știe ce am în sufletul meu
+  Și cine-mi dorește răul mereu
+  [Chorus]
+  Many men
+  Many, many, many, many men
+  Wish death upon me
+  Doamne, nu mai plâng deloc
+  Nu mai caut cerul-n loc
+  Ai milă de mine
+  Many men
+  Many, many, many, many men
+  Wish death upon me
+
+  Ai milă de sufletul meu
+  Lumea m-a făcut mai greu
+  Wish death upon me
+
+  [Verse 1]
+
+  Vor să mă vadă la pământ, fără bani și fără nume
+  Dar când intru-n restaurant se întoarce toată lumea
+  Au pus vorbe, au pus invidie
+  Au vrut să-mi fure bucurie
+
+  Eu eram diamant ascuns
+  Sub noroi și sub apus
+  N-au crezut că voi ajunge
+  Unde astăzi am ajuns
+
+  Ridic paharul pentru viață
+  Pentru frații care-au stat
+  Când mulți mi-au dorit sfârșitul
+  Eu mai tare m-am ridicat
+
+  [Chorus]
+
+  Many men
+  Many, many, many, many men
+  Wish death upon me
+
+  Doamne, nu mai plâng deloc
+  Nu mai caut cerul-n loc
+  Ai milă de mine
+
+  Ai milă de sufletul meu
+  Inima s-a făcut greu
+  Ai milă de mine
+
+  Many men
+  Many, many, many, many men
+  Wish death upon me
+
+  [Bridge]
+
+  Toți vorbesc când urci prea sus
+  Toți dispar când e de dus
+  Dar eu merg pe drumul meu
+  Cu Dumnezeu
+
+  [Final Chorus]
+
+  Many men
+  Many, many, many, many men
+  Wish death upon me
+
+  Dar încă sunt aici
+  Încă respir și încă zic
+  Doamne, ai milă de mine
+generation:
+  source_file: ACE_Step1.5_xl_turbo_00047_.mp3
+  source_sha256: a925847ffd223bd2a516e1cfd12d9117b816bfea60b357db7f0e779376343bdb
+  actual_audio_duration_seconds: 500.04
+  model_file: acestepv15xlturbobf16.safetensors
+  model_weight_dtype: default
+  vae_file: ace_1.5_vae.safetensors
+  clip_models:
+  - qwen_0.6b_ace15.safetensors
+  - qwen_4b_ace15.safetensors
+  clip_type: ace
+  clip_device: default
+  bpm: 108
+  time_signature: '6'
+  keyscale: D minor
+  language: ro
+  duration_seconds: 500
+  batch_size: 1
+  seed: 49
+  text_conditioning:
+    generate_audio_codes: true
+    cfg_scale: 15.0
+    temperature: 0.79
+    top_p: 0.85
+    top_k: 1
+    min_p: 0.05
+  sampler:
+    steps: 8
+    cfg: 1.0
+    name: euler
+    scheduler: simple
+    denoise: 1.0
+    model_shift: 3.0
+  audio_encoding:
+    format: mp3
+    quality: V0
+    encoder: Lavf62.3.100
+  comfyui:
+    workflow_id: 88ac5dad-efd7-40bb-84fe-fbaefdee1fa9
+    workflow_revision: 0
+    workflow_version: 0.4
+    frontend_version: 1.42.11
+    workflow_renderer_version: LG
+  caption_source: embedded_literal

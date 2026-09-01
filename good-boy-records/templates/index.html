@@ -11,7 +11,7 @@
 <meta property="og:description" content="Every song here is about a dog. The machinery is needlessly serious.">
 <meta property="og:type" content="website">
 </head>
-<body class="home" data-format="cassette">
+<body class="home">
 <a class="skip" href="#shelf">Skip to the catalogue</a>
 
 <div class="topline">
@@ -47,19 +47,12 @@
           <h2 id="shelf-heading">The wall</h2>
         </div>
         <div class="hardware-controls">
-          <fieldset class="format-switch" aria-label="Playback format appearance">
-            <legend>FORMAT</legend>
-            <button type="button" data-format-choice="cassette" aria-pressed="true">TAPE</button>
-            <button type="button" data-format-choice="vinyl" aria-pressed="false">VINYL</button>
-          </fieldset>
           <label class="toggle" id="preview-field" hidden>
             <input type="checkbox" id="preview-toggle">
             <span>HOVER PREVIEW</span>
           </label>
         </div>
       </div>
-
-      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> versions stay together <span aria-hidden="true">/</span> player stays fixed above the wall</p>
 
       <div class="showcase-stage">
         <div class="cassette-shelves">
@@ -70,7 +63,6 @@
           <section class="deck" id="deck" data-state="idle" aria-labelledby="deck-title">
             <div class="machine-shell">
               <div class="machine-shell__topline">
-                <span>GBR FIXED MASTER TRANSPORT</span>
                 <span class="machine-shell__actions"><span class="machine-shell__serial">SER 0001</span><button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button></span>
               </div>
               <div class="wall-monitor">
@@ -150,7 +142,7 @@
 
 </main>
 
-<footer class="colophon"><div class="shell"><p>GOOD BOY RECORDS / {{YEAR}} / STATIC BY DESIGN / NO ACCOUNT REQUIRED / DOGS REMAIN UNIMPRESSED</p></div></footer>
+<footer class="colophon"><div class="shell"><p>GOOD BOY RECORDS</p></div></footer>
 
 <script type="application/json" id="catalogue-data">{{CATALOGUE_JSON}}</script>
 <script src="{{ROOT}}assets/js/player.js" defer></script>

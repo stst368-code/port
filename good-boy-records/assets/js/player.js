@@ -109,20 +109,6 @@
     return folder + name;
   }
 
-  /* ----------------------------------------------------------- appearance */
-  function setFormat(format) {
-    format = format === "vinyl" ? "vinyl" : "cassette";
-    document.body.dataset.format = format;
-    document.querySelectorAll("[data-format-choice]").forEach(function (button) {
-      button.setAttribute("aria-pressed", button.dataset.formatChoice === format ? "true" : "false");
-    });
-    remember("gbr:format", format);
-  }
-  document.querySelectorAll("[data-format-choice]").forEach(function (button) {
-    button.addEventListener("click", function () { setFormat(button.dataset.formatChoice); });
-  });
-  setFormat(recall("gbr:format") || "cassette");
-
   if (el.detailsLink && el.drawer) {
     el.detailsLink.addEventListener("click", function () {
       el.drawer.open = !el.drawer.open;
@@ -152,7 +138,6 @@
       line.title = "Seek to " + clock(cue.start);
       if (wordTimed && Array.isArray(cue.words) && cue.words.length) {
         cue.words.forEach(function (word, wordNumber) {
-          if (wordNumber) line.appendChild(document.createTextNode(" "));
           var span = document.createElement("span");
           span.className = "lyrics__word";
           span.textContent = word.text;

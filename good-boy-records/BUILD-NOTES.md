@@ -147,7 +147,7 @@ Missing or broken cover artwork no longer blocks deployment.
 - Spectrum, VU meters and interactive five-band EQ have substantially more vertical room.
 - Two-line centred live lyrics remain permanently visible.
 
-## v5.16 continuous cassette cycle
+## v5.17 continuous cassette cycle
 
 - Clicking any cassette arms continuous playback for the session.
 - When a track ends, the player randomly selects another playable cassette and starts it automatically.

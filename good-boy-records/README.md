@@ -232,6 +232,6 @@ The player/mixer is fixed across the top of the viewport as a warm black/brown/a
 - Spectrum, VU meters and interactive five-band EQ have substantially more vertical room.
 - Two-line centred live lyrics remain permanently visible.
 
-## v5.16 cassette cycle
+## v5.17 cassette cycle
 
 Selecting a cassette now arms continuous random playback. At the end of a track the player chooses another playable song (avoiding the current song where possible), latches that cassette in the wall, plays a short mechanical insert sound, and continues automatically.
