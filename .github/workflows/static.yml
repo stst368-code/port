@@ -20,10 +20,11 @@ jobs:
 
     defaults:
       run:
+        shell: bash
         working-directory: good-boy-records
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -31,23 +32,55 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install build dependencies
-        run: pip install -r requirements.txt
+      - name: Verify project and showcase
+        run: |
+          echo "Working directory: $(pwd)"
 
-      - name: Import showcase
+          if [ ! -f tools/import_showcase.py ]; then
+            echo "ERROR: expected good-boy-records/tools/import_showcase.py"
+            echo
+            echo "Repository structure:"
+            find "$GITHUB_WORKSPACE" -maxdepth 4 -type f | sort | head -400
+            exit 1
+          fi
+
+          echo
+          echo "Showcase files committed to this build:"
+          find showcase -maxdepth 2 -type f | sort
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "PyYAML>=6.0" "Pillow>=10.0"
+
+      - name: Clean generated output
+        run: |
+          rm -rf music _site
+
+      - name: Import curated showcase
         run: python tools/import_showcase.py
 
-      - name: Build artwork
+      - name: Prepare artwork
         run: python tools/prepare_artwork.py masters assets/img/sleeves
 
-      - name: Build catalogue and pages
+      - name: Build cassette player catalogue
         run: python tools/build_catalogue.py
 
       - name: Check internal links
         run: python tools/check_links.py
 
-      - name: Stage GitHub Pages site
-        run: python tools/stage_pages.py
+      - name: Stage GitHub Pages runtime
+        run: |
+          python tools/stage_pages.py
+
+          echo
+          echo "Published artifact contents:"
+          find _site -maxdepth 3 -type f | sort | head -400
+
+          if [ -d _site/music ]; then
+            echo "ERROR: legacy music/ directory reached the Pages artifact"
+            exit 1
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -66,6 +99,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
