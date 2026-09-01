@@ -1672,3 +1672,278 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
   .home .program-art.is-materializing .program-art__cover img,
   .home .program-art.is-materializing .program-art__cover::after{animation:none!important}
 }
+
+
+/* v5.22 — centred carousel with left title/art column, right meters/controls column. */
+.home .showcase-stage{
+  margin-top:.35rem;
+}
+.home .player-rail{
+  display:block;
+}
+.home .player-rail .deck{
+  background:transparent;
+  border:0;
+}
+.home .player-rail .machine-shell.machine-shell--carousel-layout{
+  display:grid !important;
+  grid-template-columns:minmax(220px,24rem) minmax(340px,1fr) minmax(240px,28rem);
+  grid-template-rows:auto minmax(520px,clamp(520px,58vw,760px)) auto auto auto;
+  grid-template-areas:
+    "top top top"
+    "left carousel right"
+    "lyrics lyrics lyrics"
+    "status status status"
+    "drawer drawer drawer";
+  gap:.85rem;
+  padding:.9rem;
+  border:1px solid #5a3316;
+  border-radius:9px;
+  background:
+    linear-gradient(180deg,rgba(105,54,13,.35),rgba(35,16,6,.15) 42px,transparent 42px),
+    radial-gradient(circle at 50% 0,rgba(255,146,29,.09),transparent 26rem),
+    linear-gradient(180deg,#090604,#040302 72%);
+  box-shadow:inset 0 0 34px #000,0 18px 48px rgba(0,0,0,.55);
+}
+.home .player-rail .machine-shell__topline{
+  grid-area:top;
+  margin:0;
+  padding:.35rem .45rem .65rem;
+  min-height:2rem;
+  border-bottom:1px solid #4d2d16;
+  color:#9e7450;
+  background:repeating-linear-gradient(90deg,rgba(255,149,25,.05) 0 1px,transparent 1px 22px);
+}
+.home .player-rail .machine-shell__serial{letter-spacing:.18em;color:#8e6847}
+.home .player-rail .machine-shell__actions{display:flex;gap:.42rem}
+.home .player-rail .machine-shell__actions .deck__details{padding:.3rem .55rem;border:1px solid #734620;background:linear-gradient(#261309,#100804);color:#d59749;border-radius:3px}
+.home .player-rail .machine-shell__actions .deck__details[aria-expanded="true"]{box-shadow:0 0 10px rgba(255,149,29,.16), inset 0 0 10px rgba(0,0,0,.7)}
+
+.home .player-rail .stage-left,
+.home .player-rail .stage-right{
+  min-height:0;
+}
+.home .player-rail .stage-left{
+  grid-area:left;
+  display:grid;
+  grid-template-rows:minmax(140px,.34fr) minmax(0,.66fr);
+  gap:.75rem;
+}
+.home .player-rail .stage-right{
+  grid-area:right;
+  display:grid;
+  grid-template-rows:30% 50% 20%;
+  gap:.75rem;
+}
+.home .player-rail .stage-card,
+.home .player-rail .transport-stack{
+  border:1px solid #4c2f1a;
+  border-radius:5px;
+  background:linear-gradient(180deg,#110c08,#050403);
+  box-shadow:inset 0 0 18px #000;
+  min-height:0;
+}
+.home .player-rail .transport-stack{
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+  padding:.45rem;
+  gap:.45rem;
+}
+.home .player-rail .program-panel{display:contents}
+.home .player-rail .wall-monitor{
+  min-width:0;
+  height:100%;
+  margin:0;
+  padding:.8rem .9rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.7rem;
+  overflow:hidden;
+}
+.home .player-rail .wall-monitor__lamp{flex:0 0 12px;width:12px;height:12px;margin-top:0}
+.home .player-rail .wall-monitor__copy{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;text-align:left}
+.home .player-rail .wall-monitor small{margin:0 0 .55rem;font-size:.58rem;color:#9d744e;letter-spacing:.16em}
+.home .player-rail .wall-monitor strong{
+  display:block;
+  margin:0;
+  font-size:clamp(1.8rem,2.4vw,3.35rem);
+  line-height:.92;
+  letter-spacing:-.035em;
+  color:#eadcc0;
+  overflow-wrap:anywhere;
+  text-wrap:balance;
+}
+.home .player-rail .wall-monitor .deck__catalogue{
+  margin:.6rem 0 0;
+  color:#bc8b57;
+  font-size:clamp(.62rem,.78vw,.8rem);
+  line-height:1.2;
+  text-align:left;
+}
+.home .player-rail .wall-monitor>.numitron{display:none!important}
+
+.home .player-rail .program-art{
+  display:grid;
+  grid-template-rows:minmax(0,1fr) 64px;
+  gap:.4rem;
+  height:100%;
+  min-width:0;
+  padding:.48rem;
+  place-items:stretch;
+  overflow:hidden;
+}
+.home .player-rail .program-art__cover{position:relative;min-height:0;border:1px solid #2b1b10;background:radial-gradient(circle at 50% 50%,rgba(255,147,24,.04),transparent 54%), #030302;overflow:hidden;display:grid;place-items:center}
+.home .player-rail .program-art__cover img{display:block;width:100%;height:100%;object-fit:contain;aspect-ratio:1/1;border:1px solid #72502b;box-shadow:0 0 18px rgba(255,141,20,.1)}
+.home .player-rail .program-art .cassette-bay{position:relative;width:100%;height:64px;overflow:hidden;border:1px solid #5b361d;border-radius:3px;background:linear-gradient(#080604,#15100b 72%,#080604);box-shadow:inset 0 0 16px #000}
+.home .player-rail .program-art .cassette-bay__slot{left:7%;right:7%;top:8px;height:7px}
+.home .player-rail .program-art .cassette-bay__tape{left:9%;right:9%;top:18px;height:36px;grid-template-columns:40px 1fr;gap:6px;padding:3px 6px;transform:translateY(42px)}
+.home .player-rail .program-art .cassette-bay__tape[data-loaded="true"]{transform:translateY(0)}
+.home .player-rail .program-art .cassette-bay__art{width:33px;height:26px}
+.home .player-rail .program-art .cassette-bay__tape b{font-size:.47rem}
+
+.home .player-rail .cassette-carousel-shell{
+  grid-area:carousel;
+  position:relative;
+  height:clamp(520px,58vw,760px);
+  max-width:none;
+  margin:0;
+  overflow:hidden;
+  border:1px solid #5a3317;
+  border-radius:8px;
+  background:radial-gradient(ellipse at 50% 42%,rgba(255,136,20,.08),transparent 36rem),linear-gradient(180deg,#0d0906,#050403);
+  box-shadow:inset 0 0 60px #000;
+}
+.home .player-rail .carousel-readout{display:none !important}
+.home .player-rail .carousel-step{z-index:35}
+
+.home .player-rail .meter-bank{
+  margin:0;
+  padding:.55rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.5rem;
+  align-self:stretch;
+}
+.home .player-rail .vu{height:100%;min-height:120px}
+.home .player-rail .vu__scale{inset:12px 12px 0}
+.home .player-rail .vu__needle{height:calc(100% - 22px)}
+
+.home .player-rail .spectrum-panel{
+  margin:0;
+  padding:.55rem;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+.home .player-rail .spectrum-panel__head{margin-bottom:.35rem;font-size:.54rem;color:#9c7247}
+.home .player-rail .spectrum{flex:1 1 auto;min-height:0}
+
+.home .player-rail .transport-panel{
+  margin:0;
+  padding:.4rem;
+  display:grid;
+  grid-template-columns:44px 44px 106px minmax(0,1fr);
+  gap:.4rem;
+  align-items:center;
+  border:1px solid #4c2f1a;
+  background:linear-gradient(180deg,#0f0a06,#060403);
+  min-height:0;
+}
+.home .player-rail .transport__button{width:44px;height:44px}
+.home .player-rail .clock-display{min-width:106px;padding:.45rem .55rem;font-size:.86rem}
+.home .player-rail .machine-footer{
+  margin:0;
+  padding:.18rem 0 0;
+  display:grid;
+  grid-template-columns:minmax(130px,1fr) auto auto;
+  gap:.55rem;
+  align-items:center;
+  background:transparent;
+  border:0;
+}
+.home .player-rail .volume{grid-template-columns:54px minmax(0,1fr)}
+.home .player-rail .volume span,
+.home .player-rail .quality span,
+.home .player-rail .machine-lamp{font-size:.58rem}
+
+.home .player-rail .lyrics--fixed{
+  grid-area:lyrics;
+  height:auto;
+  min-height:142px;
+  padding:.35rem .55rem;
+  border:1px solid #59371e;
+  border-radius:5px;
+  background:linear-gradient(180deg,#0d0806,#050302);
+}
+.home .player-rail .lyrics--fixed .lyrics__scroll{height:8.3rem;padding:.2rem 2.9rem}
+.home .player-rail .lyrics--fixed .lyrics__list li,
+.home .player-rail .lyrics--fixed .lyrics__list li.lyrics__raw{min-height:3.25rem;font-size:clamp(1.35rem,1.95vw,2rem);text-align:center}
+.home .player-rail .lyrics--fixed .lyrics__list li.lyrics__direction{text-align:center}
+.home .player-rail .lyrics__return{margin-top:.35rem;margin-left:auto;display:block}
+
+.home .player-rail .deck__status{grid-area:status;margin:0;padding:0 .2rem;color:#7f6549}
+.home .player-rail .player-drawer{grid-area:drawer;margin:0}
+.home .player-rail #showcase-player{display:none}
+
+@media (max-width:1200px){
+  .home .player-rail .machine-shell.machine-shell--carousel-layout{
+    grid-template-columns:minmax(180px,20rem) minmax(300px,1fr) minmax(220px,22rem);
+    gap:.7rem;
+  }
+  .home .player-rail .wall-monitor strong{font-size:clamp(1.45rem,3.1vw,2.55rem)}
+  .home .player-rail .cassette-carousel-shell{height:clamp(460px,60vw,650px)}
+}
+@media (max-width:980px){
+  .home .player-rail .machine-shell.machine-shell--carousel-layout{
+    grid-template-columns:minmax(0,1fr) minmax(260px,1.1fr);
+    grid-template-rows:auto auto auto auto auto auto;
+    grid-template-areas:
+      "top top"
+      "left carousel"
+      "right right"
+      "lyrics lyrics"
+      "status status"
+      "drawer drawer";
+  }
+  .home .player-rail .stage-left{grid-template-rows:auto minmax(210px,1fr)}
+  .home .player-rail .stage-right{grid-template-rows:170px 250px auto}
+  .home .player-rail .transport-panel{grid-template-columns:42px 42px 96px minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .home .player-rail .machine-shell.machine-shell--carousel-layout{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto auto auto auto auto auto auto;
+    grid-template-areas:
+      "top"
+      "left"
+      "carousel"
+      "right"
+      "lyrics"
+      "status"
+      "drawer";
+    padding:.55rem;
+    gap:.55rem;
+  }
+  .home .player-rail .machine-shell__topline{padding:.22rem .22rem .42rem}
+  .home .player-rail .machine-shell__serial{font-size:.46rem}
+  .home .player-rail .stage-left{grid-template-rows:auto minmax(220px,1fr)}
+  .home .player-rail .stage-right{grid-template-rows:140px 210px auto}
+  .home .player-rail .wall-monitor{padding:.6rem}
+  .home .player-rail .wall-monitor strong{font-size:clamp(1.45rem,7vw,2.25rem)}
+  .home .player-rail .program-art{grid-template-rows:minmax(0,1fr) 54px;padding:.35rem}
+  .home .player-rail .program-art .cassette-bay{height:54px}
+  .home .player-rail .program-art .cassette-bay__tape{top:15px;height:31px;grid-template-columns:33px 1fr}
+  .home .player-rail .cassette-carousel-shell{height:420px}
+  .home .player-rail .meter-bank{padding:.35rem;gap:.35rem}
+  .home .player-rail .vu{min-height:110px}
+  .home .player-rail .transport-stack{padding:.32rem}
+  .home .player-rail .transport-panel{grid-template-columns:38px 38px 88px minmax(0,1fr);padding:.3rem;gap:.28rem}
+  .home .player-rail .transport__button{width:38px;height:38px}
+  .home .player-rail .clock-display{min-width:88px;padding:.32rem .4rem;font-size:.74rem}
+  .home .player-rail .machine-footer{grid-template-columns:minmax(0,1fr) auto;gap:.4rem}
+  .home .player-rail .machine-lamp{display:none}
+  .home .player-rail .lyrics--fixed .lyrics__scroll{height:7rem;padding:.1rem 1.8rem}
+  .home .player-rail .lyrics--fixed .lyrics__list li,
+  .home .player-rail .lyrics--fixed .lyrics__list li.lyrics__raw{font-size:clamp(1.05rem,5vw,1.35rem);min-height:2.55rem}
+}
