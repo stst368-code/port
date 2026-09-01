@@ -217,3 +217,8 @@ The documentation build does not require the `markdown` or `mistune` Python pack
 ## Missing artwork fallback
 
 Artwork is no longer deployment-critical. If a YAML references a cover that is not present (or a cover cannot be processed), the build uses a built-in `gbr-placeholder` cassette sleeve and continues publishing the rest of the showcase. The console still warns so the real art can be corrected later.
+
+
+## v5.12 layout
+
+The player/mixer is fixed across the top of the viewport. The cassette catalogue scrolls underneath it in full-width genre sections. Each song has one row title and all selected versions remain adjacent in that row with compact V1/V2/V3 markers.

@@ -510,12 +510,12 @@ def shelf_card(track: dict[str, Any], index: int) -> str:
 
 
 def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
-    """Render genre sections around the fixed centre player.
+    """Render genre shelves as full-width horizontal song rows.
 
-    Each composition is one vertical stack with a single shared title. Versions
-    travel downward within that stack and carry only a small V1/V2/V3 marker to
-    the cassette's left. Whole song stacks are balanced between the left and
-    right wall lanes without breaking a song across the centre player.
+    Genre remains the outer grouping. Each song/composition gets one shared
+    title and all deliberately selected versions sit beside one another in the
+    same row. Each cassette retains its small V1/V2/V3 marker immediately to
+    the left of the shell.
     """
     genres: dict[str, dict[str, list[dict[str, Any]]]] = {}
     genre_labels: dict[str, str] = {}
@@ -533,30 +533,33 @@ def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
         compositions = genres[genre_key]
         tape_count = sum(len(items) for items in compositions.values())
         song_count = len(compositions)
-        lanes: list[list[str]] = [[], []]
-        lane_weights = [0, 0]
+        rows: list[str] = []
 
-        # Longest stacks first gives a much better balance when a genre has one
-        # song with many versions and several one-offs.
         ordered = sorted(
             compositions.items(),
-            key=lambda pair: (-len(pair[1]), str(pair[0]).casefold()),
+            key=lambda pair: str(pair[1][0].get("title") or pair[0]).casefold(),
         )
         for composition, items in ordered:
+            # Keep song versions deterministic and adjacent.
+            def version_sort(track: dict[str, Any]):
+                value = (track.get("provenance") or {}).get("songVersion")
+                try:
+                    return (0, float(value))
+                except (TypeError, ValueError):
+                    return (1, str(track.get("versionLabel") or track.get("id") or "").casefold())
+
+            items = sorted(items, key=version_sort)
             cards = []
             for track in items:
                 cards.append(shelf_card(track, card_index))
                 card_index += 1
             title = items[0].get("title") or composition
             label = f"{title}, {len(items)} version" + ("s" if len(items) != 1 else "")
-            run = (
-                f'<article class="composition-stack" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
-                f'<h4 class="composition-stack__title">{esc(title)}</h4>'
-                f'<ul class="composition-stack__tapes">{"".join(cards)}</ul></article>'
+            rows.append(
+                f'<article class="composition-row" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
+                f'<h4 class="composition-row__title">{esc(title)}</h4>'
+                f'<ul class="composition-row__tapes">{"".join(cards)}</ul></article>'
             )
-            lane = 0 if lane_weights[0] <= lane_weights[1] else 1
-            lanes[lane].append(run)
-            lane_weights[lane] += max(2, len(items))
 
         chunks.append(
             '<section class="genre-cluster" data-genre="' + esc(genre_labels[genre_key]) + '">'
@@ -564,11 +567,7 @@ def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
             '<h3>' + esc(genre_labels[genre_key]) + '</h3>'
             '<span>' + str(tape_count) + ' tape' + ('s' if tape_count != 1 else '') + ' / ' + str(song_count) + ' song' + ('s' if song_count != 1 else '') + '</span>'
             '</header>'
-            '<div class="genre-wall">'
-            '<div class="genre-lane genre-lane--left">' + ''.join(lanes[0]) + '</div>'
-            '<div class="genre-wall__player-gap" aria-hidden="true"></div>'
-            '<div class="genre-lane genre-lane--right">' + ''.join(lanes[1]) + '</div>'
-            '</div>'
+            '<div class="genre-wall">' + ''.join(rows) + '</div>'
             '</section>'
         )
     return "\n".join(chunks)

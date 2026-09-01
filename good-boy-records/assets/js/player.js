@@ -540,25 +540,11 @@
 
   /* ------------------------------------------------------ viewport player */
   function initViewportPlayer() {
-    if (!el.playerRail || !el.stage) return;
-    var desktop = window.matchMedia("(min-width:1121px)");
-
-    function setVisible(visible) {
-      el.playerRail.dataset.visible = visible ? "true" : "false";
-    }
-    function configure() {
-      if (!desktop.matches) { setVisible(true); return; }
-      if (!("IntersectionObserver" in window)) { setVisible(true); return; }
-      if (el.playerRail._gbrObserver) el.playerRail._gbrObserver.disconnect();
-      var observer = new IntersectionObserver(function (entries) {
-        setVisible(entries.some(function (entry) { return entry.isIntersecting; }));
-      }, { root:null, threshold:0, rootMargin:"-52px 0px 0px 0px" });
-      observer.observe(el.stage);
-      el.playerRail._gbrObserver = observer;
-    }
-    configure();
-    if (desktop.addEventListener) desktop.addEventListener("change", configure);
-    else if (desktop.addListener) desktop.addListener(configure);
+    if (!el.playerRail) return;
+    /* v5.12: the transport is the stationary reference frame. It is visible
+       from page load and remains fixed at the top while only the document wall
+       scrolls underneath it. */
+    el.playerRail.dataset.visible = "true";
   }
 
   /* ------------------------------------------------------------- controls */

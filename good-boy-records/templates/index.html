@@ -11,7 +11,7 @@
 <meta property="og:description" content="Every song here is about a dog. The machinery is needlessly serious.">
 <meta property="og:type" content="website">
 </head>
-<body data-format="cassette">
+<body class="home" data-format="cassette">
 <a class="skip" href="#shelf">Skip to the catalogue</a>
 
 <div class="topline">
@@ -28,7 +28,7 @@
     <div>
       <p class="eyebrow">Private listening room / public evidence locker</p>
       <h1>Music made by machines.<br><em>Mostly about dogs.</em></h1>
-      <p class="masthead__lede">Songs rise in vertical version stacks around a central transport. Scroll the wall past a transport that is physically fixed to the centre of the viewport; click any cassette and that exact tape latches and glows where it lives.</p>
+      <p class="masthead__lede">The transport and mixer stay fixed across the top while the cassette wall scrolls underneath. Songs are arranged in rows, with every version kept beside its siblings.</p>
     </div>
     <div class="hero-console" aria-hidden="true">
       <div class="hero-console__vents"></div>
@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> songs stack vertically by version <span aria-hidden="true">/</span> player is viewport-mounted</p>
+      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> versions stay together in song rows <span aria-hidden="true">/</span> player is fixed above the wall</p>
 
       <div class="showcase-stage">
         <div class="genre-shelves">
@@ -70,15 +70,15 @@
           <section class="deck" id="deck" data-state="idle" aria-labelledby="deck-title">
             <div class="deck__header">
               <div>
-                <p class="eyebrow">Central transport / now playing</p>
+                <p class="eyebrow">Fixed transport / now playing</p>
                 <h2 class="deck__title" id="deck-title">NO TAPE SELECTED</h2>
-                <p class="deck__catalogue" id="deck-catalogue">Select a cassette from either wall</p>
+                <p class="deck__catalogue" id="deck-catalogue">Select a cassette from the wall</p>
               </div>
               <button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Lyrics + technical</button>
             </div>
 
             <div class="machine-shell">
-              <div class="machine-shell__topline"><span>GBR CENTRAL TRANSPORT</span><span class="machine-shell__serial">SER 0001</span></div>
+              <div class="machine-shell__topline"><span>GBR FIXED MASTER TRANSPORT</span><span class="machine-shell__serial">SER 0001</span></div>
               <div class="wall-monitor" aria-hidden="true">
                 <span class="wall-monitor__lamp"></span>
                 <div><small>ACTIVE CHANNEL</small><strong id="wall-monitor-title">NO TAPE LATCHED</strong></div>
