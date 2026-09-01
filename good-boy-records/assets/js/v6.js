@@ -63,6 +63,13 @@
   function indexForTrack(track){if(!track)return-1;for(var i=0;i<cards.length;i++)if(cards[i].dataset.track===track.id)return i;return-1;}
   function renderCarousel(ms){
     if(!cards.length)return;
+    if(el.carousel){
+      var rect=el.carousel.getBoundingClientRect(),d=Math.max(1,Math.min(rect.width,rect.height));
+      var orbit=Math.max(90,d*.385);
+      var cardSize=Math.max(48,Math.min(118,d*.145));
+      el.carousel.style.setProperty("--orbit-px",orbit.toFixed(1)+"px");
+      el.carousel.style.setProperty("--card-size",cardSize.toFixed(1)+"px");
+    }
     cards.forEach(function(card,i){var a=i*step+rotation,near=normalizedAngle(a),distance=Math.abs(near)/180;card.style.setProperty("--angle",a+"deg");card.style.setProperty("--scale",String(1-distance*.18));card.style.setProperty("--opacity",String(.46+(1-distance)*.54));card.style.setProperty("--spin-ms",Math.max(0,ms||0)+"ms");card.style.setProperty("--z",String(1000-Math.round(Math.abs(near)*3)));card.dataset.pickup=Math.abs(near)<=step*.48?"true":"false";});
     currentIndex=nearestIndex();
   }
