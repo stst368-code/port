@@ -491,7 +491,9 @@ def version_badge(track: dict[str, Any]) -> str:
 
 def shelf_card(track: dict[str, Any], index: int) -> str:
     title = esc(track["title"])
-    picture = sleeve_picture(track, "", "(max-width: 40rem) 76vw, (max-width: 70rem) 38vw, 18rem", lazy=index > 5)
+    # A cassette label is never more than ~210px wide, so the old page-width
+    # sizes hint made every tape pull the 1280w sleeve.
+    picture = sleeve_picture(track, "", "(max-width: 860px) 110px, 210px", lazy=index > 7)
     composition = esc(track.get("composition") or track["id"])
     badge = esc(version_badge(track))
 

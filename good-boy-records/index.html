@@ -1,97 +1,127 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-magazine="wheel">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <title>Good Boy Records</title>
 <meta name="description" content="Good Boy Records cassette player">
-<link rel="stylesheet" href="assets/css/v6.css">
+<link rel="stylesheet" href="assets/css/v7.css">
 </head>
 <body>
 <main class="gbr-app">
   <header class="gbr-topbar">
     <span class="gbr-brand">GOOD BOY RECORDS</span>
     <div class="gbr-top-actions">
-      <span class="gbr-status" id="gbr-status">READY</span>
+      <span class="gbr-status" id="gbr-status" role="status">Ready</span>
       <button class="gbr-top-button" id="gbr-eq-toggle" type="button" aria-expanded="false" aria-controls="gbr-eq-popover">EQ</button>
       <button class="gbr-top-button" id="gbr-tech-toggle" type="button" aria-expanded="false" aria-controls="gbr-tech-panel">TECH</button>
     </div>
   </header>
 
-  <section class="gbr-machine" aria-label="Good Boy Records player">
-    <div class="gbr-carousel-viewport" aria-label="Cassette carousel">
-      <div class="gbr-carousel" id="gbr-carousel" tabindex="0" role="region" aria-label="Rotary cassette carousel">
-        <div class="gbr-carousel-ring" aria-hidden="true"></div>
-        <div class="gbr-carousel-hub" aria-hidden="true"></div>
-        <div class="gbr-carousel-cards" id="gbr-carousel-cards">
+  <div class="gbr-machine">
+
+    <section class="gbr-magazine" id="gbr-magazine" aria-label="Cassette magazine">
+      <div class="gbr-wheel" id="gbr-wheel" aria-hidden="true"></div>
+      <div class="gbr-wheel-hub" id="gbr-wheel-hub" aria-hidden="true"></div>
+
+      <div class="gbr-cards" id="gbr-cards" tabindex="0" role="group" aria-label="Cassettes">
 <div class="track-wall"></div>
-        </div>
       </div>
-      <button class="gbr-wheel-step gbr-wheel-step--up" type="button" id="gbr-prev" aria-label="Previous cassette">▲</button>
-      <button class="gbr-wheel-step gbr-wheel-step--down" type="button" id="gbr-next" aria-label="Next cassette">▼</button>
-    </div>
+
+      <p class="gbr-magazine-empty">
+        Nothing in the magazine yet.
+        <code>python tools/build_catalogue.py</code>
+      </p>
+
+      <div class="gbr-steps">
+        <button class="gbr-step" type="button" id="gbr-prev" aria-label="Previous cassette">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 6 4 18h16z"/></svg>
+        </button>
+        <button class="gbr-step" type="button" id="gbr-next" aria-label="Next cassette">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 18 4 6h16z"/></svg>
+        </button>
+      </div>
+    </section>
 
     <div class="gbr-rack">
-      <section class="gbr-module gbr-spectrum-module" aria-label="Audio spectrum">
-        <div class="gbr-module-label"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
-        <div class="gbr-spectrum" id="gbr-spectrum" aria-hidden="true"></div>
+
+      <section class="gbr-module gbr-meters" aria-label="Output metering">
+        <div class="gbr-module-label"><span>PROGRAM LEVEL</span><span>POST EQ</span></div>
+        <div class="gbr-meter-bank">
+          <canvas class="gbr-vu" id="gbr-vu" aria-hidden="true"></canvas>
+          <canvas class="gbr-spectrum" id="gbr-spectrum" aria-hidden="true"></canvas>
+        </div>
       </section>
 
-      <section class="gbr-module gbr-art-module" aria-label="Current artwork">
+      <section class="gbr-module gbr-deck" aria-label="Loaded cassette">
         <div class="gbr-art-frame" id="gbr-art-frame">
-          <img id="gbr-artwork" src="assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current album artwork">
+          <img id="gbr-artwork" src="assets/img/sleeves/gbr-placeholder-640.jpg" alt="" width="640" height="640">
           <div class="gbr-tape-slot" id="gbr-tape-slot" aria-hidden="true"><span></span></div>
         </div>
+        <div class="gbr-plate">
+          <h1 class="gbr-plate-title" id="gbr-title">No cassette latched</h1>
+          <p class="gbr-plate-sub" id="gbr-subtitle" hidden></p>
+          <ul class="gbr-plate-meta" id="gbr-meta"></ul>
+        </div>
       </section>
 
-      <section class="gbr-module gbr-controls" aria-label="Playback controls">
-        <div class="gbr-control-row">
-          <button type="button" class="gbr-control" id="gbr-shuffle" aria-label="Shuffle play" aria-pressed="true" title="Shuffle play">⤨</button>
-          <button type="button" class="gbr-control" id="gbr-back" aria-label="Previous cassette" title="Previous cassette">◀</button>
-          <button type="button" class="gbr-control gbr-control--main" id="gbr-play" aria-label="Play or pause">▶</button>
-          <button type="button" class="gbr-control" id="gbr-skip" aria-label="Next cassette" title="Next cassette">▶</button>
+      <section class="gbr-module gbr-transport" aria-label="Transport">
+        <div class="gbr-transport-row">
+          <button type="button" class="gbr-control" id="gbr-shuffle" aria-label="Shuffle" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 4l4 3.2-4 3.2V8.4h-2.3l-2.2 3-1.4-1.9L13.6 6H17V4zM3 6h4.1l6.5 8.4H17V12l4 3.2-4 3.2v-2.4h-4.4L6.1 7.6H3V6zm0 10.4h3.1l1.9-2.5 1.4 1.9-2.4 3.1H3v-2.5z"/></svg>
+          </button>
+          <button type="button" class="gbr-control" id="gbr-back" aria-label="Previous track">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 6h2.2v12H7zm12.5 0v12l-9-6z"/></svg>
+          </button>
+          <button type="button" class="gbr-control gbr-control--main" id="gbr-play" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button type="button" class="gbr-control" id="gbr-skip" aria-label="Next track">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.8 6H17v12h-2.2zM4.5 6v12l9-6z"/></svg>
+          </button>
         </div>
-        <div class="gbr-progress-row">
+        <div class="gbr-scrub-row">
+          <input id="gbr-progress" type="range" min="0" max="0" value="0" step="0.1" aria-label="Seek">
           <span class="gbr-clock"><span id="gbr-time">0:00</span><b>/</b><span id="gbr-total">--:--</span></span>
-          <input id="gbr-progress" type="range" min="0" max="0" value="0" step="0.1" aria-label="Track progress">
         </div>
-        <div class="gbr-volume-row">
+        <div class="gbr-output-row">
           <span>OUTPUT</span>
           <input id="gbr-volume" type="range" min="0" max="1" value="0.9" step="0.01" aria-label="Volume">
           <label class="gbr-lossless" id="gbr-lossless-wrap"><input id="gbr-lossless" type="checkbox"><span>LOSSLESS</span></label>
         </div>
       </section>
 
-      <section class="gbr-module gbr-lyrics" id="gbr-lyrics" aria-label="Current lyric">
-        <div class="gbr-lyric-word" id="gbr-lyric-word">READY</div>
+      <section class="gbr-module gbr-lyrics" aria-label="Lyric">
+        <div class="gbr-lyric-word" id="gbr-lyric-word">Ready</div>
         <div class="gbr-lyric-line" id="gbr-lyric-line"></div>
       </section>
+
     </div>
-  </section>
+  </div>
 
   <div class="gbr-popover" id="gbr-eq-popover" hidden>
-    <section class="gbr-popup-card" role="dialog" aria-modal="false" aria-label="Five band equalizer">
-      <div class="gbr-popup-head"><strong>5-BAND PROGRAM EQ</strong><button type="button" id="gbr-eq-close" aria-label="Close equalizer">×</button></div>
+    <section class="gbr-popup-card" role="dialog" aria-modal="false" aria-label="Five band equaliser">
+      <div class="gbr-popup-head"><strong>5-BAND PROGRAM EQ</strong><button type="button" id="gbr-eq-close" aria-label="Close equaliser">×</button></div>
       <div class="gbr-eq-bands">
-        <label><output>0 dB</output><input data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0"><span>60</span></label>
-        <label><output>0 dB</output><input data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0"><span>250</span></label>
-        <label><output>0 dB</output><input data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0"><span>1K</span></label>
-        <label><output>0 dB</output><input data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0"><span>4K</span></label>
-        <label><output>0 dB</output><input data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0"><span>12K</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0" aria-label="60 hertz"><span>60</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0" aria-label="250 hertz"><span>250</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0" aria-label="1 kilohertz"><span>1K</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0" aria-label="4 kilohertz"><span>4K</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0" aria-label="12 kilohertz"><span>12K</span></label>
       </div>
-      <div class="gbr-popup-foot"><button type="button" id="gbr-eq-flat">FLAT</button><span id="gbr-eq-note">EQ is applied live over HTTP.</span></div>
+      <div class="gbr-popup-foot"><button type="button" id="gbr-eq-flat">FLAT</button><span id="gbr-eq-note">Applied live to the deck output.</span></div>
     </section>
   </div>
 
-  <aside class="gbr-tech-panel" id="gbr-tech-panel" hidden aria-label="Track technical details">
+  <aside class="gbr-tech-panel" id="gbr-tech-panel" hidden aria-label="Technical details">
     <div class="gbr-popup-head"><strong>TECHNICAL</strong><button type="button" id="gbr-tech-close" aria-label="Close technical details">×</button></div>
-    <div id="gbr-tech-content" class="gbr-tech-content"><p>No cassette loaded.</p></div>
+    <div id="gbr-tech-content" class="gbr-tech-content"><p>No cassette latched.</p></div>
   </aside>
 
   <audio id="gbr-audio" preload="metadata"></audio>
 </main>
 <script id="catalogue-data" type="application/json">[]</script>
-<script src="assets/js/v6.js" defer></script>
+<script src="assets/js/v7.js" defer></script>
 </body>
 </html>
