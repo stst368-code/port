@@ -220,6 +220,18 @@ The documentation build does not require the `markdown` or `mistune` Python pack
 Artwork is no longer deployment-critical. If a YAML references a cover that is not present (or a cover cannot be processed), the build uses a built-in `gbr-placeholder` cassette sleeve and continues publishing the rest of the showcase. The console still warns so the real art can be corrected later.
 
 
-## v5.14 layout
+## v5.15 layout
 
 The player/mixer is fixed across the top of the viewport as a warm black/brown/amber hi-fi rack. The cassette catalogue scrolls underneath as one continuous wall. Each song is one compact group and all selected versions remain adjacent with V1/V2/V3 markers; complete groups wrap together to fill each row.
+
+## v5.15 player-first pass
+
+- Homepage is player + cassette wall only; narrative sections are not built or staged.
+- Removed the duplicate pre-player now-playing header and the inspiration readout.
+- Fixed hi-fi rack is ~560px tall on desktop, with a much larger active-track display.
+- Spectrum, VU meters and interactive five-band EQ have substantially more vertical room.
+- Two-line centred live lyrics remain permanently visible.
+
+## v5.16 cassette cycle
+
+Selecting a cassette now arms continuous random playback. At the end of a track the player chooses another playable song (avoiding the current song where possible), latches that cassette in the wall, plays a short mechanical insert sound, and continues automatically.

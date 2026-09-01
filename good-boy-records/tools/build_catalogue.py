@@ -563,14 +563,27 @@ def build(strict: bool) -> int:
     if LEGACY_MUSIC_DIR.exists():
         shutil.rmtree(LEGACY_MUSIC_DIR)
 
+    # v5.15 is deliberately player-only. Remove previously generated narrative
+    # sections so old Journey/Experiments pages cannot survive in the site.
+    # `tools/` is real build tooling as well as an old documentation section,
+    # so it is deliberately never deleted here.
+    docs_root = ROOT / "content-source" / "docs"
+    protected = {"tools"}
+    if docs_root.exists():
+        for section in docs_root.iterdir():
+            if section.is_dir() and section.name not in protected:
+                generated = ROOT / section.name
+                if generated.exists() and generated.is_dir():
+                    shutil.rmtree(generated)
+
     report = Report()
     print("Reading content sources")
     tracks = load_tracks(report)
     if report.errors:
         return report.summarise(strict)
 
-    sections = build_docs.discover(report)
-    nav_root = build_docs.nav_html(sections, "")
+    sections = []
+    nav_root = ""
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     LYRIC_OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -647,14 +660,14 @@ def build(strict: bool) -> int:
         encoding="utf-8",
     )
 
-    doc_pages = build_docs.build(sections, render, report)
+    doc_pages = 0
 
     catalogue_bytes = (DATA_DIR / "catalogue.json").stat().st_size
     index_bytes = (ROOT / "index.html").stat().st_size
     print(f"Built {len(tracks)} tracks")
     print(f"  index.html      {index_bytes / 1024:.0f} KB (catalogue embedded, no runtime fetch)")
     print(f"  catalogue.json  {catalogue_bytes / 1024:.0f} KB")
-    print(f"  note pages      {doc_pages} across {len(sections)} sections")
+    print(f"  note pages      {doc_pages} (player-only homepage)")
 
     if index_bytes > 250 * 1024:
         report.warn(

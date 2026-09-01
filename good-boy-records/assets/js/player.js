@@ -39,6 +39,7 @@
   var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var audioContext = null, mediaSource = null, analyser = null, analyserData = null, frequencyData = null, vuFrame = null;
+  var fxContext = null, cycleArmed = false, cycleInProgress = false;
   var spectrumBars = [], spectrumLevels = [];
   var spectrumBandCount = 18, spectrumSegmentCount = 10;
   var eqFilters = [], eqHeadroom = null;
@@ -477,6 +478,81 @@
     clearSpectrum();
   }
 
+  /* A tiny synthesized transport sound keeps the site self-contained while
+     still giving the wall a physical action: plastic click, low deck thunk,
+     then a short latch tick. The context is created on the first cassette
+     gesture and stays unlocked for automatic tape changes afterwards. */
+  function playCassetteInsertSound() {
+    if (!(window.AudioContext || window.webkitAudioContext)) return;
+    try {
+      if (!fxContext) fxContext = new (window.AudioContext || window.webkitAudioContext)();
+      if (fxContext.state === "suspended") fxContext.resume().catch(function () {});
+      var now = fxContext.currentTime;
+      var master = fxContext.createGain();
+      master.gain.setValueAtTime(.0001, now);
+      master.gain.exponentialRampToValueAtTime(.19, now + .004);
+      master.gain.exponentialRampToValueAtTime(.0001, now + .19);
+      master.connect(fxContext.destination);
+
+      var thunk = fxContext.createOscillator();
+      var thunkGain = fxContext.createGain();
+      thunk.type = "sine";
+      thunk.frequency.setValueAtTime(132, now);
+      thunk.frequency.exponentialRampToValueAtTime(78, now + .095);
+      thunkGain.gain.setValueAtTime(.0001, now);
+      thunkGain.gain.exponentialRampToValueAtTime(.78, now + .006);
+      thunkGain.gain.exponentialRampToValueAtTime(.0001, now + .12);
+      thunk.connect(thunkGain); thunkGain.connect(master);
+      thunk.start(now); thunk.stop(now + .13);
+
+      var click = fxContext.createOscillator();
+      var clickGain = fxContext.createGain();
+      click.type = "square";
+      click.frequency.setValueAtTime(1780, now);
+      click.frequency.exponentialRampToValueAtTime(760, now + .026);
+      clickGain.gain.setValueAtTime(.5, now);
+      clickGain.gain.exponentialRampToValueAtTime(.0001, now + .035);
+      click.connect(clickGain); clickGain.connect(master);
+      click.start(now); click.stop(now + .04);
+
+      var latch = fxContext.createOscillator();
+      var latchGain = fxContext.createGain();
+      latch.type = "triangle";
+      latch.frequency.setValueAtTime(2450, now + .082);
+      latch.frequency.exponentialRampToValueAtTime(1250, now + .12);
+      latchGain.gain.setValueAtTime(.0001, now);
+      latchGain.gain.setValueAtTime(.0001, now + .078);
+      latchGain.gain.exponentialRampToValueAtTime(.36, now + .085);
+      latchGain.gain.exponentialRampToValueAtTime(.0001, now + .13);
+      latch.connect(latchGain); latchGain.connect(master);
+      latch.start(now + .078); latch.stop(now + .14);
+    } catch (_) {}
+  }
+
+  function playableTracks() {
+    return catalogue.filter(function (track) {
+      return track && track.audio && track.audio.available !== false && !!chooseSource(track);
+    });
+  }
+  function randomNextTrack() {
+    var pool = playableTracks();
+    if (!pool.length) return null;
+    if (current && pool.length > 1) {
+      var differentSong = pool.filter(function (track) { return track.id !== current.id && track.title !== current.title; });
+      pool = differentSong.length ? differentSong : pool.filter(function (track) { return track.id !== current.id; });
+    }
+    return pool[Math.floor(Math.random() * pool.length)] || null;
+  }
+  function cycleToRandomTrack() {
+    if (!cycleArmed || cycleInProgress) return false;
+    var next = randomNextTrack();
+    if (!next) return false;
+    cycleInProgress = true;
+    select(next, true, true);
+    cycleInProgress = false;
+    return true;
+  }
+
 
   /* --------------------------------------------------------------- select */
   function hasLossless(track) { return !!(track.audio && track.audio.sources && (track.audio.sources.flac || track.audio.sources.lossless)); }
@@ -595,13 +671,16 @@
     if (!shouldPlay) { setState("paused"); say("Ready"); return; }
     setState("loading"); say("Loading"); beginPlayback();
   }
-  function select(track, shouldPlay) { stopPreview(); dress(track); loadCurrentSource(shouldPlay); }
+  function select(track, shouldPlay, withInsertSound) { stopPreview(); dress(track); if (withInsertSound) playCassetteInsertSound(); loadCurrentSource(shouldPlay); }
 
   /* --------------------------------------------------------- audio events */
   audio.addEventListener("playing", function () { setState("playing"); say("Playing"); audioUnlocked = true; revealPreviewToggle(); resumeAnalyser(); startMeters(); startLyricClock(); });
   audio.addEventListener("pause", function () { if (!audio.ended) { setState("paused"); say("Paused"); } restMeters(); stopLyricClock(); highlight(audio.currentTime || 0); });
   audio.addEventListener("waiting", function () { setState("buffering"); say("Buffering"); });
-  audio.addEventListener("ended", function () { setState("ended"); say("End of side"); setFollowing(true); restMeters(); stopLyricClock(); highlight(audio.currentTime || 0); });
+  audio.addEventListener("ended", function () {
+    setState("ended"); say("End of side"); setFollowing(true); restMeters(); stopLyricClock(); highlight(audio.currentTime || 0);
+    if (cycleArmed && cycleToRandomTrack()) say("Changing tape");
+  });
   audio.addEventListener("error", function () { setState("error"); say("That file would not load", "alert"); restMeters(); stopLyricClock(); });
   audio.addEventListener("loadedmetadata", function () { if (isFinite(audio.duration) && audio.duration > 0) { el.scrub.max = audio.duration; el.total.textContent = clock(audio.duration); } });
   audio.addEventListener("timeupdate", function () { if (!scrubbing) { el.scrub.value = audio.currentTime; el.elapsed.textContent = clock(audio.currentTime); } highlight(audio.currentTime); });
@@ -667,12 +746,13 @@
   document.querySelectorAll("[data-play]").forEach(function (button) {
     var track = byId[button.dataset.play]; if (!track) return;
     button.addEventListener("click", function () {
+      cycleArmed = true;
       if (current && current.id === track.id) {
         if (audio.paused) beginPlayback();
         else audio.pause();
         return;
       }
-      select(track, true);
+      select(track, true, true);
     });
     var card = button.closest(".card");
     if (card && canHover) { card.addEventListener("mouseenter", function () { startPreview(track); }); card.addEventListener("mouseleave", stopPreview); card.addEventListener("focusout", stopPreview); }
@@ -684,5 +764,5 @@
   audio.removeAttribute("controls");
   var storedVolume = recall("gbr:volume"); audio.volume = storedVolume === null ? .9 : Number(storedVolume); el.volume.value = audio.volume;
   var requested = new URLSearchParams(location.search).get("track");
-  if (requested) { var match = catalogue.filter(function (track) { return track.slug === requested; })[0]; if (match) select(match, false); }
+  if (requested) { var match = catalogue.filter(function (track) { return track.slug === requested; })[0]; if (match) select(match, false, false); }
 })();

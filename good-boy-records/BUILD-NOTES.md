@@ -122,7 +122,7 @@ Missing or broken cover artwork no longer blocks deployment.
 - The workflow fails if a legacy `_site/music` directory somehow reaches the deployment artifact.
 
 
-## v5.14
+## v5.15
 
 - Moved the stationary transport/mixer to a fixed full-width top console.
 - Removed the split left/right cassette lanes and centre corridor.
@@ -131,10 +131,26 @@ Missing or broken cover artwork no longer blocks deployment.
 - Kept EQ, VU, transport, inspiration and live-lyrics drawer in the fixed player.
 
 
-## v5.14 warm hi-fi / continuous wall revision
+## v5.15 warm hi-fi / continuous wall revision
 - Reworked the fixed player toward late-1970s/early-1980s black, brown, brushed-metal and amber hi-fi hardware.
 - Compressed the interactive five-band EQ while retaining the real Web Audio filter chain.
 - Added an 18-band, 10-segment post-EQ spectrum display driven from `AnalyserNode.getByteFrequencyData()`, with fast attack and short visible decay.
 - Centred the permanently visible two-line live lyrics beneath the hardware stack.
 - Removed genre headers from the physical cassette wall. Genre remains catalogue metadata only.
 - Replaced one-song-per-row layout with intact track groups that flex-wrap across a continuous dense wall; versions never split away from their siblings.
+
+## v5.15 player-first pass
+
+- Homepage is player + cassette wall only; narrative sections are not built or staged.
+- Removed the duplicate pre-player now-playing header and the inspiration readout.
+- Fixed hi-fi rack is ~560px tall on desktop, with a much larger active-track display.
+- Spectrum, VU meters and interactive five-band EQ have substantially more vertical room.
+- Two-line centred live lyrics remain permanently visible.
+
+## v5.16 continuous cassette cycle
+
+- Clicking any cassette arms continuous playback for the session.
+- When a track ends, the player randomly selects another playable cassette and starts it automatically.
+- The chooser prefers a different song title and avoids an immediate repeat when alternatives exist.
+- Cassette selection now triggers a short synthesized mechanical insert/latch sound; automatic tape changes use the same effect.
+- The effect is generated in-browser with Web Audio, so there is no extra sound asset or external dependency.

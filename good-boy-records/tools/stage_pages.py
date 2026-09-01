@@ -24,11 +24,6 @@ def main() -> int:
     OUT.mkdir()
     for name in ["index.html", "assets", "data"]:
         copy_item(ROOT / name)
-    docs = ROOT / "content-source" / "docs"
-    if docs.exists():
-        for section in sorted(p for p in docs.iterdir() if p.is_dir()):
-            copy_item(ROOT / section.name)
-
     files = [p for p in OUT.rglob("*") if p.is_file()]
     too_large = [p for p in files if p.stat().st_size >= 100 * 1024 * 1024]
     if too_large:
