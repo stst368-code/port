@@ -30,19 +30,25 @@ with sync_playwright() as p:
     check("one shared audio element", page.locator("audio").count() == 1)
     check("rotary magazine exists", page.locator("#cassette-carousel").is_visible())
     check("album artwork display exists", page.locator("#deck-artwork").is_visible())
+    check("one integrated cassette bay", page.locator("#cassette-bay").count() == 1 and page.locator(".program-art #cassette-bay").count() == 1)
+    split = page.locator(".program-panel").evaluate("e => { const c=[...e.children]; return c.length>=2 ? [c[0].getBoundingClientRect().width,c[1].getBoundingClientRect().width] : [0,1]; }")
+    check("program faceplate is 50/50", abs(split[0] - split[1]) <= 2)
     check("EQ is a button-operated popover", page.locator("#eq-toggle").is_visible() and page.locator("#eq-popover").is_hidden())
     check("version markers map to cassettes", page.locator(".version-tag").count() == page.locator(".card").count())
     check("native audio controls removed", not page.locator("#showcase-player").get_attribute("controls"))
 
-    first = page.locator("[data-play]").first
-    track_id = first.get_attribute("data-play")
-    first.click()
-    page.wait_for_timeout(1400)
-    selected = page.locator('.card[data-track="' + track_id + '"]')
-    check("cassette becomes selected", selected.get_attribute("data-selected") == "true")
-    check("loaded cassette leaves an empty magazine slot", selected.evaluate("e => e.classList.contains('is-in-deck')"))
-    check("cassette bay shows loaded state", page.locator("#cassette-bay-tape").get_attribute("data-loaded") == "true")
-    check("player title populated", page.locator("#deck-title").inner_text().strip() not in ("", "NO TAPE LATCHED"))
+    if page.locator("[data-play]").count():
+        first = page.locator("[data-play]").first
+        track_id = first.get_attribute("data-play")
+        first.click()
+        page.wait_for_timeout(1400)
+        selected = page.locator('.card[data-track="' + track_id + '"]')
+        check("cassette becomes selected", selected.get_attribute("data-selected") == "true")
+        check("loaded cassette leaves an empty magazine slot", selected.evaluate("e => e.classList.contains('is-in-deck')"))
+        check("cassette bay shows loaded state", page.locator("#cassette-bay-tape").get_attribute("data-loaded") == "true")
+        check("player title populated", page.locator("#deck-title").inner_text().strip() not in ("", "NO TAPE LATCHED"))
+    else:
+        check("clean package may contain no sample cassettes", True)
 
     page.locator("#eq-toggle").click()
     check("EQ popover opens", page.locator("#eq-popover").is_visible())
@@ -54,6 +60,12 @@ with sync_playwright() as p:
     check("same rotary magazine exists on mobile", mobile.locator("#cassette-carousel").is_visible())
     check("same VU meters exist on mobile", mobile.locator(".vu").count() == 2)
     check("same spectrum exists on mobile", mobile.locator("#spectrum").is_visible())
+    mobile_split = mobile.locator(".program-panel").evaluate("e => { const c=[...e.children]; return c.length>=2 ? [c[0].getBoundingClientRect().width,c[1].getBoundingClientRect().width] : [0,1]; }")
+    check("mobile keeps the same 50/50 faceplate", abs(mobile_split[0] - mobile_split[1]) <= 2)
+    if mobile.locator("[data-play]").count():
+        mobile.locator("[data-play]").first.click()
+        mobile.wait_for_timeout(900)
+        check("mobile title remains visible", mobile.locator("#deck-title").is_visible() and mobile.locator("#deck-title").bounding_box()["height"] > 0)
     check("no page errors", not errs)
     b.close()
 

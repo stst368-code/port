@@ -9,15 +9,15 @@ For a normal single-release song, place these together:
 
 ```text
 showcase/
-  dogtushya-v2.yaml
-  dogtushya.png
-  dogtushya-v2.flac
+  your-song-v2.yaml
+  your-song-v2.png
+  your-song-v2.flac
 ```
 
 A generated filename is also fine:
 
 ```text
-  dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
+  your-song-v2.flac
 ```
 
 If more than one matching render is present, the importer treats that as an

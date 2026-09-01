@@ -33,9 +33,9 @@ You choose what is public. Drop only the finished items you want to show into:
 
 ```text
 showcase/
-├── dogtushya-v2.yaml
-├── dogtushya.png
-├── dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
+├── your-song-v2.yaml
+├── your-song-v2.png
+├── your-song-v2.flac
 ├── another-song-v2.yaml
 ├── another-song.png
 └── another-song-v2.flac
@@ -45,10 +45,10 @@ Subfolders are allowed too, so this is equally valid:
 
 ```text
 showcase/
-└── dogtushya/
-    ├── dogtushya-v2.yaml
-    ├── dogtushya.png
-    └── dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
+└── your-song/
+    ├── your-song-v2.yaml
+    ├── your-song-v2.png
+    └── your-song-v2.flac
 ```
 
 The importer understands the shared song YAML fields already being used:
@@ -60,7 +60,7 @@ groups are shuffled as units on each page refresh, while missing genres remain
 `Unclassified` in metadata.
 
 Audio is matched to the YAML by filename. A render beginning with the YAML stem,
-for example `dogtushya-v2_...flac`, belongs to `dogtushya-v2.yaml`. Legacy files
+for example `your-song-v2_...flac`, belongs to `your-song-v2.yaml`. Legacy files
 without the `-vN` suffix also have a title-based fallback.
 
 If you deliberately drop several matching renders into `showcase/`, each chosen
@@ -198,11 +198,9 @@ No sidecar is required. If one is absent or invalid, the player falls back to
 the existing line-timed LRC/raw YAML lyrics and playback is unaffected. See
 `WORD-LYRICS.md` for the small file contract consumed by the site.
 
-## Included example
+## Clean source package
 
-The supplied `dogtushya-v2.yaml` and `dogtushya.png` are in `showcase/` as the
-example content. No fake audio is included. Put the exact Dogtushya render you
-want visitors to hear beside them and rebuild.
+The `showcase/` folder intentionally ships without sample tracks. Add your own YAML, artwork and chosen audio there and rebuild. No fake or incomplete example track is bundled.
 
 
 ## Word-timing quality gate

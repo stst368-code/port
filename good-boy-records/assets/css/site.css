@@ -86,7 +86,6 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
 .card[data-selected=true][data-transport-state=buffering] .card__nowPlaying::after{content:" / BUFFERING"}
 .card[data-selected=true][data-transport-state=ended] .card__nowPlaying::after{content:" / ENDED"}
 .card[data-selected=true][data-transport-state=error] .card__nowPlaying::after{content:" / ERROR"}
-.card[data-track^="dogtushya"] .cassette__label img{object-position:center top}
 
 /* v5.2 — dense physical cassette wall. The wall is the interface, not a card catalogue. */
 .library{padding-top:clamp(1.8rem,3vw,3rem);background:
@@ -1480,4 +1479,196 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
   }
+}
+
+/* v5.21 — literal 50/50 programme faceplate.
+   One half belongs to the media mechanism, one half belongs to the title.
+   The cassette loads into the media half; artwork reveals only after the latch. */
+.home .program-panel{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:.52rem;
+  align-items:stretch;
+}
+.home .program-art{
+  position:relative;
+  min-width:0;
+  height:100%;
+  padding:.42rem .48rem .4rem;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) 58px;
+  gap:.38rem;
+  place-items:stretch;
+  overflow:hidden;
+  border:1px solid #352314;
+  background:linear-gradient(180deg,#0b0a08,#050403);
+  box-shadow:inset 0 0 18px #000;
+}
+.home .program-art__cover{
+  position:relative;
+  min-height:0;
+  min-width:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid #26190f;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,157,33,.025) 0 1px,transparent 1px 4px),
+    radial-gradient(circle at 50% 50%,rgba(255,147,24,.035),transparent 48%),
+    #030302;
+  box-shadow:inset 0 0 16px #000;
+}
+.home .program-art__cover img{
+  display:block;
+  width:auto!important;
+  height:100%!important;
+  max-width:100%;
+  max-height:100%;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  border:1px solid #72502b;
+  box-shadow:0 0 18px rgba(255,141,20,.1);
+  filter:saturate(.94) contrast(1.03);
+  transform:translateZ(0);
+}
+.home .program-art.is-materializing .program-art__cover img{
+  animation:gbr-art-materialize .72s cubic-bezier(.2,.76,.22,1) both;
+}
+.home .program-art__cover::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:-22%;height:18%;
+  opacity:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(255,168,52,.16),rgba(255,191,73,.42),rgba(255,139,16,.08),transparent);
+  mix-blend-mode:screen;
+}
+.home .program-art.is-materializing .program-art__cover::after{
+  animation:gbr-art-scan .72s ease-out both;
+}
+@keyframes gbr-art-materialize{
+  0%{opacity:0;clip-path:inset(49% 0 49% 0);filter:sepia(1) saturate(1.5) brightness(1.8) contrast(1.4);box-shadow:0 0 30px rgba(255,154,28,.32)}
+  28%{opacity:.72;clip-path:inset(27% 0 27% 0)}
+  68%{opacity:1;clip-path:inset(0 0 0 0);filter:sepia(.24) saturate(1.06) brightness(1.12) contrast(1.08)}
+  100%{opacity:1;clip-path:inset(0);filter:saturate(.94) contrast(1.03);box-shadow:0 0 18px rgba(255,141,20,.1)}
+}
+@keyframes gbr-art-scan{
+  0%{top:-22%;opacity:0}
+  16%{opacity:1}
+  82%{opacity:.8}
+  100%{top:108%;opacity:0}
+}
+.home .program-art .cassette-bay{
+  position:relative;
+  inset:auto;
+  width:100%;
+  height:58px;
+  min-height:0;
+  overflow:hidden;
+  border:1px solid #56351e;
+  border-radius:3px;
+  background:linear-gradient(#080604,#15100b 72%,#080604);
+  box-shadow:inset 0 0 16px #000;
+}
+.home .program-art .cassette-bay__slot{left:7%;right:7%;top:7px;height:7px}
+.home .program-art .cassette-bay__tape{left:10%;right:10%;top:17px;height:33px;grid-template-columns:38px 1fr;gap:6px;padding:3px 6px;transform:translateY(38px)}
+.home .program-art .cassette-bay__tape[data-loaded="true"]{transform:translateY(0)}
+.home .program-art .cassette-bay__art{width:31px;height:24px}
+.home .program-art .cassette-bay__tape b{font-size:.45rem}
+
+.home .program-panel .wall-monitor{
+  height:100%;
+  min-width:0;
+  margin:0;
+  padding:clamp(.65rem,1.2vw,1.15rem);
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  gap:.72rem;
+  overflow:hidden;
+  border:1px solid #302115;
+  background:radial-gradient(circle at 50% 42%,rgba(255,139,19,.045),transparent 17rem),#080705;
+}
+.home .program-panel .wall-monitor__lamp{flex:0 0 12px;width:12px;height:12px;margin:0;align-self:center}
+.home .program-panel .wall-monitor__copy{
+  flex:1 1 auto;
+  min-width:0;
+  height:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.home .program-panel .wall-monitor small{margin:0 0 .7rem;font-size:.6rem}
+.home .program-panel .wall-monitor strong{
+  display:-webkit-box;
+  width:100%;
+  margin:0;
+  font-size:clamp(2rem,3.2vw,4.15rem);
+  line-height:.92;
+  letter-spacing:-.04em;
+  text-align:center;
+  overflow:hidden;
+  overflow-wrap:break-word;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  text-wrap:balance;
+}
+.home .program-panel .deck__catalogue{
+  width:100%;
+  margin:.72rem 0 0;
+  text-align:center;
+  font-size:clamp(.62rem,.86vw,.86rem);
+  line-height:1.2;
+  white-space:normal;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+.home .program-panel .wall-monitor>.numitron{display:none!important}
+
+/* The old standalone bay grid cell no longer exists; footer owns the row. */
+.home .player-rail .machine-shell{
+  grid-template-areas:
+    "top top top"
+    "program spectrum meters"
+    "program transport meters"
+    "footer footer footer"
+    "lyrics lyrics lyrics"
+    "status status status";
+}
+
+@media (max-width:820px){
+  .home .program-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:.34rem;padding:.34rem}
+  .home .program-art{grid-template-rows:minmax(0,1fr) 47px;padding:.3rem;gap:.28rem}
+  .home .program-art .cassette-bay{height:47px}
+  .home .program-art .cassette-bay__slot{top:5px;height:6px}
+  .home .program-art .cassette-bay__tape{top:14px;height:27px;grid-template-columns:31px 1fr;padding:2px 4px}
+  .home .program-art .cassette-bay__art{width:25px;height:20px}
+  .home .program-art .cassette-bay__tape b{font-size:.38rem}
+  .home .program-panel .wall-monitor{padding:.55rem;gap:.45rem}
+  .home .program-panel .wall-monitor__lamp{flex-basis:9px;width:9px;height:9px}
+  .home .program-panel .wall-monitor small{margin-bottom:.4rem;font-size:.48rem}
+  .home .program-panel .wall-monitor strong{font-size:clamp(1.35rem,5.5vw,2.35rem);line-height:.94}
+  .home .program-panel .deck__catalogue{margin-top:.42rem;font-size:clamp(.5rem,1.8vw,.64rem)}
+}
+@media (max-width:430px){
+  .home .program-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:.25rem;padding:.25rem}
+  .home .program-art{grid-template-rows:minmax(0,1fr) 38px;padding:.2rem;gap:.2rem}
+  .home .program-art .cassette-bay{height:38px}
+  .home .program-art .cassette-bay__slot{top:4px;height:5px}
+  .home .program-art .cassette-bay__tape{left:6%;right:6%;top:11px;height:23px;grid-template-columns:25px 1fr;gap:3px;padding:2px 3px}
+  .home .program-art .cassette-bay__art{width:20px;height:16px}
+  .home .program-art .cassette-bay__tape b{font-size:.32rem}
+  .home .program-panel .wall-monitor{padding:.38rem .34rem;gap:.3rem}
+  .home .program-panel .wall-monitor__lamp{display:none}
+  .home .program-panel .wall-monitor small{display:none}
+  .home .program-panel .wall-monitor strong{font-size:clamp(1.08rem,5.8vw,1.52rem);line-height:.96;-webkit-line-clamp:3}
+  .home .program-panel .deck__catalogue{margin-top:.35rem;font-size:.43rem;-webkit-line-clamp:3}
+}
+@media (prefers-reduced-motion:reduce){
+  .home .program-art.is-materializing .program-art__cover img,
+  .home .program-art.is-materializing .program-art__cover::after{animation:none!important}
 }

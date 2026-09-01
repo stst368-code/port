@@ -72,7 +72,13 @@
               </div>
 
               <div class="program-panel">
-                <div class="program-art"><img id="deck-artwork" src="{{ROOT}}assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
+                <div class="program-art" id="program-art">
+                  <div class="program-art__cover"><img id="deck-artwork" src="{{ROOT}}assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
+                  <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
+                    <span class="cassette-bay__slot"></span>
+                    <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
+                  </div>
+                </div>
                 <div class="wall-monitor">
                   <span class="wall-monitor__lamp" aria-hidden="true"></span>
                   <div class="wall-monitor__copy">
@@ -110,11 +116,6 @@
                 <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
                 <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
                 <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
-              </div>
-
-              <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
-                <span class="cassette-bay__slot"></span>
-                <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
               </div>
 
               <div class="eq-popover" id="eq-popover" hidden>

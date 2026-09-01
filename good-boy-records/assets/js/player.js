@@ -26,7 +26,7 @@
     inspiration: document.getElementById("deck-inspiration"),
     vuLeft: document.getElementById("vu-left"), vuRight: document.getElementById("vu-right"),
     spectrum: document.getElementById("spectrum"),
-    artwork: document.getElementById("deck-artwork"),
+    artwork: document.getElementById("deck-artwork"), programArt: document.getElementById("program-art"),
     eqPanel: document.getElementById("eq-panel"), eqReset: document.getElementById("eq-reset"), eqNote: document.getElementById("eq-note"),
     eqToggle: document.getElementById("eq-toggle"), eqPopover: document.getElementById("eq-popover"),
     cassetteBay: document.getElementById("cassette-bay"), cassetteBayTape: document.getElementById("cassette-bay-tape"),
@@ -696,7 +696,8 @@
     }
     var from = source.getBoundingClientRect();
     var bay = el.cassetteBay.getBoundingClientRect();
-    var targetWidth = Math.min(Math.max(118, bay.width * .64), 230);
+    var targetWidth = Math.min(bay.width * .78, bay.height * 1.58 * .92, 176);
+    targetWidth = Math.max(64, targetWidth);
     var targetHeight = targetWidth / 1.58;
     var targetLeft = bay.left + (bay.width - targetWidth) / 2;
     var targetTop = bay.top + (bay.height - targetHeight) / 2 + 4;
@@ -771,11 +772,24 @@
     card.classList.add("is-latching");
     setTimeout(function () { card.classList.remove("is-latching"); }, 430);
   }
+  function materializeArtwork(track) {
+    if (!el.artwork) return;
+    var src = artPath(track);
+    var holder = el.programArt || el.artwork.parentElement;
+    if (holder) holder.classList.remove("is-materializing");
+    el.artwork.src = src;
+    el.artwork.alt = "Cover artwork for " + track.title;
+    if (!holder || reduceMotion.matches) return;
+    /* Restart the physical display reveal only after the cassette has latched. */
+    void holder.offsetWidth;
+    holder.classList.add("is-materializing");
+    window.setTimeout(function () { holder.classList.remove("is-materializing"); }, 780);
+  }
   function dress(track) {
     current = track;
     el.deck.hidden = false;
     el.title.textContent = track.title;
-    if (el.artwork) { el.artwork.src = artPath(track); el.artwork.alt = "Cover artwork for " + track.title; }
+    materializeArtwork(track);
     var genre = track.style && track.style.genre ? track.style.genre : "Unclassified";
     el.catalogue.textContent = [genre, track.versionLabel, track.catalogueNumber, track.released].filter(Boolean).join(" · ");
     if (el.monitorTitle) el.monitorTitle.textContent = track.title;

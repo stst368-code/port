@@ -174,3 +174,9 @@ Missing or broken cover artwork no longer blocks deployment.
 - Added a dedicated illuminated shuffle-play transport button. Cassette selection still arms continuous random playback, and shuffle can now be started directly from the stereo.
 - Removed the previous equal-and-opposite master attenuation on positive EQ boosts. A downstream Web Audio limiter now protects output peaks, so moving a band upward actually boosts that band rather than making the programme quieter overall.
 - Increased the analyser FFT from 512 to 2048 samples and switched the 18 display bands to explicit log-spaced centres with per-frame relative scaling. This prevents the first low-frequency columns from sharing the same coarse FFT bins and sitting permanently full.
+
+## v5.21
+- Now-playing faceplate is an exact 50/50 split: artwork/mechanism left, title/metadata right.
+- Cassette loading bay moved into the artwork half; carousel cassette flies into that side.
+- Cover art uses an amber scan/materialisation reveal after the cassette latch completes.
+- Removed the incomplete bundled sample track and all sample-specific build diagnostics/examples.
