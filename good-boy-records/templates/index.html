@@ -41,38 +41,47 @@
 <main id="main">
   <section class="section library" id="shelf" aria-labelledby="shelf-heading">
     <div class="shell">
-      <div class="library__bar">
-        <div>
-          <p class="eyebrow">Tape wall</p>
-          <h2 id="shelf-heading">The wall</h2>
-        </div>
-        <div class="hardware-controls">
-          <label class="toggle" id="preview-field" hidden>
-            <input type="checkbox" id="preview-toggle">
-            <span>HOVER PREVIEW</span>
-          </label>
-        </div>
-      </div>
+      <h2 class="visually-hidden" id="shelf-heading">Cassette carousel</h2>
+      <label class="toggle" id="preview-field" hidden>
+        <input type="checkbox" id="preview-toggle">
+        <span>HOVER PREVIEW</span>
+      </label>
 
       <div class="showcase-stage">
-        <div class="cassette-shelves">
+        <div class="cassette-carousel-shell" id="cassette-carousel-shell">
+          <div class="carousel-pickup" aria-hidden="true"><span></span><b>PICKUP</b></div>
+          <button type="button" class="carousel-step carousel-step--prev" id="carousel-prev" aria-label="Rotate cassette carousel backwards">‹</button>
+          <div class="cassette-carousel" id="cassette-carousel" role="region" aria-label="Rotary cassette storage carousel" tabindex="0">
+            <div class="carousel-platter" id="carousel-platter">
+              <div class="carousel-hub" aria-hidden="true"><span>GBR</span><small>ROTARY MAGAZINE</small></div>
+              <div class="cassette-shelves">
 {{SHELF}}
+              </div>
+            </div>
+          </div>
+          <button type="button" class="carousel-step carousel-step--next" id="carousel-next" aria-label="Rotate cassette carousel forwards">›</button>
+          <div class="carousel-readout" aria-live="polite"><span id="carousel-song">ROTATE TO BROWSE</span><small id="carousel-version">CASSETTE MAGAZINE</small></div>
         </div>
 
         <div class="player-rail" id="player-rail" data-visible="false">
           <section class="deck" id="deck" data-state="idle" aria-labelledby="deck-title">
             <div class="machine-shell">
               <div class="machine-shell__topline">
-                <span class="machine-shell__actions"><span class="machine-shell__serial">SER 0001</span><button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button></span>
+                <span class="machine-shell__serial">SER 0001 / GOOD BOY RECORDS</span>
+                <span class="machine-shell__actions"><button type="button" class="deck__details" id="eq-toggle" aria-controls="eq-popover" aria-expanded="false">EQ</button><button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button></span>
               </div>
-              <div class="wall-monitor">
-                <span class="wall-monitor__lamp" aria-hidden="true"></span>
-                <div class="wall-monitor__copy">
-                  <small>ACTIVE CHANNEL</small>
-                  <strong id="deck-title">NO TAPE LATCHED</strong>
-                  <span class="deck__catalogue" id="deck-catalogue">Select a cassette from the wall</span>
+
+              <div class="program-panel">
+                <div class="program-art"><img id="deck-artwork" src="{{ROOT}}assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
+                <div class="wall-monitor">
+                  <span class="wall-monitor__lamp" aria-hidden="true"></span>
+                  <div class="wall-monitor__copy">
+                    <small>ACTIVE CHANNEL</small>
+                    <strong id="deck-title">NO TAPE LATCHED</strong>
+                    <span class="deck__catalogue" id="deck-catalogue">Rotate the magazine or press shuffle</span>
+                  </div>
+                  <span class="numitron" id="wall-monitor-code">----</span>
                 </div>
-                <span class="numitron" id="wall-monitor-code">----</span>
               </div>
 
               <div class="spectrum-panel" aria-label="Post-EQ frequency spectrum">
@@ -85,18 +94,6 @@
                 <div class="vu"><span class="vu__label">R</span><div class="vu__scale"><span class="vu__needle" id="vu-right"></span></div></div>
               </div>
 
-              <div class="eq-panel" id="eq-panel">
-                <div class="eq-panel__head"><span>5-BAND PROGRAM EQ</span><button type="button" id="eq-reset">FLAT</button></div>
-                <div class="eq-bands" aria-label="Five band equalizer">
-                  <label class="eq-band"><output for="eq-60">0 dB</output><input id="eq-60" data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0"><span>60</span></label>
-                  <label class="eq-band"><output for="eq-250">0 dB</output><input id="eq-250" data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0"><span>250</span></label>
-                  <label class="eq-band"><output for="eq-1000">0 dB</output><input id="eq-1000" data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0"><span>1K</span></label>
-                  <label class="eq-band"><output for="eq-4000">0 dB</output><input id="eq-4000" data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0"><span>4K</span></label>
-                  <label class="eq-band"><output for="eq-12000">0 dB</output><input id="eq-12000" data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0"><span>12K</span></label>
-                </div>
-                <p class="eq-panel__note" id="eq-note">EQ is applied live to the shared player.</p>
-              </div>
-
               <div class="transport-panel">
                 <button type="button" class="transport__button" id="transport-toggle" aria-label="Play or pause">
                   <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>
@@ -106,16 +103,32 @@
                   <svg class="icon-shuffle" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M21 3l-7.2 7.2M4 6h3.3c2 0 3.5.8 4.8 2.2l5.6 6.2c.9 1 1.8 1.6 3.3 1.6M16 16h5v5M21 21l-2.8-2.8M4 18h3.2c1.5 0 2.5-.5 3.4-1.4l1.2-1.3"/></svg>
                 </button>
                 <div class="numitron clock-display"><span id="time-elapsed">0:00</span><b>/</b><span id="time-total">--:--</span></div>
-                <div class="transport__scrub">
-                  <label class="visually-hidden" for="transport-scrub">Seek within the track</label>
-                  <input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0">
-                </div>
+                <div class="transport__scrub"><label class="visually-hidden" for="transport-scrub">Seek within the track</label><input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0"></div>
               </div>
 
               <div class="machine-footer">
                 <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
                 <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
                 <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
+              </div>
+
+              <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
+                <span class="cassette-bay__slot"></span>
+                <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
+              </div>
+
+              <div class="eq-popover" id="eq-popover" hidden>
+                <div class="eq-panel" id="eq-panel">
+                  <div class="eq-panel__head"><span>5-BAND PROGRAM EQ</span><button type="button" id="eq-reset">FLAT</button></div>
+                  <div class="eq-bands" aria-label="Five band equalizer">
+                    <label class="eq-band"><output for="eq-60">0 dB</output><input id="eq-60" data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0"><span>60</span></label>
+                    <label class="eq-band"><output for="eq-250">0 dB</output><input id="eq-250" data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0"><span>250</span></label>
+                    <label class="eq-band"><output for="eq-1000">0 dB</output><input id="eq-1000" data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0"><span>1K</span></label>
+                    <label class="eq-band"><output for="eq-4000">0 dB</output><input id="eq-4000" data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0"><span>4K</span></label>
+                    <label class="eq-band"><output for="eq-12000">0 dB</output><input id="eq-12000" data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0"><span>12K</span></label>
+                  </div>
+                  <p class="eq-panel__note" id="eq-note">EQ is applied live to the shared player.</p>
+                </div>
               </div>
               <div class="lyrics lyrics--fixed" id="lyrics" data-following="true">
                 <p class="notice" id="lyrics-note" hidden>These lyrics are a placeholder.</p>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Browser smoke checks for the centre-player cassette wall.
+"""Browser smoke checks for the fixed hi-fi + rotary cassette magazine.
 
 Start the site first:
 
@@ -18,30 +18,42 @@ def check(name, ok):
 
 with sync_playwright() as p:
     system_chromium = shutil.which("chromium") or shutil.which("chromium-browser") or shutil.which("google-chrome")
-    launch_args = {"executable_path": system_chromium, "args": ["--no-sandbox"]} if system_chromium else {}
+    launch_args = {"executable_path": system_chromium, "args": ["--no-sandbox", "--disable-dev-shm-usage"]} if system_chromium else {}
     b = p.chromium.launch(**launch_args)
-    page = b.new_page(viewport={"width": 1600, "height": 1000})
+    page = b.new_page(viewport={"width": 1440, "height": 1000})
     errs = []
     page.on("pageerror", lambda e: errs.append(str(e)))
-    page.goto("http://localhost:8000/", wait_until="networkidle")
+    page.goto("http://127.0.0.1:8000/", wait_until="domcontentloaded")
+    page.wait_for_timeout(250)
 
-    check("centre player visible before selection", page.locator("#deck").is_visible())
-    check("only one audio element exists", page.locator("audio").count() == 1)
-    check("wall uses vertical composition stacks", page.locator(".composition-stack").count() >= 1)
-    check("version markers exist left of cassettes", page.locator(".version-tag").count() == page.locator(".card").count())
-    check("native controls removed by JS", not page.locator("#showcase-player").get_attribute("controls"))
+    check("fixed player visible before selection", page.locator("#deck").is_visible())
+    check("one shared audio element", page.locator("audio").count() == 1)
+    check("rotary magazine exists", page.locator("#cassette-carousel").is_visible())
+    check("album artwork display exists", page.locator("#deck-artwork").is_visible())
+    check("EQ is a button-operated popover", page.locator("#eq-toggle").is_visible() and page.locator("#eq-popover").is_hidden())
+    check("version markers map to cassettes", page.locator(".version-tag").count() == page.locator(".card").count())
+    check("native audio controls removed", not page.locator("#showcase-player").get_attribute("controls"))
 
     first = page.locator("[data-play]").first
     track_id = first.get_attribute("data-play")
-    shelf_y = page.evaluate("window.scrollY")
     first.click()
-    page.wait_for_timeout(500)
+    page.wait_for_timeout(1400)
     selected = page.locator('.card[data-track="' + track_id + '"]')
-    check("clicked wall cassette marked selected", selected.get_attribute("data-selected") == "true")
-    check("selection does not scroll to player", abs(page.evaluate("window.scrollY") - shelf_y) < 20)
-    check("player title populated", page.locator("#deck-title").inner_text().strip() not in ("", "NO TAPE SELECTED"))
-    check("inspiration populated", "Select a cassette" not in page.locator("#deck-inspiration").inner_text())
-    check("lyrics populated", page.locator("#lyrics-list li").count() > 1)
+    check("cassette becomes selected", selected.get_attribute("data-selected") == "true")
+    check("loaded cassette leaves an empty magazine slot", selected.evaluate("e => e.classList.contains('is-in-deck')"))
+    check("cassette bay shows loaded state", page.locator("#cassette-bay-tape").get_attribute("data-loaded") == "true")
+    check("player title populated", page.locator("#deck-title").inner_text().strip() not in ("", "NO TAPE LATCHED"))
+
+    page.locator("#eq-toggle").click()
+    check("EQ popover opens", page.locator("#eq-popover").is_visible())
+
+    mobile = b.new_page(viewport={"width": 390, "height": 844})
+    mobile.goto("http://127.0.0.1:8000/", wait_until="domcontentloaded")
+    mobile.wait_for_timeout(150)
+    check("same player exists on mobile", mobile.locator("#deck").is_visible())
+    check("same rotary magazine exists on mobile", mobile.locator("#cassette-carousel").is_visible())
+    check("same VU meters exist on mobile", mobile.locator(".vu").count() == 2)
+    check("same spectrum exists on mobile", mobile.locator("#spectrum").is_visible())
     check("no page errors", not errs)
     b.close()
 

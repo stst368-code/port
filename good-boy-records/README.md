@@ -1,16 +1,24 @@
 # Good Boy Records
 
-Static GitHub Pages music showcase. The canonical interface is a late-night wall
-of physical cassettes. Clicking a tape latches **that tape in its existing wall
-position**, gives it the warm amber hardware glow, and starts playback. It does
-not move the cassette into a second deck or scroll the visitor elsewhere.
+Static GitHub Pages music showcase built as one warm late-70s/early-80s hi-fi
+machine at every viewport size. The fixed player uses dark walnut, black
+faceplates, amber VU/spectrum lighting, a live two-line lyric glass and a real
+shared audio transport. The current sleeve is displayed directly in the deck.
 
-There is deliberately no catalogue search box. This is a curated showcase, not
-Spotify after a minor electrical fire.
+The collection is now a rotary cassette magazine inspired by slide-projector
+carousels. Song groups are randomised on each refresh while versions remain
+adjacent. Drag/swipe or the arrow controls rotate the same magazine on desktop,
+tablet and mobile. Selecting a cassette rotates it to the pickup position,
+animates it out of its slot into the player bay, and leaves an empty magazine
+slot while it is loaded. Shuffle performs a longer motorised spin before loading
+a random playable cassette.
+
+The five-band Web Audio EQ still exists, but it is deliberately hidden behind
+the hardware `EQ` button rather than permanently occupying the faceplate.
 
 ## No generated `music/` catalogue
 
-The cassette wall and central player are the catalogue. Older builds generated
+The rotary cassette magazine and fixed player are the catalogue. Older builds generated
 `music/<slug>/index.html` permanent track pages; that subsystem has been removed.
 `showcase/` is the only human-managed music source, and the deployment no longer
 stages a `music/` directory. Lyrics and technical metadata open inside the central
@@ -46,9 +54,10 @@ showcase/
 The importer understands the shared song YAML fields already being used:
 `title`, `version`, `model`, `state`, `genre`, `inspiration`, `duration`, `cover`,
 `caption`, and `lyrics`. You do not need to rewrite those into a website-specific
-file. `genre` remains useful catalogue metadata, but it no longer divides the physical wall.
-Versions with the same `title` stay inside one compact track group. Whole groups wrap
-across the wall wherever they fit, while missing genres remain `Unclassified` in metadata.
+file. `genre` remains useful catalogue metadata but does not create visible sections.
+Versions with the same `title` remain adjacent in the rotary magazine. Whole song
+groups are shuffled as units on each page refresh, while missing genres remain
+`Unclassified` in metadata.
 
 Audio is matched to the YAML by filename. A render beginning with the YAML stem,
 for example `dogtushya-v2_...flac`, belongs to `dogtushya-v2.yaml`. Legacy files

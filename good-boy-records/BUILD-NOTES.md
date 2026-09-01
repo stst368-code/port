@@ -1,3 +1,15 @@
+# v5.19 - rotary magazine / single responsive hi-fi
+
+- Replaced the scrolling cassette wall with one rotary cassette magazine inspired by slide-projector carousels.
+- The same magazine/player design is used at desktop, tablet and mobile widths; responsive CSS only rescales/reflows the same hardware.
+- Song groups are shuffled on refresh while all versions remain adjacent around the magazine.
+- Drag/swipe, keyboard arrows and physical previous/next buttons rotate the magazine.
+- Shuffle performs a multi-turn animated spin before choosing a playable track.
+- Loading a track animates its cassette from the pickup slot into the player bay and leaves the source slot visibly empty while loaded.
+- Added current album artwork directly to the player faceplate.
+- Moved the real five-band Web Audio EQ behind an `EQ` popover button.
+- Retained amber segmented post-EQ spectrum, VU meters, shuffle/cycle playback, cassette latch sound and two-line live lyrics.
+
 # v5.6 - external lyric aligner split
 
 - Removed WhisperX/Demucs setup and generation scripts from the website repository.
