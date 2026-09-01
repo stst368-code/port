@@ -1,16 +1,24 @@
 # Good Boy Records
 
-Static GitHub Pages music showcase. The canonical interface is a late-night wall
-of physical cassettes. Clicking a tape latches **that tape in its existing wall
-position**, gives it the warm amber hardware glow, and starts playback. It does
-not move the cassette into a second deck or scroll the visitor elsewhere.
+Static GitHub Pages music showcase built as one warm late-70s/early-80s hi-fi
+machine at every viewport size. The fixed player uses dark walnut, black
+faceplates, amber VU/spectrum lighting, a live two-line lyric glass and a real
+shared audio transport. The current sleeve is displayed directly in the deck.
 
-There is deliberately no catalogue search box. This is a curated showcase, not
-Spotify after a minor electrical fire.
+The collection is now a rotary cassette magazine inspired by slide-projector
+carousels. Song groups are randomised on each refresh while versions remain
+adjacent. Drag/swipe or the arrow controls rotate the same magazine on desktop,
+tablet and mobile. Selecting a cassette rotates it to the pickup position,
+animates it out of its slot into the player bay, and leaves an empty magazine
+slot while it is loaded. Shuffle performs a longer motorised spin before loading
+a random playable cassette.
+
+The five-band Web Audio EQ still exists, but it is deliberately hidden behind
+the hardware `EQ` button rather than permanently occupying the faceplate.
 
 ## No generated `music/` catalogue
 
-The cassette wall and central player are the catalogue. Older builds generated
+The rotary cassette magazine and fixed player are the catalogue. Older builds generated
 `music/<slug>/index.html` permanent track pages; that subsystem has been removed.
 `showcase/` is the only human-managed music source, and the deployment no longer
 stages a `music/` directory. Lyrics and technical metadata open inside the central
@@ -25,9 +33,9 @@ You choose what is public. Drop only the finished items you want to show into:
 
 ```text
 showcase/
-├── dogtushya-v2.yaml
-├── dogtushya.png
-├── dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
+├── your-song-v2.yaml
+├── your-song-v2.png
+├── your-song-v2.flac
 ├── another-song-v2.yaml
 ├── another-song.png
 └── another-song-v2.flac
@@ -37,21 +45,22 @@ Subfolders are allowed too, so this is equally valid:
 
 ```text
 showcase/
-└── dogtushya/
-    ├── dogtushya-v2.yaml
-    ├── dogtushya.png
-    └── dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
+└── your-song/
+    ├── your-song-v2.yaml
+    ├── your-song-v2.png
+    └── your-song-v2.flac
 ```
 
 The importer understands the shared song YAML fields already being used:
 `title`, `version`, `model`, `state`, `genre`, `inspiration`, `duration`, `cover`,
 `caption`, and `lyrics`. You do not need to rewrite those into a website-specific
-file. `genre` remains useful catalogue metadata, but it no longer divides the physical wall.
-Versions with the same `title` stay inside one compact track group. Whole groups wrap
-across the wall wherever they fit, while missing genres remain `Unclassified` in metadata.
+file. `genre` remains useful catalogue metadata but does not create visible sections.
+Versions with the same `title` remain adjacent in the rotary magazine. Whole song
+groups are shuffled as units on each page refresh, while missing genres remain
+`Unclassified` in metadata.
 
 Audio is matched to the YAML by filename. A render beginning with the YAML stem,
-for example `dogtushya-v2_...flac`, belongs to `dogtushya-v2.yaml`. Legacy files
+for example `your-song-v2_...flac`, belongs to `your-song-v2.yaml`. Legacy files
 without the `-vN` suffix also have a title-based fallback.
 
 If you deliberately drop several matching renders into `showcase/`, each chosen
@@ -189,11 +198,9 @@ No sidecar is required. If one is absent or invalid, the player falls back to
 the existing line-timed LRC/raw YAML lyrics and playback is unaffected. See
 `WORD-LYRICS.md` for the small file contract consumed by the site.
 
-## Included example
+## Clean source package
 
-The supplied `dogtushya-v2.yaml` and `dogtushya.png` are in `showcase/` as the
-example content. No fake audio is included. Put the exact Dogtushya render you
-want visitors to hear beside them and rebuild.
+The `showcase/` folder intentionally ships without sample tracks. Add your own YAML, artwork and chosen audio there and rebuild. No fake or incomplete example track is bundled.
 
 
 ## Word-timing quality gate
@@ -235,3 +242,12 @@ The player/mixer is fixed across the top of the viewport as a warm black/brown/a
 ## v5.17 cassette cycle
 
 Selecting a cassette now arms continuous random playback. At the end of a track the player chooses another playable song (avoiding the current song where possible), latches that cassette in the wall, plays a short mechanical insert sound, and continues automatically.
+
+### v5.18 player behaviour
+
+The player now randomises whole song groups on each refresh, includes a hardware-style shuffle-play button, keeps already-sung lyrics visually dark through pauses, and uses a corrected live EQ/analyser signal path. Positive EQ movement is an audible boost; peak protection is handled after the EQ rather than by reducing the whole mix. The spectrum uses higher FFT resolution so low-frequency columns respond independently.
+
+
+## v5.23 layout
+
+The player is one three-column hi-fi chassis at every viewport width: title/art left, centered rotary cassette magazine, VU/spectrum/transport right, with live lyrics across the full width below. The old fixed-player grid is explicitly neutralised so legacy CSS cannot reorder the new components.

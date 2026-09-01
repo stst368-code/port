@@ -47,12 +47,6 @@ jobs:
           echo "Showcase files committed to this run:"
           find "$PROJECT_DIR/showcase" -maxdepth 3 -type f | sort
 
-          echo
-          echo "Dogtushya cover field, if present:"
-          if [ -f "$PROJECT_DIR/showcase/dogtushya-v3.yaml" ]; then
-            grep -n '^cover:' "$PROJECT_DIR/showcase/dogtushya-v3.yaml" || true
-          fi
-
       - name: Install build dependencies
         shell: bash
         run: python -m pip install -r "$PROJECT_DIR/requirements.txt"

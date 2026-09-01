@@ -1,3 +1,15 @@
+# v5.20 - rotary magazine / single responsive hi-fi
+
+- Replaced the scrolling cassette wall with one rotary cassette magazine inspired by slide-projector carousels.
+- The same magazine/player design is used at desktop, tablet and mobile widths; responsive CSS only rescales/reflows the same hardware.
+- Song groups are shuffled on refresh while all versions remain adjacent around the magazine.
+- Drag/swipe, keyboard arrows and physical previous/next buttons rotate the magazine.
+- Shuffle performs a multi-turn animated spin before choosing a playable track.
+- Loading a track animates its cassette from the pickup slot into the player bay and leaves the source slot visibly empty while loaded.
+- Added current album artwork directly to the player faceplate.
+- Moved the real five-band Web Audio EQ behind an `EQ` popover button.
+- Retained amber segmented post-EQ spectrum, VU meters, shuffle/cycle playback, cassette latch sound and two-line live lyrics.
+
 # v5.6 - external lyric aligner split
 
 - Removed WhisperX/Demucs setup and generation scripts from the website repository.
@@ -154,3 +166,26 @@ Missing or broken cover artwork no longer blocks deployment.
 - The chooser prefers a different song title and avoids an immediate repeat when alternatives exist.
 - Cassette selection now triggers a short synthesized mechanical insert/latch sound; automatic tape changes use the same effect.
 - The effect is generated in-browser with Web Audio, so there is no extra sound asset or external dependency.
+
+## v5.18 — transport/lyrics/EQ/spectrum corrections
+
+- Completed lyric lines and words now remain dark during gaps between timed cues instead of reverting to the unsung colour.
+- Whole song/version groups are shuffled in the browser on every page refresh while versions inside each group remain ordered.
+- Added a dedicated illuminated shuffle-play transport button. Cassette selection still arms continuous random playback, and shuffle can now be started directly from the stereo.
+- Removed the previous equal-and-opposite master attenuation on positive EQ boosts. A downstream Web Audio limiter now protects output peaks, so moving a band upward actually boosts that band rather than making the programme quieter overall.
+- Increased the analyser FFT from 512 to 2048 samples and switched the 18 display bands to explicit log-spaced centres with per-frame relative scaling. This prevents the first low-frequency columns from sharing the same coarse FFT bins and sitting permanently full.
+
+## v5.21
+- Now-playing faceplate is an exact 50/50 split: artwork/mechanism left, title/metadata right.
+- Cassette loading bay moved into the artwork half; carousel cassette flies into that side.
+- Cover art uses an amber scan/materialisation reveal after the cassette latch completes.
+- Removed the incomplete bundled sample track and all sample-specific build diagnostics/examples.
+
+
+### v5.23
+- Rebuilt carousel layout from the source template, not generated index output.
+- Exact left/centre/right desktop proportions with right rail 30/50/20 VU/spectrum/transport split.
+- Same physical layout retained on mobile with scaled controls and no horizontal overflow.
+- Removed carousel track readout.
+- Lyrics span the full chassis below the carousel.
+- Bundled showcase remains sample-free.
