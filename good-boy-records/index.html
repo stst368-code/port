@@ -2,151 +2,96 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Good Boy Records — late-night canine audio laboratory</title>
-<meta name="description" content="Good Boy Records: AI-assisted songs about two golden retrievers, presented as a late-night cassette archive with synchronised lyrics and generation notes.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<link rel="stylesheet" href="assets/css/site.css">
-<meta property="og:title" content="Good Boy Records">
-<meta property="og:description" content="Every song here is about a dog. The machinery is needlessly serious.">
-<meta property="og:type" content="website">
+<title>Good Boy Records</title>
+<meta name="description" content="Good Boy Records cassette player">
+<link rel="stylesheet" href="assets/css/v6.css">
 </head>
-<body class="home">
-<a class="skip" href="#shelf">Skip to the catalogue</a>
+<body>
+<main class="gbr-app">
+  <header class="gbr-topbar">
+    <span class="gbr-brand">GOOD BOY RECORDS</span>
+    <div class="gbr-top-actions">
+      <span class="gbr-status" id="gbr-status">READY</span>
+      <button class="gbr-top-button" id="gbr-eq-toggle" type="button" aria-expanded="false" aria-controls="gbr-eq-popover">EQ</button>
+      <button class="gbr-top-button" id="gbr-tech-toggle" type="button" aria-expanded="false" aria-controls="gbr-tech-panel">TECH</button>
+    </div>
+  </header>
 
-<div class="topline">
-  <div class="shell topline__inner">
-    <a class="brand" href=""><span class="brand__lamp" aria-hidden="true"></span>GOOD BOY RECORDS</a>
-    <span class="topline__status">WAGGING TAIL CORP. / ARCHIVE TERMINAL 01</span>
-    <span class="numitron numitron--small">0 RELEASES</span>
-  </div>
-</div>
-
-
-
-<main id="main">
-  <section class="section library" id="shelf" aria-labelledby="shelf-heading">
-    <div class="shell">
-      <h2 class="visually-hidden" id="shelf-heading">Cassette carousel</h2>
-      <label class="toggle" id="preview-field" hidden>
-        <input type="checkbox" id="preview-toggle">
-        <span>HOVER PREVIEW</span>
-      </label>
-
-      <div class="showcase-stage">
-        <div class="player-rail" id="player-rail" data-visible="false">
-          <section class="deck" id="deck" data-state="idle" aria-labelledby="deck-title">
-            <div class="machine-shell machine-shell--split-rack">
-              <div class="machine-shell__topline">
-                <span class="machine-shell__serial">SER 0001 / GOOD BOY RECORDS</span>
-                <span class="machine-shell__actions"><button type="button" class="deck__details" id="eq-toggle" aria-controls="eq-popover" aria-expanded="false">EQ</button><button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button></span>
-              </div>
-
-              <div class="split-layout">
-                <div class="carousel-viewport">
-                  <div class="cassette-carousel-shell" id="cassette-carousel-shell">
-                    <div class="carousel-pickup" aria-hidden="true"><span></span><b>PICKUP</b></div>
-                    <button type="button" class="carousel-step carousel-step--prev" id="carousel-prev" aria-label="Rotate cassette carousel backwards">‹</button>
-                    <div class="cassette-carousel" id="cassette-carousel" role="region" aria-label="Rotary cassette storage carousel" tabindex="0">
-                      <div class="carousel-platter" id="carousel-platter">
-                        <div class="carousel-hub" aria-hidden="true"><span>GBR</span><small>ROTARY MAGAZINE</small></div>
-                        <div class="cassette-shelves">
+  <section class="gbr-machine" aria-label="Good Boy Records player">
+    <div class="gbr-carousel-viewport" aria-label="Cassette carousel">
+      <div class="gbr-carousel" id="gbr-carousel" tabindex="0" role="region" aria-label="Rotary cassette carousel">
+        <div class="gbr-carousel-ring" aria-hidden="true"></div>
+        <div class="gbr-carousel-hub" aria-hidden="true"></div>
+        <div class="gbr-carousel-cards" id="gbr-carousel-cards">
 <div class="track-wall"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="button" class="carousel-step carousel-step--next" id="carousel-next" aria-label="Rotate cassette carousel forwards">›</button>
-                  </div>
-                </div>
-
-                <div class="player-stack">
-                  <div class="spectrum-panel rack-module rack-module--spectrum" aria-label="Frequency spectrum">
-                    <div class="spectrum-panel__head"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
-                    <div class="spectrum" id="spectrum" aria-hidden="true"></div>
-                  </div>
-
-                  <div class="program-art rack-module rack-module--art" id="program-art">
-                    <div class="program-art__cover"><img id="deck-artwork" src="assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
-                    <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
-                      <span class="cassette-bay__slot"></span>
-                      <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
-                    </div>
-                  </div>
-
-                  <div class="transport-stack rack-module rack-module--transport">
-                    <div class="transport-panel">
-                      <button type="button" class="transport__button transport__button--shuffle" id="transport-shuffle" aria-label="Shuffle play" aria-pressed="false" title="Shuffle play">
-                        <svg class="icon-shuffle" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M21 3l-7.2 7.2M4 6h3.3c2 0 3.5.8 4.8 2.2l5.6 6.2c.9 1 1.8 1.6 3.3 1.6M16 16h5v5M21 21l-2.8-2.8M4 18h3.2c1.5 0 2.5-.5 3.4-1.4l1.2-1.3"/></svg>
-                      </button>
-                      <button type="button" class="transport__button" id="transport-toggle" aria-label="Play or pause">
-                        <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>
-                        <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
-                      </button>
-                      <div class="numitron clock-display"><span id="time-elapsed">0:00</span><b>/</b><span id="time-total">--:--</span></div>
-                      <div class="transport__scrub"><label class="visually-hidden" for="transport-scrub">Seek within the track</label><input type="range" id="transport-scrub" min="0" max="0" step="0.1" value="0"></div>
-                    </div>
-                    <div class="machine-footer">
-                      <label class="volume" for="transport-volume"><span>OUTPUT</span><input type="range" id="transport-volume" min="0" max="1" step="0.01" value="0.9"></label>
-                      <label class="quality"><input type="checkbox" id="quality-toggle"><span>LOSSLESS</span></label>
-                      <div class="machine-lamp"><span class="machine-lamp__bulb"></span><span>PLAY</span></div>
-                    </div>
-                  </div>
-
-                  <div class="lyric-focus rack-module rack-module--lyrics" id="lyric-focus" aria-live="polite">
-                    <span class="lyric-focus__word" id="lyric-focus-word">READY</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="player-internals visually-hidden" aria-hidden="true">
-                <strong id="deck-title">NO TAPE LATCHED</strong>
-                <span id="deck-catalogue">Rotate the magazine or press shuffle</span>
-                <span id="wall-monitor-code">----</span>
-                <div class="meter-bank"><span id="vu-left"></span><span id="vu-right"></span></div>
-              </div>
-
-              <div class="eq-popover" id="eq-popover" hidden>
-                <div class="eq-panel" id="eq-panel">
-                  <div class="eq-panel__head"><span>5-BAND PROGRAM EQ</span><button type="button" id="eq-reset">FLAT</button></div>
-                  <div class="eq-bands" aria-label="Five band equalizer">
-                    <label class="eq-band"><output for="eq-60">0 dB</output><input id="eq-60" data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0"><span>60</span></label>
-                    <label class="eq-band"><output for="eq-250">0 dB</output><input id="eq-250" data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0"><span>250</span></label>
-                    <label class="eq-band"><output for="eq-1000">0 dB</output><input id="eq-1000" data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0"><span>1K</span></label>
-                    <label class="eq-band"><output for="eq-4000">0 dB</output><input id="eq-4000" data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0"><span>4K</span></label>
-                    <label class="eq-band"><output for="eq-12000">0 dB</output><input id="eq-12000" data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0"><span>12K</span></label>
-                  </div>
-                  <p class="eq-panel__note" id="eq-note">EQ is applied live to the shared player.</p>
-                </div>
-              </div>
-
-              <div class="lyrics lyrics--timing-source visually-hidden" id="lyrics" data-following="true">
-                <p class="notice" id="lyrics-note" hidden>These lyrics are a placeholder.</p>
-                <div class="lyrics__scroll" id="lyrics-scroll" tabindex="-1">
-                  <ol class="lyrics__list" id="lyrics-list"><li>Select a cassette to load lyrics.</li></ol>
-                </div>
-                <button type="button" class="lyrics__return" id="lyrics-return">Return to current line</button>
-              </div>
-
-              <p class="deck__status" id="deck-status" role="status"></p>
-              <details class="player-drawer" id="player-drawer">
-                <summary><span>TECHNICAL</span><span class="listening-panel__lamp" aria-hidden="true"></span></summary>
-                <div class="listening-panel"><div id="deck-meta"></div></div>
-              </details>
-              <audio id="showcase-player" controls preload="none">Your browser cannot play this audio.</audio>
-            </div>
-          </section>
         </div>
       </div>
+      <button class="gbr-wheel-step gbr-wheel-step--up" type="button" id="gbr-prev" aria-label="Previous cassette">▲</button>
+      <button class="gbr-wheel-step gbr-wheel-step--down" type="button" id="gbr-next" aria-label="Next cassette">▼</button>
+    </div>
 
-      <noscript><p class="notice">The cassette wall player requires JavaScript. Track source files remain in the curated showcase repository.</p></noscript>
+    <div class="gbr-rack">
+      <section class="gbr-module gbr-spectrum-module" aria-label="Audio spectrum">
+        <div class="gbr-module-label"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
+        <div class="gbr-spectrum" id="gbr-spectrum" aria-hidden="true"></div>
+      </section>
+
+      <section class="gbr-module gbr-art-module" aria-label="Current artwork">
+        <div class="gbr-art-frame" id="gbr-art-frame">
+          <img id="gbr-artwork" src="assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current album artwork">
+          <div class="gbr-tape-slot" id="gbr-tape-slot" aria-hidden="true"><span></span></div>
+        </div>
+      </section>
+
+      <section class="gbr-module gbr-controls" aria-label="Playback controls">
+        <div class="gbr-control-row">
+          <button type="button" class="gbr-control" id="gbr-shuffle" aria-label="Shuffle play" aria-pressed="true" title="Shuffle play">⤨</button>
+          <button type="button" class="gbr-control" id="gbr-back" aria-label="Previous cassette" title="Previous cassette">◀</button>
+          <button type="button" class="gbr-control gbr-control--main" id="gbr-play" aria-label="Play or pause">▶</button>
+          <button type="button" class="gbr-control" id="gbr-skip" aria-label="Next cassette" title="Next cassette">▶</button>
+        </div>
+        <div class="gbr-progress-row">
+          <span class="gbr-clock"><span id="gbr-time">0:00</span><b>/</b><span id="gbr-total">--:--</span></span>
+          <input id="gbr-progress" type="range" min="0" max="0" value="0" step="0.1" aria-label="Track progress">
+        </div>
+        <div class="gbr-volume-row">
+          <span>OUTPUT</span>
+          <input id="gbr-volume" type="range" min="0" max="1" value="0.9" step="0.01" aria-label="Volume">
+          <label class="gbr-lossless" id="gbr-lossless-wrap"><input id="gbr-lossless" type="checkbox"><span>LOSSLESS</span></label>
+        </div>
+      </section>
+
+      <section class="gbr-module gbr-lyrics" id="gbr-lyrics" aria-label="Current lyric">
+        <div class="gbr-lyric-word" id="gbr-lyric-word">READY</div>
+        <div class="gbr-lyric-line" id="gbr-lyric-line"></div>
+      </section>
     </div>
   </section>
 
+  <div class="gbr-popover" id="gbr-eq-popover" hidden>
+    <section class="gbr-popup-card" role="dialog" aria-modal="false" aria-label="Five band equalizer">
+      <div class="gbr-popup-head"><strong>5-BAND PROGRAM EQ</strong><button type="button" id="gbr-eq-close" aria-label="Close equalizer">×</button></div>
+      <div class="gbr-eq-bands">
+        <label><output>0 dB</output><input data-eq-frequency="60" type="range" min="-9" max="9" step="1" value="0"><span>60</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="250" type="range" min="-9" max="9" step="1" value="0"><span>250</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="1000" type="range" min="-9" max="9" step="1" value="0"><span>1K</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="4000" type="range" min="-9" max="9" step="1" value="0"><span>4K</span></label>
+        <label><output>0 dB</output><input data-eq-frequency="12000" type="range" min="-9" max="9" step="1" value="0"><span>12K</span></label>
+      </div>
+      <div class="gbr-popup-foot"><button type="button" id="gbr-eq-flat">FLAT</button><span id="gbr-eq-note">EQ is applied live over HTTP.</span></div>
+    </section>
+  </div>
+
+  <aside class="gbr-tech-panel" id="gbr-tech-panel" hidden aria-label="Track technical details">
+    <div class="gbr-popup-head"><strong>TECHNICAL</strong><button type="button" id="gbr-tech-close" aria-label="Close technical details">×</button></div>
+    <div id="gbr-tech-content" class="gbr-tech-content"><p>No cassette loaded.</p></div>
+  </aside>
+
+  <audio id="gbr-audio" preload="metadata"></audio>
 </main>
-
-<footer class="colophon"><div class="shell"><p>GOOD BOY RECORDS</p></div></footer>
-
-<script type="application/json" id="catalogue-data">[]</script>
-<script src="assets/js/player.js" defer></script>
+<script id="catalogue-data" type="application/json">[]</script>
+<script src="assets/js/v6.js" defer></script>
 </body>
 </html>
