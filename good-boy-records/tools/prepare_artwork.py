@@ -31,6 +31,8 @@ SIZES = (640, 1280)
 # 0.0 keeps the top of the image, 0.5 centres, 1.0 keeps the bottom.
 # Portrait sleeves normally carry the title at the top, so they anchor high.
 ANCHORS: dict[str, float] = {
+    "dogtushya": 0.0,
+    "dogtushya-v2": 0.0,
 }
 DEFAULT_ANCHOR = 0.5
 PLACEHOLDER_BASE = "gbr-placeholder"
@@ -108,12 +110,6 @@ def main(source_dir: Path, output_dir: Path) -> int:
         p for p in source_dir.iterdir() if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}
     )
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Sleeve derivatives are generated build state. Remove old derivatives so
-    # deleted/renamed showcase artwork cannot linger in the deployed site.
-    for old in output_dir.iterdir():
-        if old.is_file() and old.name != ".gitkeep" and old.suffix.lower() in {".jpg", ".jpeg", ".webp"}:
-            old.unlink()
 
     # Always produce the built-in fallback first. This makes missing/broken cover
     # art a warning rather than a deployment blocker.

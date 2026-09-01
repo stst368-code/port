@@ -7,9 +7,9 @@ is never touched.
 Drop one of the shared song YAMLs beside its chosen cover and chosen render(s):
 
     showcase/
-      your-song-v2.yaml
-      your-song-v2.png
-      your-song-v2.flac
+      dogtushya-v2.yaml
+      dogtushya.png
+      dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
 
 Subfolders are also allowed. If several matching renders are deliberately put in
 showcase, each becomes a cassette. If no render is present, the cassette remains
@@ -76,7 +76,7 @@ def discover_audio(source_yaml: Path, title: str) -> list[Path]:
         if p.is_file() and p.suffix.lower() in AUDIO_EXTS
     ]
 
-    # Prefer the YAML filename prefix, e.g. your-song-v2_... .
+    # Prefer the YAML filename prefix, e.g. dogtushya-v2_CFG-... .
     exact = []
     for p in candidates:
         stem = normalised_stem(p)
@@ -250,24 +250,33 @@ def write_track(raw: dict[str, Any], source_yaml: Path, audio: Path | None, inde
 
 
 def clean_previous_generated() -> None:
-    """Reset curated build state before importing the current showcase.
-
-    These directories are generated mirrors of showcase/, not user-authored
-    libraries. Clearing them every build prevents removed/renamed tracks from
-    surviving as stale audio, covers or live-lyric sidecars.
-    """
-    for directory in (AUDIO_OUT, LIVE_LYRICS_OUT, MASTERS):
-        directory.mkdir(parents=True, exist_ok=True)
-        for path in directory.iterdir():
-            if path.name == ".gitkeep":
+    """Remove only things created by the prior curated import."""
+    if MANIFEST.exists():
+        try:
+            previous = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        except Exception:
+            previous = []
+        for item in previous if isinstance(previous, list) else []:
+            if not isinstance(item, dict):
                 continue
-            if path.is_file():
-                path.unlink()
-            elif path.is_dir():
-                shutil.rmtree(path)
+            for name in item.get("audio", []):
+                p = AUDIO_OUT / Path(str(name)).name
+                if p.is_file():
+                    p.unlink()
+            for name in item.get("liveLyrics", []):
+                p = LIVE_LYRICS_OUT / Path(str(name)).name
+                if p.is_file():
+                    p.unlink()
+            cover_name = item.get("master")
+            if cover_name:
+                p = MASTERS / Path(str(cover_name)).name
+                if p.is_file():
+                    p.unlink()
 
     # content-source/tracks is generated build state in the curated workflow.
-    # Purge all generated records before rebuilding from the current showcase.
+    # Older GBR versions wrote track YAMLs directly into content-source/tracks/,
+    # so purge all generated YAML records before rebuilding. Otherwise a repository
+    # upgraded in place can accidentally publish/validate obsolete tracks.
     track_root = ROOT / "content-source" / "tracks"
     if track_root.exists():
         for p in track_root.rglob("*.yaml"):

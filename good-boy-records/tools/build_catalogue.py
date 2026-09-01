@@ -189,7 +189,7 @@ def format_clock(seconds: float | None) -> str:
 def load_tracks(report: Report) -> list[dict[str, Any]]:
     files = sorted(TRACK_DIR.rglob("*.yaml"))
     if not files:
-        report.warn("content-source/tracks/showcase", "no curated track definitions found; building an empty carousel shell")
+        report.error("content-source/tracks/showcase", "no curated track definitions found")
         return []
 
     tracks: list[dict[str, Any]] = []
