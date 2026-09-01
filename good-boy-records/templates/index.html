@@ -41,41 +41,28 @@
                 <span class="machine-shell__serial">SER 0001 / GOOD BOY RECORDS</span>
                 <span class="machine-shell__actions"><button type="button" class="deck__details" id="eq-toggle" aria-controls="eq-popover" aria-expanded="false">EQ</button><button type="button" class="deck__details" id="deck-details" aria-controls="player-drawer" aria-expanded="false">Technical</button></span>
               </div>
-
-              <div class="stage-left">
-                <div class="wall-monitor stage-card stage-card--title">
-                  <span class="wall-monitor__lamp" aria-hidden="true"></span>
-                  <div class="wall-monitor__copy">
-                    <small>ACTIVE CHANNEL</small>
-                    <strong id="deck-title">NO TAPE LATCHED</strong>
-                    <span class="deck__catalogue" id="deck-catalogue">Rotate the magazine or press shuffle</span>
-                  </div>
-                  <span class="numitron" id="wall-monitor-code">----</span>
-                </div>
-                <div class="program-art stage-card" id="program-art">
-                  <div class="program-art__cover"><img id="deck-artwork" src="{{ROOT}}assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
-                  <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
-                    <span class="cassette-bay__slot"></span>
-                    <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
-                  </div>
-                </div>
-              </div>
-
               <div class="cassette-carousel-shell" id="cassette-carousel-shell">
                 <div class="carousel-pickup" aria-hidden="true"><span></span><b>PICKUP</b></div>
                 <div class="ring-copy" aria-hidden="true">
                   <svg class="ring-copy__svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
                     <defs>
-                      <path id="ring-title-path" d="M 240 360 A 260 260 0 0 1 760 360" />
-                      <path id="ring-meta-path" d="M 285 410 A 215 215 0 0 1 715 410" />
-                      <path id="ring-lyric-path-a" d="M 210 675 A 290 290 0 0 1 790 675" />
-                      <path id="ring-lyric-path-b" d="M 260 725 A 240 240 0 0 1 740 725" />
+                      <path id="ring-title-path" d="M 270 500 A 230 230 0 0 1 730 500" />
+                      <path id="ring-meta-path" d="M 300 500 A 200 200 0 0 1 700 500" />
+                      <path id="ring-lyric-path-a" d="M 735 520 A 235 235 0 0 1 265 520" />
+                      <path id="ring-lyric-path-b" d="M 705 535 A 205 205 0 0 1 295 535" />
                     </defs>
                     <text class="ring-copy__title"><textPath href="#ring-title-path" id="deck-title-arc" startOffset="50%" text-anchor="middle">NO TAPE LATCHED</textPath></text>
                     <text class="ring-copy__meta"><textPath href="#ring-meta-path" id="deck-catalogue-arc" startOffset="50%" text-anchor="middle">Rotate the magazine or press shuffle</textPath></text>
                     <text class="ring-copy__lyric ring-copy__lyric--a"><textPath href="#ring-lyric-path-a" id="deck-lyric-arc-a" startOffset="50%" text-anchor="middle">Select a cassette to load lyrics.</textPath></text>
                     <text class="ring-copy__lyric ring-copy__lyric--b"><textPath href="#ring-lyric-path-b" id="deck-lyric-arc-b" startOffset="50%" text-anchor="middle"></textPath></text>
                   </svg>
+                </div>
+<div class="program-art stage-card" id="program-art">
+                  <div class="program-art__cover"><img id="deck-artwork" src="{{ROOT}}assets/img/sleeves/gbr-placeholder-640.jpg" alt="Current track artwork"></div>
+                  <div class="cassette-bay" id="cassette-bay" aria-label="Cassette transport bay">
+                    <span class="cassette-bay__slot"></span>
+                    <div class="cassette-bay__tape" id="cassette-bay-tape" data-loaded="false"><span class="cassette-bay__art" id="cassette-bay-art"></span><b id="cassette-bay-label">NO TAPE</b></div>
+                  </div>
                 </div>
                 <button type="button" class="carousel-step carousel-step--prev" id="carousel-prev" aria-label="Rotate cassette carousel backwards">‹</button>
                 <div class="cassette-carousel" id="cassette-carousel" role="region" aria-label="Rotary cassette storage carousel" tabindex="0">

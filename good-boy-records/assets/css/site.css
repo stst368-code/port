@@ -2351,3 +2351,175 @@ a{color:var(--amber2);text-underline-offset:.2em} a:hover{color:#fff} img{displa
   .home .machine-shell--carousel-layout .stage-right .transport__button{ height:20px !important; }
   .home .machine-shell--carousel-layout .stage-right .clock-display{ font-size:.33rem !important; }
 }
+
+
+/* v5.27 — geometry reset: artwork physically belongs to carousel hub. */
+.home .machine-shell--carousel-layout{
+  box-sizing:border-box !important;
+  width:min(100%,1120px) !important;
+  --carousel-size:min(78vmin, calc(100vw - 3rem), 820px) !important;
+  --carousel-radius:calc(var(--carousel-size) * .355) !important;
+  --carousel-tape:calc(var(--carousel-size) * .132) !important;
+  padding:1rem 1rem 9.25rem !important;
+  min-height:calc(var(--carousel-size) + 10rem) !important;
+  overflow:hidden !important;
+}
+.home .machine-shell--carousel-layout .cassette-carousel-shell{
+  box-sizing:border-box !important;
+  width:var(--carousel-size) !important;
+  height:var(--carousel-size) !important;
+  margin:.15rem auto 0 !important;
+  overflow:visible !important;
+}
+.home .machine-shell--carousel-layout .carousel-platter{
+  width:100% !important;
+  height:100% !important;
+}
+.home .machine-shell--carousel-layout .program-art{
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  width:28% !important;
+  height:auto !important;
+  aspect-ratio:1 !important;
+  transform:translate(-50%,-50%) !important;
+  z-index:40 !important;
+  display:block !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+  background:#090603 !important;
+  box-shadow:
+    0 0 0 2px #120a05,
+    0 0 0 4px #6b3a16,
+    0 0 0 10px #100905,
+    0 0 0 11px rgba(127,68,20,.85),
+    inset 0 0 25px #000,
+    0 0 28px rgba(255,139,24,.08) !important;
+}
+.home .machine-shell--carousel-layout .program-art__cover{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  border-radius:50% !important;
+  overflow:hidden !important;
+  background:#070402 !important;
+}
+.home .machine-shell--carousel-layout .program-art__cover img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  border:0 !important;
+  border-radius:50% !important;
+  display:block !important;
+}
+.home .machine-shell--carousel-layout .program-art::after{
+  inset:0 !important;
+  border-radius:50% !important;
+  box-shadow:inset 0 0 0 1px rgba(248,171,74,.18), inset 0 0 24px rgba(0,0,0,.32) !important;
+}
+.home .machine-shell--carousel-layout .program-art .cassette-bay{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  border:0 !important;
+  background:transparent !important;
+  border-radius:50% !important;
+  overflow:hidden !important;
+}
+.home .machine-shell--carousel-layout .program-art .cassette-bay__tape{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  border-radius:50% !important;
+  border:0 !important;
+  background:transparent !important;
+  transform:translateY(115%) scale(.82) !important;
+  opacity:0 !important;
+  transition:transform .52s cubic-bezier(.2,.8,.18,1),opacity .25s ease !important;
+}
+.home .machine-shell--carousel-layout .program-art .cassette-bay__tape[data-loaded="true"]{
+  transform:translateY(0) scale(1) !important;
+  opacity:1 !important;
+}
+.home .machine-shell--carousel-layout .carousel-hub{
+  width:28% !important;
+  background:radial-gradient(circle,#120a05,#060302 75%) !important;
+}
+.home .machine-shell--carousel-layout .ring-copy__meta{ display:none !important; }
+.home .machine-shell--carousel-layout .ring-copy__title,
+.home .machine-shell--carousel-layout .ring-copy__lyric{
+  fill:#ead9ba !important;
+  stroke:rgba(6,3,1,.92) !important;
+  stroke-width:10px !important;
+  paint-order:stroke fill !important;
+  text-shadow:none !important;
+}
+.home .machine-shell--carousel-layout .ring-copy__title{
+  font-size:42px !important;
+  font-weight:850 !important;
+  letter-spacing:1.2px !important;
+}
+.home .machine-shell--carousel-layout .ring-copy__lyric--a{
+  font-size:17px !important;
+  font-weight:750 !important;
+}
+.home .machine-shell--carousel-layout .ring-copy__lyric--b{
+  font-size:15px !important;
+  opacity:.9 !important;
+}
+.home .machine-shell--carousel-layout .ring-copy{
+  z-index:32 !important;
+}
+.home .machine-shell--carousel-layout .track-wall .card{
+  z-index:auto;
+}
+.home .machine-shell--carousel-layout .track-wall .card .cassette{
+  filter:brightness(.82) saturate(.88) !important;
+  opacity:.93 !important;
+}
+.home .machine-shell--carousel-layout .track-wall .card.is-pickup .cassette{
+  filter:brightness(1.08) saturate(1) !important;
+}
+.home .machine-shell--carousel-layout .carousel-pickup{ z-index:50 !important; }
+.home .machine-shell--carousel-layout .stage-right > .transport-stack,
+.home .machine-shell--carousel-layout .stage-right > .spectrum-panel,
+.home .machine-shell--carousel-layout .stage-right > .meter-bank{
+  bottom:.65rem !important;
+  height:6.25rem !important;
+}
+.home .machine-shell--carousel-layout .stage-right > .transport-stack{left:1.4% !important;width:31% !important;}
+.home .machine-shell--carousel-layout .stage-right > .spectrum-panel{left:34.4% !important;width:35.8% !important;}
+.home .machine-shell--carousel-layout .stage-right > .meter-bank{right:1.4% !important;width:27% !important;}
+@media (max-width:700px){
+  .home .machine-shell--carousel-layout{
+    width:100% !important;
+    --carousel-size:min(calc(100vw - 1.45rem), 460px) !important;
+    --carousel-radius:calc(var(--carousel-size) * .35) !important;
+    --carousel-tape:calc(var(--carousel-size) * .128) !important;
+    padding:.65rem .25rem 9.7rem !important;
+    min-height:calc(var(--carousel-size) + 10.25rem) !important;
+    border-inline:0 !important;
+  }
+  .home .machine-shell--carousel-layout .machine-shell__topline{
+    padding:.35rem .25rem .65rem !important;
+  }
+  .home .machine-shell--carousel-layout .machine-shell__serial{font-size:.56rem !important;letter-spacing:.13em !important;}
+  .home .machine-shell--carousel-layout .program-art{width:29% !important;}
+  .home .machine-shell--carousel-layout .ring-copy__title{font-size:27px !important;stroke-width:6px !important;letter-spacing:.5px !important;}
+  .home .machine-shell--carousel-layout .ring-copy__lyric--a{font-size:10.7px !important;stroke-width:4px !important;}
+  .home .machine-shell--carousel-layout .ring-copy__lyric--b{font-size:9.7px !important;stroke-width:4px !important;}
+  .home .machine-shell--carousel-layout .carousel-step{width:34px !important;height:48px !important;font-size:1.25rem !important;}
+  .home .machine-shell--carousel-layout .stage-right > .transport-stack,
+  .home .machine-shell--carousel-layout .stage-right > .spectrum-panel,
+  .home .machine-shell--carousel-layout .stage-right > .meter-bank{height:5.25rem !important;bottom:.32rem !important;}
+  .home .machine-shell--carousel-layout .stage-right > .transport-stack{left:.6% !important;width:37% !important;}
+  .home .machine-shell--carousel-layout .stage-right > .spectrum-panel{left:38.3% !important;width:32.3% !important;}
+  .home .machine-shell--carousel-layout .stage-right > .meter-bank{right:.6% !important;width:28.2% !important;}
+}
