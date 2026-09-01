@@ -20,14 +20,6 @@ jobs:
     name: Build Good Boy Records
     runs-on: ubuntu-latest
 
-<<<<<<< HEAD
-=======
-    defaults:
-      run:
-        shell: bash
-        working-directory: good-boy-records
-
->>>>>>> 8005adda31f0ef2eaffe4b021b00c65f76a4c714
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -58,7 +50,6 @@ jobs:
         with:
           python-version: "3.12"
 
-<<<<<<< HEAD
       - name: Install GBR build dependencies - NO requirements.txt
         shell: bash
         run: |
@@ -88,41 +79,6 @@ jobs:
         run: |
           cd "$PROJECT_DIR"
           python tools/build_catalogue.py
-=======
-      - name: Verify project and showcase
-        run: |
-          echo "Working directory: $(pwd)"
-
-          if [ ! -f tools/import_showcase.py ]; then
-            echo "ERROR: expected good-boy-records/tools/import_showcase.py"
-            echo
-            echo "Repository structure:"
-            find "$GITHUB_WORKSPACE" -maxdepth 4 -type f | sort | head -400
-            exit 1
-          fi
-
-          echo
-          echo "Showcase files committed to this build:"
-          find showcase -maxdepth 2 -type f | sort
-
-      - name: Install build dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install "PyYAML>=6.0" "Pillow>=10.0"
-
-      - name: Clean generated output
-        run: |
-          rm -rf music _site
-
-      - name: Import curated showcase
-        run: python tools/import_showcase.py
-
-      - name: Prepare artwork
-        run: python tools/prepare_artwork.py masters assets/img/sleeves
-
-      - name: Build cassette player catalogue
-        run: python tools/build_catalogue.py
->>>>>>> 8005adda31f0ef2eaffe4b021b00c65f76a4c714
 
       - name: Check internal links
         shell: bash
@@ -130,26 +86,11 @@ jobs:
           cd "$PROJECT_DIR"
           python tools/check_links.py
 
-<<<<<<< HEAD
       - name: Stage Pages runtime
         shell: bash
         run: |
           cd "$PROJECT_DIR"
           python tools/stage_pages.py
-=======
-      - name: Stage GitHub Pages runtime
-        run: |
-          python tools/stage_pages.py
-
-          echo
-          echo "Published artifact contents:"
-          find _site -maxdepth 3 -type f | sort | head -400
-
-          if [ -d _site/music ]; then
-            echo "ERROR: legacy music/ directory reached the Pages artifact"
-            exit 1
-          fi
->>>>>>> 8005adda31f0ef2eaffe4b021b00c65f76a4c714
 
           test -f _site/index.html
 
