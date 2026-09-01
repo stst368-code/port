@@ -59,11 +59,11 @@
         </div>
       </div>
 
-      <p class="library__count">1 mounted tapes <span aria-hidden="true">/</span> versions stay together in song rows <span aria-hidden="true">/</span> player is fixed above the wall</p>
+      <p class="library__count">1 mounted tapes <span aria-hidden="true">/</span> versions stay together <span aria-hidden="true">/</span> player stays fixed above the wall</p>
 
       <div class="showcase-stage">
-        <div class="genre-shelves">
-<section class="genre-cluster" data-genre="Unclassified"><header class="genre-cluster__header"><h3>Unclassified</h3><span>1 tape / 1 song</span></header><div class="genre-wall"><article class="composition-row" data-composition="dogtushya" aria-label="dogtushya, 1 version"><h4 class="composition-row__title">dogtushya</h4><ul class="composition-row__tapes">          <li class="card" data-track="dogtushya-v2" data-composition="dogtushya">
+        <div class="cassette-shelves">
+<div class="track-wall"><article class="track-group" data-composition="dogtushya" aria-label="dogtushya, 1 version"><h3 class="track-group__title">dogtushya</h3><ul class="track-group__tapes">          <li class="card" data-track="dogtushya-v2" data-composition="dogtushya">
             <span class="version-tag" aria-hidden="true">V2</span>
             <button type="button" class="card__play" data-play="dogtushya-v2" aria-label="Latch and play dogtushya, V2">
               <span class="cassette" aria-hidden="true">
@@ -74,7 +74,7 @@
                 <span class="cassette__teeth"></span>
               </span>
             </button>
-          </li></ul></article></div></section>
+          </li></ul></article></div>
         </div>
 
         <div class="player-rail" id="player-rail" data-visible="false">
@@ -99,6 +99,11 @@
               <div class="inspiration-readout">
                 <span>INSPIRATION</span>
                 <p id="deck-inspiration">Select a cassette to load its source inspiration.</p>
+              </div>
+
+              <div class="spectrum-panel" aria-label="Post-EQ frequency spectrum">
+                <div class="spectrum-panel__head"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
+                <div class="spectrum" id="spectrum" aria-hidden="true"></div>
               </div>
 
               <div class="meter-bank" aria-label="Audio level meters">

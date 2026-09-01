@@ -122,10 +122,19 @@ Missing or broken cover artwork no longer blocks deployment.
 - The workflow fails if a legacy `_site/music` directory somehow reaches the deployment artifact.
 
 
-## v5.13
+## v5.14
 
 - Moved the stationary transport/mixer to a fixed full-width top console.
 - Removed the split left/right cassette lanes and centre corridor.
 - Restored full-width cassette rows.
 - Grouped each song into one row with adjacent versions and one shared title.
 - Kept EQ, VU, transport, inspiration and live-lyrics drawer in the fixed player.
+
+
+## v5.14 warm hi-fi / continuous wall revision
+- Reworked the fixed player toward late-1970s/early-1980s black, brown, brushed-metal and amber hi-fi hardware.
+- Compressed the interactive five-band EQ while retaining the real Web Audio filter chain.
+- Added an 18-band, 10-segment post-EQ spectrum display driven from `AnalyserNode.getByteFrequencyData()`, with fast attack and short visible decay.
+- Centred the permanently visible two-line live lyrics beneath the hardware stack.
+- Removed genre headers from the physical cassette wall. Genre remains catalogue metadata only.
+- Replaced one-song-per-row layout with intact track groups that flex-wrap across a continuous dense wall; versions never split away from their siblings.

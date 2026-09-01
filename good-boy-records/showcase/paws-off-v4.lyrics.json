@@ -1,0 +1,3188 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 2,
+  "title": "paws-off",
+  "song_version": 4,
+  "source_yaml": "paws-off-v4.yaml",
+  "source_audio": "paws-off-v4.mp3",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "runtime": {
+    "requested_device": "auto",
+    "demucs_device": "cuda",
+    "whisperx_device": "cuda",
+    "whisperx_compute_type": "float16",
+    "batch_size": 4,
+    "cpu_fallback_used": false
+  },
+  "generated_at": "2026-09-01T04:54:38+00:00",
+  "stats": {
+    "lyric_words": 359,
+    "recognised_words": 285,
+    "matched_words": 256,
+    "coverage": 0.7131
+  },
+  "quality": {
+    "rating": "review",
+    "review_threshold": 0.8,
+    "review_required": true,
+    "approved": false,
+    "usable_for_live_lyrics": false
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "Yeah",
+      "start": 2.869,
+      "end": 3.17,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 2.869,
+          "end": 3.17,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "Two goldens",
+      "start": 6.06,
+      "end": 6.842,
+      "words": [
+        {
+          "text": "Two",
+          "start": 6.06,
+          "end": 6.261,
+          "matched": true
+        },
+        {
+          "text": "goldens",
+          "start": 6.301,
+          "end": 6.842,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "Doja... Bam Bam...",
+      "start": 9.291,
+      "end": 11.027,
+      "words": [
+        {
+          "text": "Doja...",
+          "start": 9.291,
+          "end": 9.732,
+          "matched": true
+        },
+        {
+          "text": "Bam",
+          "start": 9.732,
+          "end": 10.38,
+          "matched": false
+        },
+        {
+          "text": "Bam...",
+          "start": 10.38,
+          "end": 11.027,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "(Woof)",
+      "start": 11.027,
+      "end": 11.675,
+      "words": [
+        {
+          "text": "(Woof)",
+          "start": 11.027,
+          "end": 11.675,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "Yeah",
+      "start": 11.675,
+      "end": 11.895,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 11.675,
+          "end": 11.895,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "Doja move silent",
+      "start": 11.895,
+      "end": 13.276,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 11.895,
+          "end": 12.736,
+          "matched": false
+        },
+        {
+          "text": "move",
+          "start": 12.736,
+          "end": 12.876,
+          "matched": true
+        },
+        {
+          "text": "silent",
+          "start": 12.896,
+          "end": 13.276,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "Cold ambition",
+      "start": 14.077,
+      "end": 14.818,
+      "words": [
+        {
+          "text": "Cold",
+          "start": 14.077,
+          "end": 14.317,
+          "matched": true
+        },
+        {
+          "text": "ambition",
+          "start": 14.377,
+          "end": 14.818,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "Never askin' permission",
+      "start": 15.278,
+      "end": 16.439,
+      "words": [
+        {
+          "text": "Never",
+          "start": 15.278,
+          "end": 15.458,
+          "matched": true
+        },
+        {
+          "text": "askin'",
+          "start": 15.518,
+          "end": 15.839,
+          "matched": true
+        },
+        {
+          "text": "permission",
+          "start": 15.899,
+          "end": 16.439,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "Head high, eyes sharp",
+      "start": 16.499,
+      "end": 17.941,
+      "words": [
+        {
+          "text": "Head",
+          "start": 16.499,
+          "end": 16.78,
+          "matched": true
+        },
+        {
+          "text": "high,",
+          "start": 16.88,
+          "end": 17.16,
+          "matched": true
+        },
+        {
+          "text": "eyes",
+          "start": 17.42,
+          "end": 17.54,
+          "matched": true
+        },
+        {
+          "text": "sharp",
+          "start": 17.64,
+          "end": 17.941,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "On her mission",
+      "start": 18.181,
+      "end": 18.841,
+      "words": [
+        {
+          "text": "On",
+          "start": 18.181,
+          "end": 18.281,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 18.321,
+          "end": 18.441,
+          "matched": true
+        },
+        {
+          "text": "mission",
+          "start": 18.501,
+          "end": 18.841,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "Yeah",
+      "start": 18.881,
+      "end": 19.382,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 18.881,
+          "end": 19.382,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "Extortin' scratches",
+      "start": 20.303,
+      "end": 21.264,
+      "words": [
+        {
+          "text": "Extortin'",
+          "start": 20.303,
+          "end": 20.763,
+          "matched": true
+        },
+        {
+          "text": "scratches",
+          "start": 20.803,
+          "end": 21.264,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "Independent",
+      "start": 22.144,
+      "end": 22.845,
+      "words": [
+        {
+          "text": "Independent",
+          "start": 22.144,
+          "end": 22.845,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "But she want all the attention",
+      "start": 23.085,
+      "end": 24.446,
+      "words": [
+        {
+          "text": "But",
+          "start": 23.085,
+          "end": 23.225,
+          "matched": true
+        },
+        {
+          "text": "she",
+          "start": 23.245,
+          "end": 23.365,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 23.385,
+          "end": 23.506,
+          "matched": true
+        },
+        {
+          "text": "all",
+          "start": 23.566,
+          "end": 23.686,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 23.706,
+          "end": 23.806,
+          "matched": true
+        },
+        {
+          "text": "attention",
+          "start": 23.886,
+          "end": 24.446,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "(yeah, yeah)",
+      "start": 24.486,
+      "end": 25.147,
+      "words": [
+        {
+          "text": "(yeah,",
+          "start": 24.486,
+          "end": 24.787,
+          "matched": true
+        },
+        {
+          "text": "yeah)",
+          "start": 24.887,
+          "end": 25.147,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Bam Bam crashin' through",
+      "start": 25.287,
+      "end": 26.348,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 25.287,
+          "end": 25.447,
+          "matched": true
+        },
+        {
+          "text": "Bam",
+          "start": 25.467,
+          "end": 25.648,
+          "matched": true
+        },
+        {
+          "text": "crashin'",
+          "start": 25.668,
+          "end": 26.048,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 26.088,
+          "end": 26.348,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "Big fluff",
+      "start": 26.468,
+      "end": 27.009,
+      "words": [
+        {
+          "text": "Big",
+          "start": 26.468,
+          "end": 26.668,
+          "matched": true
+        },
+        {
+          "text": "fluff",
+          "start": 26.728,
+          "end": 27.009,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Big smile",
+      "start": 27.269,
+      "end": 27.91,
+      "words": [
+        {
+          "text": "Big",
+          "start": 27.269,
+          "end": 27.469,
+          "matched": true
+        },
+        {
+          "text": "smile",
+          "start": 27.489,
+          "end": 27.91,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "Big hips energy",
+      "start": 28.09,
+      "end": 29.131,
+      "words": [
+        {
+          "text": "Big",
+          "start": 28.09,
+          "end": 28.31,
+          "matched": true
+        },
+        {
+          "text": "hips",
+          "start": 28.37,
+          "end": 28.61,
+          "matched": true
+        },
+        {
+          "text": "energy",
+          "start": 28.69,
+          "end": 29.131,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "Ball bounce",
+      "start": 29.171,
+      "end": 29.731,
+      "words": [
+        {
+          "text": "Ball",
+          "start": 29.171,
+          "end": 29.431,
+          "matched": true
+        },
+        {
+          "text": "bounce",
+          "start": 29.471,
+          "end": 29.731,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "He gone like a missile",
+      "start": 29.751,
+      "end": 31.212,
+      "words": [
+        {
+          "text": "He",
+          "start": 29.751,
+          "end": 29.911,
+          "matched": true
+        },
+        {
+          "text": "gone",
+          "start": 29.951,
+          "end": 30.212,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 30.232,
+          "end": 30.372,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 30.412,
+          "end": 30.432,
+          "matched": true
+        },
+        {
+          "text": "missile",
+          "start": 30.492,
+          "end": 31.212,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "Single neuron mind",
+      "start": 31.273,
+      "end": 32.063,
+      "words": [
+        {
+          "text": "Single",
+          "start": 31.273,
+          "end": 31.553,
+          "matched": true
+        },
+        {
+          "text": "neuron",
+          "start": 31.573,
+          "end": 32.033,
+          "matched": true
+        },
+        {
+          "text": "mind",
+          "start": 32.033,
+          "end": 32.063,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "One focus",
+      "start": 32.063,
+      "end": 32.454,
+      "words": [
+        {
+          "text": "One",
+          "start": 32.063,
+          "end": 32.093,
+          "matched": false
+        },
+        {
+          "text": "focus",
+          "start": 32.093,
+          "end": 32.454,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "Tongue flappin' in the wind",
+      "start": 32.454,
+      "end": 33.695,
+      "words": [
+        {
+          "text": "Tongue",
+          "start": 32.454,
+          "end": 32.701,
+          "matched": false
+        },
+        {
+          "text": "flappin'",
+          "start": 32.701,
+          "end": 32.947,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 32.947,
+          "end": 33.194,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 33.194,
+          "end": 33.294,
+          "matched": true
+        },
+        {
+          "text": "wind",
+          "start": 33.294,
+          "end": 33.695,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "Bring it back once",
+      "start": 33.695,
+      "end": 34.676,
+      "words": [
+        {
+          "text": "Bring",
+          "start": 33.695,
+          "end": 33.855,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 33.895,
+          "end": 33.975,
+          "matched": true
+        },
+        {
+          "text": "back",
+          "start": 34.015,
+          "end": 34.235,
+          "matched": true
+        },
+        {
+          "text": "once",
+          "start": 34.435,
+          "end": 34.676,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "He do it again",
+      "start": 34.736,
+      "end": 35.216,
+      "words": [
+        {
+          "text": "He",
+          "start": 34.736,
+          "end": 34.896,
+          "matched": true
+        },
+        {
+          "text": "do",
+          "start": 34.916,
+          "end": 35.036,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 35.096,
+          "end": 35.156,
+          "matched": true
+        },
+        {
+          "text": "again",
+          "start": 35.156,
+          "end": 35.216,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "Again",
+      "start": 35.216,
+      "end": 35.536,
+      "words": [
+        {
+          "text": "Again",
+          "start": 35.216,
+          "end": 35.536,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "Again",
+      "start": 35.997,
+      "end": 36.357,
+      "words": [
+        {
+          "text": "Again",
+          "start": 35.997,
+          "end": 36.357,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "(Woof)",
+      "start": 36.357,
+      "end": 37.658,
+      "words": [
+        {
+          "text": "(Woof)",
+          "start": 36.357,
+          "end": 37.658,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "Golden hearted giant",
+      "start": 37.658,
+      "end": 39.139,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 37.658,
+          "end": 38.018,
+          "matched": true
+        },
+        {
+          "text": "hearted",
+          "start": 38.078,
+          "end": 38.378,
+          "matched": true
+        },
+        {
+          "text": "giant",
+          "start": 38.458,
+          "end": 39.139,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "Big soft mouth",
+      "start": 39.259,
+      "end": 40.379,
+      "words": [
+        {
+          "text": "Big",
+          "start": 39.259,
+          "end": 39.539,
+          "matched": true
+        },
+        {
+          "text": "soft",
+          "start": 39.659,
+          "end": 39.999,
+          "matched": true
+        },
+        {
+          "text": "mouth",
+          "start": 40.079,
+          "end": 40.379,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "Never learned no personal space",
+      "start": 40.499,
+      "end": 41.98,
+      "words": [
+        {
+          "text": "Never",
+          "start": 40.499,
+          "end": 40.819,
+          "matched": true
+        },
+        {
+          "text": "learned",
+          "start": 40.879,
+          "end": 41.08,
+          "matched": true
+        },
+        {
+          "text": "no",
+          "start": 41.12,
+          "end": 41.24,
+          "matched": true
+        },
+        {
+          "text": "personal",
+          "start": 41.28,
+          "end": 41.62,
+          "matched": true
+        },
+        {
+          "text": "space",
+          "start": 41.64,
+          "end": 41.98,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "He can fit ya neck in his mouth",
+      "start": 42.1,
+      "end": 45.061,
+      "words": [
+        {
+          "text": "He",
+          "start": 42.1,
+          "end": 42.24,
+          "matched": true
+        },
+        {
+          "text": "can",
+          "start": 42.26,
+          "end": 42.42,
+          "matched": true
+        },
+        {
+          "text": "fit",
+          "start": 42.48,
+          "end": 42.74,
+          "matched": true
+        },
+        {
+          "text": "ya",
+          "start": 42.74,
+          "end": 43.301,
+          "matched": false
+        },
+        {
+          "text": "neck",
+          "start": 43.301,
+          "end": 43.541,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 43.741,
+          "end": 43.841,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 43.881,
+          "end": 44.001,
+          "matched": true
+        },
+        {
+          "text": "mouth",
+          "start": 44.081,
+          "end": 45.061,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "Woof",
+      "start": 45.061,
+      "end": 45.281,
+      "words": [
+        {
+          "text": "Woof",
+          "start": 45.061,
+          "end": 45.281,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "Boss walk",
+      "start": 45.281,
+      "end": 45.982,
+      "words": [
+        {
+          "text": "Boss",
+          "start": 45.281,
+          "end": 45.561,
+          "matched": true
+        },
+        {
+          "text": "walk",
+          "start": 45.662,
+          "end": 45.982,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "Lone wolf",
+      "start": 46.082,
+      "end": 46.662,
+      "words": [
+        {
+          "text": "Lone",
+          "start": 46.082,
+          "end": 46.442,
+          "matched": true
+        },
+        {
+          "text": "wolf",
+          "start": 46.462,
+          "end": 46.662,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "Doja, regal vibe",
+      "start": 46.882,
+      "end": 48.103,
+      "words": [
+        {
+          "text": "Doja,",
+          "start": 46.882,
+          "end": 47.262,
+          "matched": true
+        },
+        {
+          "text": "regal",
+          "start": 47.322,
+          "end": 47.642,
+          "matched": true
+        },
+        {
+          "text": "vibe",
+          "start": 47.702,
+          "end": 48.103,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "Good boy",
+      "start": 48.483,
+      "end": 49.203,
+      "words": [
+        {
+          "text": "Good",
+          "start": 48.483,
+          "end": 48.803,
+          "matched": true
+        },
+        {
+          "text": "boy",
+          "start": 48.883,
+          "end": 49.203,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l39",
+      "text": "Down for the ride",
+      "start": 49.263,
+      "end": 49.943,
+      "words": [
+        {
+          "text": "Down",
+          "start": 49.263,
+          "end": 49.383,
+          "matched": true
+        },
+        {
+          "text": "for",
+          "start": 49.403,
+          "end": 49.503,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 49.523,
+          "end": 49.643,
+          "matched": true
+        },
+        {
+          "text": "ride",
+          "start": 49.683,
+          "end": 49.943,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l40",
+      "text": "That's my Bam Bam",
+      "start": 50.083,
+      "end": 51.364,
+      "words": [
+        {
+          "text": "That's",
+          "start": 50.083,
+          "end": 50.263,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 50.283,
+          "end": 50.424,
+          "matched": true
+        },
+        {
+          "text": "Bam",
+          "start": 50.424,
+          "end": 50.894,
+          "matched": false
+        },
+        {
+          "text": "Bam",
+          "start": 50.894,
+          "end": 51.364,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l41",
+      "text": "One runs her kingdom",
+      "start": 51.364,
+      "end": 52.504,
+      "words": [
+        {
+          "text": "One",
+          "start": 51.364,
+          "end": 51.484,
+          "matched": true
+        },
+        {
+          "text": "runs",
+          "start": 51.544,
+          "end": 51.864,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 51.884,
+          "end": 52.044,
+          "matched": true
+        },
+        {
+          "text": "kingdom",
+          "start": 52.084,
+          "end": 52.504,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l42",
+      "text": "One live for mama",
+      "start": 52.945,
+      "end": 54.005,
+      "words": [
+        {
+          "text": "One",
+          "start": 52.945,
+          "end": 53.105,
+          "matched": true
+        },
+        {
+          "text": "live",
+          "start": 53.105,
+          "end": 53.445,
+          "matched": false
+        },
+        {
+          "text": "for",
+          "start": 53.445,
+          "end": 53.665,
+          "matched": true
+        },
+        {
+          "text": "mama",
+          "start": 53.705,
+          "end": 54.005,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l43",
+      "text": "Side by side",
+      "start": 54.045,
+      "end": 54.785,
+      "words": [
+        {
+          "text": "Side",
+          "start": 54.045,
+          "end": 54.245,
+          "matched": true
+        },
+        {
+          "text": "by",
+          "start": 54.285,
+          "end": 54.405,
+          "matched": true
+        },
+        {
+          "text": "side",
+          "start": 54.465,
+          "end": 54.785,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l44",
+      "text": "Golden retriever life",
+      "start": 54.865,
+      "end": 55.966,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 54.865,
+          "end": 55.146,
+          "matched": true
+        },
+        {
+          "text": "retriever",
+          "start": 55.166,
+          "end": 55.506,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 55.686,
+          "end": 55.966,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l45",
+      "text": "Yeah that's their life",
+      "start": 56.486,
+      "end": 57.847,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 56.486,
+          "end": 56.686,
+          "matched": true
+        },
+        {
+          "text": "that's",
+          "start": 56.706,
+          "end": 56.846,
+          "matched": true
+        },
+        {
+          "text": "their",
+          "start": 56.906,
+          "end": 57.246,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 57.286,
+          "end": 57.847,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l46",
+      "text": "(Woof)",
+      "start": 57.847,
+      "end": 58.067,
+      "words": [
+        {
+          "text": "(Woof)",
+          "start": 57.847,
+          "end": 58.067,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l47",
+      "text": "Golden retriever life",
+      "start": 58.067,
+      "end": 59.167,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 58.067,
+          "end": 58.347,
+          "matched": true
+        },
+        {
+          "text": "retriever",
+          "start": 58.367,
+          "end": 58.707,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 58.887,
+          "end": 59.167,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l48",
+      "text": "Yeah that's their life",
+      "start": 59.687,
+      "end": 60.708,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 59.687,
+          "end": 59.867,
+          "matched": true
+        },
+        {
+          "text": "that's",
+          "start": 59.888,
+          "end": 60.028,
+          "matched": true
+        },
+        {
+          "text": "their",
+          "start": 60.108,
+          "end": 60.428,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 60.488,
+          "end": 60.708,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l49",
+      "text": "Doja like",
+      "start": 60.868,
+      "end": 61.548,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 60.868,
+          "end": 61.228,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 61.288,
+          "end": 61.548,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l50",
+      "text": "\"I got this",
+      "start": 61.968,
+      "end": 62.489,
+      "words": [
+        {
+          "text": "\"I",
+          "start": 61.968,
+          "end": 62.068,
+          "matched": true
+        },
+        {
+          "text": "got",
+          "start": 62.088,
+          "end": 62.269,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 62.289,
+          "end": 62.489,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l51",
+      "text": "This universe mine",
+      "start": 62.689,
+      "end": 64.069,
+      "words": [
+        {
+          "text": "This",
+          "start": 62.689,
+          "end": 62.849,
+          "matched": true
+        },
+        {
+          "text": "universe",
+          "start": 62.969,
+          "end": 63.609,
+          "matched": true
+        },
+        {
+          "text": "mine",
+          "start": 63.709,
+          "end": 64.069,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l52",
+      "text": "You can stop scratchin'",
+      "start": 64.089,
+      "end": 64.81,
+      "words": [
+        {
+          "text": "You",
+          "start": 64.089,
+          "end": 64.169,
+          "matched": true
+        },
+        {
+          "text": "can",
+          "start": 64.189,
+          "end": 64.249,
+          "matched": true
+        },
+        {
+          "text": "stop",
+          "start": 64.269,
+          "end": 64.429,
+          "matched": true
+        },
+        {
+          "text": "scratchin'",
+          "start": 64.449,
+          "end": 64.81,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l53",
+      "text": "When I call time\"",
+      "start": 66.103,
+      "end": 67.103,
+      "words": [
+        {
+          "text": "When",
+          "start": 66.103,
+          "end": 66.283,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 66.323,
+          "end": 66.403,
+          "matched": true
+        },
+        {
+          "text": "call",
+          "start": 66.503,
+          "end": 66.823,
+          "matched": true
+        },
+        {
+          "text": "time\"",
+          "start": 66.823,
+          "end": 67.103,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l54",
+      "text": "Cold maturity",
+      "start": 67.103,
+      "end": 67.664,
+      "words": [
+        {
+          "text": "Cold",
+          "start": 67.103,
+          "end": 67.384,
+          "matched": false
+        },
+        {
+          "text": "maturity",
+          "start": 67.384,
+          "end": 67.664,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l55",
+      "text": "Total authority",
+      "start": 67.664,
+      "end": 69.165,
+      "words": [
+        {
+          "text": "Total",
+          "start": 67.664,
+          "end": 67.944,
+          "matched": true
+        },
+        {
+          "text": "authority",
+          "start": 68.004,
+          "end": 69.165,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l56",
+      "text": "Run every field",
+      "start": 69.285,
+      "end": 69.885,
+      "words": [
+        {
+          "text": "Run",
+          "start": 69.285,
+          "end": 69.405,
+          "matched": true
+        },
+        {
+          "text": "every",
+          "start": 69.445,
+          "end": 69.625,
+          "matched": true
+        },
+        {
+          "text": "field",
+          "start": 69.665,
+          "end": 69.885,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l57",
+      "text": "You want affection",
+      "start": 70.065,
+      "end": 70.846,
+      "words": [
+        {
+          "text": "You",
+          "start": 70.065,
+          "end": 70.165,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 70.205,
+          "end": 70.346,
+          "matched": true
+        },
+        {
+          "text": "affection",
+          "start": 70.366,
+          "end": 70.846,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l58",
+      "text": "She'll let you know",
+      "start": 70.866,
+      "end": 71.947,
+      "words": [
+        {
+          "text": "She'll",
+          "start": 70.866,
+          "end": 71.426,
+          "matched": true
+        },
+        {
+          "text": "let",
+          "start": 71.446,
+          "end": 71.546,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 71.586,
+          "end": 71.666,
+          "matched": true
+        },
+        {
+          "text": "know",
+          "start": 71.706,
+          "end": 71.947,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l59",
+      "text": "Otherwise",
+      "start": 72.307,
+      "end": 72.767,
+      "words": [
+        {
+          "text": "Otherwise",
+          "start": 72.307,
+          "end": 72.767,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l60",
+      "text": "Beauty sleep",
+      "start": 72.887,
+      "end": 73.467,
+      "words": [
+        {
+          "text": "Beauty",
+          "start": 72.887,
+          "end": 73.227,
+          "matched": true
+        },
+        {
+          "text": "sleep",
+          "start": 73.247,
+          "end": 73.467,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l61",
+      "text": "Let her glow",
+      "start": 73.487,
+      "end": 73.868,
+      "words": [
+        {
+          "text": "Let",
+          "start": 73.487,
+          "end": 73.588,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 73.608,
+          "end": 73.668,
+          "matched": true
+        },
+        {
+          "text": "glow",
+          "start": 73.708,
+          "end": 73.868,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l62",
+      "text": "Never been a follower",
+      "start": 74.088,
+      "end": 75.088,
+      "words": [
+        {
+          "text": "Never",
+          "start": 74.088,
+          "end": 74.268,
+          "matched": true
+        },
+        {
+          "text": "been",
+          "start": 74.288,
+          "end": 74.448,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 74.468,
+          "end": 74.508,
+          "matched": true
+        },
+        {
+          "text": "follower",
+          "start": 74.568,
+          "end": 75.088,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l63",
+      "text": "That's not her role",
+      "start": 75.669,
+      "end": 76.529,
+      "words": [
+        {
+          "text": "That's",
+          "start": 75.669,
+          "end": 75.829,
+          "matched": true
+        },
+        {
+          "text": "not",
+          "start": 75.849,
+          "end": 75.989,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 75.989,
+          "end": 76.259,
+          "matched": false
+        },
+        {
+          "text": "role",
+          "start": 76.259,
+          "end": 76.529,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l64",
+      "text": "Opossum face",
+      "start": 76.529,
+      "end": 77.15,
+      "words": [
+        {
+          "text": "Opossum",
+          "start": 76.529,
+          "end": 76.85,
+          "matched": true
+        },
+        {
+          "text": "face",
+          "start": 76.89,
+          "end": 77.15,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l65",
+      "text": "Burned in her soul",
+      "start": 77.15,
+      "end": 79.211,
+      "words": [
+        {
+          "text": "Burned",
+          "start": 77.15,
+          "end": 77.35,
+          "matched": false
+        },
+        {
+          "text": "in",
+          "start": 77.35,
+          "end": 77.55,
+          "matched": false
+        },
+        {
+          "text": "her",
+          "start": 77.55,
+          "end": 77.61,
+          "matched": true
+        },
+        {
+          "text": "soul",
+          "start": 77.65,
+          "end": 79.211,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l66",
+      "text": "Tail never stop waggin'",
+      "start": 79.291,
+      "end": 80.832,
+      "words": [
+        {
+          "text": "Tail",
+          "start": 79.291,
+          "end": 79.631,
+          "matched": true
+        },
+        {
+          "text": "never",
+          "start": 79.711,
+          "end": 79.971,
+          "matched": true
+        },
+        {
+          "text": "stop",
+          "start": 80.031,
+          "end": 80.352,
+          "matched": true
+        },
+        {
+          "text": "waggin'",
+          "start": 80.472,
+          "end": 80.832,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l67",
+      "text": "Offer a treat",
+      "start": 80.952,
+      "end": 81.913,
+      "words": [
+        {
+          "text": "Offer",
+          "start": 80.952,
+          "end": 81.052,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 81.192,
+          "end": 81.232,
+          "matched": true
+        },
+        {
+          "text": "treat",
+          "start": 81.232,
+          "end": 81.913,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l68",
+      "text": "She take your whole hand",
+      "start": 81.913,
+      "end": 82.733,
+      "words": [
+        {
+          "text": "She",
+          "start": 81.913,
+          "end": 82.073,
+          "matched": true
+        },
+        {
+          "text": "take",
+          "start": 82.093,
+          "end": 82.233,
+          "matched": true
+        },
+        {
+          "text": "your",
+          "start": 82.253,
+          "end": 82.333,
+          "matched": true
+        },
+        {
+          "text": "whole",
+          "start": 82.353,
+          "end": 82.493,
+          "matched": true
+        },
+        {
+          "text": "hand",
+          "start": 82.513,
+          "end": 82.733,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l69",
+      "text": "(yeah)",
+      "start": 82.913,
+      "end": 83.153,
+      "words": [
+        {
+          "text": "(yeah)",
+          "start": 82.913,
+          "end": 83.153,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l70",
+      "text": "Bam Bam",
+      "start": 83.293,
+      "end": 83.834,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 83.293,
+          "end": 83.554,
+          "matched": true
+        },
+        {
+          "text": "Bam",
+          "start": 83.594,
+          "end": 83.834,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l71",
+      "text": "Wreckin' ball",
+      "start": 84.094,
+      "end": 84.594,
+      "words": [
+        {
+          "text": "Wreckin'",
+          "start": 84.094,
+          "end": 84.354,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 84.374,
+          "end": 84.594,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l72",
+      "text": "Heard somebody say",
+      "start": 84.854,
+      "end": 85.495,
+      "words": [
+        {
+          "text": "Heard",
+          "start": 84.854,
+          "end": 84.994,
+          "matched": true
+        },
+        {
+          "text": "somebody",
+          "start": 85.014,
+          "end": 85.235,
+          "matched": true
+        },
+        {
+          "text": "say",
+          "start": 85.275,
+          "end": 85.495,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l73",
+      "text": "Ready",
+      "start": 85.675,
+      "end": 85.915,
+      "words": [
+        {
+          "text": "Ready",
+          "start": 85.675,
+          "end": 85.915,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l74",
+      "text": "Set",
+      "start": 85.915,
+      "end": 86.24,
+      "words": [
+        {
+          "text": "Set",
+          "start": 85.915,
+          "end": 86.24,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l75",
+      "text": "Go",
+      "start": 86.24,
+      "end": 86.565,
+      "words": [
+        {
+          "text": "Go",
+          "start": 86.24,
+          "end": 86.565,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l76",
+      "text": "And he forgot it all",
+      "start": 86.565,
+      "end": 88.191,
+      "words": [
+        {
+          "text": "And",
+          "start": 86.565,
+          "end": 86.89,
+          "matched": false
+        },
+        {
+          "text": "he",
+          "start": 86.89,
+          "end": 87.215,
+          "matched": false
+        },
+        {
+          "text": "forgot",
+          "start": 87.215,
+          "end": 87.541,
+          "matched": false
+        },
+        {
+          "text": "it",
+          "start": 87.541,
+          "end": 87.866,
+          "matched": false
+        },
+        {
+          "text": "all",
+          "start": 87.866,
+          "end": 88.191,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l77",
+      "text": "Rain or snow",
+      "start": 88.191,
+      "end": 89.166,
+      "words": [
+        {
+          "text": "Rain",
+          "start": 88.191,
+          "end": 88.516,
+          "matched": false
+        },
+        {
+          "text": "or",
+          "start": 88.516,
+          "end": 88.841,
+          "matched": false
+        },
+        {
+          "text": "snow",
+          "start": 88.841,
+          "end": 89.166,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l78",
+      "text": "Spring or fall",
+      "start": 89.166,
+      "end": 90.142,
+      "words": [
+        {
+          "text": "Spring",
+          "start": 89.166,
+          "end": 89.491,
+          "matched": false
+        },
+        {
+          "text": "or",
+          "start": 89.491,
+          "end": 89.816,
+          "matched": false
+        },
+        {
+          "text": "fall",
+          "start": 89.816,
+          "end": 90.142,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l79",
+      "text": "Ball gets touched",
+      "start": 90.142,
+      "end": 91.117,
+      "words": [
+        {
+          "text": "Ball",
+          "start": 90.142,
+          "end": 90.467,
+          "matched": false
+        },
+        {
+          "text": "gets",
+          "start": 90.467,
+          "end": 90.792,
+          "matched": false
+        },
+        {
+          "text": "touched",
+          "start": 90.792,
+          "end": 91.117,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l80",
+      "text": "He answer the call",
+      "start": 91.117,
+      "end": 92.417,
+      "words": [
+        {
+          "text": "He",
+          "start": 91.117,
+          "end": 91.442,
+          "matched": false
+        },
+        {
+          "text": "answer",
+          "start": 91.442,
+          "end": 91.767,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 91.767,
+          "end": 92.092,
+          "matched": false
+        },
+        {
+          "text": "call",
+          "start": 92.092,
+          "end": 92.417,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l81",
+      "text": "Love for every human and friend",
+      "start": 92.417,
+      "end": 94.368,
+      "words": [
+        {
+          "text": "Love",
+          "start": 92.417,
+          "end": 92.743,
+          "matched": false
+        },
+        {
+          "text": "for",
+          "start": 92.743,
+          "end": 93.068,
+          "matched": false
+        },
+        {
+          "text": "every",
+          "start": 93.068,
+          "end": 93.393,
+          "matched": false
+        },
+        {
+          "text": "human",
+          "start": 93.393,
+          "end": 93.718,
+          "matched": false
+        },
+        {
+          "text": "and",
+          "start": 93.718,
+          "end": 94.043,
+          "matched": false
+        },
+        {
+          "text": "friend",
+          "start": 94.043,
+          "end": 94.368,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l82",
+      "text": "Except Teddy",
+      "start": 94.368,
+      "end": 95.018,
+      "words": [
+        {
+          "text": "Except",
+          "start": 94.368,
+          "end": 94.693,
+          "matched": false
+        },
+        {
+          "text": "Teddy",
+          "start": 94.693,
+          "end": 95.018,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l83",
+      "text": "(fluff Teddy)",
+      "start": 95.018,
+      "end": 95.669,
+      "words": [
+        {
+          "text": "(fluff",
+          "start": 95.018,
+          "end": 95.343,
+          "matched": false
+        },
+        {
+          "text": "Teddy)",
+          "start": 95.343,
+          "end": 95.669,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l84",
+      "text": "Nobody know why",
+      "start": 95.669,
+      "end": 96.644,
+      "words": [
+        {
+          "text": "Nobody",
+          "start": 95.669,
+          "end": 95.994,
+          "matched": false
+        },
+        {
+          "text": "know",
+          "start": 95.994,
+          "end": 96.319,
+          "matched": false
+        },
+        {
+          "text": "why",
+          "start": 96.319,
+          "end": 96.644,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l85",
+      "text": "Fluff Teddy",
+      "start": 96.644,
+      "end": 97.294,
+      "words": [
+        {
+          "text": "Fluff",
+          "start": 96.644,
+          "end": 96.969,
+          "matched": false
+        },
+        {
+          "text": "Teddy",
+          "start": 96.969,
+          "end": 97.294,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l86",
+      "text": "Woof",
+      "start": 97.294,
+      "end": 97.619,
+      "words": [
+        {
+          "text": "Woof",
+          "start": 97.294,
+          "end": 97.619,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l87",
+      "text": "Boss walk",
+      "start": 97.619,
+      "end": 98.27,
+      "words": [
+        {
+          "text": "Boss",
+          "start": 97.619,
+          "end": 97.944,
+          "matched": false
+        },
+        {
+          "text": "walk",
+          "start": 97.944,
+          "end": 98.27,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l88",
+      "text": "Lone wolf",
+      "start": 98.27,
+      "end": 98.92,
+      "words": [
+        {
+          "text": "Lone",
+          "start": 98.27,
+          "end": 98.595,
+          "matched": false
+        },
+        {
+          "text": "wolf",
+          "start": 98.595,
+          "end": 98.92,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l89",
+      "text": "Doja, regal vibe",
+      "start": 98.92,
+      "end": 99.895,
+      "words": [
+        {
+          "text": "Doja,",
+          "start": 98.92,
+          "end": 99.245,
+          "matched": false
+        },
+        {
+          "text": "regal",
+          "start": 99.245,
+          "end": 99.57,
+          "matched": false
+        },
+        {
+          "text": "vibe",
+          "start": 99.57,
+          "end": 99.895,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l90",
+      "text": "Good boy",
+      "start": 99.895,
+      "end": 100.545,
+      "words": [
+        {
+          "text": "Good",
+          "start": 99.895,
+          "end": 100.22,
+          "matched": false
+        },
+        {
+          "text": "boy",
+          "start": 100.22,
+          "end": 100.545,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l91",
+      "text": "Down for the ride",
+      "start": 100.545,
+      "end": 101.846,
+      "words": [
+        {
+          "text": "Down",
+          "start": 100.545,
+          "end": 100.87,
+          "matched": false
+        },
+        {
+          "text": "for",
+          "start": 100.87,
+          "end": 101.196,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 101.196,
+          "end": 101.521,
+          "matched": false
+        },
+        {
+          "text": "ride",
+          "start": 101.521,
+          "end": 101.846,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l92",
+      "text": "That's my Bam Bam",
+      "start": 101.846,
+      "end": 103.146,
+      "words": [
+        {
+          "text": "That's",
+          "start": 101.846,
+          "end": 102.171,
+          "matched": false
+        },
+        {
+          "text": "my",
+          "start": 102.171,
+          "end": 102.496,
+          "matched": false
+        },
+        {
+          "text": "Bam",
+          "start": 102.496,
+          "end": 102.821,
+          "matched": false
+        },
+        {
+          "text": "Bam",
+          "start": 102.821,
+          "end": 103.146,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l93",
+      "text": "One runs her kingdom",
+      "start": 103.146,
+      "end": 104.447,
+      "words": [
+        {
+          "text": "One",
+          "start": 103.146,
+          "end": 103.471,
+          "matched": false
+        },
+        {
+          "text": "runs",
+          "start": 103.471,
+          "end": 103.797,
+          "matched": false
+        },
+        {
+          "text": "her",
+          "start": 103.797,
+          "end": 104.122,
+          "matched": false
+        },
+        {
+          "text": "kingdom",
+          "start": 104.122,
+          "end": 104.447,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l94",
+      "text": "One live for mama",
+      "start": 104.447,
+      "end": 105.747,
+      "words": [
+        {
+          "text": "One",
+          "start": 104.447,
+          "end": 104.772,
+          "matched": false
+        },
+        {
+          "text": "live",
+          "start": 104.772,
+          "end": 105.097,
+          "matched": false
+        },
+        {
+          "text": "for",
+          "start": 105.097,
+          "end": 105.422,
+          "matched": false
+        },
+        {
+          "text": "mama",
+          "start": 105.422,
+          "end": 105.747,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l95",
+      "text": "Side by side",
+      "start": 105.747,
+      "end": 106.723,
+      "words": [
+        {
+          "text": "Side",
+          "start": 105.747,
+          "end": 106.072,
+          "matched": false
+        },
+        {
+          "text": "by",
+          "start": 106.072,
+          "end": 106.398,
+          "matched": false
+        },
+        {
+          "text": "side",
+          "start": 106.398,
+          "end": 106.723,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l96",
+      "text": "Golden retriever life",
+      "start": 106.723,
+      "end": 107.698,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 106.723,
+          "end": 107.048,
+          "matched": false
+        },
+        {
+          "text": "retriever",
+          "start": 107.048,
+          "end": 107.373,
+          "matched": false
+        },
+        {
+          "text": "life",
+          "start": 107.373,
+          "end": 107.698,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l97",
+      "text": "Yeah that's their life",
+      "start": 107.698,
+      "end": 109.059,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 107.698,
+          "end": 107.998,
+          "matched": true
+        },
+        {
+          "text": "that's",
+          "start": 108.078,
+          "end": 108.458,
+          "matched": true
+        },
+        {
+          "text": "their",
+          "start": 108.618,
+          "end": 108.738,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 108.839,
+          "end": 109.059,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l98",
+      "text": "(Woof)",
+      "start": 109.059,
+      "end": 109.279,
+      "words": [
+        {
+          "text": "(Woof)",
+          "start": 109.059,
+          "end": 109.279,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l99",
+      "text": "Golden retriever life",
+      "start": 109.279,
+      "end": 110.439,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 109.279,
+          "end": 109.519,
+          "matched": true
+        },
+        {
+          "text": "retriever",
+          "start": 109.539,
+          "end": 110.019,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 110.059,
+          "end": 110.439,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l100",
+      "text": "Yeah that's their life",
+      "start": 110.899,
+      "end": 111.94,
+      "words": [
+        {
+          "text": "Yeah",
+          "start": 110.899,
+          "end": 111.079,
+          "matched": true
+        },
+        {
+          "text": "that's",
+          "start": 111.099,
+          "end": 111.219,
+          "matched": true
+        },
+        {
+          "text": "their",
+          "start": 111.299,
+          "end": 111.66,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 111.7,
+          "end": 111.94,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l101",
+      "text": "Two sides of a golden",
+      "start": 112.06,
+      "end": 113.28,
+      "words": [
+        {
+          "text": "Two",
+          "start": 112.06,
+          "end": 112.26,
+          "matched": true
+        },
+        {
+          "text": "sides",
+          "start": 112.34,
+          "end": 112.62,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 112.68,
+          "end": 112.76,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 112.82,
+          "end": 112.84,
+          "matched": true
+        },
+        {
+          "text": "golden",
+          "start": 112.88,
+          "end": 113.28,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l102",
+      "text": "Same heart underneath",
+      "start": 113.68,
+      "end": 115.041,
+      "words": [
+        {
+          "text": "Same",
+          "start": 113.68,
+          "end": 113.941,
+          "matched": true
+        },
+        {
+          "text": "heart",
+          "start": 114.001,
+          "end": 114.201,
+          "matched": true
+        },
+        {
+          "text": "underneath",
+          "start": 114.241,
+          "end": 115.041,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l103",
+      "text": "One bring the wisdom",
+      "start": 115.361,
+      "end": 116.522,
+      "words": [
+        {
+          "text": "One",
+          "start": 115.361,
+          "end": 115.521,
+          "matched": true
+        },
+        {
+          "text": "bring",
+          "start": 115.561,
+          "end": 115.861,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 115.901,
+          "end": 116.021,
+          "matched": true
+        },
+        {
+          "text": "wisdom",
+          "start": 116.101,
+          "end": 116.522,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l104",
+      "text": "One bring the energy",
+      "start": 116.962,
+      "end": 118.102,
+      "words": [
+        {
+          "text": "One",
+          "start": 116.962,
+          "end": 117.102,
+          "matched": true
+        },
+        {
+          "text": "bring",
+          "start": 117.162,
+          "end": 117.462,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 117.502,
+          "end": 117.662,
+          "matched": true
+        },
+        {
+          "text": "energy",
+          "start": 117.722,
+          "end": 118.102,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l105",
+      "text": "Doja bein gremlin",
+      "start": 118.102,
+      "end": 119.683,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 118.102,
+          "end": 118.762,
+          "matched": false
+        },
+        {
+          "text": "bein",
+          "start": 118.762,
+          "end": 119.203,
+          "matched": true
+        },
+        {
+          "text": "gremlin",
+          "start": 119.303,
+          "end": 119.683,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l106",
+      "text": "Bam Bam spreadin' slobber",
+      "start": 119.703,
+      "end": 121.404,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 119.703,
+          "end": 120.023,
+          "matched": true
+        },
+        {
+          "text": "Bam",
+          "start": 120.063,
+          "end": 120.303,
+          "matched": true
+        },
+        {
+          "text": "spreadin'",
+          "start": 120.323,
+          "end": 120.763,
+          "matched": true
+        },
+        {
+          "text": "slobber",
+          "start": 120.763,
+          "end": 121.404,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l107",
+      "text": "One girl",
+      "start": 121.404,
+      "end": 121.904,
+      "words": [
+        {
+          "text": "One",
+          "start": 121.404,
+          "end": 121.544,
+          "matched": true
+        },
+        {
+          "text": "girl",
+          "start": 121.684,
+          "end": 121.904,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l108",
+      "text": "One boy",
+      "start": 122.184,
+      "end": 122.824,
+      "words": [
+        {
+          "text": "One",
+          "start": 122.184,
+          "end": 122.304,
+          "matched": true
+        },
+        {
+          "text": "boy",
+          "start": 122.484,
+          "end": 122.824,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l109",
+      "text": "Same breed",
+      "start": 122.864,
+      "end": 123.544,
+      "words": [
+        {
+          "text": "Same",
+          "start": 122.864,
+          "end": 123.224,
+          "matched": true
+        },
+        {
+          "text": "breed",
+          "start": 123.284,
+          "end": 123.544,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l110",
+      "text": "Different game",
+      "start": 123.584,
+      "end": 124.745,
+      "words": [
+        {
+          "text": "Different",
+          "start": 123.584,
+          "end": 124.045,
+          "matched": true
+        },
+        {
+          "text": "game",
+          "start": 124.085,
+          "end": 124.745,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l111",
+      "text": "(Woof)",
+      "start": 124.745,
+      "end": 126.105,
+      "words": [
+        {
+          "text": "(Woof)",
+          "start": 124.745,
+          "end": 126.105,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l112",
+      "text": "Yeah...",
+      "start": 126.105,
+      "end": 126.526,
+      "words": [
+        {
+          "text": "Yeah...",
+          "start": 126.105,
+          "end": 126.526,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l113",
+      "text": "Doja the princess",
+      "start": 126.526,
+      "end": 128.406,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 126.526,
+          "end": 127.546,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 127.546,
+          "end": 127.646,
+          "matched": true
+        },
+        {
+          "text": "princess",
+          "start": 127.686,
+          "end": 128.406,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l114",
+      "text": "Bam Bam the chunk",
+      "start": 128.406,
+      "end": 129.587,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 128.406,
+          "end": 128.776,
+          "matched": false
+        },
+        {
+          "text": "Bam",
+          "start": 128.776,
+          "end": 129.147,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 129.147,
+          "end": 129.227,
+          "matched": true
+        },
+        {
+          "text": "chunk",
+          "start": 129.267,
+          "end": 129.587,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l115",
+      "text": "One hold it steady",
+      "start": 130.484,
+      "end": 131.105,
+      "words": [
+        {
+          "text": "One",
+          "start": 130.484,
+          "end": 130.564,
+          "matched": true
+        },
+        {
+          "text": "hold",
+          "start": 130.584,
+          "end": 130.704,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 130.724,
+          "end": 130.825,
+          "matched": true
+        },
+        {
+          "text": "steady",
+          "start": 130.845,
+          "end": 131.105,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l116",
+      "text": "One can't get enough",
+      "start": 131.906,
+      "end": 132.747,
+      "words": [
+        {
+          "text": "One",
+          "start": 131.906,
+          "end": 132.006,
+          "matched": true
+        },
+        {
+          "text": "can't",
+          "start": 132.046,
+          "end": 132.187,
+          "matched": true
+        },
+        {
+          "text": "get",
+          "start": 132.207,
+          "end": 132.367,
+          "matched": true
+        },
+        {
+          "text": "enough",
+          "start": 132.427,
+          "end": 132.747,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l117",
+      "text": "Two goldens",
+      "start": 133.268,
+      "end": 134.049,
+      "words": [
+        {
+          "text": "Two",
+          "start": 133.268,
+          "end": 133.508,
+          "matched": true
+        },
+        {
+          "text": "goldens",
+          "start": 133.669,
+          "end": 134.049,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l118",
+      "text": "One home",
+      "start": 134.209,
+      "end": 134.69,
+      "words": [
+        {
+          "text": "One",
+          "start": 134.209,
+          "end": 134.43,
+          "matched": true
+        },
+        {
+          "text": "home",
+          "start": 134.49,
+          "end": 134.69,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l119",
+      "text": "They got it all",
+      "start": 135.251,
+      "end": 135.952,
+      "words": [
+        {
+          "text": "They",
+          "start": 135.251,
+          "end": 135.391,
+          "matched": true
+        },
+        {
+          "text": "got",
+          "start": 135.431,
+          "end": 135.531,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 135.591,
+          "end": 135.712,
+          "matched": true
+        },
+        {
+          "text": "all",
+          "start": 135.812,
+          "end": 135.952,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l120",
+      "text": "Yeah...",
+      "start": 136.473,
+      "end": 136.713,
+      "words": [
+        {
+          "text": "Yeah...",
+          "start": 136.473,
+          "end": 136.713,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l121",
+      "text": "And I'm outside",
+      "start": 137.154,
+      "end": 138.676,
+      "words": [
+        {
+          "text": "And",
+          "start": 137.154,
+          "end": 137.254,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 137.334,
+          "end": 137.414,
+          "matched": true
+        },
+        {
+          "text": "outside",
+          "start": 137.454,
+          "end": 138.676,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l122",
+      "text": "Twenty twenty six",
+      "start": 138.676,
+      "end": 140.098,
+      "words": [
+        {
+          "text": "Twenty",
+          "start": 138.676,
+          "end": 139.15,
+          "matched": false
+        },
+        {
+          "text": "twenty",
+          "start": 139.15,
+          "end": 139.624,
+          "matched": false
+        },
+        {
+          "text": "six",
+          "start": 139.624,
+          "end": 140.098,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l123",
+      "text": "Go get that treat",
+      "start": 140.098,
+      "end": 141.099,
+      "words": [
+        {
+          "text": "Go",
+          "start": 140.098,
+          "end": 140.318,
+          "matched": true
+        },
+        {
+          "text": "get",
+          "start": 140.338,
+          "end": 140.518,
+          "matched": true
+        },
+        {
+          "text": "that",
+          "start": 140.619,
+          "end": 140.839,
+          "matched": true
+        },
+        {
+          "text": "treat",
+          "start": 140.859,
+          "end": 141.099,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l124",
+      "text": "Walk this on repeat",
+      "start": 141.64,
+      "end": 142.722,
+      "words": [
+        {
+          "text": "Walk",
+          "start": 141.64,
+          "end": 141.8,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 141.82,
+          "end": 141.98,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 142.121,
+          "end": 142.281,
+          "matched": true
+        },
+        {
+          "text": "repeat",
+          "start": 142.341,
+          "end": 142.722,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l125",
+      "text": "Woof",
+      "start": 146.887,
+      "end": 147.048,
+      "words": [
+        {
+          "text": "Woof",
+          "start": 146.887,
+          "end": 147.048,
+          "matched": true
+        }
+      ]
+    }
+  ]
+}

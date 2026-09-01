@@ -686,3 +686,218 @@ body[data-format=vinyl] .cassette__label{inset:0;height:100%;border-radius:2px}b
   .composition-row__tapes{gap:1px;row-gap:1px}
   .composition-row .card{width:min(43vw,156px);grid-template-columns:20px minmax(0,1fr)}
 }
+
+/* v5.14 — warm stacked hi-fi rack + live segmented spectrum + continuous wall.
+   Visual target: black/brown hardware, amber lamps, brushed metal and wood trim. */
+.home{
+  --gbr-player-height:338px;
+  --wood-dark:#21130b;
+  --wood-mid:#4b2b16;
+  --wood-edge:#6a3d1c;
+  --hifi-face:#1a1a17;
+  --hifi-metal:#4a463d;
+}
+.home body,.home{background:#080705}
+.home .library{
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(255,151,20,.055),transparent 42rem),
+    linear-gradient(180deg,#0b0906,#060504 76%);
+}
+.home .player-rail .deck{
+  padding:.28rem clamp(.45rem,.8vw,.8rem) .38rem;
+  border-bottom:1px solid #53351e;
+  border-radius:0;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.018),transparent 12%,transparent 88%,rgba(255,255,255,.012)),
+    linear-gradient(180deg,#17110c,#090806 84%);
+  box-shadow:0 12px 30px rgba(0,0,0,.9),inset 0 -1px #1d1009;
+}
+.home .deck__header{
+  max-width:116rem;
+  margin:0 auto .22rem;
+  padding:0 .3rem .2rem;
+  border-bottom:1px solid #3a2516;
+}
+.home .deck__header .eyebrow{color:#8a6746}
+.home .deck__title{color:#e4d7bd;text-shadow:0 1px #000}
+.home .deck__catalogue{color:#9d7a54}
+.home .deck__details{
+  border-color:#5c3c20;background:linear-gradient(#2e1b0f,#160d08);color:#d99b3b;
+  box-shadow:inset 0 1px rgba(255,214,140,.07)
+}
+.home .player-rail .machine-shell{
+  max-width:116rem;
+  padding:.38rem .46rem .42rem;
+  grid-template-columns:minmax(245px,.9fr) minmax(380px,1.35fr) minmax(250px,.85fr);
+  grid-template-areas:
+    "top top top"
+    "monitor spectrum meters"
+    "inspiration transport eq"
+    "footer footer eq"
+    "lyrics lyrics lyrics"
+    "status status status";
+  column-gap:.42rem;row-gap:.24rem;
+  border:1px solid #5b351b;
+  border-radius:5px;
+  background:
+    linear-gradient(90deg,rgba(111,61,26,.28),transparent 6%,transparent 94%,rgba(111,61,26,.22)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px),
+    linear-gradient(180deg,#25160d,#0e0b08 15%,#0c0c0a 84%,#2a170c);
+  box-shadow:
+    inset 0 0 0 2px #160c07,
+    inset 0 1px rgba(255,199,102,.08),
+    0 4px 14px rgba(0,0,0,.75);
+}
+.home .player-rail .machine-shell__topline{
+  padding:0 .16rem;color:#8a6849;letter-spacing:.16em
+}
+.home .player-rail .wall-monitor,
+.home .player-rail .inspiration-readout,
+.home .player-rail .transport-panel,
+.home .player-rail .eq-panel,
+.home .spectrum-panel,
+.home .player-rail .meter-bank{
+  border-color:#49301d;
+  border-radius:3px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.025),transparent 20%),
+    linear-gradient(180deg,#171714,#090907);
+  box-shadow:inset 0 0 12px rgba(0,0,0,.82),inset 0 1px rgba(255,211,134,.04)
+}
+.home .player-rail .wall-monitor{min-height:54px;padding:.38rem .5rem}
+.home .player-rail .wall-monitor__lamp{background:#cf7c13;border-color:#e5a03a;box-shadow:0 0 7px rgba(255,151,20,.65)}
+.home .player-rail .wall-monitor small,.home .inspiration-readout>span{color:#8f6a43}
+.home .player-rail .wall-monitor strong{color:#d7c9ad}
+.home .player-rail .inspiration-readout{min-height:50px;padding:.32rem .48rem;grid-template-columns:62px 1fr}
+.home .player-rail .inspiration-readout p{font-size:.7rem;color:#b7a78d;max-height:2.7em}
+
+/* Real post-EQ segmented spectrum display. */
+.home .spectrum-panel{grid-area:spectrum;min-width:0;padding:.26rem .34rem .3rem}
+.home .spectrum-panel__head{display:flex;justify-content:space-between;gap:.5rem;margin-bottom:.18rem;color:#735538;font:700 .45rem/1 var(--font-mono);letter-spacing:.13em;text-transform:uppercase}
+.home .spectrum{
+  height:66px;display:grid;grid-template-columns:repeat(18,minmax(3px,1fr));gap:3px;align-items:end;
+  padding:5px 6px;border:1px solid #24170d;border-radius:2px;
+  background:linear-gradient(180deg,#080705,#100a05);
+  box-shadow:inset 0 0 18px #000
+}
+.home .spectrum__band{height:100%;display:flex;flex-direction:column;justify-content:flex-start;gap:2px;min-width:0}
+.home .spectrum__segment{display:block;flex:1;min-height:2px;border-radius:1px;background:#2c1b0d;box-shadow:inset 0 0 0 1px rgba(255,153,24,.025);opacity:.48;transition:background .16s ease,box-shadow .18s ease,opacity .18s ease}
+.home .spectrum__segment.is-lit{background:#f39a20;opacity:1;box-shadow:0 0 3px #ff9f20,0 0 8px rgba(255,126,8,.72),inset 0 0 2px #ffd16a}
+.home .spectrum__band:nth-child(n+14) .spectrum__segment.is-lit{background:#ffb12c}
+
+.home .player-rail .meter-bank{padding:.2rem .28rem;gap:.28rem}
+.home .player-rail .vu{height:58px;border-color:#5b3d20;background:linear-gradient(#d99a35,#b96c15 70%,#7f4510);box-shadow:inset 0 0 15px rgba(78,31,0,.42),0 0 5px rgba(255,139,19,.08)}
+.home .player-rail .vu__label{color:#38210d}
+
+/* EQ remains fully interactive but is no longer the largest object in the rack. */
+.home .player-rail .eq-panel{grid-area:eq;align-self:stretch;min-height:0}
+.home .player-rail .eq-panel__head{padding:.2rem .32rem;font-size:.45rem;color:#8f6a43}
+.home .player-rail .eq-panel__head button{padding:.14rem .28rem;font-size:.43rem;border-color:#4f351f;background:#17100a;color:#c88a37}
+.home .player-rail .eq-bands{padding:.12rem .2rem .1rem;gap:.06rem}
+.home .player-rail .eq-band{grid-template-rows:10px 35px 9px;font-size:.4rem;color:#8c704e}
+.home .player-rail .eq-band input{height:31px}
+.home .player-rail .eq-band output{font-size:.38rem;color:#bc8c4d}
+
+.home .player-rail .transport-panel{padding:.28rem .34rem;grid-template-columns:34px 90px 1fr}
+.home .player-rail .transport__button{width:32px;height:32px;border-color:#71441f;background:radial-gradient(circle,#39210f,#130b07 72%);color:#f0a333;box-shadow:inset 0 1px rgba(255,224,158,.12),0 0 8px rgba(255,139,15,.08)}
+.home .player-rail .clock-display{min-width:86px;padding:.26rem .32rem;color:#ffad32;background:#100a05;border-color:#573316}
+.home .player-rail .machine-footer{padding:0 .1rem;color:#8d7252}
+.home .player-rail .volume span,.home .player-rail .quality span{color:#89694a}
+.home .player-rail .machine-lamp__bulb{background:#f39420;box-shadow:0 0 9px rgba(255,145,25,.7)}
+
+/* The lyric glass is the bottom component in the rack: two large centred lines. */
+.home .lyrics--fixed{
+  border-color:#51331d;
+  background:linear-gradient(180deg,#120c07,#080705);
+  box-shadow:inset 0 0 20px #000,0 0 7px rgba(255,139,15,.035)
+}
+.home .lyrics--fixed .lyrics__scroll{height:5.25rem;padding:.1rem 2.8rem}
+.home .lyrics--fixed .lyrics__list li,
+.home .lyrics--fixed .lyrics__list li.lyrics__raw{
+  justify-content:center;text-align:center;
+  min-height:2.48rem;padding:.16rem .45rem;
+  font-size:clamp(1.18rem,1.75vw,1.58rem);
+  color:#cbbda3
+}
+.home .lyrics--fixed .lyrics__list li.lyrics__direction{justify-content:center;text-align:center;color:#8a6339}
+.home .lyrics[data-mode="word"] .lyrics__list li.is-active .lyrics__word.is-current{color:#ffc356;text-shadow:0 0 5px #ff9c1c,0 0 17px rgba(255,136,9,.55)}
+
+/* One continuous cosy wall. Whole song groups wrap like physical objects;
+   a group never gets split merely to honour an obsolete genre heading. */
+.home .cassette-shelves{position:relative;z-index:1}
+.home .track-wall{
+  display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;
+  gap:4px 5px;padding:6px;
+  border:1px solid #2d1c10;border-radius:3px;
+  background:
+    linear-gradient(90deg,rgba(77,42,18,.12),transparent 8%,transparent 92%,rgba(77,42,18,.1)),
+    repeating-linear-gradient(0deg,transparent 0 120px,rgba(91,51,22,.08) 120px 121px),
+    linear-gradient(180deg,#100d09,#070605);
+  box-shadow:inset 0 0 36px rgba(0,0,0,.9),0 18px 55px rgba(0,0,0,.55)
+}
+.home .track-group{
+  flex:0 0 auto;min-width:0;margin:0;padding:2px 3px 3px;
+  border:1px solid rgba(105,62,29,.26);border-radius:3px;
+  background:linear-gradient(180deg,rgba(64,36,16,.12),rgba(0,0,0,.05));
+  box-shadow:inset 0 1px rgba(255,190,96,.025)
+}
+.home .track-group__title{
+  margin:0 0 2px;padding:2px 3px 3px;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:#b59b79;font:800 .58rem/1 var(--font-mono);letter-spacing:.055em;text-transform:uppercase;
+  border-bottom:1px solid rgba(112,67,31,.28)
+}
+.home .track-group__tapes{list-style:none;display:flex;gap:2px;margin:0;padding:0}
+.home .track-group .card{display:grid;grid-template-columns:19px 132px;gap:1px;align-items:center;width:auto;padding:0;background:none;border:0;box-shadow:none}
+.home .track-group .version-tag{grid-column:1;min-height:22px;border-color:#3a281b;background:#0f0b08;color:#9b7447;font-size:.46rem}
+.home .track-group .card__play{grid-column:2}
+.home .track-group .cassette{width:132px;aspect-ratio:1.08/1;border-color:#51473a;box-shadow:0 4px 7px rgba(0,0,0,.78),inset 0 0 0 3px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.12)}
+.home .track-group .cassette__label{left:5.5%;right:5.5%;top:2%;aspect-ratio:1/1}
+.home .track-group .cassette__window{left:22%;right:22%;top:68%;height:18%}
+.home .track-group .card[data-selected=true] .cassette{box-shadow:0 4px 8px #000,0 0 12px rgba(255,143,18,.48),inset 0 0 18px rgba(255,158,24,.1)}
+.home .genre-shelves,.home .genre-cluster,.home .genre-cluster__header,.home .genre-wall,.composition-row{display:contents}
+
+@media (max-width:980px){
+  .home{--gbr-player-height:404px}
+  .home .player-rail .machine-shell{
+    grid-template-columns:1fr 1.2fr;
+    grid-template-areas:
+      "top top"
+      "monitor spectrum"
+      "meters spectrum"
+      "transport eq"
+      "inspiration inspiration"
+      "footer footer"
+      "lyrics lyrics"
+      "status status";
+  }
+  .home .player-rail .meter-bank{display:grid}
+  .home .spectrum{height:72px}
+}
+@media (max-width:650px){
+  .home{--gbr-player-height:500px}
+  .home .player-rail .machine-shell{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "top"
+      "monitor"
+      "spectrum"
+      "transport"
+      "eq"
+      "inspiration"
+      "footer"
+      "lyrics"
+      "status";
+  }
+  .home .player-rail .meter-bank{display:none}
+  .home .spectrum{height:52px;gap:2px;padding:4px}
+  .home .spectrum-panel__head{font-size:.39rem}
+  .home .player-rail .eq-band{grid-template-rows:9px 29px 8px}.home .player-rail .eq-band input{height:27px}
+  .home .lyrics--fixed .lyrics__scroll{height:4.85rem}
+  .home .lyrics--fixed .lyrics__list li,.home .lyrics--fixed .lyrics__list li.lyrics__raw{font-size:1.05rem;min-height:2.25rem}
+  .home .track-wall{gap:3px;padding:3px}
+  .home .track-group{padding:2px}
+  .home .track-group .card{grid-template-columns:18px 118px}
+  .home .track-group .cassette{width:118px}
+}
+@media (prefers-reduced-motion:reduce){.home .spectrum__segment{transition:none}}

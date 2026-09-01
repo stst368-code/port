@@ -46,8 +46,9 @@ showcase/
 The importer understands the shared song YAML fields already being used:
 `title`, `version`, `model`, `state`, `genre`, `inspiration`, `duration`, `cover`,
 `caption`, and `lyrics`. You do not need to rewrite those into a website-specific
-file. `genre` drives the physical wall sections; versions with the same `title`
-are kept directly beside each other. Missing genres fall into `Unclassified`.
+file. `genre` remains useful catalogue metadata, but it no longer divides the physical wall.
+Versions with the same `title` stay inside one compact track group. Whole groups wrap
+across the wall wherever they fit, while missing genres remain `Unclassified` in metadata.
 
 Audio is matched to the YAML by filename. A render beginning with the YAML stem,
 for example `dogtushya-v2_...flac`, belongs to `dogtushya-v2.yaml`. Legacy files
@@ -148,7 +149,7 @@ The centre column is intentionally reserved for the fixed desktop player, so cas
 
 ## Wall grouping and player EQ
 
-The wall is generated as `genre -> song -> version`. Genre sections are visible
+The wall is generated as `song -> version`. Genre remains metadata rather than visible wall chrome.
 as slim hardware shelf labels, while versions of one song are kept as one
 vertical cassette stack under a single shared title. Nothing is alphabetically
 or technically filtered at runtime; the grouping is resolved at build time.
@@ -219,6 +220,6 @@ The documentation build does not require the `markdown` or `mistune` Python pack
 Artwork is no longer deployment-critical. If a YAML references a cover that is not present (or a cover cannot be processed), the build uses a built-in `gbr-placeholder` cassette sleeve and continues publishing the rest of the showcase. The console still warns so the real art can be corrected later.
 
 
-## v5.13 layout
+## v5.14 layout
 
-The player/mixer is fixed across the top of the viewport. The cassette catalogue scrolls underneath it in full-width genre sections. Each song has one row title and all selected versions remain adjacent in that row with compact V1/V2/V3 markers.
+The player/mixer is fixed across the top of the viewport as a warm black/brown/amber hi-fi rack. The cassette catalogue scrolls underneath as one continuous wall. Each song is one compact group and all selected versions remain adjacent with V1/V2/V3 markers; complete groups wrap together to fill each row.

@@ -510,67 +510,47 @@ def shelf_card(track: dict[str, Any], index: int) -> str:
 
 
 def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
-    """Render genre shelves as full-width horizontal song rows.
+    """Render one continuous cassette wall made from intact song groups.
 
-    Genre remains the outer grouping. Each song/composition gets one shared
-    title and all deliberately selected versions sit beside one another in the
-    same row. Each cassette retains its small V1/V2/V3 marker immediately to
-    the left of the shell.
+    Genre is metadata, not layout chrome. Every composition remains an atomic
+    group so its selected versions stay together, while CSS flex-wrap packs as
+    many complete song groups into each visual row as the viewport allows.
     """
-    genres: dict[str, dict[str, list[dict[str, Any]]]] = {}
-    genre_labels: dict[str, str] = {}
+    compositions: dict[str, list[dict[str, Any]]] = {}
     for track in tracks:
-        style = track.get("style") or {}
-        label = str(style.get("genre") or "Unclassified").strip() or "Unclassified"
-        genre_key = label.casefold()
         composition = str(track.get("composition") or track.get("id") or "track")
-        genre_labels.setdefault(genre_key, label)
-        genres.setdefault(genre_key, {}).setdefault(composition, []).append(track)
+        compositions.setdefault(composition, []).append(track)
 
-    chunks: list[str] = []
+    groups: list[str] = []
     card_index = 0
-    for genre_key in sorted(genres):
-        compositions = genres[genre_key]
-        tape_count = sum(len(items) for items in compositions.values())
-        song_count = len(compositions)
-        rows: list[str] = []
+    ordered = sorted(
+        compositions.items(),
+        key=lambda pair: str(pair[1][0].get("title") or pair[0]).casefold(),
+    )
 
-        ordered = sorted(
-            compositions.items(),
-            key=lambda pair: str(pair[1][0].get("title") or pair[0]).casefold(),
+    for composition, items in ordered:
+        def version_sort(track: dict[str, Any]):
+            value = (track.get("provenance") or {}).get("songVersion")
+            try:
+                return (0, float(value))
+            except (TypeError, ValueError):
+                return (1, str(track.get("versionLabel") or track.get("id") or "").casefold())
+
+        items = sorted(items, key=version_sort)
+        cards = []
+        for track in items:
+            cards.append(shelf_card(track, card_index))
+            card_index += 1
+
+        title = items[0].get("title") or composition
+        label = f"{title}, {len(items)} version" + ("s" if len(items) != 1 else "")
+        groups.append(
+            f'<article class="track-group" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
+            f'<h3 class="track-group__title">{esc(title)}</h3>'
+            f'<ul class="track-group__tapes">{"".join(cards)}</ul></article>'
         )
-        for composition, items in ordered:
-            # Keep song versions deterministic and adjacent.
-            def version_sort(track: dict[str, Any]):
-                value = (track.get("provenance") or {}).get("songVersion")
-                try:
-                    return (0, float(value))
-                except (TypeError, ValueError):
-                    return (1, str(track.get("versionLabel") or track.get("id") or "").casefold())
 
-            items = sorted(items, key=version_sort)
-            cards = []
-            for track in items:
-                cards.append(shelf_card(track, card_index))
-                card_index += 1
-            title = items[0].get("title") or composition
-            label = f"{title}, {len(items)} version" + ("s" if len(items) != 1 else "")
-            rows.append(
-                f'<article class="composition-row" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
-                f'<h4 class="composition-row__title">{esc(title)}</h4>'
-                f'<ul class="composition-row__tapes">{"".join(cards)}</ul></article>'
-            )
-
-        chunks.append(
-            '<section class="genre-cluster" data-genre="' + esc(genre_labels[genre_key]) + '">'
-            '<header class="genre-cluster__header">'
-            '<h3>' + esc(genre_labels[genre_key]) + '</h3>'
-            '<span>' + str(tape_count) + ' tape' + ('s' if tape_count != 1 else '') + ' / ' + str(song_count) + ' song' + ('s' if song_count != 1 else '') + '</span>'
-            '</header>'
-            '<div class="genre-wall">' + ''.join(rows) + '</div>'
-            '</section>'
-        )
-    return "\n".join(chunks)
+    return '<div class="track-wall">' + ''.join(groups) + '</div>'
 
 
 

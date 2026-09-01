@@ -59,10 +59,10 @@
         </div>
       </div>
 
-      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> versions stay together in song rows <span aria-hidden="true">/</span> player is fixed above the wall</p>
+      <p class="library__count">{{TRACK_COUNT}} mounted tapes <span aria-hidden="true">/</span> versions stay together <span aria-hidden="true">/</span> player stays fixed above the wall</p>
 
       <div class="showcase-stage">
-        <div class="genre-shelves">
+        <div class="cassette-shelves">
 {{SHELF}}
         </div>
 
@@ -88,6 +88,11 @@
               <div class="inspiration-readout">
                 <span>INSPIRATION</span>
                 <p id="deck-inspiration">Select a cassette to load its source inspiration.</p>
+              </div>
+
+              <div class="spectrum-panel" aria-label="Post-EQ frequency spectrum">
+                <div class="spectrum-panel__head"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
+                <div class="spectrum" id="spectrum" aria-hidden="true"></div>
               </div>
 
               <div class="meter-bank" aria-label="Audio level meters">

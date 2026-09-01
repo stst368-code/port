@@ -24,6 +24,7 @@
     monitorTitle: document.getElementById("wall-monitor-title"), monitorCode: document.getElementById("wall-monitor-code"),
     inspiration: document.getElementById("deck-inspiration"),
     vuLeft: document.getElementById("vu-left"), vuRight: document.getElementById("vu-right"),
+    spectrum: document.getElementById("spectrum"),
     eqPanel: document.getElementById("eq-panel"), eqReset: document.getElementById("eq-reset"), eqNote: document.getElementById("eq-note"),
     playerRail: document.getElementById("player-rail"), stage: document.querySelector(".showcase-stage")
   };
@@ -37,10 +38,49 @@
   var audioUnlocked = false, previewTimer = null, previewStop = null;
   var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var audioContext = null, mediaSource = null, analyser = null, analyserData = null, vuFrame = null;
+  var audioContext = null, mediaSource = null, analyser = null, analyserData = null, frequencyData = null, vuFrame = null;
+  var spectrumBars = [], spectrumLevels = [];
+  var spectrumBandCount = 18, spectrumSegmentCount = 10;
   var eqFilters = [], eqHeadroom = null;
   var eqInputs = Array.prototype.slice.call(document.querySelectorAll("[data-eq-frequency]"));
   var eqFrequencies = [60, 250, 1000, 4000, 12000];
+
+  function initSpectrum() {
+    if (!el.spectrum || spectrumBars.length) return;
+    var fragment = document.createDocumentFragment();
+    for (var band = 0; band < spectrumBandCount; band++) {
+      var bar = document.createElement("span");
+      bar.className = "spectrum__band";
+      var segments = [];
+      for (var seg = spectrumSegmentCount - 1; seg >= 0; seg--) {
+        var block = document.createElement("i");
+        block.className = "spectrum__segment";
+        block.dataset.level = String(seg + 1);
+        bar.appendChild(block);
+        segments.push(block);
+      }
+      fragment.appendChild(bar);
+      spectrumBars.push(segments);
+      spectrumLevels.push(0);
+    }
+    el.spectrum.appendChild(fragment);
+  }
+
+  function paintSpectrum(levels) {
+    if (!spectrumBars.length) return;
+    for (var band = 0; band < spectrumBars.length; band++) {
+      var lit = Math.round(Math.max(0, Math.min(1, levels[band] || 0)) * spectrumSegmentCount);
+      spectrumBars[band].forEach(function (segment) {
+        var level = Number(segment.dataset.level) || 0;
+        segment.classList.toggle("is-lit", level <= lit);
+      });
+    }
+  }
+
+  function clearSpectrum() {
+    spectrumLevels = spectrumLevels.map(function () { return 0; });
+    paintSpectrum(spectrumLevels);
+  }
 
   function remember(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
   function recall(key) { try { return localStorage.getItem(key); } catch (_) { return null; } }
@@ -372,6 +412,7 @@
       analyser.fftSize = 512;
       analyser.smoothingTimeConstant = .68;
       analyserData = new Uint8Array(analyser.fftSize);
+      frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
       mediaSource.connect(eqHeadroom);
       var node = eqHeadroom;
@@ -386,6 +427,34 @@
     ensureAudioGraph();
     if (audioContext && audioContext.state === "suspended") audioContext.resume().catch(function () {});
   }
+  function drawSpectrum() {
+    if (!analyser || !frequencyData || !spectrumBars.length) return;
+    analyser.getByteFrequencyData(frequencyData);
+    var nyquist = (audioContext ? audioContext.sampleRate : 48000) / 2;
+    var minHz = 45, maxHz = Math.min(16000, nyquist);
+    for (var band = 0; band < spectrumBandCount; band++) {
+      var loRatio = band / spectrumBandCount;
+      var hiRatio = (band + 1) / spectrumBandCount;
+      var lowHz = minHz * Math.pow(maxHz / minHz, loRatio);
+      var highHz = minHz * Math.pow(maxHz / minHz, hiRatio);
+      var lowBin = Math.max(1, Math.floor(lowHz / nyquist * frequencyData.length));
+      var highBin = Math.min(frequencyData.length - 1, Math.max(lowBin + 1, Math.ceil(highHz / nyquist * frequencyData.length)));
+      var total = 0, peak = 0, count = 0;
+      for (var i = lowBin; i <= highBin; i++) {
+        var value = frequencyData[i] / 255;
+        total += value;
+        peak = Math.max(peak, value);
+        count += 1;
+      }
+      var target = count ? ((total / count) * .68 + peak * .32) : 0;
+      target = Math.max(0, Math.min(1, (target - .025) * 1.42));
+      var currentLevel = spectrumLevels[band] || 0;
+      /* Fast attack, visible short decay: old illuminated blocks hang around
+         just long enough to read as analogue hardware rather than flicker. */
+      spectrumLevels[band] = target >= currentLevel ? target : Math.max(target, currentLevel - .055);
+    }
+    paintSpectrum(spectrumLevels);
+  }
   function drawMeters() {
     if (!analyser || audio.paused || audio.ended) { vuFrame = null; return; }
     analyser.getByteTimeDomainData(analyserData);
@@ -397,6 +466,7 @@
     var right = -42 + Math.min(1, strength * .94 + .025) * 76;
     if (el.vuLeft) el.vuLeft.style.transform = "rotate(" + left.toFixed(1) + "deg)";
     if (el.vuRight) el.vuRight.style.transform = "rotate(" + right.toFixed(1) + "deg)";
+    drawSpectrum();
     vuFrame = requestAnimationFrame(drawMeters);
   }
   function startMeters() { if (vuFrame) cancelAnimationFrame(vuFrame); if (analyser) vuFrame = requestAnimationFrame(drawMeters); }
@@ -404,7 +474,9 @@
     if (vuFrame) cancelAnimationFrame(vuFrame); vuFrame = null;
     if (el.vuLeft) el.vuLeft.style.transform = "rotate(-42deg)";
     if (el.vuRight) el.vuRight.style.transform = "rotate(-42deg)";
+    clearSpectrum();
   }
+
 
   /* --------------------------------------------------------------- select */
   function hasLossless(track) { return !!(track.audio && track.audio.sources && (track.audio.sources.flac || track.audio.sources.lossless)); }
@@ -607,6 +679,7 @@
   });
 
   /* ----------------------------------------------------------------- boot */
+  initSpectrum();
   initViewportPlayer();
   audio.removeAttribute("controls");
   var storedVolume = recall("gbr:volume"); audio.volume = storedVolume === null ? .9 : Number(storedVolume); el.volume.value = audio.volume;
