@@ -54,3 +54,8 @@ button,input{font:inherit}button{color:inherit}
   .gbr-control-row{min-height:32px}
   .gbr-progress-row,.gbr-volume-row{min-height:15px}
 }
+
+
+/* v6.3 cassette sizing pass only. */
+.gbr-carousel-cards .version-tag{font-size:clamp(.42rem,.72vw,.62rem);padding:4px 7px;top:calc(100% + 5px)}
+@media(max-width:700px){.gbr-carousel-cards .version-tag{font-size:.36rem;padding:3px 5px;top:calc(100% + 3px)}}

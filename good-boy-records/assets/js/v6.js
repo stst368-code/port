@@ -65,8 +65,10 @@
     if(!cards.length)return;
     if(el.carousel){
       var rect=el.carousel.getBoundingClientRect(),d=Math.max(1,Math.min(rect.width,rect.height));
-      var orbit=Math.max(90,d*.385);
-      var cardSize=Math.max(48,Math.min(118,d*.145));
+      var orbit=Math.max(90,d*.37);
+      /* Size the tapes from the actual rendered wheel. The old 118px cap made
+         a desktop-size magazine look like it had postage stamps bolted to it. */
+      var cardSize=Math.max(62,Math.min(210,d*.235));
       el.carousel.style.setProperty("--orbit-px",orbit.toFixed(1)+"px");
       el.carousel.style.setProperty("--card-size",cardSize.toFixed(1)+"px");
     }
