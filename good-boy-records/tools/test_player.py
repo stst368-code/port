@@ -53,7 +53,8 @@ check("focused lyrics exist", 'id="gbr-lyric-word"' in html)
 check("EQ popup exists", 'id="gbr-eq-popover"' in html and 'data-eq-frequency="60"' in html)
 check("technical drawer exists", 'id="gbr-tech-panel"' in html)
 check("word timing loader exists", "gbr-word-lyrics-v1" in js)
-check("shuffle avoids same song where possible", "t.title !== current.title" in js)
+check("shuffle reaches takes, not just songs",
+      "t.composition !== current.composition" in js and "playableTracks" in js)
 check("media session exists", "MediaMetadata" in js)
 check("cassette insert sound exists", "playInsertSound" in js)
 check("carousel drag exists", "pointerdown" in js and "pointermove" in js)
@@ -67,13 +68,29 @@ check("sleeve precedes the title plate",
       html.index('id="gbr-art-frame"') < html.index('id="gbr-title"'))
 check("rack order is spectrum, deck, VU",
       template.index("gbr-analyser") < template.index("gbr-deck") < template.index("gbr-meters"))
-check("VU geometry adapts to plate shape", "isRoomy" in js and "90 * (h / w)" in js)
-# The sleeves carry the titles, so no text titles are painted on the rack in
-# either mode. They stay in the accessibility tree rather than display:none.
-check("no song titles painted on the rack",
-      "display: block;" not in css.split(".gbr-cards .track-group__title")[1][:400])
-check("group titles kept for assistive tech",
-      "clip-path: inset(50%)" in css.split(".gbr-cards .track-group__title")[1][:400])
+check("meter geometry is derived, not hard coded",
+      "meterGeometry" in js and "METER_SWEEP" in js)
+# The sleeves carry the titles, so no text titles are painted on the rack.
+check("no song titles painted on the rack", "track-group__title" not in css)
+check("bay names reach assistive tech", 'aria-label="Latch ' in
+      (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8"))
+
+# --- one bay per song, with every take inside it ---------------------------
+check("wall is built from bays", "shelf_bay" in
+      (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8"))
+check("a bay carries its takes", "data-tracks" in
+      (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8") and "bayTakes" in js)
+check("takes stack behind the selected sleeve", ".cassette-stack" in css and "paintStack" in js)
+
+# --- take dial --------------------------------------------------------------
+check("dial detents equal takes", "dialAngles" in js and "takes.length" in js)
+check("dial is always present, locked when there is one take",
+      "el.take.hidden = false" in js and 'data-locked="true"' in css)
+check("every detent is named", "gbr-dial-labels" in template and "dialLabels" in js)
+check("dial states the count so takes are not missed", '"Take " + (chosen + 1) + " of "' in js)
+check("dial announces itself on latch", "callDial" in js and "is-calling" in css)
+check("dial has its own detent sound", "playDetent" in js)
+check("carousel is still a way to reach takes", "stepTake(1); return;" in js)
 
 # --- cassette load sound ----------------------------------------------------
 # Mechanisms are noise, not tone. Oscillators alone gave the v6 UI blip.
@@ -96,6 +113,64 @@ check("folders are a tablist with escape and focus return",
       and "closeFolders(true)" in js)
 check("playback keys are inert while a folder is open",
       "if (folders.root && folders.root.dataset.open) return;" in js)
+
+# --- meters, console and power ---------------------------------------------
+check("meters are a side-by-side pair", "meterSplit" in js and "drawMeterFace" in js)
+check("dial has the scalloped skirt", "dialPath" in js)
+check("dial is lamp lit", "lamp.addColorStop" in js and "rgba(255, 176, 60" in js)
+check("percent-modulation row is drawn", "PERCENT" in js)
+check("console holds the EQ and power switch",
+      'id="gbr-console"' in html and 'id="gbr-power"' in html and "gbr-mini-eq" in html)
+check("only one set of EQ controls exists", html.count('data-eq-frequency="60"') == 1)
+check("console relocates instead of duplicating", "placeConsole" in js and 'id="gbr-console-slot"' in html)
+check("power is a real state, not a dimmer",
+      'data-power="off"' in css and "audio.pause();" in js and "setPower" in js)
+check("power-up runs a needle sweep", "sweepUntil" in js)
+check("power sound falls back to first interaction", "armPowerSound" in js)
+check("power sequence is electromechanical", "degauss" in js.lower() and "hum(" in js)
+
+# --- empty bay --------------------------------------------------------------
+# The tape in the deck leaves an impression in the drum, not a hole.
+check("empty bay is etched, not blank",
+      "only its slot is empty" in css and "rgba(255, 200, 128" in css)
+
+# --- magazine lamp ----------------------------------------------------------
+check("magazine has its own lamp", ".gbr-lamp" in css and "--lamp" in js)
+check("lamp brightness is a continuous knob, not detents",
+      'role="slider"' in template and "lamp.drag" in js)
+check("lamp level persists", '"gbr:lamp"' in js)
+
+# --- fanned bays ------------------------------------------------------------
+# Stacking hid the other takes' artwork, which defeated the point of keeping
+# them. The bay at the pickup point fans so every sleeve is legible.
+check("bays fan at the pickup point", "--fan-x" in js and "--fan-x" in css)
+check("fan spread is capped for many takes", "88 / (total - 1)" in js)
+check("only the selected take reads as removed",
+      '.card.is-in-deck .cassette[data-front="true"]' in css)
+check("a fanned sleeve can be picked directly", 'sleeve.dataset.front === "false"' in js)
+
+# --- restore bug ------------------------------------------------------------
+# Number(null) is 0, which passed the range guard and zeroed the control.
+check("missing stored values do not read as zero", "recallNumber" in js)
+
+# --- lamp, EQ and source fallback ------------------------------------------
+check("lamp is four corner fills plus a key spot",
+      "46% 40% at 0% 0%" in css and ".gbr-lamp-key" in css and "--spot-x" in js)
+check("fill and key have different response curves",
+      "Math.pow(lamp.value, 0.75)" in js and "Math.pow(lamp.value, 1.5)" in js)
+check("EQ faders beat the base range rules on specificity",
+      '.gbr-mini-eq input[type="range"]::-webkit-slider-thumb' in css)
+check("EQ console lines up with the dial canvas above it",
+      "Same inset as the dial canvas" in css)
+
+# A FLAC-only track played with lossless off, or an MP3-only track with it on,
+# used to yield no source at all. Preference now only orders candidates.
+check("source selection is a ranked list", "sourceCandidates" in js and "SOURCE_KINDS" in js)
+check("preference orders candidates without discarding them",
+      "it never removes" in js and "found.sort" in js)
+check("a failed source falls through to the next", "nextCandidate" in js)
+check("lossless switch stays usable on tracks without a master",
+      "el.lossless.disabled = false;" in js)
 
 # --- regressions we do not want back ---------------------------------------
 # Capturing the pointer on pointerdown retargets the following click to the

@@ -114,6 +114,11 @@ emerging from a shroud along the bottom.
   has), non-linear VU face, peak-hold pip, overload lamp. `VU_REFERENCE = 9`
   puts 0 VU at -9 dBFS: studio alignment of -18 would leave the needles pinned
   in the red against any modern master.
+- **The empty bay.** A tape held in the deck leaves an impression pressed into
+  the drum rather than a hole: no colour of its own, just a dark edge where the
+  light would not reach and a faint lit edge where it would. Shell, label
+  window and tape window all take the same two-line treatment, so the whole
+  shape reads as one stamping.
 - **Track titling.** A plate under the artwork carrying the title and the
   version / genre / catalogue / duration chips. v6 showed the track title
   nowhere at all — recognising the sleeve was the only way to know what was on.
@@ -168,6 +173,96 @@ It runs on its own `AudioContext`, deliberately. Routing it through the program
 graph would put the latch through the user's EQ and, worse, spike the VU meters
 with a sound that is not the record. Its level follows the output slider.
 
+## Bays and takes
+
+The wall used to carry one tape per take, so forty songs at three attempts each
+produced a hundred and twenty tapes. It now carries one **bay** per song.
+
+A bay is not a single tape, though — it holds every take as a stack, and the
+sleeve at the front is whichever take is loaded. That matters because takes
+differ in artwork and often in genre, and that difference is most of the reason
+for keeping them. Switching take swaps the front sleeve, the deck artwork, the
+genre chip and the technical drawer together.
+
+The bay at the pickup point **fans out**, so every take's sleeve is visible
+rather than hidden behind the front one; the rest of the wheel keeps its bays
+collapsed so the column stays readable. Spread is computed from the take count
+and capped, so six attempts do not fan across the whole column. A fanned sleeve
+can be clicked directly to load that take.
+
+Only the *selected* take is in the deck, so only its slot in the bay reads as
+empty — the others keep their sleeves. That is both what a real magazine looks
+like and how the other artwork stays visible while something is playing.
+
+The magazine is lit by four fills from the corners plus a key spot aimed at the
+bay under the pickup, so the whole wall is readable while the loaded bay is
+clearly the subject. They are two layers off one knob with different response
+curves — fill rises early so the wall is never black, key climbs later and
+harder — which is what gives the control its range. The knob is continuous
+rather than stepped, because the right brightness depends on the room, and the
+level persists.
+
+Three things guard against the other takes being missed:
+
+- The bay's tag reads `3 takes` rather than a version number, and the stack
+  visibly fans, so depth is legible from the wall itself.
+- The dial is always present, even for a single-take song, where it shows one
+  detent labelled `v1` and simply does not turn. Every detent is named, so the
+  dial says what each position *is* rather than leaving you to count round it — so it is a fixed part of the deck rather
+  than something that appears and disappears. It sits immediately left of the
+  song name — the control that changes
+  the name is next to the name — and its legend reads `Take 1 of 3` in words
+  rather than a bare `v1`.
+- When a multi-take song is latched the dial gives one small nudge, so it
+  announces itself instead of waiting to be noticed.
+
+The dial has one detent per take, a lit tick at the current position, and a
+sprung detent click deliberately unlike the cassette latch so the two are never
+confused. A song with one take shows no dial at all rather than a control that
+does nothing. Arrow keys step it either way; clicking steps forward and wraps.
+
+Clicking the bay that is already in the deck also steps to the next take, so the
+carousel remains a way to reach versions and not merely songs.
+
+Shuffle draws from every take rather than from songs, so versions come up on
+their own. It still prefers a different composition first, so a run does not sit
+on one song playing its takes back to back.
+
+## The meter bank and console
+
+The VU movements are a side-by-side pair drawn into one canvas: cream dial,
+scalloped skirt with the needle emerging from it, warm lamp burning up through
+the face from below, dark bezel with corner screws, red band from 0 VU, and the
+percentage-modulation row under the main scale. Ballistics are unchanged — a
+spring solver at roughly 300 ms to full deflection with the slight overshoot a
+real movement has.
+
+Underneath them sits the console: five condensed EQ faders, a FLAT reset, and
+the power switch. There is only ever **one** set of EQ controls in the document.
+On narrow viewports the console element is moved into the EQ popover and the
+top-bar EQ button appears; on wide viewports it moves back inline and the button
+hides. Moving the node rather than rendering two sets keeps a single binding to
+the audio graph.
+
+## Power
+
+The deck boots into standby and switches itself on shortly after first paint:
+needles sweep the full scale and fall back, the lamps come up, and the
+electromechanical sequence plays — switch clack, relay, transformer swelling to
+temperature with its second harmonic, a decaying degauss buzz beating against
+itself, capstan and reel motors spinning up, then the mechanism settling.
+
+Off is a real state rather than a dimmer: playback stops, the transport and
+magazine stop responding, the dials go grey and unlit, and the spectrum falls
+away instead of freezing on its last frame.
+
+**Caveat worth knowing.** Browsers will not let a page make noise before it has
+been touched, so the power-up sound is usually blocked on a cold load. The
+sequence still runs visually, and the sound is armed to fire on the first real
+interaction, so the machine is heard coming alive rather than never at all. On a
+site the browser already trusts it plays immediately. Toggling the switch by
+hand always makes sound, because that is a gesture.
+
 ## Also fixed
 
 - Spectrum moved from 180 DOM nodes toggling classes every frame to one canvas.
@@ -203,7 +298,11 @@ Three rules the stylesheet depends on. Breaking one is how v6 got into trouble:
 - Cassette fly-in animation and synthesised mechanical latch sound.
 - Continuous play. Shuffle prefers a different song before another version of
   the same one.
-- MP3, Opus, WAV and FLAC selection with a remembered lossless preference.
+- MP3, Opus, WAV and FLAC. Format selection is a ranked list, not a single
+  guess: the lossless switch and the browser's `canPlayType` only *order* the
+  candidates, they never remove the last one. A FLAC-only take plays with the
+  switch off, an MP3-only take plays with it on, and if a file fails to load
+  the deck falls through to the next candidate rather than stopping.
 - Word-timed lyric sidecars with large current-word focus; line-timed fallback.
 - Five-band Web Audio EQ (60 / 250 / 1k / 4k / 12k, ±9 dB) with limiter,
   remembered locally.

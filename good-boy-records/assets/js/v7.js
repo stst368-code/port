@@ -40,6 +40,14 @@
   }
   function remember(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
   function recall(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
+  /* Number(null) is 0, not NaN, so a missing key would otherwise read as a
+     legitimate zero and quietly zero the control it restores. */
+  function recallNumber(k) {
+    var raw = recall(k);
+    if (raw == null || raw === "") return NaN;
+    var value = Number(raw);
+    return isFinite(value) ? value : NaN;
+  }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
   var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -70,6 +78,16 @@
     slot: $("gbr-tape-slot"),
     title: $("gbr-title"),
     meta: $("gbr-meta"),
+    take: $("gbr-take"),
+    dial: $("gbr-dial"),
+    dialTicks: $("gbr-dial-ticks"),
+    dialKnob: $("gbr-dial-knob"),
+    lampKey: $("gbr-lamp-key"),
+    dialLabels: $("gbr-dial-labels"),
+    bright: $("gbr-bright"),
+    brightTicks: $("gbr-bright-ticks"),
+    brightKnob: $("gbr-bright-knob"),
+    takeLegend: $("gbr-take-legend"),
     play: $("gbr-play"),
     shuffle: $("gbr-shuffle"),
     back: $("gbr-back"),
@@ -125,9 +143,70 @@
     suppressClickUntil: 0
   };
 
+  /* A bay is one song. `takes` are its versions in order; `selection` records
+     which one is at the front of the stack. */
+  var selection = {};
+
+  function bayTakes(card) {
+    if (!card) return [];
+    if (!card._takes) {
+      card._takes = String(card.dataset.tracks || "").split(",")
+        .filter(function (id) { return !!byId[id]; });
+    }
+    return card._takes;
+  }
+  function bayKey(card) { return card.dataset.composition || ""; }
+  function takeIndex(card) {
+    return clamp(0, selection[bayKey(card)] || 0, Math.max(0, bayTakes(card).length - 1));
+  }
+  function bayTrack(card) { return byId[bayTakes(card)[takeIndex(card)]] || null; }
+
+  /* Front sleeve carries the selected take's artwork. Collapsed, the rest sit
+     behind it as a tidy stack; expanded, they fan out far enough that each
+     sleeve is genuinely legible rather than a sliver of edge.
+
+     The spread is computed from the take count and capped, so a song with six
+     attempts does not fan itself across the whole column. */
+  function paintStack(card, expanded) {
+    if (!card) return;
+    var sleeves = card.querySelectorAll(".cassette");
+    var total = sleeves.length;
+    if (!total) return;
+    if (expanded == null) expanded = card.dataset.expanded === "true";
+    card.dataset.expanded = expanded && total > 1 ? "true" : "false";
+
+    var chosen = takeIndex(card);
+    var spread = total > 1 ? clamp(14, 88 / (total - 1), 32) : 0;
+
+    for (var i = 0; i < total; i++) {
+      var depth = mod(i - chosen, total);
+      var sleeve = sleeves[i];
+      sleeve.dataset.front = depth === 0 ? "true" : "false";
+      sleeve.dataset.hidden = "false";
+      sleeve.style.setProperty("--stack", String(depth));
+
+      if (expanded && total > 1) {
+        /* Fan behind and to the left, so the front sleeve keeps the bay's
+           anchor point and the others reveal leftwards into the crescent. */
+        sleeve.style.setProperty("--fan-x", (-depth * spread).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-y", (-depth * 3).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-rot", (-depth * 3.4).toFixed(1) + "deg");
+        sleeve.style.setProperty("--fan-scale", (1 - depth * 0.03).toFixed(3));
+      } else {
+        var capped = Math.min(depth, 3);
+        sleeve.style.setProperty("--fan-x", (capped * 7).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-y", (capped * -6).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-rot", (capped * -3).toFixed(1) + "deg");
+        sleeve.style.setProperty("--fan-scale", (1 - capped * 0.05).toFixed(3));
+        sleeve.dataset.hidden = depth > 3 ? "true" : "false";
+      }
+      sleeve.style.zIndex = String(30 - depth);
+    }
+  }
+
   function collectCards() {
     mag.cards = Array.prototype.slice.call(el.cards ? el.cards.querySelectorAll(".card") : []);
-    mag.cards.forEach(function (c, i) { c.dataset.index = String(i); });
+    mag.cards.forEach(function (c, i) { c.dataset.index = String(i); paintStack(c); });
     if (el.magazine) el.magazine.dataset.empty = mag.cards.length ? "false" : "true";
   }
 
@@ -138,7 +217,7 @@
     var wall = el.cards && el.cards.querySelector(".track-wall");
     if (!wall) return;
     var groups = Array.prototype.slice.call(wall.children)
-      .filter(function (n) { return n.classList.contains("track-group"); });
+      .filter(function (n) { return n.classList.contains("card"); });
     for (var i = groups.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var tmp = groups[i]; groups[i] = groups[j]; groups[j] = tmp;
@@ -179,6 +258,10 @@
 
     document.documentElement.style.setProperty("--card-w", cardW.toFixed(1) + "px");
 
+    /* Aim the key light at the pickup point. */
+    el.magazine.style.setProperty("--spot-x", ((cardCx / W) * 100).toFixed(1) + "%");
+    el.magazine.style.setProperty("--spot-y", "50%");
+
     var discR = mag.radius / 0.78;
     if (el.wheel) {
       el.wheel.style.setProperty("--wheel-x", mag.centreX.toFixed(1) + "px");
@@ -197,7 +280,10 @@
     if (!n) return;
 
     if (mag.mode === "rail") {
-      mag.cards.forEach(function (card) { card.dataset.visible = "true"; });
+      mag.cards.forEach(function (card) {
+        card.dataset.visible = "true";
+        if (card.dataset.expanded !== "true") paintStack(card, true);
+      });
       return;
     }
 
@@ -222,7 +308,11 @@
       card.style.setProperty("--scale", (1 - near * 0.17).toFixed(3));
       card.style.setProperty("--opacity", (1 - near * 0.62).toFixed(3));
       card.style.setProperty("--z", String(1000 - Math.round(Math.abs(theta) * 4)));
-      card.dataset.pickup = Math.abs(offset) < 0.5 ? "true" : "false";
+      var atPickup = Math.abs(offset) < 0.5;
+      if (card.dataset.pickup !== String(atPickup)) {
+        card.dataset.pickup = atPickup ? "true" : "false";
+        paintStack(card, atPickup);
+      }
     }
 
     if (el.wheel) {
@@ -239,14 +329,24 @@
   function indexOfTrack(track) {
     if (!track) return -1;
     for (var i = 0; i < mag.cards.length; i++) {
-      if (mag.cards[i].dataset.track === track.id) return i;
+      if (bayTakes(mag.cards[i]).indexOf(track.id) !== -1) return i;
     }
     return -1;
+  }
+  /* Point a bay at a specific take. Shuffle picks a track, not a song, so the
+     stack has to follow it. */
+  function selectTake(track) {
+    var index = indexOfTrack(track);
+    if (index < 0) return -1;
+    var card = mag.cards[index];
+    var at = bayTakes(card).indexOf(track.id);
+    if (at >= 0) { selection[bayKey(card)] = at; paintStack(card); }
+    return index;
   }
   function trackAt(index) {
     var n = mag.cards.length;
     if (!n) return null;
-    return byId[mag.cards[mod(index, n)].dataset.track] || null;
+    return bayTrack(mag.cards[mod(index, n)]);
   }
 
   /* Animate `position` rather than transitioning transforms, so cards travel
@@ -303,7 +403,7 @@
 
   function markSelected(id) {
     mag.cards.forEach(function (card) {
-      var on = card.dataset.track === id;
+      var on = bayTakes(card).indexOf(id) !== -1;
       card.dataset.active = on ? "true" : "false";
       card.classList.toggle("is-in-deck", on && mag.mode === "wheel");
       var button = card.querySelector(".card__play");
@@ -324,8 +424,20 @@
         card.classList.remove("is-in-deck", "is-departing");
       });
     }
+    placeConsole(next);
     relayoutMagazine();
     if (current) markSelected(current.id);
+  }
+
+  function placeConsole(mode) {
+    var console_ = $("gbr-console");
+    if (!console_) return;
+    var home = $("gbr-meters-module");
+    var slot = $("gbr-console-slot");
+    var target = mode === "rail" ? slot : home;
+    if (target && console_.parentElement !== target) target.appendChild(console_);
+    /* The top-bar EQ button only earns its place when the console is hidden. */
+    if (el.eqToggle) el.eqToggle.hidden = mode !== "rail";
   }
 
   function bindMagazine() {
@@ -342,9 +454,34 @@
       var card = event.target.closest(".card") || mag.lastHit;
       mag.lastHit = null;
       if (!card) return;
-      var track = byId[card.dataset.track];
+      /* In a fanned bay each sleeve is its own target, so a take can be
+         chosen by pointing at its artwork. */
+      var sleeve = event.target.closest(".cassette");
+      if (sleeve && card.dataset.expanded === "true" && sleeve.dataset.front === "false") {
+        var at = bayTakes(card).indexOf(sleeve.dataset.track);
+        if (at >= 0) {
+          selection[bayKey(card)] = at;
+          paintStack(card, true);
+          playDetent();
+          var picked = bayTrack(card);
+          if (picked) {
+            if (current && bayTakes(card).indexOf(current.id) !== -1) {
+              paintDial(card);
+              latch(picked, !audio.paused);
+            } else {
+              engage(picked, true, false);
+            }
+          }
+          return;
+        }
+      }
+
+      var track = bayTrack(card);
       if (!track) return;
-      if (current && current.id === track.id) {
+      /* Second click on the bay already in the deck steps to the next take —
+         the carousel stays a way to reach versions, not just songs. */
+      if (current && bayTakes(card).indexOf(current.id) !== -1) {
+        if (bayTakes(card).length > 1) { stepTake(1); return; }
         if (audio.paused) startPlayback(); else audio.pause();
         return;
       }
@@ -557,6 +694,8 @@
   /* One rAF loop drives both instruments. It idles when nothing is playing
      and the needles have come to rest, so a paused tab costs nothing. */
 
+  var power = { on: false, sweepUntil: 0, armed: false };
+
   var SPECTRUM_BANDS = 24;
   var SPECTRUM_SEGS = 13;
   var BAND_CENTRES = [];
@@ -613,151 +752,15 @@
     return { ctx: ctx, w: rect.width, h: rect.height };
   }
 
-  /* The scale, lettering and red arc never change, so they are drawn once
-     into an offscreen canvas and blitted each frame. */
-  function renderVuFace(w, h) {
-    var key = Math.round(w) + "x" + Math.round(h);
-    if (meters.face && meters.faceKey === key) return meters.face;
+  /* Classic bridge VU. Cream dial with the scalloped skirt the needle pivots
+     behind, warm lamp burning up through it from below, dark bezel with corner
+     screws. Two movements side by side in one canvas, so the pair is sized
+     from a single measurement.
 
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var off = document.createElement("canvas");
-    off.width = Math.round(w * dpr);
-    off.height = Math.round(h * dpr);
-    var c = off.getContext("2d");
-    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+     Everything except the needle and the glass is static, so it is rendered
+     once per resize into an offscreen canvas and blitted each frame. */
 
-    var gap = 3;
-    var mh = (h - gap) / 2;
-    for (var i = 0; i < 2; i++) {
-      drawFacePlate(c, 0, i * (mh + gap), w, mh, meters.channels[i].name);
-    }
-
-    meters.face = { canvas: off, w: w, h: h, meterH: mh, gap: gap };
-    meters.faceKey = key;
-    return meters.face;
-  }
-
-  /* Plates taller than this get the full treatment: numerals following the
-     arc, and a shroud the needle emerges from. */
-  function isRoomy(h) { return h >= 58; }
-
-  function meterGeometry(w, h) {
-    /* One formula covers both plate proportions. Sweep comes from the aspect
-       ratio, the radius from the width, and the pivot drops below the plate as
-       it does on real hardware. The second constraint keeps the ends of the
-       arc from running off the bottom of a tall plate. */
-    var sweep = clamp(22, 90 * (h / w) + 8, 52) / DEG;
-    var crown = h * 0.17;
-    var floorLimit = isRoomy(h) ? 0.58 : 0.82;   /* how far down the arc may go */
-    var r = Math.min(
-      (w * 0.42) / Math.sin(sweep),
-      ((floorLimit - 0.17) * h) / (1 - Math.cos(sweep))
-    );
-    return { cx: w / 2, cy: r + crown, r: r, sweep: sweep };
-  }
-  function needleAngle(geo, fraction) {
-    return -Math.PI / 2 + (fraction - 0.5) * 2 * geo.sweep;
-  }
-
-  function drawFacePlate(c, x, y, w, h, label) {
-    c.save();
-    c.translate(x, y);
-
-    var plate = c.createLinearGradient(0, 0, 0, h);
-    plate.addColorStop(0, "#f2dfb3");
-    plate.addColorStop(0.5, "#e5cd9b");
-    plate.addColorStop(1, "#c3a268");
-    c.fillStyle = plate;
-    roundRect(c, 0, 0, w, h, 3);
-    c.fill();
-
-    /* Lamp behind the face, brightest at the crown of the arc. */
-    var geo = meterGeometry(w, h);
-    var lamp = c.createRadialGradient(geo.cx, h * 0.34, 0, geo.cx, h * 0.34, w * 0.6);
-    lamp.addColorStop(0, "rgba(255, 226, 160, 0.55)");
-    lamp.addColorStop(1, "rgba(255, 196, 96, 0)");
-    c.fillStyle = lamp;
-    roundRect(c, 0, 0, w, h, 3);
-    c.fill();
-
-    var roomy = isRoomy(h);
-    var arcW = clamp(1.5, h * 0.045, 3.4);
-    var tickLong = clamp(3, h * 0.13, 15);
-    var tickShort = tickLong * 0.55;
-
-    c.lineWidth = arcW;
-    c.strokeStyle = "#3a2c1c";
-    c.beginPath();
-    c.arc(geo.cx, geo.cy, geo.r, needleAngle(geo, 0), needleAngle(geo, vuToFraction(0)));
-    c.stroke();
-    c.strokeStyle = "#c23a22";
-    c.beginPath();
-    c.arc(geo.cx, geo.cy, geo.r, needleAngle(geo, vuToFraction(0)), needleAngle(geo, 1));
-    c.stroke();
-
-    var majors = [-20, -10, -7, -5, -3, -2, -1, 0, 1, 2, 3];
-    var labelled = [-20, -10, -5, -3, 0, 3];
-    majors.forEach(function (vu) {
-      var long = labelled.indexOf(vu) !== -1;
-      if (!roomy && !long) return;
-      var a = needleAngle(geo, vuToFraction(vu));
-      var len = long ? tickLong : tickShort;
-      c.strokeStyle = vu >= 0 ? "#a8331f" : "#3a2c1c";
-      c.lineWidth = long ? Math.max(1.2, arcW * 0.5) : Math.max(0.8, arcW * 0.32);
-      c.beginPath();
-      c.moveTo(geo.cx + Math.cos(a) * (geo.r - arcW / 2 - len),
-               geo.cy + Math.sin(a) * (geo.r - arcW / 2 - len));
-      c.lineTo(geo.cx + Math.cos(a) * (geo.r - arcW / 2),
-               geo.cy + Math.sin(a) * (geo.r - arcW / 2));
-      c.stroke();
-    });
-
-    if (roomy) {
-      /* Numerals sit inside the arc, on their own tick. */
-      var fs = clamp(7, h * 0.105, 14);
-      c.font = "600 " + fs.toFixed(1) + "px ui-monospace, monospace";
-      c.textAlign = "center";
-      c.textBaseline = "middle";
-      var ringR = geo.r - arcW / 2 - tickLong - fs * 1.15;
-      /* The shroud is drawn over the bottom of the plate, so lift any numeral
-         that would otherwise sit behind it. Real faces offset the end
-         numerals for the same reason. */
-      var ceiling = h * 0.74 - fs * 0.75;
-      labelled.forEach(function (vu) {
-        var a = needleAngle(geo, vuToFraction(vu));
-        c.fillStyle = vu >= 0 ? "#a8331f" : "#4a3720";
-        c.fillText(vu > 0 ? "+" + vu : String(vu),
-                   geo.cx + Math.cos(a) * ringR,
-                   Math.min(geo.cy + Math.sin(a) * ringR, ceiling));
-      });
-    } else if (h >= 26) {
-      c.font = "600 " + Math.max(5, Math.round(h * 0.15)) + "px ui-monospace, monospace";
-      c.textBaseline = "top";
-      c.textAlign = "left";
-      c.fillStyle = "#4a3720";
-      c.fillText("-20", 4, h * 0.5);
-      c.textAlign = "right";
-      c.fillStyle = "#a8331f";
-      c.fillText("+3", w - 4, h * 0.5);
-    }
-
-    if (!roomy) {
-      c.fillStyle = "#5b452a";
-      c.font = "700 " + clamp(6, h * 0.2, 13).toFixed(1) + "px ui-monospace, monospace";
-      c.textAlign = "left";
-      c.textBaseline = "bottom";
-      c.fillText(label, 5, h - 3);
-      c.textAlign = "right";
-      c.fillText("VU", w - 5, h - 3);
-    }
-
-    c.strokeStyle = "rgba(70,50,26,0.55)";
-    c.lineWidth = 1;
-    roundRect(c, 0.5, 0.5, w - 1, h - 1, 3);
-    c.stroke();
-
-    c.restore();
-  }
+  var METER_SWEEP = 47 / DEG;
 
   function roundRect(c, x, y, w, h, r) {
     r = Math.min(r, w / 2, h / 2);
@@ -770,10 +773,217 @@
     c.closePath();
   }
 
+  function meterSplit(w, h) {
+    var gap = Math.max(3, w * 0.02);
+    return { gap: gap, w: (w - gap) / 2, h: h };
+  }
+
+  function meterGeometry(w, h) {
+    /* Pivot near the foot of the dial, arc crowning about a third down, which
+       is where a real movement puts them. */
+    /* Pivot sits just under the crest of the skirt, so the needle appears out
+       of it rather than sweeping across the whole dial. */
+    return {
+      cx: w / 2,
+      cy: h * 0.80,
+      r: Math.min(w * 0.495, h * 0.60),
+      sweep: METER_SWEEP
+    };
+  }
+
+  function needleAngle(geo, fraction) {
+    return -Math.PI / 2 + (fraction - 0.5) * 2 * geo.sweep;
+  }
+
+  /* The dial outline: rounded square whose bottom edge lifts into the skirt
+     the needle disappears behind. */
+  function dialPath(c, w, h) {
+    var r = Math.min(w, h) * 0.09;
+    var b = h;
+    c.beginPath();
+    c.moveTo(r, 0);
+    c.lineTo(w - r, 0);
+    c.quadraticCurveTo(w, 0, w, r);
+    c.lineTo(w, b - r);
+    c.quadraticCurveTo(w, b, w - r, b);
+    c.lineTo(w * 0.80, b);
+    c.quadraticCurveTo(w * 0.72, b, w * 0.685, h * 0.855);
+    c.quadraticCurveTo(w * 0.635, h * 0.745, w * 0.5, h * 0.745);
+    c.quadraticCurveTo(w * 0.365, h * 0.745, w * 0.315, h * 0.855);
+    c.quadraticCurveTo(w * 0.28, b, w * 0.20, b);
+    c.lineTo(r, b);
+    c.quadraticCurveTo(0, b, 0, b - r);
+    c.lineTo(0, r);
+    c.quadraticCurveTo(0, 0, r, 0);
+    c.closePath();
+  }
+
+  var MAJORS = [
+    [-20, "20"], [-10, "10"], [-7, "7"], [-5, "5"], [-3, "3"],
+    [-2, "2"], [-1, "1"], [0, "0"], [1, "1"], [2, "2"], [3, "3"]
+  ];
+  var PERCENT = [[-14, "20"], [-8, "40"], [-4.4, "60"], [-1.9, "80"], [0, "100"]];
+
+  function drawMeterFace(c, x, y, w, h, lit) {
+    c.save();
+    c.translate(x, y);
+
+    /* Bezel. */
+    var bezel = c.createLinearGradient(0, 0, 0, h);
+    bezel.addColorStop(0, "#2b2825");
+    bezel.addColorStop(0.5, "#131110");
+    bezel.addColorStop(1, "#050404");
+    c.fillStyle = bezel;
+    roundRect(c, 0, 0, w, h, Math.min(w, h) * 0.09);
+    c.fill();
+
+    var pad = Math.min(w, h) * 0.085;
+    var fw = w - pad * 2;
+    var fh = h - pad * 2;
+    var tiny = fw < 70;
+
+    c.save();
+    c.translate(pad, pad);
+    dialPath(c, fw, fh);
+    c.save();
+    c.clip();
+
+    /* Dial and lamp. The glow rises from below, as a bulb behind the skirt. */
+    c.fillStyle = lit ? "#f6ecca" : "#8f8a76";
+    c.fillRect(0, 0, fw, fh);
+    if (lit) {
+      var lamp = c.createRadialGradient(fw / 2, fh * 1.02, 0, fw / 2, fh * 1.02, fh * 1.25);
+      lamp.addColorStop(0, "rgba(255, 176, 60, 0.62)");
+      lamp.addColorStop(0.45, "rgba(255, 190, 96, 0.26)");
+      lamp.addColorStop(1, "rgba(255, 208, 130, 0)");
+      c.fillStyle = lamp;
+      c.fillRect(0, 0, fw, fh);
+    }
+
+    var geo = meterGeometry(fw, fh);
+    var ink = lit ? "#1d1710" : "#3f3b32";
+    var red = lit ? "#8e1f2a" : "#5a4038";
+
+    /* Red band, 0 VU to full scale. */
+    c.strokeStyle = red;
+    c.lineWidth = Math.max(2, geo.r * 0.075);
+    c.beginPath();
+    c.arc(geo.cx, geo.cy, geo.r * 0.955,
+          needleAngle(geo, vuToFraction(0)), needleAngle(geo, 1));
+    c.stroke();
+
+    /* Main ticks and their numerals. */
+    var numSize = Math.max(5.5, geo.r * 0.115);
+    c.font = "600 " + numSize.toFixed(1) + "px ui-monospace, monospace";
+    c.textAlign = "center";
+    c.textBaseline = "middle";
+    MAJORS.forEach(function (entry) {
+      var vu = entry[0];
+      var a = needleAngle(geo, vuToFraction(vu));
+      var long = vu <= -10 || vu === -5 || vu === 0 || vu === 3;
+      c.strokeStyle = vu >= 0 ? red : ink;
+      c.lineWidth = long ? Math.max(1, geo.r * 0.017) : Math.max(0.7, geo.r * 0.011);
+      var inner = geo.r * (long ? 0.885 : 0.925);
+      c.beginPath();
+      c.moveTo(geo.cx + Math.cos(a) * inner, geo.cy + Math.sin(a) * inner);
+      c.lineTo(geo.cx + Math.cos(a) * geo.r, geo.cy + Math.sin(a) * geo.r);
+      c.stroke();
+      if (tiny && !long) return;
+      c.fillStyle = vu >= 0 ? red : ink;
+      c.fillText(entry[1],
+                 geo.cx + Math.cos(a) * geo.r * 1.11,
+                 geo.cy + Math.sin(a) * geo.r * 1.11);
+    });
+
+    /* Percentage-modulation row: dots, then its own numerals. */
+    if (!tiny) {
+      c.fillStyle = ink;
+      for (var i = 0; i <= 20; i++) {
+        var f = i / 20;
+        var da = needleAngle(geo, f);
+        c.beginPath();
+        c.arc(geo.cx + Math.cos(da) * geo.r * 0.80,
+              geo.cy + Math.sin(da) * geo.r * 0.80,
+              Math.max(0.7, geo.r * 0.014), 0, Math.PI * 2);
+        c.fill();
+      }
+      c.font = "600 " + Math.max(4.5, geo.r * 0.088).toFixed(1) + "px ui-monospace, monospace";
+      PERCENT.forEach(function (entry) {
+        var pa = needleAngle(geo, vuToFraction(entry[0]));
+        c.fillText(entry[1],
+                   geo.cx + Math.cos(pa) * geo.r * 0.665,
+                   geo.cy + Math.sin(pa) * geo.r * 0.63);
+      });
+    }
+
+    /* VU wordmark, and the polarity marks at the ends of the travel. */
+    c.fillStyle = ink;
+    c.font = "700 " + Math.max(7, geo.r * 0.20).toFixed(1) + "px Georgia, serif";
+    c.fillText("VU", geo.cx, geo.cy - geo.r * 0.34);
+    if (!tiny) {
+      c.font = "600 " + Math.max(6, geo.r * 0.16).toFixed(1) + "px ui-monospace, monospace";
+      var ea = needleAngle(geo, 0);
+      c.fillText("\u2013", geo.cx + Math.cos(ea) * geo.r * 0.52, geo.cy + Math.sin(ea) * geo.r * 0.52);
+      c.fillStyle = red;
+      var pa2 = needleAngle(geo, 1);
+      c.fillText("+", geo.cx + Math.cos(pa2) * geo.r * 0.52, geo.cy + Math.sin(pa2) * geo.r * 0.52);
+    }
+
+    c.restore();               /* release the dial clip */
+    c.strokeStyle = "rgba(0,0,0,0.55)";
+    c.lineWidth = 1;
+    dialPath(c, fw, fh);
+    c.stroke();
+    c.restore();               /* release the pad translate */
+
+    /* Corner screws. */
+    var sr = Math.max(1.6, Math.min(w, h) * 0.035);
+    [[pad * 0.55, pad * 0.55], [w - pad * 0.55, pad * 0.55],
+     [pad * 0.55, h - pad * 0.55], [w - pad * 0.55, h - pad * 0.55]].forEach(function (p) {
+      var g = c.createRadialGradient(p[0] - sr * 0.3, p[1] - sr * 0.3, 0, p[0], p[1], sr);
+      g.addColorStop(0, "#6d6862");
+      g.addColorStop(1, "#1a1715");
+      c.fillStyle = g;
+      c.beginPath();
+      c.arc(p[0], p[1], sr, 0, Math.PI * 2);
+      c.fill();
+      c.strokeStyle = "rgba(0,0,0,0.7)";
+      c.lineWidth = Math.max(0.8, sr * 0.28);
+      c.beginPath();
+      c.moveTo(p[0] - sr * 0.6, p[1] + sr * 0.2);
+      c.lineTo(p[0] + sr * 0.6, p[1] - sr * 0.2);
+      c.stroke();
+    });
+
+    c.restore();
+  }
+
+  function renderVuFace(w, h, lit) {
+    var key = Math.round(w) + "x" + Math.round(h) + (lit ? "L" : "D");
+    if (meters.face && meters.faceKey === key) return meters.face;
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var off = document.createElement("canvas");
+    off.width = Math.round(w * dpr);
+    off.height = Math.round(h * dpr);
+    var c = off.getContext("2d");
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var split = meterSplit(w, h);
+    drawMeterFace(c, 0, 0, split.w, split.h, lit);
+    drawMeterFace(c, split.w + split.gap, 0, split.w, split.h, lit);
+
+    meters.face = { canvas: off, w: w, h: h, split: split, lit: lit };
+    meters.faceKey = key;
+    return meters.face;
+  }
+
   function drawVu(dt) {
     var fit = fitCanvas(el.vu);
     if (!fit) return false;
-    var face = renderVuFace(fit.w, fit.h);
+    var lit = power.on;
+    var face = renderVuFace(fit.w, fit.h, lit);
+    var split = face.split;
     var c = fit.ctx;
 
     c.clearRect(0, 0, fit.w, fit.h);
@@ -781,92 +991,71 @@
 
     var settled = true;
     var now = performance.now();
+    var pad = Math.min(split.w, split.h) * 0.085;
+    var fw = split.w - pad * 2;
+    var fh = split.h - pad * 2;
+    var geo = meterGeometry(fw, fh);
 
     for (var i = 0; i < 2; i++) {
       var ch = meters.channels[i];
 
-      /* Spring ballistics: ~300 ms to reach 99% with the slight overshoot a
-         mechanical movement actually has. */
+      /* Spring ballistics: about 300 ms to full deflection, with the slight
+         overshoot a mechanical movement actually has. */
       var accel = (ch.target - ch.pos) * 190 - ch.vel * 26;
       ch.vel += accel * dt;
       ch.pos += ch.vel * dt;
       ch.pos = clamp(0, ch.pos, 1.06);
       if (Math.abs(ch.target - ch.pos) > 0.002 || Math.abs(ch.vel) > 0.01) settled = false;
 
-      var top = i * (face.meterH + face.gap);
-      var geo = meterGeometry(fit.w, face.meterH);
+      var ox = i * (split.w + split.gap) + pad;
       var angle = needleAngle(geo, clamp(0, ch.pos, 1));
 
       c.save();
-      c.translate(0, top);
-      c.beginPath();
-      c.rect(0, 0, fit.w, face.meterH);
+      c.translate(ox, pad);
+      dialPath(c, fw, fh);
       c.clip();
 
-      /* Peak hold pip. */
-      if (now - ch.peakAt < 1400 && ch.peak > 0.02) {
+      if (lit && now - ch.peakAt < 1400 && ch.peak > 0.02) {
         var pa = needleAngle(geo, clamp(0, ch.peak, 1));
-        c.fillStyle = ch.peak >= vuToFraction(0) ? "#b8321c" : "#6b542f";
+        c.fillStyle = ch.peak >= vuToFraction(0) ? "#9e2130" : "#6b542f";
         c.beginPath();
-        c.arc(geo.cx + Math.cos(pa) * geo.r, geo.cy + Math.sin(pa) * geo.r,
-              clamp(1.1, face.meterH * 0.022, 3.4), 0, Math.PI * 2);
+        c.arc(geo.cx + Math.cos(pa) * geo.r * 0.955,
+              geo.cy + Math.sin(pa) * geo.r * 0.955,
+              Math.max(1, geo.r * 0.028), 0, Math.PI * 2);
         c.fill();
         settled = false;
       }
 
-      /* Needle. */
-      var roomy = isRoomy(face.meterH);
-      var tipX = geo.cx + Math.cos(angle) * (geo.r + face.meterH * 0.02);
-      var tipY = geo.cy + Math.sin(angle) * (geo.r + face.meterH * 0.02);
-      var tail = geo.r * (roomy ? 0.62 : 0.3);
-      var baseX = geo.cx + Math.cos(angle) * (geo.r - tail);
-      var baseY = geo.cy + Math.sin(angle) * (geo.r - tail);
-
-      c.strokeStyle = "rgba(20,12,4,0.28)";
-      c.lineWidth = Math.max(1.6, face.meterH * 0.05);
+      /* Needle: shadow first, so it lifts off the dial. */
+      var tipX = geo.cx + Math.cos(angle) * geo.r * 0.99;
+      var tipY = geo.cy + Math.sin(angle) * geo.r * 0.99;
+      c.strokeStyle = "rgba(40,26,8,0.22)";
+      c.lineWidth = Math.max(1.4, geo.r * 0.028);
       c.lineCap = "round";
       c.beginPath();
-      c.moveTo(baseX + 1, baseY + 1.2);
-      c.lineTo(tipX + 1, tipY + 1.2);
+      c.moveTo(geo.cx + 1.5, geo.cy + 1.5);
+      c.lineTo(tipX + 1.5, tipY + 1.5);
       c.stroke();
 
-      c.strokeStyle = "#1d1409";
-      c.lineWidth = Math.max(1.2, face.meterH * 0.038);
+      c.strokeStyle = lit ? "#191308" : "#403a30";
+      c.lineWidth = Math.max(1, geo.r * 0.020);
       c.beginPath();
-      c.moveTo(baseX, baseY);
+      c.moveTo(geo.cx, geo.cy);
       c.lineTo(tipX, tipY);
       c.stroke();
 
-      /* Shroud: the needle has to come out of something. Drawn after the
-         needle so it hides the tail, which is why it is not part of the
-         cached face. */
-      if (roomy) {
-        var sy = face.meterH * 0.74;
-        var shroud = c.createLinearGradient(0, sy, 0, face.meterH);
-        shroud.addColorStop(0, "#8c7345");
-        shroud.addColorStop(0.18, "#3a2c1a");
-        shroud.addColorStop(1, "#221a0f");
-        c.fillStyle = shroud;
-        c.fillRect(0, sy, fit.w, face.meterH - sy);
-        c.fillStyle = "#d8bd85";
-        c.font = "700 " + clamp(7, face.meterH * 0.1, 13).toFixed(1) + "px ui-monospace, monospace";
-        c.textBaseline = "bottom";
-        c.textAlign = "left";
-        c.fillText(ch.name, 6, face.meterH - 5);
-        c.textAlign = "right";
-        c.fillText("VU", fit.w - 6, face.meterH - 5);
-      }
+      /* Glass. */
+      var gloss = c.createLinearGradient(0, 0, fw * 0.75, fh);
+      gloss.addColorStop(0, "rgba(255,255,255,0.16)");
+      gloss.addColorStop(0.34, "rgba(255,255,255,0.03)");
+      gloss.addColorStop(0.55, "rgba(255,255,255,0)");
+      c.fillStyle = gloss;
+      c.fillRect(0, 0, fw, fh);
 
-      /* Overload lamp. */
-      if (ch.over > 0) {
+      if (lit && ch.over > 0) {
         ch.over = Math.max(0, ch.over - dt * 1.6);
-        c.fillStyle = "rgba(224,73,42," + (0.35 + ch.over * 0.65).toFixed(3) + ")";
-        c.beginPath();
-        c.arc(fit.w - 8, 6, Math.max(2, face.meterH * 0.07), 0, Math.PI * 2);
-        c.fill();
         settled = false;
       }
-
       c.restore();
     }
 
@@ -915,6 +1104,19 @@
   }
 
   function sampleAudio(dt) {
+    if (performance.now() < power.sweepUntil) {
+      meters.channels.forEach(function (ch) { ch.target = 1; });
+      return;
+    }
+    if (!power.on) {
+      meters.channels.forEach(function (ch) { ch.target = 0; });
+      /* Let the display fall away rather than freezing on its last frame. */
+      for (var b = 0; b < SPECTRUM_BANDS; b++) {
+        meters.spectrum[b] = Math.max(0, meters.spectrum[b] - dt * 2.2);
+        meters.caps[b] = Math.max(0, meters.caps[b] - dt * 1.6);
+      }
+      return;
+    }
     if (!graph.ready) return;
 
     /* Spectrum: geometric-mean band edges over the FFT. */
@@ -975,7 +1177,7 @@
     var spectrumBusy = drawSpectrum();
 
     var playing = !audio.paused && !audio.ended;
-    if (playing || vuBusy || spectrumBusy) {
+    if (playing || vuBusy || spectrumBusy || performance.now() < power.sweepUntil) {
       meters.raf = requestAnimationFrame(meterFrame);
     } else {
       meters.running = false;
@@ -1020,16 +1222,54 @@
     return !!(s.flac || s.lossless);
   }
 
-  function chooseSource(track) {
-    var s = (track && track.audio && track.audio.sources) || {};
-    var loss = s.flac || s.lossless;
+  /* Source selection is a ranked list, not a single guess.
+
+     The old version could return null — if a track was FLAC-only and the
+     browser reported no FLAC support, nothing played at all. `canPlayType` is
+     also unreliable: several browsers answer "" for formats they can in fact
+     decode. So preference now only *orders* the candidates; it never removes
+     the last one. Whatever the lossless switch says, if the track has any
+     audio at all, something is queued.
+
+     If a candidate then fails to load, the error handler steps to the next,
+     so a broken or undecodable file falls through to a working one instead of
+     stopping the deck. */
+  var SOURCE_KINDS = [
+    { key: "flac", mime: "audio/flac", lossless: true },
+    { key: "lossless", mime: "audio/flac", lossless: true },
+    { key: "wav", mime: "audio/wav", lossless: true },
+    { key: "opus", mime: 'audio/ogg; codecs="opus"', lossless: false },
+    { key: "mp3", mime: "audio/mpeg", lossless: false }
+  ];
+
+  function sourceCandidates(track) {
+    var sources = (track && track.audio && track.audio.sources) || {};
     var wants = !!(el.lossless && el.lossless.checked);
-    if (wants && loss && audio.canPlayType("audio/flac")) return assetUrl(loss, "assets/audio/tracks/");
-    if (s.opus && audio.canPlayType('audio/ogg; codecs="opus"')) return assetUrl(s.opus, "assets/audio/tracks/");
-    if (s.mp3) return assetUrl(s.mp3, "assets/audio/tracks/");
-    if (s.wav && audio.canPlayType("audio/wav")) return assetUrl(s.wav, "assets/audio/tracks/");
-    if (loss && audio.canPlayType("audio/flac")) return assetUrl(loss, "assets/audio/tracks/");
-    return null;
+
+    var found = [];
+    SOURCE_KINDS.forEach(function (kind) {
+      var name = sources[kind.key];
+      if (!name) return;
+      var url = assetUrl(name, "assets/audio/tracks/");
+      if (!url || found.some(function (c) { return c.url === url; })) return;
+      var support = "";
+      try { support = audio.canPlayType(kind.mime) || ""; } catch (_) { support = ""; }
+      found.push({
+        url: url,
+        lossless: kind.lossless,
+        /* Higher sorts first: matches the switch, then declared support. */
+        rank: (kind.lossless === wants ? 4 : 0) +
+              (support === "probably" ? 2 : (support === "maybe" ? 1 : 0))
+      });
+    });
+
+    found.sort(function (a, b) { return b.rank - a.rank; });
+    return found.map(function (c) { return c.url; });
+  }
+
+  function chooseSource(track) {
+    var list = sourceCandidates(track);
+    return list.length ? list[0] : null;
   }
 
   function versionLabel(track) {
@@ -1191,6 +1431,35 @@
     osc.stop(at + dur + 0.03);
   }
 
+  /* A sustained partial with its own swell and decay: the transformer coming
+     up to temperature, rather than a click. */
+  function hum(ctx, out, at, freq, peak, attack, hold, release, wobble) {
+    var osc = ctx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, at);
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.linearRampToValueAtTime(peak, at + attack);
+    gain.gain.setValueAtTime(peak, at + attack + hold);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + attack + hold + release);
+    osc.connect(gain);
+    gain.connect(out);
+    osc.start(at);
+    osc.stop(at + attack + hold + release + 0.05);
+
+    if (wobble) {
+      /* Mains hum is never perfectly steady. */
+      var lfo = ctx.createOscillator();
+      lfo.frequency.value = wobble;
+      var depth = ctx.createGain();
+      depth.gain.value = peak * 0.35;
+      lfo.connect(depth);
+      depth.connect(gain.gain);
+      lfo.start(at);
+      lfo.stop(at + attack + hold + release + 0.05);
+    }
+  }
+
   function playInsertSound() {
     var ctx = fxContext();
     if (!ctx) return;
@@ -1240,6 +1509,23 @@
     } catch (_) {}
   }
 
+  /* The selector detent: a small sprung click, distinct from the cassette
+     latch so the two are never confused. */
+  function playDetent() {
+    var ctx = fxContext();
+    if (!ctx || ctx.state !== "running") return;
+    var level = clamp(0.15, audio.volume, 1);
+    try {
+      var now = ctx.currentTime + 0.005;
+      var master = ctx.createGain();
+      master.gain.value = 0.5 * level;
+      master.connect(ctx.destination);
+      noiseHit(ctx, master, now, { from: 4300, q: 11, dur: 0.016, gain: 0.32, attack: 0.0008 });
+      noiseHit(ctx, master, now + 0.004, { from: 1500, q: 5, dur: 0.032, gain: 0.15 });
+      bodyHit(ctx, master, now + 0.003, 330, 0.03, 0.06);
+    } catch (_) {}
+  }
+
   function flyIntoDeck(track, done) {
     var index = indexOfTrack(track);
     var card = index >= 0 ? mag.cards[index] : null;
@@ -1283,6 +1569,190 @@
       playInsertSound();
       if (done) done();
     }, 560);
+  }
+
+  /* ====================================================== MAGAZINE LAMP == */
+  /* A continuous knob rather than stepped detents: the right brightness
+     depends on the room, so this is a level control, not a selector. */
+
+  var LAMP_ARC = 140;
+  var lamp = { value: 0.55, drag: null };
+
+  function paintLamp() {
+    if (el.magazine) {
+      /* Fill comes up early so the wall is never black; the key light climbs
+         later and harder, which is what gives the knob its range. */
+      el.magazine.style.setProperty("--lamp-fill", (Math.pow(lamp.value, 0.75) * 0.95).toFixed(3));
+      el.magazine.style.setProperty("--lamp-key", Math.pow(lamp.value, 1.5).toFixed(3));
+    }
+    if (el.brightKnob) {
+      el.brightKnob.style.setProperty("--angle",
+        (-LAMP_ARC + lamp.value * LAMP_ARC * 2).toFixed(1) + "deg");
+    }
+    if (el.bright) el.bright.setAttribute("aria-valuenow", String(Math.round(lamp.value * 100)));
+    if (el.brightTicks) {
+      Array.prototype.forEach.call(el.brightTicks.children, function (tick, i) {
+        tick.dataset.on = (i / (el.brightTicks.childElementCount - 1)) <= lamp.value + 0.001
+          ? "true" : "false";
+      });
+    }
+  }
+
+  function setLamp(value) {
+    lamp.value = clamp(0, value, 1);
+    paintLamp();
+    remember("gbr:lamp", lamp.value.toFixed(3));
+  }
+
+  function initLamp() {
+    if (!el.bright) return;
+    var saved = recallNumber("gbr:lamp");
+    if (saved >= 0 && saved <= 1) lamp.value = saved;
+
+    if (el.brightTicks && !el.brightTicks.childElementCount) {
+      for (var i = 0; i < 9; i++) {
+        var tick = document.createElement("i");
+        tick.style.setProperty("--a", (-LAMP_ARC + (i / 8) * LAMP_ARC * 2).toFixed(1) + "deg");
+        el.brightTicks.appendChild(tick);
+      }
+    }
+    paintLamp();
+
+    el.bright.addEventListener("pointerdown", function (event) {
+      lamp.drag = { id: event.pointerId, y: event.clientY, from: lamp.value };
+      try { el.bright.setPointerCapture(event.pointerId); } catch (_) {}
+      event.preventDefault();
+    });
+    el.bright.addEventListener("pointermove", function (event) {
+      if (!lamp.drag || lamp.drag.id !== event.pointerId) return;
+      /* Up is brighter, 120px for the full sweep. */
+      setLamp(lamp.drag.from + (lamp.drag.y - event.clientY) / 120);
+    });
+    ["pointerup", "pointercancel"].forEach(function (type) {
+      el.bright.addEventListener(type, function (event) {
+        if (!lamp.drag || lamp.drag.id !== event.pointerId) return;
+        lamp.drag = null;
+        try { el.bright.releasePointerCapture(event.pointerId); } catch (_) {}
+      });
+    });
+    el.bright.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      setLamp(lamp.value - (event.deltaY > 0 ? 0.06 : -0.06));
+    }, { passive: false });
+    el.bright.addEventListener("keydown", function (event) {
+      var step = (event.key === "ArrowUp" || event.key === "ArrowRight") ? 0.08
+               : (event.key === "ArrowDown" || event.key === "ArrowLeft") ? -0.08 : 0;
+      if (!step) return;
+      event.preventDefault();
+      setLamp(lamp.value + step);
+    });
+  }
+
+  /* ========================================================= TAKE DIAL === */
+  /* A stepped rotary beside the title. Detents equal takes, so a song with one
+     version shows no dial at all rather than a control that does nothing. */
+
+  var DIAL_ARC = 132;                    /* degrees either side of centre */
+
+  function dialAngles(count) {
+    if (count < 2) return [0];
+    var step = (DIAL_ARC * 2) / (count - 1);
+    var out = [];
+    for (var i = 0; i < count; i++) out.push(-DIAL_ARC + step * i);
+    return out;
+  }
+
+  function paintDial(card) {
+    if (!el.take) return;
+    var takes = card ? bayTakes(card) : [];
+    /* The dial is part of the deck, not a conditional extra. A single-take song
+       shows one detent and simply does not turn. */
+    el.take.hidden = false;
+    if (!takes.length) {
+      if (el.dialTicks) el.dialTicks.innerHTML = "";
+      if (el.takeLegend) el.takeLegend.hidden = true;
+      el.take.dataset.locked = "true";
+      return;
+    }
+    el.take.dataset.locked = takes.length < 2 ? "true" : "false";
+
+    var chosen = takeIndex(card);
+    var angles = dialAngles(takes.length);
+    var key = bayKey(card) + ":" + takes.length;
+    if (el.take.dataset.key !== key) {
+      el.take.dataset.key = key;
+      if (el.dialTicks) el.dialTicks.innerHTML = "";
+      if (el.dialLabels) el.dialLabels.innerHTML = "";
+    }
+    el.take.hidden = false;
+
+    if (el.dialTicks && el.dialTicks.childElementCount !== takes.length) {
+      el.dialTicks.innerHTML = "";
+      angles.forEach(function (a) {
+        var tick = document.createElement("i");
+        tick.style.setProperty("--a", a.toFixed(1) + "deg");
+        el.dialTicks.appendChild(tick);
+      });
+    }
+
+    /* Every detent is named, so the dial says what each position is rather
+       than leaving you to count round it. */
+    if (el.dialLabels && el.dialLabels.childElementCount !== takes.length) {
+      el.dialLabels.innerHTML = "";
+      angles.forEach(function (a, i) {
+        var span = document.createElement("span");
+        var rad = (a - 90) / DEG;
+        span.style.left = (50 + Math.cos(rad) * 41).toFixed(2) + "%";
+        span.style.top = (50 + Math.sin(rad) * 41).toFixed(2) + "%";
+        span.textContent = versionLabel(byId[takes[i]]) || ("v" + (i + 1));
+        el.dialLabels.appendChild(span);
+      });
+    }
+    Array.prototype.forEach.call(el.dialLabels ? el.dialLabels.children : [], function (span, i) {
+      span.dataset.on = i === chosen ? "true" : "false";
+    });
+    Array.prototype.forEach.call(el.dialTicks ? el.dialTicks.children : [], function (tick, i) {
+      tick.dataset.on = i === chosen ? "true" : "false";
+    });
+    if (el.dialKnob) el.dialKnob.style.setProperty("--angle", angles[chosen].toFixed(1) + "deg");
+
+    if (el.dial) {
+      el.dial.disabled = takes.length < 2;
+      el.dial.setAttribute("aria-label", takes.length < 2
+        ? "Take 1 of 1"
+        : "Take " + (chosen + 1) + " of " + takes.length + ", select next take");
+    }
+    if (el.takeLegend) {
+      el.takeLegend.hidden = false;
+      el.takeLegend.textContent = "Take " + (chosen + 1) + " of " + takes.length;
+    }
+  }
+
+  /* Draw attention to the dial the first time a multi-take song lands, so the
+     other versions are not quietly missed. */
+  function callDial() {
+    if (!el.take || el.take.hidden || reduceMotion.matches) return;
+    el.take.classList.remove("is-calling");
+    void el.take.offsetWidth;
+    el.take.classList.add("is-calling");
+  }
+
+  function stepTake(direction) {
+    var index = indexOfTrack(current);
+    if (index < 0) return;
+    var card = mag.cards[index];
+    var takes = bayTakes(card);
+    if (takes.length < 2) return;
+
+    selection[bayKey(card)] = mod(takeIndex(card) + direction, takes.length);
+    paintStack(card);
+    paintDial(card);
+    playDetent();
+
+    var next = bayTrack(card);
+    if (!next) return;
+    var wasPlaying = !audio.paused;
+    latch(next, wasPlaying);
   }
 
   /* ============================================================ LYRICS === */
@@ -1395,8 +1865,12 @@
     var pool = playableTracks();
     if (!pool.length) return null;
     if (current && pool.length > 1) {
-      /* Prefer a different song before another version of the same one. */
-      var other = pool.filter(function (t) { return t.id !== current.id && t.title !== current.title; });
+      /* Every take is in the pool, so shuffle reaches versions and not merely
+         songs. It still prefers a different song first, so a run does not sit
+         on one composition playing its takes back to back. */
+      var other = pool.filter(function (t) {
+        return t.id !== current.id && t.composition !== current.composition;
+      });
       pool = other.length ? other : pool.filter(function (t) { return t.id !== current.id; });
     }
     return pool[Math.floor(Math.random() * pool.length)] || null;
@@ -1409,11 +1883,17 @@
   }
 
   function updateLossless(track) {
+    /* The switch is a standing preference, so it keeps its own state even on a
+       track that has no lossless master. The label dims to say this track
+       cannot honour it; the setting still applies to the next one that can. */
     var ok = hasLossless(track);
     if (el.losslessWrap) el.losslessWrap.dataset.available = ok ? "true" : "false";
     if (el.lossless) {
-      el.lossless.disabled = !ok;
-      el.lossless.checked = ok && recall("gbr:lossless") === "on";
+      el.lossless.disabled = false;
+      el.lossless.checked = recall("gbr:lossless") === "on";
+      el.lossless.title = ok
+        ? "Prefer the lossless master"
+        : "This take has no lossless master; the best available is used";
     }
   }
 
@@ -1434,8 +1914,14 @@
   }
 
   function setSource(track) {
-    var src = chooseSource(track);
-    if (!src) { setStatus("No audio", "fault"); return false; }
+    var list = sourceCandidates(track);
+    if (!list.length) { setStatus("No audio", "fault"); return false; }
+    audio._candidates = list;
+    audio._candidate = 0;
+    return loadCandidate(list[0]);
+  }
+
+  function loadCandidate(src) {
     if (location.protocol !== "file:") {
       try {
         if (new URL(src, location.href).origin !== location.origin) audio.crossOrigin = "anonymous";
@@ -1444,6 +1930,22 @@
     }
     var absolute = new URL(src, location.href).href;
     if (audio.src !== absolute) { audio.src = src; audio.load(); }
+    return true;
+  }
+
+  /* Step to the next candidate. Returns false once they are exhausted. */
+  function nextCandidate() {
+    var list = audio._candidates || [];
+    var at = (audio._candidate || 0) + 1;
+    if (at >= list.length) return false;
+    audio._candidate = at;
+    var resume = !audio.paused;
+    if (!loadCandidate(list[at])) return false;
+    setStatus("Switching format");
+    if (resume) audio.addEventListener("canplay", function once() {
+      audio.removeEventListener("canplay", once);
+      startPlayback();
+    });
     return true;
   }
 
@@ -1457,7 +1959,9 @@
   function latch(track, autoplay) {
     if (!track) return;
     current = track;
+    var bayIndex = selectTake(track);
     markSelected(track.id);
+    paintDial(bayIndex >= 0 ? mag.cards[bayIndex] : null);
     paintArtwork(track);
     paintPlate(track);
     loadLyrics(track);
@@ -1481,7 +1985,10 @@
     var index = indexOfTrack(track);
     if (index < 0) { latch(track, autoplay); return; }
     glideTo(index, { long: !!longSpin }, function () {
-      flyIntoDeck(track, function () { latch(track, autoplay); });
+      flyIntoDeck(track, function () {
+        latch(track, autoplay);
+        callDial();
+      });
     });
   }
 
@@ -1511,6 +2018,123 @@
   function togglePopup(node, button) {
     if (!node) return;
     if (node.hidden) openPopup(node, button); else closePopup(node, button);
+  }
+
+  /* ============================================================== POWER == */
+  /* The deck is either running or it is not. Off is a real state: transport
+     and magazine stop responding, the lamps behind the meters die, and the
+     dials go grey. */
+
+  function playPowerSound(on) {
+    var ctx = fxContext();
+    if (!ctx) return false;
+    if (ctx.state !== "running") return false;
+    var level = clamp(0.15, audio.volume, 1);
+
+    try {
+      var now = ctx.currentTime + 0.01;
+      var master = ctx.createGain();
+      master.gain.value = 0.5 * level;
+      var tame = ctx.createBiquadFilter();
+      tame.type = "lowpass";
+      tame.frequency.value = 6400;
+      master.connect(tame);
+      tame.connect(ctx.destination);
+
+      /* The switch itself, then the relay behind it. */
+      noiseHit(ctx, master, now, { from: 2700, q: 9, dur: 0.03, gain: 0.34, attack: 0.001 });
+      bodyHit(ctx, master, now + 0.004, 150, 0.05, 0.11);
+      noiseHit(ctx, master, now + 0.042, { type: "lowpass", from: 420, q: 0.7, dur: 0.1, gain: 0.2 });
+      bodyHit(ctx, master, now + 0.042, 82, 0.13, 0.17);
+
+      if (on) {
+        /* Transformer coming up, and its second harmonic. */
+        hum(ctx, master, now + 0.09, 100, 0.075, 0.7, 1.2, 2.4, 3.1);
+        hum(ctx, master, now + 0.12, 200, 0.032, 0.75, 1.1, 2.1, 4.7);
+
+        /* Degauss: a buzzing swell that beats against itself as it decays. */
+        var deg = ctx.createOscillator();
+        deg.type = "sawtooth";
+        deg.frequency.setValueAtTime(61, now + 0.2);
+        deg.frequency.linearRampToValueAtTime(49, now + 2.4);
+        var degFilter = ctx.createBiquadFilter();
+        degFilter.type = "lowpass";
+        degFilter.frequency.value = 240;
+        var degGain = ctx.createGain();
+        degGain.gain.setValueAtTime(0.0001, now + 0.2);
+        degGain.gain.linearRampToValueAtTime(0.11, now + 0.5);
+        degGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
+        var beat = ctx.createOscillator();
+        beat.frequency.value = 7.5;
+        var beatDepth = ctx.createGain();
+        beatDepth.gain.value = 0.05;
+        beat.connect(beatDepth);
+        beatDepth.connect(degGain.gain);
+        deg.connect(degFilter);
+        degFilter.connect(degGain);
+        degGain.connect(master);
+        deg.start(now + 0.2); deg.stop(now + 2.6);
+        beat.start(now + 0.2); beat.stop(now + 2.6);
+
+        /* Capstan and reel motors spinning up. */
+        noiseHit(ctx, master, now + 0.28, { from: 170, to: 920, q: 1.4, dur: 2.2, gain: 0.055, attack: 0.9 });
+        hum(ctx, master, now + 0.3, 44, 0.05, 1.35, 0.5, 1.3, 0);
+
+        /* Mechanism settling. */
+        noiseHit(ctx, master, now + 2.5, { from: 3000, q: 7, dur: 0.022, gain: 0.13, attack: 0.001 });
+      } else {
+        /* Everything winds down. */
+        hum(ctx, master, now + 0.02, 96, 0.05, 0.02, 0.05, 0.5, 3);
+        noiseHit(ctx, master, now + 0.05, { from: 780, to: 140, q: 1.3, dur: 0.85, gain: 0.05, attack: 0.03 });
+        hum(ctx, master, now + 0.05, 82, 0.04, 0.02, 0.1, 0.7, 0);
+        noiseHit(ctx, master, now + 0.92, { type: "lowpass", from: 300, q: 0.7, dur: 0.09, gain: 0.14 });
+        bodyHit(ctx, master, now + 0.92, 64, 0.12, 0.1);
+      }
+      return true;
+    } catch (_) { return false; }
+  }
+
+  /* Browsers will not let a page make noise before it has been touched. If the
+     power-up is blocked we still run it visually, and arm the sound to fire on
+     the first real interaction so the machine is heard coming alive rather
+     than never at all. */
+  function armPowerSound() {
+    if (power.armed) return;
+    power.armed = true;
+    var fire = function () {
+      document.removeEventListener("pointerdown", fire, true);
+      document.removeEventListener("keydown", fire, true);
+      var ctx = fxContext();
+      if (ctx && ctx.state === "running" && power.on) playPowerSound(true);
+    };
+    document.addEventListener("pointerdown", fire, true);
+    document.addEventListener("keydown", fire, true);
+  }
+
+  function setPower(on, silent) {
+    if (power.on === on && !silent) return;
+    power.on = on;
+    var app = document.querySelector(".gbr-app");
+    if (app) app.dataset.power = on ? "on" : "off";
+    var button = $("gbr-power");
+    if (button) button.setAttribute("aria-checked", on ? "true" : "false");
+
+    meters.face = null;                      /* the lamp state changes the dial */
+
+    if (on) {
+      /* Self-test: the needles kick across the scale and fall back, the way a
+         movement does when the rail comes up. */
+      power.sweepUntil = performance.now() + 1650;
+      startMeters();
+    } else {
+      audio.pause();
+      closeFolders(false);
+      meters.channels.forEach(function (ch) { ch.target = 0; ch.peak = 0; });
+      startMeters();
+    }
+
+    if (silent) return;
+    if (!playPowerSound(on) && on) armPowerSound();
   }
 
   /* ============================================================ FOLDERS == */
@@ -1575,6 +2199,8 @@
     shuffleGroups();
     collectCards();
     initFolders();
+    initLamp();
+    setPower(false, true);
     applyMagazineMode();
     bindMagazine();
     restMeters();
@@ -1592,8 +2218,8 @@
     setShuffle(recall("gbr:shuffle") !== "off");
 
     if (el.volume) {
-      var savedVolume = Number(recall("gbr:volume"));
-      if (isFinite(savedVolume) && savedVolume >= 0 && savedVolume <= 1) el.volume.value = savedVolume;
+      var savedVolume = recallNumber("gbr:volume");
+      if (savedVolume >= 0 && savedVolume <= 1) el.volume.value = savedVolume;
       audio.volume = Number(el.volume.value) || 0.9;
       fillRange(el.volume);
       el.volume.addEventListener("input", function () {
@@ -1646,12 +2272,28 @@
       remember("gbr:lossless", el.lossless.checked ? "on" : "off");
       if (!current) return;
       var at = audio.currentTime || 0, wasPlaying = !audio.paused;
+      /* Re-ranks the same candidate list; if the preferred format is not
+         there, the next best is loaded rather than nothing. */
       if (!setSource(current)) return;
       audio.addEventListener("loadedmetadata", function () {
         try { audio.currentTime = Math.min(at, audio.duration || at); } catch (_) {}
         if (wasPlaying) startPlayback();
       }, { once: true });
     });
+
+    if (el.dial) {
+      el.dial.addEventListener("click", function () { stepTake(1); });
+      el.dial.addEventListener("keydown", function (event) {
+        var step = (event.key === "ArrowLeft" || event.key === "ArrowDown") ? -1
+                 : (event.key === "ArrowRight" || event.key === "ArrowUp") ? 1 : 0;
+        if (!step) return;
+        event.preventDefault();
+        stepTake(step);
+      });
+    }
+
+    var powerButton = $("gbr-power");
+    if (powerButton) powerButton.addEventListener("click", function () { setPower(!power.on); });
 
     if (el.eqToggle) el.eqToggle.addEventListener("click", function () { togglePopup(el.eqPopover, el.eqToggle); });
     if (el.eqClose) el.eqClose.addEventListener("click", function () { closePopup(el.eqPopover, el.eqToggle); });
@@ -1706,7 +2348,10 @@
       paintLyric(audio.currentTime || 0);
     });
     audio.addEventListener("ended", function () { advance(1); });
-    audio.addEventListener("error", function () { setStatus("Audio error", "fault"); });
+    audio.addEventListener("error", function () {
+      if (nextCandidate()) return;
+      setStatus("Audio error", "fault");
+    });
 
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stopMeters();
@@ -1737,6 +2382,8 @@
       setStatus(mag.cards.length ? "Ready" : "No cassettes");
       if (!mag.cards.length && el.title) el.title.textContent = "No cassettes staged";
     }
+
+    setTimeout(function () { setPower(true); }, reduceMotion.matches ? 0 : 420);
   }
 
   var PLAY_PATH = "M8 5v14l11-7z";

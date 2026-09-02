@@ -33,6 +33,11 @@ SONGS = [
 ]
 
 
+def shift(rgb: tuple[int, int, int], step: int) -> tuple[int, int, int]:
+    """Each take gets its own sleeve, as it would in the real catalogue."""
+    return tuple(min(250, max(24, c + (step - 1) * 46)) for c in rgb)
+
+
 def sleeve(path: Path, rgb: tuple[int, int, int], text: str) -> None:
     """Flat two-tone sleeve. Enough to tell tapes apart in a screenshot."""
     from PIL import Image, ImageDraw
@@ -64,12 +69,12 @@ def main() -> int:
         composition = title.lower().replace(" ", "-").replace(",", "").replace("'", "")
         for version in versions:
             track_id = f"{composition}-v{version}"
-            base = f"sleeve-{song_index}"
+            base = f"sleeve-{song_index}-{version}"
             for width in (640, 1280):
                 for ext in ("jpg", "webp"):
                     target = OUT / f"assets/img/sleeves/{base}-{width}.{ext}"
                     if not target.exists():
-                        sleeve(target, rgb, title)
+                        sleeve(target, shift(rgb, int(version)), f"{title} v{version}")
             tracks.append({
                 "id": track_id,
                 "composition": composition,
@@ -81,7 +86,7 @@ def main() -> int:
                 "model": {"provider": "ACE-Step", "name": "3.5B"},
                 "provenance": {"songVersion": version, "generationNumber": int(version)},
                 "generation": {"cfg": 4.5, "steps": 60, "seed": 100000 + song_index},
-                "style": {"genre": genre, "summary": genre},
+                "style": {"genre": genre if version == "1" else genre + " (alt)", "summary": genre},
                 "audio": {
                     "available": True,
                     "duration": 180 + song_index * 11,
