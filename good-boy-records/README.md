@@ -194,16 +194,21 @@ Only the *selected* take is in the deck, so only its slot in the bay reads as
 empty — the others keep their sleeves. That is both what a real magazine looks
 like and how the other artwork stays visible while something is playing.
 
-The magazine has its own lamp, on a continuous knob in the top right of the
-panel rather than stepped detents, because the right brightness depends on the
-room. The level persists. Without it the etched impression had nothing to catch.
+The magazine is lit by four fills from the corners plus a key spot aimed at the
+bay under the pickup, so the whole wall is readable while the loaded bay is
+clearly the subject. They are two layers off one knob with different response
+curves — fill rises early so the wall is never black, key climbs later and
+harder — which is what gives the control its range. The knob is continuous
+rather than stepped, because the right brightness depends on the room, and the
+level persists.
 
 Three things guard against the other takes being missed:
 
 - The bay's tag reads `3 takes` rather than a version number, and the stack
   visibly fans, so depth is legible from the wall itself.
 - The dial is always present, even for a single-take song, where it shows one
-  detent and simply does not turn — so it is a fixed part of the deck rather
+  detent labelled `v1` and simply does not turn. Every detent is named, so the
+  dial says what each position *is* rather than leaving you to count round it — so it is a fixed part of the deck rather
   than something that appears and disappears. It sits immediately left of the
   song name — the control that changes
   the name is next to the name — and its legend reads `Take 1 of 3` in words
@@ -293,7 +298,11 @@ Three rules the stylesheet depends on. Breaking one is how v6 got into trouble:
 - Cassette fly-in animation and synthesised mechanical latch sound.
 - Continuous play. Shuffle prefers a different song before another version of
   the same one.
-- MP3, Opus, WAV and FLAC selection with a remembered lossless preference.
+- MP3, Opus, WAV and FLAC. Format selection is a ranked list, not a single
+  guess: the lossless switch and the browser's `canPlayType` only *order* the
+  candidates, they never remove the last one. A FLAC-only take plays with the
+  switch off, an MP3-only take plays with it on, and if a file fails to load
+  the deck falls through to the next candidate rather than stopping.
 - Word-timed lyric sidecars with large current-word focus; line-timed fallback.
 - Five-band Web Audio EQ (60 / 250 / 1k / 4k / 12k, ±9 dB) with limiter,
   remembered locally.

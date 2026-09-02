@@ -85,7 +85,8 @@ check("takes stack behind the selected sleeve", ".cassette-stack" in css and "pa
 # --- take dial --------------------------------------------------------------
 check("dial detents equal takes", "dialAngles" in js and "takes.length" in js)
 check("dial is always present, locked when there is one take",
-      'el.take.hidden = false' in js and 'data-locked="true"' in css)
+      "el.take.hidden = false" in js and 'data-locked="true"' in css)
+check("every detent is named", "gbr-dial-labels" in template and "dialLabels" in js)
 check("dial states the count so takes are not missed", '"Take " + (chosen + 1) + " of "' in js)
 check("dial announces itself on latch", "callDial" in js and "is-calling" in css)
 check("dial has its own detent sound", "playDetent" in js)
@@ -151,6 +152,25 @@ check("a fanned sleeve can be picked directly", 'sleeve.dataset.front === "false
 # --- restore bug ------------------------------------------------------------
 # Number(null) is 0, which passed the range guard and zeroed the control.
 check("missing stored values do not read as zero", "recallNumber" in js)
+
+# --- lamp, EQ and source fallback ------------------------------------------
+check("lamp is four corner fills plus a key spot",
+      "46% 40% at 0% 0%" in css and ".gbr-lamp-key" in css and "--spot-x" in js)
+check("fill and key have different response curves",
+      "Math.pow(lamp.value, 0.75)" in js and "Math.pow(lamp.value, 1.5)" in js)
+check("EQ faders beat the base range rules on specificity",
+      '.gbr-mini-eq input[type="range"]::-webkit-slider-thumb' in css)
+check("EQ console lines up with the dial canvas above it",
+      "Same inset as the dial canvas" in css)
+
+# A FLAC-only track played with lossless off, or an MP3-only track with it on,
+# used to yield no source at all. Preference now only orders candidates.
+check("source selection is a ranked list", "sourceCandidates" in js and "SOURCE_KINDS" in js)
+check("preference orders candidates without discarding them",
+      "it never removes" in js and "found.sort" in js)
+check("a failed source falls through to the next", "nextCandidate" in js)
+check("lossless switch stays usable on tracks without a master",
+      "el.lossless.disabled = false;" in js)
 
 # --- regressions we do not want back ---------------------------------------
 # Capturing the pointer on pointerdown retargets the following click to the

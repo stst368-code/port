@@ -82,6 +82,8 @@
     dial: $("gbr-dial"),
     dialTicks: $("gbr-dial-ticks"),
     dialKnob: $("gbr-dial-knob"),
+    lampKey: $("gbr-lamp-key"),
+    dialLabels: $("gbr-dial-labels"),
     bright: $("gbr-bright"),
     brightTicks: $("gbr-bright-ticks"),
     brightKnob: $("gbr-bright-knob"),
@@ -255,6 +257,10 @@
     mag.centreY = H / 2;
 
     document.documentElement.style.setProperty("--card-w", cardW.toFixed(1) + "px");
+
+    /* Aim the key light at the pickup point. */
+    el.magazine.style.setProperty("--spot-x", ((cardCx / W) * 100).toFixed(1) + "%");
+    el.magazine.style.setProperty("--spot-y", "50%");
 
     var discR = mag.radius / 0.78;
     if (el.wheel) {
@@ -1216,16 +1222,54 @@
     return !!(s.flac || s.lossless);
   }
 
-  function chooseSource(track) {
-    var s = (track && track.audio && track.audio.sources) || {};
-    var loss = s.flac || s.lossless;
+  /* Source selection is a ranked list, not a single guess.
+
+     The old version could return null — if a track was FLAC-only and the
+     browser reported no FLAC support, nothing played at all. `canPlayType` is
+     also unreliable: several browsers answer "" for formats they can in fact
+     decode. So preference now only *orders* the candidates; it never removes
+     the last one. Whatever the lossless switch says, if the track has any
+     audio at all, something is queued.
+
+     If a candidate then fails to load, the error handler steps to the next,
+     so a broken or undecodable file falls through to a working one instead of
+     stopping the deck. */
+  var SOURCE_KINDS = [
+    { key: "flac", mime: "audio/flac", lossless: true },
+    { key: "lossless", mime: "audio/flac", lossless: true },
+    { key: "wav", mime: "audio/wav", lossless: true },
+    { key: "opus", mime: 'audio/ogg; codecs="opus"', lossless: false },
+    { key: "mp3", mime: "audio/mpeg", lossless: false }
+  ];
+
+  function sourceCandidates(track) {
+    var sources = (track && track.audio && track.audio.sources) || {};
     var wants = !!(el.lossless && el.lossless.checked);
-    if (wants && loss && audio.canPlayType("audio/flac")) return assetUrl(loss, "assets/audio/tracks/");
-    if (s.opus && audio.canPlayType('audio/ogg; codecs="opus"')) return assetUrl(s.opus, "assets/audio/tracks/");
-    if (s.mp3) return assetUrl(s.mp3, "assets/audio/tracks/");
-    if (s.wav && audio.canPlayType("audio/wav")) return assetUrl(s.wav, "assets/audio/tracks/");
-    if (loss && audio.canPlayType("audio/flac")) return assetUrl(loss, "assets/audio/tracks/");
-    return null;
+
+    var found = [];
+    SOURCE_KINDS.forEach(function (kind) {
+      var name = sources[kind.key];
+      if (!name) return;
+      var url = assetUrl(name, "assets/audio/tracks/");
+      if (!url || found.some(function (c) { return c.url === url; })) return;
+      var support = "";
+      try { support = audio.canPlayType(kind.mime) || ""; } catch (_) { support = ""; }
+      found.push({
+        url: url,
+        lossless: kind.lossless,
+        /* Higher sorts first: matches the switch, then declared support. */
+        rank: (kind.lossless === wants ? 4 : 0) +
+              (support === "probably" ? 2 : (support === "maybe" ? 1 : 0))
+      });
+    });
+
+    found.sort(function (a, b) { return b.rank - a.rank; });
+    return found.map(function (c) { return c.url; });
+  }
+
+  function chooseSource(track) {
+    var list = sourceCandidates(track);
+    return list.length ? list[0] : null;
   }
 
   function versionLabel(track) {
@@ -1535,7 +1579,12 @@
   var lamp = { value: 0.55, drag: null };
 
   function paintLamp() {
-    if (el.magazine) el.magazine.style.setProperty("--lamp", lamp.value.toFixed(3));
+    if (el.magazine) {
+      /* Fill comes up early so the wall is never black; the key light climbs
+         later and harder, which is what gives the knob its range. */
+      el.magazine.style.setProperty("--lamp-fill", (Math.pow(lamp.value, 0.75) * 0.95).toFixed(3));
+      el.magazine.style.setProperty("--lamp-key", Math.pow(lamp.value, 1.5).toFixed(3));
+    }
     if (el.brightKnob) {
       el.brightKnob.style.setProperty("--angle",
         (-LAMP_ARC + lamp.value * LAMP_ARC * 2).toFixed(1) + "deg");
@@ -1629,6 +1678,12 @@
 
     var chosen = takeIndex(card);
     var angles = dialAngles(takes.length);
+    var key = bayKey(card) + ":" + takes.length;
+    if (el.take.dataset.key !== key) {
+      el.take.dataset.key = key;
+      if (el.dialTicks) el.dialTicks.innerHTML = "";
+      if (el.dialLabels) el.dialLabels.innerHTML = "";
+    }
     el.take.hidden = false;
 
     if (el.dialTicks && el.dialTicks.childElementCount !== takes.length) {
@@ -1639,6 +1694,23 @@
         el.dialTicks.appendChild(tick);
       });
     }
+
+    /* Every detent is named, so the dial says what each position is rather
+       than leaving you to count round it. */
+    if (el.dialLabels && el.dialLabels.childElementCount !== takes.length) {
+      el.dialLabels.innerHTML = "";
+      angles.forEach(function (a, i) {
+        var span = document.createElement("span");
+        var rad = (a - 90) / DEG;
+        span.style.left = (50 + Math.cos(rad) * 41).toFixed(2) + "%";
+        span.style.top = (50 + Math.sin(rad) * 41).toFixed(2) + "%";
+        span.textContent = versionLabel(byId[takes[i]]) || ("v" + (i + 1));
+        el.dialLabels.appendChild(span);
+      });
+    }
+    Array.prototype.forEach.call(el.dialLabels ? el.dialLabels.children : [], function (span, i) {
+      span.dataset.on = i === chosen ? "true" : "false";
+    });
     Array.prototype.forEach.call(el.dialTicks ? el.dialTicks.children : [], function (tick, i) {
       tick.dataset.on = i === chosen ? "true" : "false";
     });
@@ -1811,11 +1883,17 @@
   }
 
   function updateLossless(track) {
+    /* The switch is a standing preference, so it keeps its own state even on a
+       track that has no lossless master. The label dims to say this track
+       cannot honour it; the setting still applies to the next one that can. */
     var ok = hasLossless(track);
     if (el.losslessWrap) el.losslessWrap.dataset.available = ok ? "true" : "false";
     if (el.lossless) {
-      el.lossless.disabled = !ok;
-      el.lossless.checked = ok && recall("gbr:lossless") === "on";
+      el.lossless.disabled = false;
+      el.lossless.checked = recall("gbr:lossless") === "on";
+      el.lossless.title = ok
+        ? "Prefer the lossless master"
+        : "This take has no lossless master; the best available is used";
     }
   }
 
@@ -1836,8 +1914,14 @@
   }
 
   function setSource(track) {
-    var src = chooseSource(track);
-    if (!src) { setStatus("No audio", "fault"); return false; }
+    var list = sourceCandidates(track);
+    if (!list.length) { setStatus("No audio", "fault"); return false; }
+    audio._candidates = list;
+    audio._candidate = 0;
+    return loadCandidate(list[0]);
+  }
+
+  function loadCandidate(src) {
     if (location.protocol !== "file:") {
       try {
         if (new URL(src, location.href).origin !== location.origin) audio.crossOrigin = "anonymous";
@@ -1846,6 +1930,22 @@
     }
     var absolute = new URL(src, location.href).href;
     if (audio.src !== absolute) { audio.src = src; audio.load(); }
+    return true;
+  }
+
+  /* Step to the next candidate. Returns false once they are exhausted. */
+  function nextCandidate() {
+    var list = audio._candidates || [];
+    var at = (audio._candidate || 0) + 1;
+    if (at >= list.length) return false;
+    audio._candidate = at;
+    var resume = !audio.paused;
+    if (!loadCandidate(list[at])) return false;
+    setStatus("Switching format");
+    if (resume) audio.addEventListener("canplay", function once() {
+      audio.removeEventListener("canplay", once);
+      startPlayback();
+    });
     return true;
   }
 
@@ -2172,6 +2272,8 @@
       remember("gbr:lossless", el.lossless.checked ? "on" : "off");
       if (!current) return;
       var at = audio.currentTime || 0, wasPlaying = !audio.paused;
+      /* Re-ranks the same candidate list; if the preferred format is not
+         there, the next best is loaded rather than nothing. */
       if (!setSource(current)) return;
       audio.addEventListener("loadedmetadata", function () {
         try { audio.currentTime = Math.min(at, audio.duration || at); } catch (_) {}
@@ -2246,7 +2348,10 @@
       paintLyric(audio.currentTime || 0);
     });
     audio.addEventListener("ended", function () { advance(1); });
-    audio.addEventListener("error", function () { setStatus("Audio error", "fault"); });
+    audio.addEventListener("error", function () {
+      if (nextCandidate()) return;
+      setStatus("Audio error", "fault");
+    });
 
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stopMeters();
