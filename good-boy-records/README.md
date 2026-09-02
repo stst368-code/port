@@ -184,11 +184,28 @@ differ in artwork and often in genre, and that difference is most of the reason
 for keeping them. Switching take swaps the front sleeve, the deck artwork, the
 genre chip and the technical drawer together.
 
+The bay at the pickup point **fans out**, so every take's sleeve is visible
+rather than hidden behind the front one; the rest of the wheel keeps its bays
+collapsed so the column stays readable. Spread is computed from the take count
+and capped, so six attempts do not fan across the whole column. A fanned sleeve
+can be clicked directly to load that take.
+
+Only the *selected* take is in the deck, so only its slot in the bay reads as
+empty — the others keep their sleeves. That is both what a real magazine looks
+like and how the other artwork stays visible while something is playing.
+
+The magazine has its own lamp, on a continuous knob in the top right of the
+panel rather than stepped detents, because the right brightness depends on the
+room. The level persists. Without it the etched impression had nothing to catch.
+
 Three things guard against the other takes being missed:
 
 - The bay's tag reads `3 takes` rather than a version number, and the stack
   visibly fans, so depth is legible from the wall itself.
-- The dial sits immediately left of the song name — the control that changes
+- The dial is always present, even for a single-take song, where it shows one
+  detent and simply does not turn — so it is a fixed part of the deck rather
+  than something that appears and disappears. It sits immediately left of the
+  song name — the control that changes
   the name is next to the name — and its legend reads `Take 1 of 3` in words
   rather than a bare `v1`.
 - When a multi-take song is latched the dial gives one small nudge, so it

@@ -224,6 +224,37 @@ button { cursor: pointer; }
 
 /* ======================================================== MAGAZINE (wheel) */
 
+/* The magazine is lit by its own lamp, so an empty etched bay has something to
+   catch. Brightness is on a knob because the right level depends on the room. */
+.gbr-lamp {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--lamp, 0.55);
+  transition: opacity 180ms ease;
+  background:
+    radial-gradient(58% 46% at 72% 50%, rgba(255, 146, 32, 0.30) 0%, rgba(255, 128, 20, 0.10) 45%, transparent 78%),
+    radial-gradient(96% 74% at 82% 50%, rgba(255, 172, 70, 0.11) 0%, transparent 72%);
+}
+
+.gbr-bright {
+  position: absolute;
+  z-index: 6;
+  right: 0.45rem;
+  top: 0.45rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.18rem;
+}
+.gbr-bright-legend {
+  color: var(--legend);
+  font: 700 0.4rem/1 var(--mono);
+  letter-spacing: 0.12em;
+}
+.gbr-dial--small { width: 30px; cursor: ns-resize; touch-action: none; }
+.gbr-dial--small .gbr-dial-knob { transition: transform 90ms linear; }
+
 .gbr-magazine {
   grid-area: magazine;
   position: relative;
@@ -283,6 +314,7 @@ button { cursor: pointer; }
 .gbr-cards {
   position: absolute;
   inset: 0;
+  z-index: 2;
   touch-action: none;
   cursor: grab;
 }
@@ -352,15 +384,24 @@ button { cursor: pointer; }
 }
 
 .cassette {
+  /* Collapsed, a bay is a tidy stack. At the pickup point it fans out so every
+     take's sleeve is actually visible — the whole reason for keeping them. JS
+     writes --fan-x and --fan-rot, because the spread depends on how many takes
+     there are. */
   transform:
-    translate(calc(var(--stack, 0) * 10%), calc(var(--stack, 0) * -8%))
-    rotate(calc(var(--stack, 0) * -3.2deg))
-    scale(calc(1 - var(--stack, 0) * 0.05));
-  filter: brightness(calc(1 - var(--stack, 0) * 0.38));
+    translate(var(--fan-x, 0%), var(--fan-y, 0%))
+    rotate(var(--fan-rot, 0deg))
+    scale(var(--fan-scale, 1));
+  filter: brightness(calc(1 - var(--stack, 0) * 0.16));
   z-index: calc(20 - var(--stack, 0));
   transition: transform 220ms cubic-bezier(0.2, 0.78, 0.18, 1), filter 220ms ease;
 }
 .cassette[data-hidden="true"] { visibility: hidden; }
+.card[data-expanded="true"] .cassette { transition-duration: 260ms; }
+.card[data-expanded="true"] .cassette[data-front="false"] { cursor: pointer; }
+.card[data-expanded="true"] .cassette[data-front="false"]:hover {
+  filter: brightness(1.08);
+}
 
 .cassette__label {
   position: absolute;
@@ -451,32 +492,33 @@ button { cursor: pointer; }
    dark edge where the light would not reach and a faint lit edge where it
    would. Every part uses the same two-line treatment, so the whole shape reads
    as one stamping rather than an outline drawing. */
-.card.is-in-deck .cassette[data-front="false"],
-.card.is-departing .cassette[data-front="false"] { display: none; }
-.card.is-in-deck .cassette,
-.card.is-departing .cassette,
-.card.is-in-deck .cassette__label,
-.card.is-departing .cassette__label,
-.card.is-in-deck .cassette__window,
-.card.is-departing .cassette__window {
+/* Only the selected take is in the deck, so only its slot is empty. The other
+   takes are still sitting in the bay and keep their sleeves — which is both
+   what a real magazine looks like and how the other artwork stays visible. */
+.card.is-in-deck .cassette[data-front="true"],
+.card.is-departing .cassette[data-front="true"],
+.card.is-in-deck .cassette[data-front="true"] .cassette__label,
+.card.is-departing .cassette[data-front="true"] .cassette__label,
+.card.is-in-deck .cassette[data-front="true"] .cassette__window,
+.card.is-departing .cassette[data-front="true"] .cassette__window {
   background: none;
   box-shadow:
-    inset 0 1.5px 1px rgba(0, 0, 0, 0.85),
-    inset 0 -1px 0 rgba(255, 197, 122, 0.07),
-    0 1px 0 rgba(255, 197, 122, 0.055);
+    inset 0 2px 1.5px rgba(0, 0, 0, 0.92),
+    inset 0 -1.5px 0 rgba(255, 200, 128, 0.13),
+    0 1.5px 0 rgba(255, 200, 128, 0.10);
 }
-.card.is-in-deck .cassette__label img,
-.card.is-departing .cassette__label img { opacity: 0; }
-.card.is-in-deck .cassette__reel,
-.card.is-departing .cassette__reel {
+.card.is-in-deck .cassette[data-front="true"] .cassette__label img,
+.card.is-departing .cassette[data-front="true"] .cassette__label img { opacity: 0; }
+.card.is-in-deck .cassette[data-front="true"] .cassette__reel,
+.card.is-departing .cassette[data-front="true"] .cassette__reel {
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.55);
-  box-shadow: 0 1px 0 rgba(255, 197, 122, 0.06);
+  box-shadow: 0 1px 0 rgba(255, 200, 128, 0.06);
 }
-.card.is-in-deck .cassette__window b,
-.card.is-departing .cassette__window b {
+.card.is-in-deck .cassette[data-front="true"] .cassette__window b,
+.card.is-departing .cassette[data-front="true"] .cassette__window b {
   background: rgba(0, 0, 0, 0.42);
-  box-shadow: 0 1px 0 rgba(255, 197, 122, 0.05);
+  box-shadow: 0 1px 0 rgba(255, 200, 128, 0.05);
 }
 .card.is-in-deck .version-tag,
 .card.is-departing .version-tag { opacity: 0.45; }
@@ -833,6 +875,8 @@ button { cursor: pointer; }
   box-shadow: 0 3px 9px #000, inset 0 1px rgba(255, 214, 136, 0.12);
 }
 .gbr-dial:hover { border-color: var(--line-hi); }
+.gbr-take[data-locked="true"] .gbr-dial { cursor: default; opacity: 0.72; }
+.gbr-take[data-locked="true"] .gbr-dial:hover { border-color: var(--line); }
 
 .gbr-dial-ticks { position: absolute; inset: 0; }
 .gbr-dial-ticks i {
@@ -1253,6 +1297,8 @@ input:disabled { opacity: 0.4; }
   box-shadow: 0 3px 9px #000, inset 0 1px rgba(255, 214, 136, 0.12);
 }
 .gbr-dial:hover { border-color: var(--line-hi); }
+.gbr-take[data-locked="true"] .gbr-dial { cursor: default; opacity: 0.72; }
+.gbr-take[data-locked="true"] .gbr-dial:hover { border-color: var(--line); }
 
 .gbr-dial-ticks { position: absolute; inset: 0; }
 .gbr-dial-ticks i {
@@ -1378,6 +1424,8 @@ input:disabled { opacity: 0.4; }
   box-shadow: 0 3px 9px #000, inset 0 1px rgba(255, 214, 136, 0.12);
 }
 .gbr-dial:hover { border-color: var(--line-hi); }
+.gbr-take[data-locked="true"] .gbr-dial { cursor: default; opacity: 0.72; }
+.gbr-take[data-locked="true"] .gbr-dial:hover { border-color: var(--line); }
 
 .gbr-dial-ticks { position: absolute; inset: 0; }
 .gbr-dial-ticks i {

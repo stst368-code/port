@@ -40,6 +40,14 @@
   }
   function remember(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
   function recall(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
+  /* Number(null) is 0, not NaN, so a missing key would otherwise read as a
+     legitimate zero and quietly zero the control it restores. */
+  function recallNumber(k) {
+    var raw = recall(k);
+    if (raw == null || raw === "") return NaN;
+    var value = Number(raw);
+    return isFinite(value) ? value : NaN;
+  }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
   var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -74,6 +82,9 @@
     dial: $("gbr-dial"),
     dialTicks: $("gbr-dial-ticks"),
     dialKnob: $("gbr-dial-knob"),
+    bright: $("gbr-bright"),
+    brightTicks: $("gbr-bright-ticks"),
+    brightKnob: $("gbr-bright-knob"),
     takeLegend: $("gbr-take-legend"),
     play: $("gbr-play"),
     shuffle: $("gbr-shuffle"),
@@ -148,17 +159,46 @@
   }
   function bayTrack(card) { return byId[bayTakes(card)[takeIndex(card)]] || null; }
 
-  /* Front sleeve carries the selected take's artwork; the rest fan back. */
-  function paintStack(card) {
+  /* Front sleeve carries the selected take's artwork. Collapsed, the rest sit
+     behind it as a tidy stack; expanded, they fan out far enough that each
+     sleeve is genuinely legible rather than a sliver of edge.
+
+     The spread is computed from the take count and capped, so a song with six
+     attempts does not fan itself across the whole column. */
+  function paintStack(card, expanded) {
     if (!card) return;
     var sleeves = card.querySelectorAll(".cassette");
-    var chosen = takeIndex(card);
     var total = sleeves.length;
+    if (!total) return;
+    if (expanded == null) expanded = card.dataset.expanded === "true";
+    card.dataset.expanded = expanded && total > 1 ? "true" : "false";
+
+    var chosen = takeIndex(card);
+    var spread = total > 1 ? clamp(14, 88 / (total - 1), 32) : 0;
+
     for (var i = 0; i < total; i++) {
       var depth = mod(i - chosen, total);
-      sleeves[i].style.setProperty("--stack", String(Math.min(depth, 3)));
-      sleeves[i].dataset.front = depth === 0 ? "true" : "false";
-      sleeves[i].dataset.hidden = depth > 3 ? "true" : "false";
+      var sleeve = sleeves[i];
+      sleeve.dataset.front = depth === 0 ? "true" : "false";
+      sleeve.dataset.hidden = "false";
+      sleeve.style.setProperty("--stack", String(depth));
+
+      if (expanded && total > 1) {
+        /* Fan behind and to the left, so the front sleeve keeps the bay's
+           anchor point and the others reveal leftwards into the crescent. */
+        sleeve.style.setProperty("--fan-x", (-depth * spread).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-y", (-depth * 3).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-rot", (-depth * 3.4).toFixed(1) + "deg");
+        sleeve.style.setProperty("--fan-scale", (1 - depth * 0.03).toFixed(3));
+      } else {
+        var capped = Math.min(depth, 3);
+        sleeve.style.setProperty("--fan-x", (capped * 7).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-y", (capped * -6).toFixed(1) + "%");
+        sleeve.style.setProperty("--fan-rot", (capped * -3).toFixed(1) + "deg");
+        sleeve.style.setProperty("--fan-scale", (1 - capped * 0.05).toFixed(3));
+        sleeve.dataset.hidden = depth > 3 ? "true" : "false";
+      }
+      sleeve.style.zIndex = String(30 - depth);
     }
   }
 
@@ -234,7 +274,10 @@
     if (!n) return;
 
     if (mag.mode === "rail") {
-      mag.cards.forEach(function (card) { card.dataset.visible = "true"; });
+      mag.cards.forEach(function (card) {
+        card.dataset.visible = "true";
+        if (card.dataset.expanded !== "true") paintStack(card, true);
+      });
       return;
     }
 
@@ -259,7 +302,11 @@
       card.style.setProperty("--scale", (1 - near * 0.17).toFixed(3));
       card.style.setProperty("--opacity", (1 - near * 0.62).toFixed(3));
       card.style.setProperty("--z", String(1000 - Math.round(Math.abs(theta) * 4)));
-      card.dataset.pickup = Math.abs(offset) < 0.5 ? "true" : "false";
+      var atPickup = Math.abs(offset) < 0.5;
+      if (card.dataset.pickup !== String(atPickup)) {
+        card.dataset.pickup = atPickup ? "true" : "false";
+        paintStack(card, atPickup);
+      }
     }
 
     if (el.wheel) {
@@ -401,6 +448,28 @@
       var card = event.target.closest(".card") || mag.lastHit;
       mag.lastHit = null;
       if (!card) return;
+      /* In a fanned bay each sleeve is its own target, so a take can be
+         chosen by pointing at its artwork. */
+      var sleeve = event.target.closest(".cassette");
+      if (sleeve && card.dataset.expanded === "true" && sleeve.dataset.front === "false") {
+        var at = bayTakes(card).indexOf(sleeve.dataset.track);
+        if (at >= 0) {
+          selection[bayKey(card)] = at;
+          paintStack(card, true);
+          playDetent();
+          var picked = bayTrack(card);
+          if (picked) {
+            if (current && bayTakes(card).indexOf(current.id) !== -1) {
+              paintDial(card);
+              latch(picked, !audio.paused);
+            } else {
+              engage(picked, true, false);
+            }
+          }
+          return;
+        }
+      }
+
       var track = bayTrack(card);
       if (!track) return;
       /* Second click on the bay already in the deck steps to the next take —
@@ -1458,6 +1527,78 @@
     }, 560);
   }
 
+  /* ====================================================== MAGAZINE LAMP == */
+  /* A continuous knob rather than stepped detents: the right brightness
+     depends on the room, so this is a level control, not a selector. */
+
+  var LAMP_ARC = 140;
+  var lamp = { value: 0.55, drag: null };
+
+  function paintLamp() {
+    if (el.magazine) el.magazine.style.setProperty("--lamp", lamp.value.toFixed(3));
+    if (el.brightKnob) {
+      el.brightKnob.style.setProperty("--angle",
+        (-LAMP_ARC + lamp.value * LAMP_ARC * 2).toFixed(1) + "deg");
+    }
+    if (el.bright) el.bright.setAttribute("aria-valuenow", String(Math.round(lamp.value * 100)));
+    if (el.brightTicks) {
+      Array.prototype.forEach.call(el.brightTicks.children, function (tick, i) {
+        tick.dataset.on = (i / (el.brightTicks.childElementCount - 1)) <= lamp.value + 0.001
+          ? "true" : "false";
+      });
+    }
+  }
+
+  function setLamp(value) {
+    lamp.value = clamp(0, value, 1);
+    paintLamp();
+    remember("gbr:lamp", lamp.value.toFixed(3));
+  }
+
+  function initLamp() {
+    if (!el.bright) return;
+    var saved = recallNumber("gbr:lamp");
+    if (saved >= 0 && saved <= 1) lamp.value = saved;
+
+    if (el.brightTicks && !el.brightTicks.childElementCount) {
+      for (var i = 0; i < 9; i++) {
+        var tick = document.createElement("i");
+        tick.style.setProperty("--a", (-LAMP_ARC + (i / 8) * LAMP_ARC * 2).toFixed(1) + "deg");
+        el.brightTicks.appendChild(tick);
+      }
+    }
+    paintLamp();
+
+    el.bright.addEventListener("pointerdown", function (event) {
+      lamp.drag = { id: event.pointerId, y: event.clientY, from: lamp.value };
+      try { el.bright.setPointerCapture(event.pointerId); } catch (_) {}
+      event.preventDefault();
+    });
+    el.bright.addEventListener("pointermove", function (event) {
+      if (!lamp.drag || lamp.drag.id !== event.pointerId) return;
+      /* Up is brighter, 120px for the full sweep. */
+      setLamp(lamp.drag.from + (lamp.drag.y - event.clientY) / 120);
+    });
+    ["pointerup", "pointercancel"].forEach(function (type) {
+      el.bright.addEventListener(type, function (event) {
+        if (!lamp.drag || lamp.drag.id !== event.pointerId) return;
+        lamp.drag = null;
+        try { el.bright.releasePointerCapture(event.pointerId); } catch (_) {}
+      });
+    });
+    el.bright.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      setLamp(lamp.value - (event.deltaY > 0 ? 0.06 : -0.06));
+    }, { passive: false });
+    el.bright.addEventListener("keydown", function (event) {
+      var step = (event.key === "ArrowUp" || event.key === "ArrowRight") ? 0.08
+               : (event.key === "ArrowDown" || event.key === "ArrowLeft") ? -0.08 : 0;
+      if (!step) return;
+      event.preventDefault();
+      setLamp(lamp.value + step);
+    });
+  }
+
   /* ========================================================= TAKE DIAL === */
   /* A stepped rotary beside the title. Detents equal takes, so a song with one
      version shows no dial at all rather than a control that does nothing. */
@@ -1475,11 +1616,16 @@
   function paintDial(card) {
     if (!el.take) return;
     var takes = card ? bayTakes(card) : [];
-    if (takes.length < 2) {
-      el.take.hidden = true;
+    /* The dial is part of the deck, not a conditional extra. A single-take song
+       shows one detent and simply does not turn. */
+    el.take.hidden = false;
+    if (!takes.length) {
+      if (el.dialTicks) el.dialTicks.innerHTML = "";
       if (el.takeLegend) el.takeLegend.hidden = true;
+      el.take.dataset.locked = "true";
       return;
     }
+    el.take.dataset.locked = takes.length < 2 ? "true" : "false";
 
     var chosen = takeIndex(card);
     var angles = dialAngles(takes.length);
@@ -1498,10 +1644,11 @@
     });
     if (el.dialKnob) el.dialKnob.style.setProperty("--angle", angles[chosen].toFixed(1) + "deg");
 
-    if (el.dialm) el.dialm = null;
     if (el.dial) {
-      el.dial.setAttribute("aria-label",
-        "Take " + (chosen + 1) + " of " + takes.length + ", select next take");
+      el.dial.disabled = takes.length < 2;
+      el.dial.setAttribute("aria-label", takes.length < 2
+        ? "Take 1 of 1"
+        : "Take " + (chosen + 1) + " of " + takes.length + ", select next take");
     }
     if (el.takeLegend) {
       el.takeLegend.hidden = false;
@@ -1802,21 +1949,21 @@
 
       if (on) {
         /* Transformer coming up, and its second harmonic. */
-        hum(ctx, master, now + 0.09, 100, 0.075, 0.55, 0.5, 1.9, 3.1);
-        hum(ctx, master, now + 0.12, 200, 0.032, 0.6, 0.4, 1.6, 4.7);
+        hum(ctx, master, now + 0.09, 100, 0.075, 0.7, 1.2, 2.4, 3.1);
+        hum(ctx, master, now + 0.12, 200, 0.032, 0.75, 1.1, 2.1, 4.7);
 
         /* Degauss: a buzzing swell that beats against itself as it decays. */
         var deg = ctx.createOscillator();
         deg.type = "sawtooth";
         deg.frequency.setValueAtTime(61, now + 0.2);
-        deg.frequency.linearRampToValueAtTime(52, now + 1.5);
+        deg.frequency.linearRampToValueAtTime(49, now + 2.4);
         var degFilter = ctx.createBiquadFilter();
         degFilter.type = "lowpass";
         degFilter.frequency.value = 240;
         var degGain = ctx.createGain();
         degGain.gain.setValueAtTime(0.0001, now + 0.2);
-        degGain.gain.linearRampToValueAtTime(0.11, now + 0.42);
-        degGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.55);
+        degGain.gain.linearRampToValueAtTime(0.11, now + 0.5);
+        degGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
         var beat = ctx.createOscillator();
         beat.frequency.value = 7.5;
         var beatDepth = ctx.createGain();
@@ -1826,15 +1973,15 @@
         deg.connect(degFilter);
         degFilter.connect(degGain);
         degGain.connect(master);
-        deg.start(now + 0.2); deg.stop(now + 1.62);
-        beat.start(now + 0.2); beat.stop(now + 1.62);
+        deg.start(now + 0.2); deg.stop(now + 2.6);
+        beat.start(now + 0.2); beat.stop(now + 2.6);
 
         /* Capstan and reel motors spinning up. */
-        noiseHit(ctx, master, now + 0.28, { from: 170, to: 920, q: 1.4, dur: 1.25, gain: 0.055, attack: 0.5 });
-        hum(ctx, master, now + 0.3, 44, 0.05, 0.85, 0.3, 1.1, 0);
+        noiseHit(ctx, master, now + 0.28, { from: 170, to: 920, q: 1.4, dur: 2.2, gain: 0.055, attack: 0.9 });
+        hum(ctx, master, now + 0.3, 44, 0.05, 1.35, 0.5, 1.3, 0);
 
         /* Mechanism settling. */
-        noiseHit(ctx, master, now + 1.5, { from: 3000, q: 7, dur: 0.022, gain: 0.13, attack: 0.001 });
+        noiseHit(ctx, master, now + 2.5, { from: 3000, q: 7, dur: 0.022, gain: 0.13, attack: 0.001 });
       } else {
         /* Everything winds down. */
         hum(ctx, master, now + 0.02, 96, 0.05, 0.02, 0.05, 0.5, 3);
@@ -1877,7 +2024,7 @@
     if (on) {
       /* Self-test: the needles kick across the scale and fall back, the way a
          movement does when the rail comes up. */
-      power.sweepUntil = performance.now() + 620;
+      power.sweepUntil = performance.now() + 1650;
       startMeters();
     } else {
       audio.pause();
@@ -1952,6 +2099,7 @@
     shuffleGroups();
     collectCards();
     initFolders();
+    initLamp();
     setPower(false, true);
     applyMagazineMode();
     bindMagazine();
@@ -1970,8 +2118,8 @@
     setShuffle(recall("gbr:shuffle") !== "off");
 
     if (el.volume) {
-      var savedVolume = Number(recall("gbr:volume"));
-      if (isFinite(savedVolume) && savedVolume >= 0 && savedVolume <= 1) el.volume.value = savedVolume;
+      var savedVolume = recallNumber("gbr:volume");
+      if (savedVolume >= 0 && savedVolume <= 1) el.volume.value = savedVolume;
       audio.volume = Number(el.volume.value) || 0.9;
       fillRange(el.volume);
       el.volume.addEventListener("input", function () {

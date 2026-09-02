@@ -84,7 +84,8 @@ check("takes stack behind the selected sleeve", ".cassette-stack" in css and "pa
 
 # --- take dial --------------------------------------------------------------
 check("dial detents equal takes", "dialAngles" in js and "takes.length" in js)
-check("dial hides itself for single-take songs", "if (takes.length < 2)" in js)
+check("dial is always present, locked when there is one take",
+      'el.take.hidden = false' in js and 'data-locked="true"' in css)
 check("dial states the count so takes are not missed", '"Take " + (chosen + 1) + " of "' in js)
 check("dial announces itself on latch", "callDial" in js and "is-calling" in css)
 check("dial has its own detent sound", "playDetent" in js)
@@ -130,7 +131,26 @@ check("power sequence is electromechanical", "degauss" in js.lower() and "hum(" 
 # --- empty bay --------------------------------------------------------------
 # The tape in the deck leaves an impression in the drum, not a hole.
 check("empty bay is etched, not blank",
-      "impression pressed into the drum" in css and "rgba(255, 197, 122" in css)
+      "only its slot is empty" in css and "rgba(255, 200, 128" in css)
+
+# --- magazine lamp ----------------------------------------------------------
+check("magazine has its own lamp", ".gbr-lamp" in css and "--lamp" in js)
+check("lamp brightness is a continuous knob, not detents",
+      'role="slider"' in template and "lamp.drag" in js)
+check("lamp level persists", '"gbr:lamp"' in js)
+
+# --- fanned bays ------------------------------------------------------------
+# Stacking hid the other takes' artwork, which defeated the point of keeping
+# them. The bay at the pickup point fans so every sleeve is legible.
+check("bays fan at the pickup point", "--fan-x" in js and "--fan-x" in css)
+check("fan spread is capped for many takes", "88 / (total - 1)" in js)
+check("only the selected take reads as removed",
+      '.card.is-in-deck .cassette[data-front="true"]' in css)
+check("a fanned sleeve can be picked directly", 'sleeve.dataset.front === "false"' in js)
+
+# --- restore bug ------------------------------------------------------------
+# Number(null) is 0, which passed the range guard and zeroed the control.
+check("missing stored values do not read as zero", "recallNumber" in js)
 
 # --- regressions we do not want back ---------------------------------------
 # Capturing the pointer on pointerdown retargets the following click to the
