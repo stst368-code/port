@@ -55,7 +55,29 @@ check("carousel drag exists", "pointerdown" in js and "pointermove" in js)
 check("lossless selection exists", "gbr:lossless" in js and "audio/flac" in js)
 check("post-EQ analyser exists", "createBiquadFilter" in js and "createAnalyser" in js)
 
+# --- layout arrangement -----------------------------------------------------
+check("spectrum spans the full top of the rack", ".gbr-analyser  { grid-column: 1 / -1" in css)
+check("VU bank sits beside the deck", ".gbr-meters    { grid-column: 2;" in css)
+check("sleeve precedes the title plate",
+      html.index('id="gbr-art-frame"') < html.index('id="gbr-title"'))
+check("rack order is spectrum, deck, VU",
+      template.index("gbr-analyser") < template.index("gbr-deck") < template.index("gbr-meters"))
+check("VU geometry adapts to plate shape", "isRoomy" in js and "90 * (h / w)" in js)
+# The sleeves carry the titles, so no text titles are painted on the rack in
+# either mode. They stay in the accessibility tree rather than display:none.
+check("no song titles painted on the rack",
+      "display: block;" not in css.split(".gbr-cards .track-group__title")[1][:400])
+check("group titles kept for assistive tech",
+      "clip-path: inset(50%)" in css.split(".gbr-cards .track-group__title")[1][:400])
+
 # --- regressions we do not want back ---------------------------------------
+# Capturing the pointer on pointerdown retargets the following click to the
+# container, which made cassettes unselectable with a mouse. Capture must be
+# deferred until a drag actually starts, and the click handler must have a
+# fallback to whatever the pointer went down on.
+check("pointer capture is deferred until a drag starts",
+      "mag.dragging.captured = true" in js and "captured: false" in js)
+check("click falls back to the pointerdown target", "mag.lastHit" in js)
 check("scrubbing is not fought by timeupdate", "_isScrubbing" in js)
 check("no legacy player stylesheet", "site.css" not in html)
 check("no important cascade pile", css.count("!important") <= 2)

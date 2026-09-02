@@ -40,6 +40,20 @@ cassette was never visible and the tapes you could see were just whichever ones
 happened to swing through the crescent. v7 places cards from three o'clock, so
 the pickup tape sits next to the step buttons where the interface implies it is.
 
+### Cassettes could not be selected with a mouse
+
+Separate from the sizing bug, and worth writing down because it is easy to
+reintroduce. The carousel called `setPointerCapture()` on `pointerdown` so that
+a drag could continue outside the element. Pointer capture retargets the
+subsequent `click` to the capturing element, so the delegated handler saw
+`event.target === #gbr-cards`, `closest('.card')` returned null, and it bailed.
+Every click on a tape did nothing.
+
+Capture is now deferred until the pointer has actually moved more than 4px, so
+a plain click never captures and reaches the card normally. The click handler
+also falls back to whatever was recorded at `pointerdown`. Both are covered by
+tests, because the failure is silent — no error, just nothing happening.
+
 ### Mobile
 
 The `34% / 66%` split gave the magazine about 133px on a phone. Wheel 266px,
@@ -58,6 +72,40 @@ Every percentage height inside the machine was resolving against a
 the page 317px past the viewport once it had real intrinsic dimensions.
 `.gbr-app` is now `height: 100dvh`, and the rack scrolls internally if a window
 is genuinely too short.
+
+## Rack arrangement
+
+```
++-------------------------------------------------------------+
+| spectrum, full width                                         |
++-----------------------------------+-------------------------+
+|              sleeve               |      VU meter, L        |
+|          title / version          +-------------------------+
+|         genre / cat / time        |      VU meter, R        |
++-----------------------------------+-------------------------+
+| transport                                                   |
++-------------------------------------------------------------+
+| lyric word                                                   |
++-------------------------------------------------------------+
+```
+
+The rack itself carries no text titles in either mode — the sleeve art is the
+identifier. The `track-group__title` headings the build tool emits are kept in
+the accessibility tree rather than removed with `display: none`, so tabbing
+through the tapes still announces which song each group belongs to. The version
+chips stay visible, since a sleeve cannot tell you which take you are looking
+at.
+
+The five modules are placed explicitly on the rack grid rather than wrapped in
+container elements, so the narrow-viewport block re-places the same markup into
+a single column with the two instruments sharing a strip at the foot. Below
+620px of height the spectrum row drops out and the VU bank stays.
+
+The VU face geometry is derived from the plate's aspect ratio, so one drawing
+routine covers both the tall movement beside the artwork and the short wide
+strip on a phone: sweep comes from the aspect, radius from the width, and the
+pivot falls below the plate as it does on real hardware, with the needle
+emerging from a shroud along the bottom.
 
 ## Restored
 

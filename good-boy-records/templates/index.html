@@ -46,12 +46,9 @@
 
     <div class="gbr-rack">
 
-      <section class="gbr-module gbr-meters" aria-label="Output metering">
-        <div class="gbr-module-label"><span>PROGRAM LEVEL</span><span>POST EQ</span></div>
-        <div class="gbr-meter-bank">
-          <canvas class="gbr-vu" id="gbr-vu" aria-hidden="true"></canvas>
-          <canvas class="gbr-spectrum" id="gbr-spectrum" aria-hidden="true"></canvas>
-        </div>
+      <section class="gbr-module gbr-analyser" aria-label="Program spectrum">
+        <div class="gbr-module-label"><span>PROGRAM SPECTRUM</span><span>POST EQ</span></div>
+        <canvas class="gbr-spectrum" id="gbr-spectrum" aria-hidden="true"></canvas>
       </section>
 
       <section class="gbr-module gbr-deck" aria-label="Loaded cassette">
@@ -64,6 +61,11 @@
           <p class="gbr-plate-sub" id="gbr-subtitle" hidden></p>
           <ul class="gbr-plate-meta" id="gbr-meta"></ul>
         </div>
+      </section>
+
+      <section class="gbr-module gbr-meters" aria-label="Output level">
+        <div class="gbr-module-label"><span>OUTPUT LEVEL</span><span>VU</span></div>
+        <canvas class="gbr-vu" id="gbr-vu" aria-hidden="true"></canvas>
       </section>
 
       <section class="gbr-module gbr-transport" aria-label="Transport">

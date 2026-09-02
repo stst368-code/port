@@ -122,6 +122,7 @@
     pitch: 140,
     anim: 0,
     dragging: null,
+    lastHit: null,
     suppressClickUntil: 0
   };
 
@@ -152,7 +153,7 @@
 
     if (mag.mode === "rail") {
       var railW = el.magazine.getBoundingClientRect().width || 320;
-      var railCard = clamp(64, railW * 0.21, 104);
+      var railCard = clamp(70, railW * 0.235, 116);
       document.documentElement.style.setProperty("--rail-card-w", railCard.toFixed(1) + "px");
       return;
     }
@@ -337,7 +338,10 @@
         event.stopPropagation();
         return;
       }
-      var card = event.target.closest(".card");
+      /* Pointer capture retargets click to the capture element, so fall back
+         to whatever the pointer actually went down on. */
+      var card = event.target.closest(".card") || mag.lastHit;
+      mag.lastHit = null;
       if (!card) return;
       var track = byId[card.dataset.track];
       if (!track) return;
@@ -371,15 +375,30 @@
     el.cards.addEventListener("pointerdown", function (event) {
       if (mag.mode !== "wheel" || event.button !== 0 || !mag.cards.length) return;
       cancelAnimationFrame(mag.anim);
-      mag.dragging = { id: event.pointerId, y: event.clientY, from: mag.position, moved: false };
-      el.cards.dataset.dragging = "true";
-      try { el.cards.setPointerCapture(event.pointerId); } catch (_) {}
+      mag.lastHit = event.target.closest(".card");
+      mag.dragging = {
+        id: event.pointerId, y: event.clientY,
+        from: mag.position, moved: false, captured: false
+      };
     });
 
     el.cards.addEventListener("pointermove", function (event) {
       if (!mag.dragging || mag.dragging.id !== event.pointerId) return;
       var dy = event.clientY - mag.dragging.y;
-      if (Math.abs(dy) > 4) mag.dragging.moved = true;
+
+      if (!mag.dragging.moved) {
+        if (Math.abs(dy) <= 4) return;
+        mag.dragging.moved = true;
+        el.cards.dataset.dragging = "true";
+        /* Capture only once a real drag begins. Capturing on pointerdown
+           retargets the following click to this container, which is what
+           stopped cassettes being selectable with the mouse at all. */
+        try {
+          el.cards.setPointerCapture(event.pointerId);
+          mag.dragging.captured = true;
+        } catch (_) {}
+      }
+
       mag.position = mag.dragging.from + dy / mag.pitch;
       paintMagazine();
     });
@@ -387,11 +406,13 @@
     function endDrag(event) {
       if (!mag.dragging || mag.dragging.id !== event.pointerId) return;
       var moved = mag.dragging.moved;
+      var captured = mag.dragging.captured;
       mag.dragging = null;
       el.cards.dataset.dragging = "false";
-      if (moved) mag.suppressClickUntil = Date.now() + 300;
+      if (captured) { try { el.cards.releasePointerCapture(event.pointerId); } catch (_) {} }
+      if (!moved) return;                       /* a tap: let the click select */
+      mag.suppressClickUntil = Date.now() + 300;
       glideTo(pickupIndex(), { duration: 240 }, null);
-      try { el.cards.releasePointerCapture(event.pointerId); } catch (_) {}
     }
     el.cards.addEventListener("pointerup", endDrag);
     el.cards.addEventListener("pointercancel", endDrag);
@@ -617,13 +638,23 @@
     return meters.face;
   }
 
+  /* Plates taller than this get the full treatment: numerals following the
+     arc, and a shroud the needle emerges from. */
+  function isRoomy(h) { return h >= 58; }
+
   function meterGeometry(w, h) {
-    /* Pivot sits well below the plate, giving the shallow wide arc of a
-       bridge-format VU rather than a car speedometer. */
-    var pivotY = h * 2.5;
-    var radius = h * 2.16;
-    var sweep = 23 / DEG;
-    return { cx: w / 2, cy: pivotY, r: radius, sweep: sweep };
+    /* One formula covers both plate proportions. Sweep comes from the aspect
+       ratio, the radius from the width, and the pivot drops below the plate as
+       it does on real hardware. The second constraint keeps the ends of the
+       arc from running off the bottom of a tall plate. */
+    var sweep = clamp(22, 90 * (h / w) + 8, 52) / DEG;
+    var crown = h * 0.17;
+    var floorLimit = isRoomy(h) ? 0.58 : 0.82;   /* how far down the arc may go */
+    var r = Math.min(
+      (w * 0.42) / Math.sin(sweep),
+      ((floorLimit - 0.17) * h) / (1 - Math.cos(sweep))
+    );
+    return { cx: w / 2, cy: r + crown, r: r, sweep: sweep };
   }
   function needleAngle(geo, fraction) {
     return -Math.PI / 2 + (fraction - 0.5) * 2 * geo.sweep;
@@ -634,66 +665,87 @@
     c.translate(x, y);
 
     var plate = c.createLinearGradient(0, 0, 0, h);
-    plate.addColorStop(0, "#f0dcae");
-    plate.addColorStop(0.55, "#e3cb98");
-    plate.addColorStop(1, "#c5a56c");
+    plate.addColorStop(0, "#f2dfb3");
+    plate.addColorStop(0.5, "#e5cd9b");
+    plate.addColorStop(1, "#c3a268");
     c.fillStyle = plate;
     roundRect(c, 0, 0, w, h, 3);
     c.fill();
 
+    /* Lamp behind the face, brightest at the crown of the arc. */
     var geo = meterGeometry(w, h);
+    var lamp = c.createRadialGradient(geo.cx, h * 0.34, 0, geo.cx, h * 0.34, w * 0.6);
+    lamp.addColorStop(0, "rgba(255, 226, 160, 0.55)");
+    lamp.addColorStop(1, "rgba(255, 196, 96, 0)");
+    c.fillStyle = lamp;
+    roundRect(c, 0, 0, w, h, 3);
+    c.fill();
 
-    /* Red overload arc, from 0 VU to full scale. */
-    c.lineWidth = Math.max(1.6, h * 0.075);
-    c.strokeStyle = "#c8402a";
-    c.beginPath();
-    c.arc(geo.cx, geo.cy, geo.r, needleAngle(geo, vuToFraction(0)), needleAngle(geo, 1));
-    c.stroke();
+    var roomy = isRoomy(h);
+    var arcW = clamp(1.5, h * 0.045, 3.4);
+    var tickLong = clamp(3, h * 0.13, 15);
+    var tickShort = tickLong * 0.55;
 
+    c.lineWidth = arcW;
     c.strokeStyle = "#3a2c1c";
     c.beginPath();
     c.arc(geo.cx, geo.cy, geo.r, needleAngle(geo, 0), needleAngle(geo, vuToFraction(0)));
     c.stroke();
+    c.strokeStyle = "#c23a22";
+    c.beginPath();
+    c.arc(geo.cx, geo.cy, geo.r, needleAngle(geo, vuToFraction(0)), needleAngle(geo, 1));
+    c.stroke();
 
-    /* Ticks. Only the labelled majors on small plates. */
-    var majors = [-20, -10, -7, -5, -3, -1, 0, 1, 2, 3];
-    var tiny = h < 30;
+    var majors = [-20, -10, -7, -5, -3, -2, -1, 0, 1, 2, 3];
+    var labelled = [-20, -10, -5, -3, 0, 3];
     majors.forEach(function (vu) {
-      var f = vuToFraction(vu);
-      var a = needleAngle(geo, f);
-      var long = (vu === -20 || vu === -10 || vu === -5 || vu === 0 || vu === 3);
-      if (tiny && !long) return;
-      var inner = geo.r - (long ? h * 0.2 : h * 0.12);
+      var long = labelled.indexOf(vu) !== -1;
+      if (!roomy && !long) return;
+      var a = needleAngle(geo, vuToFraction(vu));
+      var len = long ? tickLong : tickShort;
       c.strokeStyle = vu >= 0 ? "#a8331f" : "#3a2c1c";
-      c.lineWidth = long ? 1.4 : 0.9;
+      c.lineWidth = long ? Math.max(1.2, arcW * 0.5) : Math.max(0.8, arcW * 0.32);
       c.beginPath();
-      c.moveTo(geo.cx + Math.cos(a) * inner, geo.cy + Math.sin(a) * inner);
-      c.lineTo(geo.cx + Math.cos(a) * (geo.r - h * 0.02), geo.cy + Math.sin(a) * (geo.r - h * 0.02));
+      c.moveTo(geo.cx + Math.cos(a) * (geo.r - arcW / 2 - len),
+               geo.cy + Math.sin(a) * (geo.r - arcW / 2 - len));
+      c.lineTo(geo.cx + Math.cos(a) * (geo.r - arcW / 2),
+               geo.cy + Math.sin(a) * (geo.r - arcW / 2));
       c.stroke();
     });
 
-    if (h >= 26) {
-      c.fillStyle = "#4a3720";
+    if (roomy) {
+      /* Numerals sit inside the arc, on their own tick. */
+      var fs = clamp(7, h * 0.105, 14);
+      c.font = "600 " + fs.toFixed(1) + "px ui-monospace, monospace";
+      c.textAlign = "center";
+      c.textBaseline = "middle";
+      var ringR = geo.r - arcW / 2 - tickLong - fs * 1.15;
+      labelled.forEach(function (vu) {
+        var a = needleAngle(geo, vuToFraction(vu));
+        c.fillStyle = vu >= 0 ? "#a8331f" : "#4a3720";
+        c.fillText(vu > 0 ? "+" + vu : String(vu),
+                   geo.cx + Math.cos(a) * ringR, geo.cy + Math.sin(a) * ringR);
+      });
+    } else if (h >= 26) {
       c.font = "600 " + Math.max(5, Math.round(h * 0.15)) + "px ui-monospace, monospace";
       c.textBaseline = "top";
       c.textAlign = "left";
+      c.fillStyle = "#4a3720";
       c.fillText("-20", 4, h * 0.5);
       c.textAlign = "right";
       c.fillStyle = "#a8331f";
       c.fillText("+3", w - 4, h * 0.5);
-      c.textAlign = "center";
-      c.fillStyle = "#4a3720";
-      c.fillText("0", geo.cx + Math.cos(needleAngle(geo, vuToFraction(0))) * (geo.r - h * 0.34),
-                      h * 0.5);
     }
 
-    c.fillStyle = "#5b452a";
-    c.font = "700 " + Math.max(6, Math.round(h * 0.2)) + "px ui-monospace, monospace";
-    c.textAlign = "left";
-    c.textBaseline = "bottom";
-    c.fillText(label, 4, h - 2);
-    c.textAlign = "right";
-    c.fillText("VU", w - 4, h - 2);
+    if (!roomy) {
+      c.fillStyle = "#5b452a";
+      c.font = "700 " + clamp(6, h * 0.2, 13).toFixed(1) + "px ui-monospace, monospace";
+      c.textAlign = "left";
+      c.textBaseline = "bottom";
+      c.fillText(label, 5, h - 3);
+      c.textAlign = "right";
+      c.fillText("VU", w - 5, h - 3);
+    }
 
     c.strokeStyle = "rgba(70,50,26,0.55)";
     c.lineWidth = 1;
@@ -753,16 +805,18 @@
         c.fillStyle = ch.peak >= vuToFraction(0) ? "#b8321c" : "#6b542f";
         c.beginPath();
         c.arc(geo.cx + Math.cos(pa) * geo.r, geo.cy + Math.sin(pa) * geo.r,
-              Math.max(1.1, face.meterH * 0.045), 0, Math.PI * 2);
+              clamp(1.1, face.meterH * 0.022, 3.4), 0, Math.PI * 2);
         c.fill();
         settled = false;
       }
 
       /* Needle. */
-      var tipX = geo.cx + Math.cos(angle) * (geo.r + face.meterH * 0.03);
-      var tipY = geo.cy + Math.sin(angle) * (geo.r + face.meterH * 0.03);
-      var baseX = geo.cx + Math.cos(angle) * (geo.r - face.meterH * 0.72);
-      var baseY = geo.cy + Math.sin(angle) * (geo.r - face.meterH * 0.72);
+      var roomy = isRoomy(face.meterH);
+      var tipX = geo.cx + Math.cos(angle) * (geo.r + face.meterH * 0.02);
+      var tipY = geo.cy + Math.sin(angle) * (geo.r + face.meterH * 0.02);
+      var tail = geo.r * (roomy ? 0.62 : 0.3);
+      var baseX = geo.cx + Math.cos(angle) * (geo.r - tail);
+      var baseY = geo.cy + Math.sin(angle) * (geo.r - tail);
 
       c.strokeStyle = "rgba(20,12,4,0.28)";
       c.lineWidth = Math.max(1.6, face.meterH * 0.05);
@@ -778,6 +832,26 @@
       c.moveTo(baseX, baseY);
       c.lineTo(tipX, tipY);
       c.stroke();
+
+      /* Shroud: the needle has to come out of something. Drawn after the
+         needle so it hides the tail, which is why it is not part of the
+         cached face. */
+      if (roomy) {
+        var sy = face.meterH * 0.74;
+        var shroud = c.createLinearGradient(0, sy, 0, face.meterH);
+        shroud.addColorStop(0, "#8c7345");
+        shroud.addColorStop(0.18, "#3a2c1a");
+        shroud.addColorStop(1, "#221a0f");
+        c.fillStyle = shroud;
+        c.fillRect(0, sy, fit.w, face.meterH - sy);
+        c.fillStyle = "#d8bd85";
+        c.font = "700 " + clamp(7, face.meterH * 0.1, 13).toFixed(1) + "px ui-monospace, monospace";
+        c.textBaseline = "bottom";
+        c.textAlign = "left";
+        c.fillText(ch.name, 6, face.meterH - 5);
+        c.textAlign = "right";
+        c.fillText("VU", fit.w - 6, face.meterH - 5);
+      }
 
       /* Overload lamp. */
       if (ch.over > 0) {
