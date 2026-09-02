@@ -53,7 +53,8 @@ check("focused lyrics exist", 'id="gbr-lyric-word"' in html)
 check("EQ popup exists", 'id="gbr-eq-popover"' in html and 'data-eq-frequency="60"' in html)
 check("technical drawer exists", 'id="gbr-tech-panel"' in html)
 check("word timing loader exists", "gbr-word-lyrics-v1" in js)
-check("shuffle avoids same song where possible", "t.title !== current.title" in js)
+check("shuffle reaches takes, not just songs",
+      "t.composition !== current.composition" in js and "playableTracks" in js)
 check("media session exists", "MediaMetadata" in js)
 check("cassette insert sound exists", "playInsertSound" in js)
 check("carousel drag exists", "pointerdown" in js and "pointermove" in js)
@@ -69,12 +70,25 @@ check("rack order is spectrum, deck, VU",
       template.index("gbr-analyser") < template.index("gbr-deck") < template.index("gbr-meters"))
 check("meter geometry is derived, not hard coded",
       "meterGeometry" in js and "METER_SWEEP" in js)
-# The sleeves carry the titles, so no text titles are painted on the rack in
-# either mode. They stay in the accessibility tree rather than display:none.
-check("no song titles painted on the rack",
-      "display: block;" not in css.split(".gbr-cards .track-group__title")[1][:400])
-check("group titles kept for assistive tech",
-      "clip-path: inset(50%)" in css.split(".gbr-cards .track-group__title")[1][:400])
+# The sleeves carry the titles, so no text titles are painted on the rack.
+check("no song titles painted on the rack", "track-group__title" not in css)
+check("bay names reach assistive tech", 'aria-label="Latch ' in
+      (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8"))
+
+# --- one bay per song, with every take inside it ---------------------------
+check("wall is built from bays", "shelf_bay" in
+      (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8"))
+check("a bay carries its takes", "data-tracks" in
+      (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8") and "bayTakes" in js)
+check("takes stack behind the selected sleeve", ".cassette-stack" in css and "paintStack" in js)
+
+# --- take dial --------------------------------------------------------------
+check("dial detents equal takes", "dialAngles" in js and "takes.length" in js)
+check("dial hides itself for single-take songs", "if (takes.length < 2)" in js)
+check("dial states the count so takes are not missed", '"Take " + (chosen + 1) + " of "' in js)
+check("dial announces itself on latch", "callDial" in js and "is-calling" in css)
+check("dial has its own detent sound", "playDetent" in js)
+check("carousel is still a way to reach takes", "stepTake(1); return;" in js)
 
 # --- cassette load sound ----------------------------------------------------
 # Mechanisms are noise, not tone. Oscillators alone gave the v6 UI blip.

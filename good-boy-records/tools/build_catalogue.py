@@ -490,70 +490,74 @@ def version_badge(track: dict[str, Any]) -> str:
     return "VER"
 
 
-def shelf_card(track: dict[str, Any], index: int) -> str:
-    title = esc(track["title"])
-    # A cassette label is never more than ~210px wide, so the old page-width
-    # sizes hint made every tape pull the 1280w sleeve.
-    picture = sleeve_picture(track, "", "(max-width: 860px) 110px, 210px", lazy=index > 7)
-    composition = esc(track.get("composition") or track["id"])
-    badge = esc(version_badge(track))
+def shelf_bay(items: list[dict[str, Any]], index: int) -> str:
+    """One bay per composition, holding every take of it as a stack.
 
-    return f"""          <li class="card" data-track="{esc(track['id'])}" data-composition="{composition}">
+    The wall used to carry one tape per take, which meant a catalogue of forty
+    songs with three attempts each produced a hundred and twenty tapes. A bay
+    collapses that to one, but keeps all the sleeves so the front of the stack
+    can show whichever take is loaded — the artwork differs between takes, and
+    that difference is the point of having them.
+    """
+    lead = items[0]
+    title = esc(lead["title"])
+    composition = esc(lead.get("composition") or lead["id"])
+    count = len(items)
+    ids = ",".join(str(track["id"]) for track in items)
+
+    sleeves = []
+    for depth, track in enumerate(items):
+        picture = sleeve_picture(
+            track, "", "(max-width: 860px) 110px, 210px", lazy=index > 7 or depth > 0
+        )
+        sleeves.append(
+            f'<span class="cassette" data-track="{esc(track["id"])}" data-depth="{depth}">'
+            f'<span class="cassette__label">{picture}</span>'
+            f'<span class="cassette__window">'
+            f'<i class="cassette__reel"></i><b></b><i class="cassette__reel"></i>'
+            f"</span></span>"
+        )
+
+    badge = f"{count} takes" if count > 1 else esc(version_badge(lead))
+    label = title if count == 1 else f"{title}, {count} takes"
+
+    return f"""          <li class="card" data-composition="{composition}" data-takes="{count}" data-tracks="{esc(ids)}">
             <span class="version-tag" aria-hidden="true">{badge}</span>
-            <button type="button" class="card__play" data-play="{esc(track['id'])}" aria-label="Latch and play {title}, {badge}">
-              <span class="cassette" aria-hidden="true">
-                <span class="cassette__screw cassette__screw--1"></span><span class="cassette__screw cassette__screw--2"></span>
-                <span class="cassette__screw cassette__screw--3"></span><span class="cassette__screw cassette__screw--4"></span>
-                <span class="cassette__label">{picture}</span>
-                <span class="cassette__window"><i class="cassette__reel"></i><b></b><i class="cassette__reel"></i></span>
-                <span class="cassette__teeth"></span>
-              </span>
+            <button type="button" class="card__play" aria-label="Latch {esc(label)}">
+              <span class="cassette-stack" aria-hidden="true">{"".join(sleeves)}</span>
             </button>
           </li>"""
 
 
 def grouped_shelf(tracks: list[dict[str, Any]]) -> str:
-    """Render one continuous cassette wall made from intact song groups.
+    """Render the wall as one bay per composition, ordered by title.
 
-    Genre is metadata, not layout chrome. Every composition remains an atomic
-    group so its selected versions stay together, while CSS flex-wrap packs as
-    many complete song groups into each visual row as the viewport allows.
+    Takes of a song are sorted by version so the stack reads oldest-to-newest
+    from the back, and the bay carries their ids so the player can step through
+    them without another lookup.
     """
     compositions: dict[str, list[dict[str, Any]]] = {}
     for track in tracks:
         composition = str(track.get("composition") or track.get("id") or "track")
         compositions.setdefault(composition, []).append(track)
 
-    groups: list[str] = []
-    card_index = 0
+    def version_sort(track: dict[str, Any]):
+        value = (track.get("provenance") or {}).get("songVersion")
+        try:
+            return (0, float(value))
+        except (TypeError, ValueError):
+            return (1, str(track.get("versionLabel") or track.get("id") or "").casefold())
+
     ordered = sorted(
         compositions.items(),
         key=lambda pair: str(pair[1][0].get("title") or pair[0]).casefold(),
     )
 
-    for composition, items in ordered:
-        def version_sort(track: dict[str, Any]):
-            value = (track.get("provenance") or {}).get("songVersion")
-            try:
-                return (0, float(value))
-            except (TypeError, ValueError):
-                return (1, str(track.get("versionLabel") or track.get("id") or "").casefold())
-
-        items = sorted(items, key=version_sort)
-        cards = []
-        for track in items:
-            cards.append(shelf_card(track, card_index))
-            card_index += 1
-
-        title = items[0].get("title") or composition
-        label = f"{title}, {len(items)} version" + ("s" if len(items) != 1 else "")
-        groups.append(
-            f'<article class="track-group" data-composition="{esc(composition)}" aria-label="{esc(label)}">'
-            f'<h3 class="track-group__title">{esc(title)}</h3>'
-            f'<ul class="track-group__tapes">{"".join(cards)}</ul></article>'
-        )
-
-    return '<div class="track-wall">' + ''.join(groups) + '</div>'
+    bays = [
+        shelf_bay(sorted(items, key=version_sort), index)
+        for index, (composition, items) in enumerate(ordered)
+    ]
+    return '<ul class="track-wall">' + "".join(bays) + "</ul>"
 
 
 

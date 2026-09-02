@@ -173,6 +173,39 @@ It runs on its own `AudioContext`, deliberately. Routing it through the program
 graph would put the latch through the user's EQ and, worse, spike the VU meters
 with a sound that is not the record. Its level follows the output slider.
 
+## Bays and takes
+
+The wall used to carry one tape per take, so forty songs at three attempts each
+produced a hundred and twenty tapes. It now carries one **bay** per song.
+
+A bay is not a single tape, though — it holds every take as a stack, and the
+sleeve at the front is whichever take is loaded. That matters because takes
+differ in artwork and often in genre, and that difference is most of the reason
+for keeping them. Switching take swaps the front sleeve, the deck artwork, the
+genre chip and the technical drawer together.
+
+Three things guard against the other takes being missed:
+
+- The bay's tag reads `3 takes` rather than a version number, and the stack
+  visibly fans, so depth is legible from the wall itself.
+- The dial sits immediately left of the song name — the control that changes
+  the name is next to the name — and its legend reads `Take 1 of 3` in words
+  rather than a bare `v1`.
+- When a multi-take song is latched the dial gives one small nudge, so it
+  announces itself instead of waiting to be noticed.
+
+The dial has one detent per take, a lit tick at the current position, and a
+sprung detent click deliberately unlike the cassette latch so the two are never
+confused. A song with one take shows no dial at all rather than a control that
+does nothing. Arrow keys step it either way; clicking steps forward and wraps.
+
+Clicking the bay that is already in the deck also steps to the next take, so the
+carousel remains a way to reach versions and not merely songs.
+
+Shuffle draws from every take rather than from songs, so versions come up on
+their own. It still prefers a different composition first, so a run does not sit
+on one song playing its takes back to back.
+
 ## The meter bank and console
 
 The VU movements are a side-by-side pair drawn into one canvas: cream dial,

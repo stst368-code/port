@@ -70,6 +70,11 @@
     slot: $("gbr-tape-slot"),
     title: $("gbr-title"),
     meta: $("gbr-meta"),
+    take: $("gbr-take"),
+    dial: $("gbr-dial"),
+    dialTicks: $("gbr-dial-ticks"),
+    dialKnob: $("gbr-dial-knob"),
+    takeLegend: $("gbr-take-legend"),
     play: $("gbr-play"),
     shuffle: $("gbr-shuffle"),
     back: $("gbr-back"),
@@ -125,9 +130,41 @@
     suppressClickUntil: 0
   };
 
+  /* A bay is one song. `takes` are its versions in order; `selection` records
+     which one is at the front of the stack. */
+  var selection = {};
+
+  function bayTakes(card) {
+    if (!card) return [];
+    if (!card._takes) {
+      card._takes = String(card.dataset.tracks || "").split(",")
+        .filter(function (id) { return !!byId[id]; });
+    }
+    return card._takes;
+  }
+  function bayKey(card) { return card.dataset.composition || ""; }
+  function takeIndex(card) {
+    return clamp(0, selection[bayKey(card)] || 0, Math.max(0, bayTakes(card).length - 1));
+  }
+  function bayTrack(card) { return byId[bayTakes(card)[takeIndex(card)]] || null; }
+
+  /* Front sleeve carries the selected take's artwork; the rest fan back. */
+  function paintStack(card) {
+    if (!card) return;
+    var sleeves = card.querySelectorAll(".cassette");
+    var chosen = takeIndex(card);
+    var total = sleeves.length;
+    for (var i = 0; i < total; i++) {
+      var depth = mod(i - chosen, total);
+      sleeves[i].style.setProperty("--stack", String(Math.min(depth, 3)));
+      sleeves[i].dataset.front = depth === 0 ? "true" : "false";
+      sleeves[i].dataset.hidden = depth > 3 ? "true" : "false";
+    }
+  }
+
   function collectCards() {
     mag.cards = Array.prototype.slice.call(el.cards ? el.cards.querySelectorAll(".card") : []);
-    mag.cards.forEach(function (c, i) { c.dataset.index = String(i); });
+    mag.cards.forEach(function (c, i) { c.dataset.index = String(i); paintStack(c); });
     if (el.magazine) el.magazine.dataset.empty = mag.cards.length ? "false" : "true";
   }
 
@@ -138,7 +175,7 @@
     var wall = el.cards && el.cards.querySelector(".track-wall");
     if (!wall) return;
     var groups = Array.prototype.slice.call(wall.children)
-      .filter(function (n) { return n.classList.contains("track-group"); });
+      .filter(function (n) { return n.classList.contains("card"); });
     for (var i = groups.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var tmp = groups[i]; groups[i] = groups[j]; groups[j] = tmp;
@@ -239,14 +276,24 @@
   function indexOfTrack(track) {
     if (!track) return -1;
     for (var i = 0; i < mag.cards.length; i++) {
-      if (mag.cards[i].dataset.track === track.id) return i;
+      if (bayTakes(mag.cards[i]).indexOf(track.id) !== -1) return i;
     }
     return -1;
+  }
+  /* Point a bay at a specific take. Shuffle picks a track, not a song, so the
+     stack has to follow it. */
+  function selectTake(track) {
+    var index = indexOfTrack(track);
+    if (index < 0) return -1;
+    var card = mag.cards[index];
+    var at = bayTakes(card).indexOf(track.id);
+    if (at >= 0) { selection[bayKey(card)] = at; paintStack(card); }
+    return index;
   }
   function trackAt(index) {
     var n = mag.cards.length;
     if (!n) return null;
-    return byId[mag.cards[mod(index, n)].dataset.track] || null;
+    return bayTrack(mag.cards[mod(index, n)]);
   }
 
   /* Animate `position` rather than transitioning transforms, so cards travel
@@ -303,7 +350,7 @@
 
   function markSelected(id) {
     mag.cards.forEach(function (card) {
-      var on = card.dataset.track === id;
+      var on = bayTakes(card).indexOf(id) !== -1;
       card.dataset.active = on ? "true" : "false";
       card.classList.toggle("is-in-deck", on && mag.mode === "wheel");
       var button = card.querySelector(".card__play");
@@ -354,9 +401,12 @@
       var card = event.target.closest(".card") || mag.lastHit;
       mag.lastHit = null;
       if (!card) return;
-      var track = byId[card.dataset.track];
+      var track = bayTrack(card);
       if (!track) return;
-      if (current && current.id === track.id) {
+      /* Second click on the bay already in the deck steps to the next take —
+         the carousel stays a way to reach versions, not just songs. */
+      if (current && bayTakes(card).indexOf(current.id) !== -1) {
+        if (bayTakes(card).length > 1) { stepTake(1); return; }
         if (audio.paused) startPlayback(); else audio.pause();
         return;
       }
@@ -1346,6 +1396,23 @@
     } catch (_) {}
   }
 
+  /* The selector detent: a small sprung click, distinct from the cassette
+     latch so the two are never confused. */
+  function playDetent() {
+    var ctx = fxContext();
+    if (!ctx || ctx.state !== "running") return;
+    var level = clamp(0.15, audio.volume, 1);
+    try {
+      var now = ctx.currentTime + 0.005;
+      var master = ctx.createGain();
+      master.gain.value = 0.5 * level;
+      master.connect(ctx.destination);
+      noiseHit(ctx, master, now, { from: 4300, q: 11, dur: 0.016, gain: 0.32, attack: 0.0008 });
+      noiseHit(ctx, master, now + 0.004, { from: 1500, q: 5, dur: 0.032, gain: 0.15 });
+      bodyHit(ctx, master, now + 0.003, 330, 0.03, 0.06);
+    } catch (_) {}
+  }
+
   function flyIntoDeck(track, done) {
     var index = indexOfTrack(track);
     var card = index >= 0 ? mag.cards[index] : null;
@@ -1389,6 +1456,84 @@
       playInsertSound();
       if (done) done();
     }, 560);
+  }
+
+  /* ========================================================= TAKE DIAL === */
+  /* A stepped rotary beside the title. Detents equal takes, so a song with one
+     version shows no dial at all rather than a control that does nothing. */
+
+  var DIAL_ARC = 132;                    /* degrees either side of centre */
+
+  function dialAngles(count) {
+    if (count < 2) return [0];
+    var step = (DIAL_ARC * 2) / (count - 1);
+    var out = [];
+    for (var i = 0; i < count; i++) out.push(-DIAL_ARC + step * i);
+    return out;
+  }
+
+  function paintDial(card) {
+    if (!el.take) return;
+    var takes = card ? bayTakes(card) : [];
+    if (takes.length < 2) {
+      el.take.hidden = true;
+      if (el.takeLegend) el.takeLegend.hidden = true;
+      return;
+    }
+
+    var chosen = takeIndex(card);
+    var angles = dialAngles(takes.length);
+    el.take.hidden = false;
+
+    if (el.dialTicks && el.dialTicks.childElementCount !== takes.length) {
+      el.dialTicks.innerHTML = "";
+      angles.forEach(function (a) {
+        var tick = document.createElement("i");
+        tick.style.setProperty("--a", a.toFixed(1) + "deg");
+        el.dialTicks.appendChild(tick);
+      });
+    }
+    Array.prototype.forEach.call(el.dialTicks ? el.dialTicks.children : [], function (tick, i) {
+      tick.dataset.on = i === chosen ? "true" : "false";
+    });
+    if (el.dialKnob) el.dialKnob.style.setProperty("--angle", angles[chosen].toFixed(1) + "deg");
+
+    if (el.dialm) el.dialm = null;
+    if (el.dial) {
+      el.dial.setAttribute("aria-label",
+        "Take " + (chosen + 1) + " of " + takes.length + ", select next take");
+    }
+    if (el.takeLegend) {
+      el.takeLegend.hidden = false;
+      el.takeLegend.textContent = "Take " + (chosen + 1) + " of " + takes.length;
+    }
+  }
+
+  /* Draw attention to the dial the first time a multi-take song lands, so the
+     other versions are not quietly missed. */
+  function callDial() {
+    if (!el.take || el.take.hidden || reduceMotion.matches) return;
+    el.take.classList.remove("is-calling");
+    void el.take.offsetWidth;
+    el.take.classList.add("is-calling");
+  }
+
+  function stepTake(direction) {
+    var index = indexOfTrack(current);
+    if (index < 0) return;
+    var card = mag.cards[index];
+    var takes = bayTakes(card);
+    if (takes.length < 2) return;
+
+    selection[bayKey(card)] = mod(takeIndex(card) + direction, takes.length);
+    paintStack(card);
+    paintDial(card);
+    playDetent();
+
+    var next = bayTrack(card);
+    if (!next) return;
+    var wasPlaying = !audio.paused;
+    latch(next, wasPlaying);
   }
 
   /* ============================================================ LYRICS === */
@@ -1501,8 +1646,12 @@
     var pool = playableTracks();
     if (!pool.length) return null;
     if (current && pool.length > 1) {
-      /* Prefer a different song before another version of the same one. */
-      var other = pool.filter(function (t) { return t.id !== current.id && t.title !== current.title; });
+      /* Every take is in the pool, so shuffle reaches versions and not merely
+         songs. It still prefers a different song first, so a run does not sit
+         on one composition playing its takes back to back. */
+      var other = pool.filter(function (t) {
+        return t.id !== current.id && t.composition !== current.composition;
+      });
       pool = other.length ? other : pool.filter(function (t) { return t.id !== current.id; });
     }
     return pool[Math.floor(Math.random() * pool.length)] || null;
@@ -1563,7 +1712,9 @@
   function latch(track, autoplay) {
     if (!track) return;
     current = track;
+    var bayIndex = selectTake(track);
     markSelected(track.id);
+    paintDial(bayIndex >= 0 ? mag.cards[bayIndex] : null);
     paintArtwork(track);
     paintPlate(track);
     loadLyrics(track);
@@ -1587,7 +1738,10 @@
     var index = indexOfTrack(track);
     if (index < 0) { latch(track, autoplay); return; }
     glideTo(index, { long: !!longSpin }, function () {
-      flyIntoDeck(track, function () { latch(track, autoplay); });
+      flyIntoDeck(track, function () {
+        latch(track, autoplay);
+        callDial();
+      });
     });
   }
 
@@ -1876,6 +2030,17 @@
         if (wasPlaying) startPlayback();
       }, { once: true });
     });
+
+    if (el.dial) {
+      el.dial.addEventListener("click", function () { stepTake(1); });
+      el.dial.addEventListener("keydown", function (event) {
+        var step = (event.key === "ArrowLeft" || event.key === "ArrowDown") ? -1
+                 : (event.key === "ArrowRight" || event.key === "ArrowUp") ? 1 : 0;
+        if (!step) return;
+        event.preventDefault();
+        stepTake(step);
+      });
+    }
 
     var powerButton = $("gbr-power");
     if (powerButton) powerButton.addEventListener("click", function () { setPower(!power.on); });
