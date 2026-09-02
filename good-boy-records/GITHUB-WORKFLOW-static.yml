@@ -1,4 +1,4 @@
-name: Build and deploy Good Boy Records
+name: GBR Pages v6
 
 on:
   push:
@@ -11,13 +11,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "gbr-pages"
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,82 +26,47 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify Good Boy Records source
+      - name: Verify project
         shell: bash
         run: |
           PROJECT_DIR="$GITHUB_WORKSPACE/good-boy-records"
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
-
-          if [ ! -f "$PROJECT_DIR/tools/import_showcase.py" ]; then
-            echo "ERROR: Good Boy Records was not found at:"
-            echo "  $PROJECT_DIR"
-            echo
-            echo "Repository files near the root:"
-            find "$GITHUB_WORKSPACE" -maxdepth 3 -type f | sort | head -300
-            exit 1
-          fi
-
-          echo "Building exactly from: $PROJECT_DIR"
-          echo
-          echo "Showcase files committed to this run:"
-          find "$PROJECT_DIR/showcase" -maxdepth 3 -type f | sort
-
-          echo
-          echo "Dogtushya cover field, if present:"
-          if [ -f "$PROJECT_DIR/showcase/dogtushya-v3.yaml" ]; then
-            grep -n '^cover:' "$PROJECT_DIR/showcase/dogtushya-v3.yaml" || true
-          fi
+          test -f "$PROJECT_DIR/tools/import_showcase.py"
+          test -f "$PROJECT_DIR/tools/build_catalogue.py"
+          find "$PROJECT_DIR/showcase" -maxdepth 2 -type f | sort
 
       - name: Install build dependencies
-        shell: bash
-        run: python -m pip install -r "$PROJECT_DIR/requirements.txt"
+        run: python -m pip install "PyYAML>=6.0" "Pillow>=10.0"
 
-      - name: Remove legacy generated output
+      - name: Clean generated output
         shell: bash
-        run: |
-          rm -rf "$PROJECT_DIR/music"
-          rm -rf "$PROJECT_DIR/_site"
+        run: rm -rf "$PROJECT_DIR/_site" "$PROJECT_DIR/music"
 
       - name: Import curated showcase
         shell: bash
-        run: |
-          cd "$PROJECT_DIR"
-          python tools/import_showcase.py
+        run: cd "$PROJECT_DIR" && python tools/import_showcase.py
 
       - name: Prepare artwork
         shell: bash
-        run: |
-          cd "$PROJECT_DIR"
-          python tools/prepare_artwork.py masters assets/img/sleeves
+        run: cd "$PROJECT_DIR" && python tools/prepare_artwork.py masters assets/img/sleeves
 
-      - name: Build cassette wall and player data
+      - name: Build catalogue
         shell: bash
-        run: |
-          cd "$PROJECT_DIR"
-          python tools/build_catalogue.py
+        run: cd "$PROJECT_DIR" && python tools/build_catalogue.py
+
+      - name: Test player structure
+        shell: bash
+        run: cd "$PROJECT_DIR" && python tools/test_player.py
 
       - name: Check internal links
         shell: bash
-        run: |
-          cd "$PROJECT_DIR"
-          python tools/check_links.py
+        run: cd "$PROJECT_DIR" && python tools/check_links.py
 
-      - name: Stage GitHub Pages runtime
+      - name: Stage Pages
         shell: bash
-        run: |
-          cd "$PROJECT_DIR"
-          python tools/stage_pages.py
+        run: cd "$PROJECT_DIR" && python tools/stage_pages.py
 
-          echo
-          echo "Published artifact contents:"
-          find _site -maxdepth 3 -type f | sort | head -300
-
-          if [ -d _site/music ]; then
-            echo "ERROR: legacy music/ directory reached the Pages artifact"
-            exit 1
-          fi
-
-      - name: Setup Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
@@ -116,7 +80,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

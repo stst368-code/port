@@ -1,241 +1,274 @@
-# Good Boy Records
+# Good Boy Records v7
 
-Static GitHub Pages music showcase. The canonical interface is a late-night wall
-of physical cassettes. Clicking a tape latches **that tape in its existing wall
-position**, gives it the warm amber hardware glow, and starts playback. It does
-not move the cassette into a second deck or scroll the visitor elsewhere.
+Cassette player for the Good Boy Records catalogue. v7 keeps the v6 palette and
+the rotary-magazine idea, and rebuilds the layer underneath them: geometry,
+responsiveness, and the instrumentation that v6 dropped.
 
-There is deliberately no catalogue search box. This is a curated showcase, not
-Spotify after a minor electrical fire.
+## What changed from v6.3, and why
 
-## No generated `music/` catalogue
+### The cassette sizing bug
 
-The cassette wall and central player are the catalogue. Older builds generated
-`music/<slug>/index.html` permanent track pages; that subsystem has been removed.
-`showcase/` is the only human-managed music source, and the deployment no longer
-stages a `music/` directory. Lyrics and technical metadata open inside the central
-player instead.
+v6 sized things in a circle. `--diameter` was `min(200%, 75svh)` — a percentage
+of the column the wheel lived in — and `renderCarousel()` then derived both the
+orbit radius and the cassette size from that wheel's measured box:
 
-## The `showcase/` folder is the only music source
-
-The site does **not** scan your MiniMax project, output folder, OneDrive, or any
-other working directory.
-
-You choose what is public. Drop only the finished items you want to show into:
-
-```text
-showcase/
-├── dogtushya-v2.yaml
-├── dogtushya.png
-├── dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
-├── another-song-v2.yaml
-├── another-song.png
-└── another-song-v2.flac
+```js
+var d = Math.max(1, Math.min(rect.width, rect.height));
+var cardSize = Math.max(62, Math.min(210, d * 0.235));
 ```
 
-Subfolders are allowed too, so this is equally valid:
+The column sized the wheel and the wheel sized the tapes, so on any narrow
+column the whole chain bottomed out at the 62px floor. Worse, because `200%`
+resolves against a different axis for `width` than for `height`, the "circle"
+was really an ellipse and `min(width, height)` picked the short one.
 
-```text
-showcase/
-└── dogtushya/
-    ├── dogtushya-v2.yaml
-    ├── dogtushya.png
-    └── dogtushya-v2_CFG-1.70_STEP-31_SEED-7.flac
+v7 measures the column once per resize, derives cassette width from it, and
+derives the wheel from the cassettes. The dependency only ever runs one way.
+Desktop tapes are now ~172px instead of 62–148px.
+
+### The tapes were pointing at the wrong place
+
+The card transform put angle 0 at twelve o'clock:
+
+```css
+rotate(var(--angle)) translateY(calc(-1 * var(--orbit-px)))
 ```
 
-The importer understands the shared song YAML fields already being used:
-`title`, `version`, `model`, `state`, `genre`, `inspiration`, `duration`, `cover`,
-`caption`, and `lyrics`. You do not need to rewrite those into a website-specific
-file. `genre` remains useful catalogue metadata, but it no longer divides the physical wall.
-Versions with the same `title` stay inside one compact track group. Whole groups wrap
-across the wall wherever they fit, while missing genres remain `Unclassified` in metadata.
+But the wheel's centre sits at the left edge of the column, vertically centred.
+Twelve o'clock is therefore off-screen above the column, so the "selected"
+cassette was never visible and the tapes you could see were just whichever ones
+happened to swing through the crescent. v7 places cards from three o'clock, so
+the pickup tape sits next to the step buttons where the interface implies it is.
 
-Audio is matched to the YAML by filename. A render beginning with the YAML stem,
-for example `dogtushya-v2_...flac`, belongs to `dogtushya-v2.yaml`. Legacy files
-without the `-vN` suffix also have a title-based fallback.
+### Cassettes could not be selected with a mouse
 
-If you deliberately drop several matching renders into `showcase/`, each chosen
-render becomes its own cassette/version. CFG, STEP/STP and SEED values are read
-from filenames when present.
+Separate from the sizing bug, and worth writing down because it is easy to
+reintroduce. The carousel called `setPointerCapture()` on `pointerdown` so that
+a drag could continue outside the element. Pointer capture retargets the
+subsequent `click` to the capturing element, so the delegated handler saw
+`event.target === #gbr-cards`, `closest('.card')` returned null, and it bailed.
+Every click on a tape did nothing.
 
-Nothing outside `showcase/` is discovered or copied.
+Capture is now deferred until the pointer has actually moved more than 4px, so
+a plain click never captures and reaches the card normally. The click handler
+also falls back to whatever was recorded at `pointerdown`. Both are covered by
+tests, because the failure is silent — no error, just nothing happening.
 
+### Mobile
 
-## Upgrading an older repository
+The `34% / 66%` split gave the magazine about 133px on a phone. Wheel 266px,
+cards at the 62px floor, centred on x = 0 — half of every tape was outside the
+viewport. v7 switches the magazine to a horizontal snap rail below 860px,
+grouped by song, using the `track-group__title` markup the build tool was
+already emitting and the stylesheet was hiding.
 
-`showcase/` is the only authoritative music source. The importer now removes stale
-generated YAML records left by older versions under `content-source/tracks/`, and
-the catalogue builder reads only `content-source/tracks/showcase/`. This prevents
-old demo/placeholder tracks from reappearing in GitHub Actions after an in-place
-upgrade.
+Both modes share one DOM. `data-magazine` on `<html>` selects between them and
+`MAGAZINE_QUERY` in the JS mirrors the CSS breakpoint — change both together.
 
+### Heights that could not resolve
 
-## GitHub workflow location
+Every percentage height inside the machine was resolving against a
+`min-height`, which is not a definite size. That is what let the artwork push
+the page 317px past the viewport once it had real intrinsic dimensions.
+`.gbr-app` is now `height: 100dvh`, and the rack scrolls internally if a window
+is genuinely too short.
 
-This project lives at `good-boy-records/` inside the `port` repository. GitHub only
-loads workflow files from the repository-root `.github/workflows/` directory.
+## Rack arrangement
 
-Copy `GITHUB-WORKFLOW-static.yml` to this exact repository path:
-
-```text
-port/
-├── .github/
-│   └── workflows/
-│       └── static.yml
-└── good-boy-records/
-    ├── showcase/
-    ├── tools/
-    └── ...
+```
++-------------------------------------------------------------+
+| spectrum, full width                                         |
++-----------------------------------+-------------------------+
+|              sleeve               |      VU meter, L        |
+|          title / version          +-------------------------+
+|         genre / cat / time        |      VU meter, R        |
++-----------------------------------+-------------------------+
+| transport                                                   |
++-------------------------------------------------------------+
+| lyric word                                                   |
++-------------------------------------------------------------+
 ```
 
-Do not put `.github/workflows/` inside `good-boy-records/`. The supplied workflow
-uses the explicit path `$GITHUB_WORKSPACE/good-boy-records`; it does not auto-detect
-or guess which copy of the project to build.
+The rack itself carries no text titles in either mode — the sleeve art is the
+identifier. The `track-group__title` headings the build tool emits are kept in
+the accessibility tree rather than removed with `display: none`, so tabbing
+through the tapes still announces which song each group belongs to. The version
+chips stay visible, since a sleeve cannot tell you which take you are looking
+at.
 
-## Build on Windows
+The five modules are placed explicitly on the rack grid rather than wrapped in
+container elements, so the narrow-viewport block re-places the same markup into
+a single column with the two instruments sharing a strip at the foot. Below
+620px of height the spectrum row drops out and the VU bank stays.
 
-Run:
+The VU face geometry is derived from the plate's aspect ratio, so one drawing
+routine covers both the tall movement beside the artwork and the short wide
+strip on a phone: sweep comes from the aspect, radius from the width, and the
+pivot falls below the plate as it does on real hardware, with the needle
+emerging from a shroud along the bottom.
 
-```text
-START-SITE.bat
+## Restored
+
+- **Stereo VU meters.** Canvas, fed by a `ChannelSplitter` off the post-limiter
+  tap. Spring ballistics (~300 ms with the slight overshoot a real movement
+  has), non-linear VU face, peak-hold pip, overload lamp. `VU_REFERENCE = 9`
+  puts 0 VU at -9 dBFS: studio alignment of -18 would leave the needles pinned
+  in the red against any modern master.
+- **The empty bay.** A tape held in the deck leaves an impression pressed into
+  the drum rather than a hole: no colour of its own, just a dark edge where the
+  light would not reach and a faint lit edge where it would. Shell, label
+  window and tape window all take the same two-line treatment, so the whole
+  shape reads as one stamping.
+- **Track titling.** A plate under the artwork carrying the title and the
+  version / genre / catalogue / duration chips. v6 showed the track title
+  nowhere at all — recognising the sleeve was the only way to know what was on.
+  No free prose here: `notes.short` and `subtitle` go to the technical drawer
+  instead, so the plate stays a label rather than a paragraph.
+
+## Side folders
+
+Manila tabs down the right edge pull out a paper sheet over the machine, for
+long-form text that does not belong in the metadata drawer. Paper is already
+established in this interface by the VU faces, so prose gets a readable surface
+without inventing a new visual language for it.
+
+Content lives in `content-source/folders/*.md`, one file per tab:
+
+```
+---
+tab: Notes            # label down the side, ~12 characters
+title: Sleeve notes
+order: 3
+---
+
+Body markdown here.
 ```
 
-It runs `BUILD-SHOWCASE.bat`, which:
+Markdown goes through the same conservative dependency-free subset the written
+pages use, so headings, lists, tables, quotes, links and fenced code all work.
+Files sort by `order`, then filename; a leading `01-` in the filename is
+stripped from the element id. A file with broken frontmatter is skipped with a
+warning rather than failing the build. Delete a file to remove its tab; remove
+them all and the tabs, the gutter reserved for them, and the drawer disappear
+entirely.
 
-1. Reads only `showcase/`.
-2. Converts the selected native YAML into generated site records.
-3. Copies only the selected audio into the runtime audio folder.
-4. Generates web artwork derivatives from the selected cover.
-5. Rebuilds the catalogue/pages and checks internal links.
-6. Starts the local preview at `http://localhost:8000/`.
+The three files currently in there are placeholders — replace them.
 
-You can run `BUILD-SHOWCASE.bat` by itself when you only want to rebuild.
+The tabs are a proper tablist: arrow keys move along the strip, Escape closes
+and returns focus to the tab that opened the drawer, and the transport
+keyboard shortcuts go inert while a sheet is open so space-to-play does not
+fire while you are reading.
 
-## FLAC and GitHub Pages
+## The cassette load sound
 
-Hand-picked FLAC files in `showcase/` are intentionally allowed by `.gitignore`
-so they can be committed with the project. During the build they are copied into
-the runtime site and deployed on GitHub Pages.
+v6 used three oscillators, which read as a UI blip because mechanisms are
+noise, not tone. It is now nine filtered noise bursts and two low body hits,
+scheduled as the sequence a real deck makes: the shell sliding down the well,
+the well bottoming out, the latch catching, the chassis absorbing it, the
+spring flap settling, then the two reel hubs engaging a few milliseconds apart.
+Timings and filter frequencies are jittered per play, so repeated loads do not
+sound identical.
 
-The Pages workflow stages runtime files only and checks that no individual file
-reaches 100 MiB and that the staged site remains below 1 GiB.
+It runs on its own `AudioContext`, deliberately. Routing it through the program
+graph would put the latch through the user's EQ and, worse, spike the VU meters
+with a sound that is not the record. Its level follows the output slider.
 
-There is no external object-storage requirement in this build.
+## The meter bank and console
 
-## Player behaviour
+The VU movements are a side-by-side pair drawn into one canvas: cream dial,
+scalloped skirt with the needle emerging from it, warm lamp burning up through
+the face from below, dark bezel with corner screws, red band from 0 VU, and the
+percentage-modulation row under the main scale. Ballistics are unchanged — a
+spring solver at roughly 300 ms to full deflection with the slight overshoot a
+real movement has.
 
-- One shared `<audio>` element for the entire wall.
-- Click a new cassette: it performs a short mechanical latch movement **in its
-  current wall position**, glows amber and starts playback.
-- Click the currently latched cassette again: play/pause toggles in place.
-- Only the selected playing cassette spins its own reels.
-- Selecting a cassette never calls `scrollIntoView()` and never relocates it.
-- On desktop the central transport is genuinely `position: fixed` at viewport centre.
-  The cassette wall owns the page scroll and moves past it on both sides.
-- The player itself is not a scroll container; wheel/trackpad scrolling over the
-  machine continues to move the page. Only the explicitly opened lyrics/technical
-  drawer has a small internal scrolling region.
-- The lower monitor rack is information/transport UI only. It does not contain a
-  duplicate inserted cassette.
-- Tape/Vinyl remains a persisted appearance switch using the same player state.
-- Native MiniMax lyrics are displayed even when no separately timed LRC exists.
+Underneath them sits the console: five condensed EQ faders, a FLAT reset, and
+the power switch. There is only ever **one** set of EQ controls in the document.
+On narrow viewports the console element is moved into the EQ popover and the
+top-bar EQ button appears; on wide viewports it moves back inline and the button
+hides. Moving the node rather than rendering two sets keeps a single binding to
+the audio graph.
 
+## Power
 
-## Centre-player wall layout
+The deck boots into standby and switches itself on shortly after first paint:
+needles sweep the full scale and fall back, the lamps come up, and the
+electromechanical sequence plays — switch clack, relay, transformer swelling to
+temperature with its second harmonic, a decaying degauss buzz beating against
+itself, capstan and reel motors spinning up, then the mechanism settling.
 
-The desktop wall is arranged around a centre transport that remains vertically centred while the collection scrolls. Each song appears once as a titled vertical stack. Its versions sit directly beneath that title, and each cassette gets only a small `V1`, `V2`, `V3` marker to its left. Genre sections remain the outer grouping.
+Off is a real state rather than a dimmer: playback stops, the transport and
+magazine stop responding, the dials go grey and unlit, and the spectrum falls
+away instead of freezing on its last frame.
 
-The centre column is intentionally reserved for the fixed desktop player, so cassettes pass on the left and right rather than disappearing underneath it. Lyrics and technical metadata live in a collapsible drawer on the player to keep the permanent centre hardware compact. On narrower screens the player becomes a sticky top-centred transport and the two wall lanes collapse responsively.
+**Caveat worth knowing.** Browsers will not let a page make noise before it has
+been touched, so the power-up sound is usually blocked on a cold load. The
+sequence still runs visually, and the sound is armed to fire on the first real
+interaction, so the machine is heard coming alive rather than never at all. On a
+site the browser already trusts it plays immediately. Toggling the switch by
+hand always makes sound, because that is a gesture.
 
-## Wall grouping and player EQ
+## Also fixed
 
-The wall is generated as `song -> version`. Genre remains metadata rather than visible wall chrome.
-as slim hardware shelf labels, while versions of one song are kept as one
-vertical cassette stack under a single shared title. Nothing is alphabetically
-or technically filtered at runtime; the grouping is resolved at build time.
+- Spectrum moved from 180 DOM nodes toggling classes every frame to one canvas.
+- The rAF loop idles when nothing is playing and the needles have settled.
+- Scrubbing no longer fights `timeupdate`. v6 had a `seeking` flag it never
+  read, so the thumb was overwritten mid-drag.
+- Transport glyphs (`▶ ◀ ⤨ Ⅱ`) replaced with SVG; the roman numeral used for
+  pause rendered inconsistently across platforms.
+- Sleeve `sizes` hint corrected in `build_catalogue.py`. It advertised
+  `76vw` for an image that is never wider than ~210px, so every tape pulled the
+  1280w file.
+- `ResizeObserver` on the magazine and the meter canvases.
+- Empty magazine states what to do instead of rendering a blank drum.
+- Visible focus rings; `prefers-reduced-motion` respected throughout.
 
-The player exposes the YAML `inspiration` field as its own readout and includes a
-real five-band Web Audio EQ (60 Hz, 250 Hz, 1 kHz, 4 kHz and 12 kHz, +/-9 dB).
-Settings are remembered locally. EQ and VU processing are intentionally disabled
-for direct `file://` opens because Chromium can mute local MediaElement sources
-when routed through Web Audio. `START-SITE.bat` and GitHub Pages both use HTTP,
-where the EQ operates normally.
+## Layout contract
 
-The cassette shell is intentionally squarer than a physical Compact Cassette.
-Its art panel is genuinely square, so 1:1 album covers fit without the old wide
-label crop; the reel window and lower mechanics sit over the artwork.
+Three rules the stylesheet depends on. Breaking one is how v6 got into trouble:
 
-## Word-timed live lyrics
+1. Nothing sizes itself from a percentage of a box whose size depends on that
+   percentage.
+2. Two magazine modes, one DOM. No rule reads a viewport width except the media
+   queries at the foot of `v7.css`.
+3. The rack is `auto / 1fr / auto / auto`, never fixed percentages. Artwork is
+   the only element allowed to absorb slack, so short windows shrink the art
+   instead of crushing the transport.
 
-The website contains **no WhisperX, Demucs, PyTorch, model cache or alignment
-environment**. Word timing is produced by the separate `GBR-LyricAligner` tool,
-which should live outside this Git repository.
+## Player features
 
-Point that tool at this repository's `showcase/` folder. For each selected audio
-file it may write one tiny sidecar beside the source media:
+- Rotary magazine on desktop: drag, wheel, keyboard, and step buttons.
+- Snap rail on mobile, grouped by song, centring the latched tape.
+- Song groups randomise per visit; versions of a song stay together.
+- Cassette fly-in animation and synthesised mechanical latch sound.
+- Continuous play. Shuffle prefers a different song before another version of
+  the same one.
+- MP3, Opus, WAV and FLAC selection with a remembered lossless preference.
+- Word-timed lyric sidecars with large current-word focus; line-timed fallback.
+- Five-band Web Audio EQ (60 / 250 / 1k / 4k / 12k, ±9 dB) with limiter,
+  remembered locally.
+- Media Session metadata and next/previous handlers.
+- Technical metadata drawer.
+- One shared `<audio>` element.
+
+## Local use
 
 ```text
-pity-pawty-v2_CFG-1.70_STEP-31_SEED-7.flac
-pity-pawty-v2_CFG-1.70_STEP-31_SEED-7.lyrics.json
-```
-
-That JSON is the only alignment artefact the website needs. `BUILD-SHOWCASE.bat`
-automatically validates and copies an exact matching sidecar into generated
-`data/live-lyrics/`. The browser lazy-loads it only when that cassette is
-selected, scrolls the current lyric line, and gives the currently sung word the
-incandescent amber highlight.
-
-No sidecar is required. If one is absent or invalid, the player falls back to
-the existing line-timed LRC/raw YAML lyrics and playback is unaffected. See
-`WORD-LYRICS.md` for the small file contract consumed by the site.
-
-## Included example
-
-The supplied `dogtushya-v2.yaml` and `dogtushya.png` are in `showcase/` as the
-example content. No fake audio is included. Put the exact Dogtushya render you
-want visitors to hear beside them and rebuild.
-
-
-## Word-timing quality gate
-
-Word-timed `*.lyrics.json` sidecars are generated by the separate GBR Lyric Aligner. New sidecars carry a quality/review state. Low-confidence alignment files remain available for inspection but are not used for live word highlighting until approved in the external aligner. The player automatically falls back to ordinary lyrics, so a questionable forced alignment cannot break playback or present interpolated timing as trustworthy. See `WORD-LYRICS.md`.
-
-## Manual build
-
-```bash
-pip install PyYAML Pillow
 python tools/import_showcase.py
 python tools/prepare_artwork.py masters assets/img/sleeves
 python tools/build_catalogue.py
-python tools/check_links.py
 python tools/serve.py
 ```
 
-### Markdown dependency note
+Do not judge the EQ or the meters over `file://`. Browsers can mute or block a
+`MediaElementAudioSourceNode` for local opaque origins, and seeking needs HTTP
+Range support. Use the local server or GitHub Pages.
 
-The documentation build does not require the `markdown` or `mistune` Python packages. The renderer is bundled in `tools/build_docs.py`. The only Python packages listed in `requirements.txt` are PyYAML and Pillow, which are used for YAML parsing and artwork preparation.
+`python tools/test_player.py` runs the smoke checks. `python tools/make_demo.py`
+writes a throwaway `_demo/` with generated sleeves and a fake catalogue, for
+eyeballing layout changes without touching real media — delete it when done.
 
-## Missing artwork fallback
+## GitHub Pages
 
-Artwork is no longer deployment-critical. If a YAML references a cover that is not present (or a cover cannot be processed), the build uses a built-in `gbr-placeholder` cassette sleeve and continues publishing the rest of the showcase. The console still warns so the real art can be corrected later.
-
-
-## v5.15 layout
-
-The player/mixer is fixed across the top of the viewport as a warm black/brown/amber hi-fi rack. The cassette catalogue scrolls underneath as one continuous wall. Each song is one compact group and all selected versions remain adjacent with V1/V2/V3 markers; complete groups wrap together to fill each row.
-
-## v5.15 player-first pass
-
-- Homepage is player + cassette wall only; narrative sections are not built or staged.
-- Removed the duplicate pre-player now-playing header and the inspiration readout.
-- Fixed hi-fi rack is ~560px tall on desktop, with a much larger active-track display.
-- Spectrum, VU meters and interactive five-band EQ have substantially more vertical room.
-- Two-line centred live lyrics remain permanently visible.
-
-## v5.17 cassette cycle
-
-Selecting a cassette now arms continuous random playback. At the end of a track the player chooses another playable song (avoiding the current song where possible), latches that cassette in the wall, plays a short mechanical insert sound, and continues automatically.
-
-### v5.18 player behaviour
-
-The player now randomises whole song groups on each refresh, includes a hardware-style shuffle-play button, keeps already-sung lyrics visually dark through pauses, and uses a corrected live EQ/analyser signal path. Positive EQ movement is an audible boost; peak protection is handled after the EQ rather than by reducing the whole mix. The spectrum uses higher FFT resolution so low-frequency columns respond independently.
+`GITHUB-WORKFLOW-static.yml` is the root-repository workflow reference; in the
+`port` repository it belongs at `.github/workflows/gbr-pages.yml`.

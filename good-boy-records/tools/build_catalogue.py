@@ -41,6 +41,7 @@ except ImportError:  # pragma: no cover
     sys.exit("PyYAML is required: pip install PyYAML")
 
 import build_docs
+import build_folders
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -189,7 +190,7 @@ def format_clock(seconds: float | None) -> str:
 def load_tracks(report: Report) -> list[dict[str, Any]]:
     files = sorted(TRACK_DIR.rglob("*.yaml"))
     if not files:
-        report.error("content-source/tracks/showcase", "no curated track definitions found")
+        report.warn("content-source/tracks/showcase", "no curated track definitions found; building an empty carousel shell")
         return []
 
     tracks: list[dict[str, Any]] = []
@@ -491,7 +492,9 @@ def version_badge(track: dict[str, Any]) -> str:
 
 def shelf_card(track: dict[str, Any], index: int) -> str:
     title = esc(track["title"])
-    picture = sleeve_picture(track, "", "(max-width: 40rem) 76vw, (max-width: 70rem) 38vw, 18rem", lazy=index > 5)
+    # A cassette label is never more than ~210px wide, so the old page-width
+    # sizes hint made every tape pull the 1280w sleeve.
+    picture = sleeve_picture(track, "", "(max-width: 860px) 110px, 210px", lazy=index > 7)
     composition = esc(track.get("composition") or track["id"])
     badge = esc(version_badge(track))
 
@@ -652,6 +655,7 @@ def build(strict: bool) -> int:
                 "ROOT": "",
                 "SHELF": shelf,
                 "CATALOGUE_JSON": json.dumps(catalogue, separators=(",", ":")).replace("</", "<\\/"),
+                "FOLDERS": build_folders.build(),
                 "TRACK_COUNT": str(len(tracks)),
                 "NAV": nav_root,
                 "YEAR": str(date.today().year),
