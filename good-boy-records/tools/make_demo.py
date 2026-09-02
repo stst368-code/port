@@ -15,6 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import build_folders  # noqa: E402
 from build_catalogue import grouped_shelf, render  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -99,6 +100,7 @@ def main() -> int:
             "ROOT": "",
             "SHELF": shelf,
             "CATALOGUE_JSON": json.dumps(tracks, separators=(",", ":")).replace("</", "<\\/"),
+            "FOLDERS": build_folders.build(lambda m: None),
             "TRACK_COUNT": str(len(tracks)),
             "NAV": "",
             "YEAR": "2026",

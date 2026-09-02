@@ -58,7 +58,6 @@
         </div>
         <div class="gbr-plate">
           <h1 class="gbr-plate-title" id="gbr-title">No cassette latched</h1>
-          <p class="gbr-plate-sub" id="gbr-subtitle" hidden></p>
           <ul class="gbr-plate-meta" id="gbr-meta"></ul>
         </div>
       </section>
@@ -120,6 +119,36 @@
     <div class="gbr-popup-head"><strong>TECHNICAL</strong><button type="button" id="gbr-tech-close" aria-label="Close technical details">×</button></div>
     <div id="gbr-tech-content" class="gbr-tech-content"><p>No cassette latched.</p></div>
   </aside>
+
+<aside class="gbr-folders" id="gbr-folders" data-open="">
+  <div class="gbr-folder-scrim" id="gbr-folder-scrim"></div>
+  <div class="gbr-folder-tabs" role="tablist" aria-label="Sleeve notes">
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-about" data-folder="about" aria-controls="gbr-folder-about" aria-selected="false"><span>About</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-process" data-folder="process" aria-controls="gbr-folder-process" aria-selected="false"><span>Process</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-notes" data-folder="notes" aria-controls="gbr-folder-notes" aria-selected="false"><span>Notes</span></button>
+  </div>
+  <div class="gbr-folder-drawer" id="gbr-folder-drawer">
+    <button class="gbr-folder-close" type="button" id="gbr-folder-close" aria-label="Close notes">&times;</button>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-about" aria-labelledby="gbr-tab-about" tabindex="-1" hidden><h2 class="gbr-folder-title">About Good Boy Records</h2><div class="gbr-folder-body"><p><em>Placeholder — replace this file with your own words.</em></p>
+<p>Good Boy Records is a made-up label for AI-generated music, run out of a converted mill in Derbyshire by two golden retrievers with strong opinions about seating arrangements.</p>
+<p>Each cassette on the wall is one generated take. Songs usually have several versions; they sit together in the magazine so you can hear how a track moved between attempts.</p></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-process" aria-labelledby="gbr-tab-process" tabindex="-1" hidden><h2 class="gbr-folder-title">How the records get made</h2><div class="gbr-folder-body"><p><em>Placeholder — replace this file with your own words.</em></p>
+<p>Somewhere to write up the pipeline: prompt construction, which model produced what, how many attempts a track took, what got thrown away.</p>
+<p>The <strong>Tech</strong> button in the corner already shows the per-track parameters — model, CFG, steps, seed. This folder is for the parts that do not fit in a metadata table.</p></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-notes" aria-labelledby="gbr-tab-notes" tabindex="-1" hidden><h2 class="gbr-folder-title">Sleeve notes</h2><div class="gbr-folder-body"><p><em>Placeholder — replace this file with your own words.</em></p>
+<h2 id="adding-your-own-folders">Adding your own folders</h2>
+<p>Drop a Markdown file into <code>content-source/folders/</code> and rebuild:</p>
+<pre><code>python tools/build_catalogue.py</code></pre>
+<p>Each file needs frontmatter:</p>
+<pre><code>---
+tab: Notes
+title: Sleeve notes
+order: 3
+---</code></pre>
+<p><code>tab</code> is the label down the side, so keep it short — about twelve characters before it starts to crowd the others. <code>order</code> sorts the tabs top to bottom.</p>
+<p>The body takes the usual Markdown: headings, lists, tables, quotes, links, <code>inline code</code> and fenced blocks. Delete a file to remove its tab; remove them all and the tabs disappear entirely.</p></div></article>
+  </div>
+</aside>
 
   <audio id="gbr-audio" preload="metadata"></audio>
 </main>

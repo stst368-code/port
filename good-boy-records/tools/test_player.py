@@ -29,6 +29,11 @@ check("stereo VU meters present", 'id="gbr-vu"' in html and "analyserL" in js)
 check("VU has real ballistics", "VU_SCALE" in js and "ch.vel" in js)
 check("track title plate present", 'id="gbr-title"' in html and "paintPlate" in js)
 check("title plate carries version and catalogue", 'data-kind="version"' in js and "catalogueNumber" in js)
+# The plate is title plus chips only. Free prose about a track belongs in the
+# technical drawer, not under the title.
+check("no prose line on the title plate",
+      'id="gbr-subtitle"' not in html and ".gbr-plate-sub" not in css)
+check("track notes still reach the technical drawer", "notes.short" in js)
 
 # --- the geometry bug this rebuild exists to fix ----------------------------
 check("cassette size measured from the column", "--card-w" in js and "lane * 0.62" in js)
@@ -69,6 +74,28 @@ check("no song titles painted on the rack",
       "display: block;" not in css.split(".gbr-cards .track-group__title")[1][:400])
 check("group titles kept for assistive tech",
       "clip-path: inset(50%)" in css.split(".gbr-cards .track-group__title")[1][:400])
+
+# --- cassette load sound ----------------------------------------------------
+# Mechanisms are noise, not tone. Oscillators alone gave the v6 UI blip.
+check("insert sound is noise based", "createBufferSource" in js and "fx.noise" in js)
+check("insert sound has the full mechanism sequence",
+      all(x in js for x in ["Shell sliding", "Latch catches", "reel hubs"]))
+check("insert sound stays off the program graph and meters",
+      "fxContext" in js and "own AudioContext" in js)
+check("insert sound follows the output level", "clamp(0, audio.volume, 1)" in js)
+
+# --- side folders -----------------------------------------------------------
+check("folder tabs are built from markdown", (ROOT / "tools/build_folders.py").exists())
+check("template has a folder slot", "{{FOLDERS}}" in template)
+check("folders are wired into the single build command",
+      "build_folders" in (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8"))
+check("folder drawer is styled as paper", ".gbr-folder-sheet" in css and ".gbr-folder-tab" in css)
+check("shell reserves a gutter for the tabs", ".gbr-app:has(> .gbr-folders)" in css)
+check("folders are a tablist with escape and focus return",
+      'role="tablist"' in (ROOT / "tools/build_folders.py").read_text(encoding="utf-8")
+      and "closeFolders(true)" in js)
+check("playback keys are inert while a folder is open",
+      "if (folders.root && folders.root.dataset.open) return;" in js)
 
 # --- regressions we do not want back ---------------------------------------
 # Capturing the pointer on pointerdown retargets the following click to the

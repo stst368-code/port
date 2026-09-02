@@ -41,6 +41,7 @@ except ImportError:  # pragma: no cover
     sys.exit("PyYAML is required: pip install PyYAML")
 
 import build_docs
+import build_folders
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -654,6 +655,7 @@ def build(strict: bool) -> int:
                 "ROOT": "",
                 "SHELF": shelf,
                 "CATALOGUE_JSON": json.dumps(catalogue, separators=(",", ":")).replace("</", "<\\/"),
+                "FOLDERS": build_folders.build(),
                 "TRACK_COUNT": str(len(tracks)),
                 "NAV": nav_root,
                 "YEAR": str(date.today().year),

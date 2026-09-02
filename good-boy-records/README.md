@@ -114,9 +114,59 @@ emerging from a shroud along the bottom.
   has), non-linear VU face, peak-hold pip, overload lamp. `VU_REFERENCE = 9`
   puts 0 VU at -9 dBFS: studio alignment of -18 would leave the needles pinned
   in the red against any modern master.
-- **Track titling.** A plate beside the artwork carrying title, subtitle, and
+- **Track titling.** A plate under the artwork carrying the title and the
   version / genre / catalogue / duration chips. v6 showed the track title
   nowhere at all — recognising the sleeve was the only way to know what was on.
+  No free prose here: `notes.short` and `subtitle` go to the technical drawer
+  instead, so the plate stays a label rather than a paragraph.
+
+## Side folders
+
+Manila tabs down the right edge pull out a paper sheet over the machine, for
+long-form text that does not belong in the metadata drawer. Paper is already
+established in this interface by the VU faces, so prose gets a readable surface
+without inventing a new visual language for it.
+
+Content lives in `content-source/folders/*.md`, one file per tab:
+
+```
+---
+tab: Notes            # label down the side, ~12 characters
+title: Sleeve notes
+order: 3
+---
+
+Body markdown here.
+```
+
+Markdown goes through the same conservative dependency-free subset the written
+pages use, so headings, lists, tables, quotes, links and fenced code all work.
+Files sort by `order`, then filename; a leading `01-` in the filename is
+stripped from the element id. A file with broken frontmatter is skipped with a
+warning rather than failing the build. Delete a file to remove its tab; remove
+them all and the tabs, the gutter reserved for them, and the drawer disappear
+entirely.
+
+The three files currently in there are placeholders — replace them.
+
+The tabs are a proper tablist: arrow keys move along the strip, Escape closes
+and returns focus to the tab that opened the drawer, and the transport
+keyboard shortcuts go inert while a sheet is open so space-to-play does not
+fire while you are reading.
+
+## The cassette load sound
+
+v6 used three oscillators, which read as a UI blip because mechanisms are
+noise, not tone. It is now nine filtered noise bursts and two low body hits,
+scheduled as the sequence a real deck makes: the shell sliding down the well,
+the well bottoming out, the latch catching, the chassis absorbing it, the
+spring flap settling, then the two reel hubs engaging a few milliseconds apart.
+Timings and filter frequencies are jittered per play, so repeated loads do not
+sound identical.
+
+It runs on its own `AudioContext`, deliberately. Routing it through the program
+graph would put the latch through the user's EQ and, worse, spike the VU meters
+with a sound that is not the record. Its level follows the output slider.
 
 ## Also fixed
 

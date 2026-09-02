@@ -69,7 +69,6 @@
     artFrame: $("gbr-art-frame"),
     slot: $("gbr-tape-slot"),
     title: $("gbr-title"),
-    subtitle: $("gbr-subtitle"),
     meta: $("gbr-meta"),
     play: $("gbr-play"),
     shuffle: $("gbr-shuffle"),
@@ -720,11 +719,16 @@
       c.textAlign = "center";
       c.textBaseline = "middle";
       var ringR = geo.r - arcW / 2 - tickLong - fs * 1.15;
+      /* The shroud is drawn over the bottom of the plate, so lift any numeral
+         that would otherwise sit behind it. Real faces offset the end
+         numerals for the same reason. */
+      var ceiling = h * 0.74 - fs * 0.75;
       labelled.forEach(function (vu) {
         var a = needleAngle(geo, vuToFraction(vu));
         c.fillStyle = vu >= 0 ? "#a8331f" : "#4a3720";
         c.fillText(vu > 0 ? "+" + vu : String(vu),
-                   geo.cx + Math.cos(a) * ringR, geo.cy + Math.sin(a) * ringR);
+                   geo.cx + Math.cos(a) * ringR,
+                   Math.min(geo.cy + Math.sin(a) * ringR, ceiling));
       });
     } else if (h >= 26) {
       c.font = "600 " + Math.max(5, Math.round(h * 0.15)) + "px ui-monospace, monospace";
@@ -1041,11 +1045,6 @@
      only way to know what was playing was to recognise the sleeve. */
   function paintPlate(track) {
     if (el.title) el.title.textContent = track ? track.title : "No cassette latched";
-    if (el.subtitle) {
-      var sub = track && (track.subtitle || (track.notes && (track.notes.short || track.notes.caption)) || "");
-      el.subtitle.textContent = sub || "";
-      el.subtitle.hidden = !sub;
-    }
     if (!el.meta) return;
 
     if (!track) {
@@ -1095,6 +1094,7 @@
       return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>";
     }).join("") + "</dl>";
     var note = (track.notes && (track.notes.short || track.notes.caption)) || track.subtitle;
+    /* Prose about a track lives here, not on the plate. */
     if (note) html += '<p class="gbr-tech-note">' + esc(note) + "</p>";
     el.techContent.innerHTML = html;
   }
@@ -1116,36 +1116,127 @@
   }
 
   /* --------------------------------------------------------- insert fx --- */
+  /* Mechanisms are noise, not tone. The v6 version was three oscillators and
+     read as a UI blip; this is filtered noise bursts shaped into the actual
+     sequence a deck makes — shell sliding into the well, the well bottoming
+     out, the latch catching, the chassis absorbing it, then the spring flap
+     and the two reel hubs engaging.
 
-  var fxCtx = null;
-  function playInsertSound() {
+     Kept on its own AudioContext, deliberately: routing it through the program
+     graph would put the latch through the user's EQ and, worse, spike the VU
+     meters with a sound that is not the record. */
+
+  var fx = { ctx: null, noise: null };
+
+  function fxContext() {
     var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    try {
-      if (!fxCtx) fxCtx = new AC();
-      if (fxCtx.state === "suspended") fxCtx.resume().catch(function () {});
-      var now = fxCtx.currentTime;
-      var master = fxCtx.createGain();
-      master.gain.setValueAtTime(0.0001, now);
-      master.gain.exponentialRampToValueAtTime(0.18, now + 0.004);
-      master.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
-      master.connect(fxCtx.destination);
+    if (!AC) return null;
+    if (!fx.ctx) {
+      try { fx.ctx = new AC(); } catch (_) { return null; }
+    }
+    if (fx.ctx.state === "suspended") fx.ctx.resume().catch(function () {});
+    if (!fx.noise) {
+      var len = Math.floor(fx.ctx.sampleRate * 0.5);
+      var buffer = fx.ctx.createBuffer(1, len, fx.ctx.sampleRate);
+      var data = buffer.getChannelData(0);
+      for (var i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+      fx.noise = buffer;
+    }
+    return fx.ctx;
+  }
 
-      function tone(type, f1, f2, start, len, gain) {
-        var o = fxCtx.createOscillator(), g = fxCtx.createGain();
-        o.type = type;
-        o.frequency.setValueAtTime(f1, now + start);
-        o.frequency.exponentialRampToValueAtTime(f2, now + start + len);
-        g.gain.setValueAtTime(0.0001, now + start);
-        g.gain.exponentialRampToValueAtTime(gain, now + start + 0.004);
-        g.gain.exponentialRampToValueAtTime(0.0001, now + start + len);
-        o.connect(g); g.connect(master);
-        o.start(now + start);
-        o.stop(now + start + len + 0.01);
-      }
-      tone("square", 1800, 760, 0, 0.035, 0.5);
-      tone("sine", 132, 78, 0.008, 0.115, 0.72);
-      tone("triangle", 2450, 1250, 0.082, 0.05, 0.34);
+  function jitter(value, amount) { return value * (1 + (Math.random() * 2 - 1) * amount); }
+
+  /* A filtered noise burst: the building block for every plastic and metal
+     part of the sequence. */
+  function noiseHit(ctx, out, at, o) {
+    var src = ctx.createBufferSource();
+    src.buffer = fx.noise;
+    src.loop = true;
+    src.playbackRate.value = 0.85 + Math.random() * 0.3;
+
+    var filter = ctx.createBiquadFilter();
+    filter.type = o.type || "bandpass";
+    filter.frequency.setValueAtTime(jitter(o.from, 0.06), at);
+    if (o.to) {
+      filter.frequency.exponentialRampToValueAtTime(jitter(o.to, 0.06), at + o.dur);
+    }
+    filter.Q.value = o.q == null ? 1 : o.q;
+
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.linearRampToValueAtTime(o.gain, at + (o.attack == null ? 0.002 : o.attack));
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + o.dur);
+
+    src.connect(filter);
+    filter.connect(gain);
+    gain.connect(out);
+    src.start(at);
+    src.stop(at + o.dur + 0.03);
+  }
+
+  /* The low resonance of the chassis taking the weight. */
+  function bodyHit(ctx, out, at, freq, dur, level) {
+    var osc = ctx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(jitter(freq, 0.05), at);
+    osc.frequency.exponentialRampToValueAtTime(jitter(freq * 0.6, 0.05), at + dur);
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.linearRampToValueAtTime(level, at + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+    osc.connect(gain);
+    gain.connect(out);
+    osc.start(at);
+    osc.stop(at + dur + 0.03);
+  }
+
+  function playInsertSound() {
+    var ctx = fxContext();
+    if (!ctx) return;
+    /* Follow the deck's own output level; a latch louder than the music is
+       just annoying. */
+    var level = clamp(0, audio.volume, 1);
+    if (level < 0.02) return;
+
+    try {
+      var now = ctx.currentTime + 0.01;
+      var master = ctx.createGain();
+      master.gain.value = 0.55 * level;
+
+      var tame = ctx.createBiquadFilter();
+      tame.type = "lowpass";
+      tame.frequency.value = 7200;
+      var floorCut = ctx.createBiquadFilter();
+      floorCut.type = "highpass";
+      floorCut.frequency.value = 70;
+
+      master.connect(tame);
+      tame.connect(floorCut);
+      floorCut.connect(ctx.destination);
+
+      var t = function (base) { return now + base + (Math.random() * 0.016 - 0.008); };
+
+      /* Shell sliding down the well. */
+      noiseHit(ctx, master, t(0), { from: 2100, to: 850, q: 0.9, dur: 0.11, gain: 0.09, attack: 0.025 });
+
+      /* It bottoms out. */
+      noiseHit(ctx, master, t(0.09), { from: 950, q: 2.2, dur: 0.055, gain: 0.15 });
+      bodyHit(ctx, master, t(0.09), 124, 0.09, 0.09);
+
+      /* Latch catches: the sharp plastic tick. */
+      noiseHit(ctx, master, t(0.142), { from: 3400, q: 7, dur: 0.028, gain: 0.30, attack: 0.001 });
+
+      /* Chassis takes it. */
+      noiseHit(ctx, master, t(0.155), { type: "lowpass", from: 320, q: 0.7, dur: 0.17, gain: 0.17 });
+      bodyHit(ctx, master, t(0.155), 78, 0.19, 0.15);
+
+      /* Spring flap settling. */
+      noiseHit(ctx, master, t(0.24), { from: 5200, q: 9, dur: 0.022, gain: 0.12, attack: 0.001 });
+
+      /* Both reel hubs engaging, a few milliseconds apart. */
+      noiseHit(ctx, master, t(0.30), { from: 2600, q: 6, dur: 0.02, gain: 0.09, attack: 0.001 });
+      noiseHit(ctx, master, t(0.335), { from: 2350, q: 6, dur: 0.02, gain: 0.07, attack: 0.001 });
     } catch (_) {}
   }
 
@@ -1422,11 +1513,68 @@
     if (node.hidden) openPopup(node, button); else closePopup(node, button);
   }
 
+  /* ============================================================ FOLDERS == */
+  /* Tabs down the right edge pull out a single drawer; switching tabs swaps
+     the sheet inside it rather than closing and reopening. Absent from the
+     page entirely when content-source/folders is empty, so everything here
+     no-ops rather than guarding at every call site. */
+
+  var folders = { root: null, drawer: null, tabs: [], sheets: [], lastTab: null };
+
+  function setFolder(id) {
+    if (!folders.root) return;
+    folders.root.dataset.open = id || "";
+    folders.tabs.forEach(function (tab) {
+      tab.setAttribute("aria-selected", tab.dataset.folder === id ? "true" : "false");
+    });
+    folders.sheets.forEach(function (sheet) {
+      sheet.hidden = sheet.id !== "gbr-folder-" + id;
+    });
+    if (!id) return;
+    var open = document.getElementById("gbr-folder-" + id);
+    if (open) { open.scrollTop = 0; open.focus({ preventScroll: true }); }
+  }
+
+  function closeFolders(restoreFocus) {
+    if (!folders.root || !folders.root.dataset.open) return;
+    setFolder("");
+    if (restoreFocus && folders.lastTab) folders.lastTab.focus();
+  }
+
+  function initFolders() {
+    folders.root = $("gbr-folders");
+    if (!folders.root) return;
+    folders.drawer = $("gbr-folder-drawer");
+    folders.tabs = Array.prototype.slice.call(folders.root.querySelectorAll(".gbr-folder-tab"));
+    folders.sheets = Array.prototype.slice.call(folders.root.querySelectorAll(".gbr-folder-sheet"));
+
+    folders.tabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () {
+        folders.lastTab = tab;
+        var id = tab.dataset.folder;
+        setFolder(folders.root.dataset.open === id ? "" : id);
+      });
+      /* Roving arrow keys along the tab strip, as a tablist should. */
+      tab.addEventListener("keydown", function (event) {
+        var step = event.key === "ArrowDown" ? 1 : (event.key === "ArrowUp" ? -1 : 0);
+        if (!step) return;
+        event.preventDefault();
+        folders.tabs[mod(index + step, folders.tabs.length)].focus();
+      });
+    });
+
+    var close = $("gbr-folder-close");
+    if (close) close.addEventListener("click", function () { closeFolders(true); });
+    var scrim = $("gbr-folder-scrim");
+    if (scrim) scrim.addEventListener("click", function () { closeFolders(true); });
+  }
+
   /* ============================================================== BOOT === */
 
   function boot() {
     shuffleGroups();
     collectCards();
+    initFolders();
     applyMagazineMode();
     bindMagazine();
     restMeters();
@@ -1520,12 +1668,14 @@
 
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
+        if (folders.root && folders.root.dataset.open) { closeFolders(true); return; }
         closePopup(el.eqPopover, el.eqToggle);
         closePopup(el.techPanel, el.techToggle);
         return;
       }
       var tag = (event.target.tagName || "").toLowerCase();
       if (tag === "input" || tag === "textarea" || tag === "select") return;
+      if (folders.root && folders.root.dataset.open) return;
       if (event.key === " ") { event.preventDefault(); if (el.play) el.play.click(); }
     });
 
@@ -1586,10 +1736,6 @@
     } else {
       setStatus(mag.cards.length ? "Ready" : "No cassettes");
       if (!mag.cards.length && el.title) el.title.textContent = "No cassettes staged";
-      if (!mag.cards.length && el.subtitle) {
-        el.subtitle.hidden = false;
-        el.subtitle.textContent = "Add a track to content-source/tracks/showcase, then run tools/build_catalogue.py.";
-      }
     }
   }
 
