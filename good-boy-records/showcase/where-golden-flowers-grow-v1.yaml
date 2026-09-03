@@ -1,0 +1,81 @@
+title: where-golden-flowers-grow
+version: 1
+model: minimax H3
+state: active
+genre: psychedelic-rock
+inspiration: original
+duration: 300
+cover: where-golden-flowers-grow-v1.png
+caption: |
+  Genre tambourine and phasing. Approximately 78 BPM. E major target key, in 6/8 timing. 1967 British psychedelic rock, whimsical psychedelic pop, and surreal pastoral atmosphere, opening into dynamic dreamy arrangement. Favour tape echo, psychedelic studio effects, warm vintage valve recording, and hazy analogue production, with the mix and spatial character appropriate to the stated era.
+  Vocals Base the lead and supporting vocal treatment on dreamy male vocals and ethereal layered harmonies. Treat lyric control tags such as Whispered and Very distant as explicit performer or delivery changes; recurring named or gendered voices should remain recognisably stable. Keep lead, backing, choir, spoken, and character roles clearly separated, and use vocal effects only where they serve the stated style.
+  Arrangement Follow the lyric-section timeline Intro → Verse 1 → Instrumental → Verse 2 → Chorus → Instrumental → Verse 3 → Bridge → Instrumental → Chorus → Outro. Intro backwards guitar, Mellotron, distant cymbals; Instrumental: Response; Chorus dreamy layered harmonies; Instrumental: psychedelic guitar and Mellotron; Bridge: tempo loosens, tape effects; Instrumental: Swell; Outro: extended psychedelic improvisation; Outro: Backward guitar fade. Instrument lifecycle jangly electric guitar, backwards guitar, Mellotron strings, Hammond organ, melodic bass guitar, loose acoustic drums, and sitar-like guitar textures should enter, recede, and return as one evolving arrangement rather than remain as a static stack. Shape transitions through changes in density, register, articulation, percussion, and ambience so the energy curve remains clearly audible. Explicit exclusions avoid modern neo-psychedelia, shoegaze, indie rock, synthwave, heavy metal, modern synthesizers, electronic drums, glossy digital production, modern pop vocals.
+lyrics: |
+  [intro]
+  [verse]
+  Come through the garden
+  The morning is blue
+  Sunlight is falling
+  In circles on you
+  Doja lies dreaming
+  Where yellow flowers grow
+  Bam hears a ball bounce
+  And suddenly goes
+  [instrumental]
+  [verse]
+  Golden as daylight
+  Soft as the rain
+  One watches quietly
+  One runs again
+  Where are you going?
+  Nobody knows
+  Over the hillside
+  Where the warm river flows
+  [chorus]
+  Run through the colours
+  Run through the light
+  Follow the fields
+  Till they fall out of sight
+  I'll be beside you
+  Wherever you roam
+  Two golden shadows
+  Will always come home
+  [instrumental]
+  [verse]
+  Doja sees kingdoms
+  Inside every tree
+  Bam sees a tennis ball
+  Floating at sea
+  One asks the questions
+  One simply runs
+  Both disappear
+  In the afternoon sun
+  [bridge]
+  Maybe the garden
+  Goes on without end
+  Maybe the pathway
+  Comes round again
+  Maybe tomorrow
+  We'll wake up and find
+  Golden pawprints
+  All over the sky
+  [instrumental]
+  [chorus]
+  Run through the colours
+  Run through the light
+  Follow the fields
+  Till they fall out of sight
+  I'll be beside you
+  Wherever you roam
+  Two golden shadows
+  Will always come home
+  [outro]
+  Doja in sunlight
+  Bam in the blue
+  Wherever this road goes
+  I'll follow you
+  [Whispered]
+  Follow you...
+  Follow you...
+  [Very distant]
+  Woof.

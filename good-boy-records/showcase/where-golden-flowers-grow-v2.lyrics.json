@@ -1,0 +1,1620 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 2,
+  "title": "where-golden-flowers-grow",
+  "song_version": 2,
+  "source_yaml": "where-golden-flowers-grow-v2.yaml",
+  "source_audio": "where-golden-flowers-grow-v2.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "runtime": {
+    "requested_device": "auto",
+    "demucs_device": "cuda",
+    "whisperx_device": "cuda",
+    "whisperx_compute_type": "float16",
+    "batch_size": 4,
+    "cpu_fallback_used": false
+  },
+  "generated_at": "2026-09-03T19:27:06+00:00",
+  "stats": {
+    "lyric_words": 191,
+    "recognised_words": 218,
+    "matched_words": 186,
+    "coverage": 0.9738
+  },
+  "quality": {
+    "rating": "excellent",
+    "review_threshold": 0.8,
+    "review_required": false,
+    "approved": false,
+    "usable_for_live_lyrics": true
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "Come through the garden",
+      "start": 15.9,
+      "end": 17.243,
+      "words": [
+        {
+          "text": "Come",
+          "start": 15.9,
+          "end": 16.1,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 16.141,
+          "end": 16.421,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 16.461,
+          "end": 16.561,
+          "matched": true
+        },
+        {
+          "text": "garden",
+          "start": 16.642,
+          "end": 17.243,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "The morning is blue",
+      "start": 17.624,
+      "end": 18.826,
+      "words": [
+        {
+          "text": "The",
+          "start": 17.624,
+          "end": 17.744,
+          "matched": true
+        },
+        {
+          "text": "morning",
+          "start": 17.844,
+          "end": 18.305,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 18.425,
+          "end": 18.505,
+          "matched": true
+        },
+        {
+          "text": "blue",
+          "start": 18.565,
+          "end": 18.826,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "Sunlight is falling",
+      "start": 19.708,
+      "end": 21.171,
+      "words": [
+        {
+          "text": "Sunlight",
+          "start": 19.708,
+          "end": 20.289,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 20.329,
+          "end": 20.409,
+          "matched": true
+        },
+        {
+          "text": "falling",
+          "start": 20.489,
+          "end": 21.171,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "In circles on you",
+      "start": 21.291,
+      "end": 22.614,
+      "words": [
+        {
+          "text": "In",
+          "start": 21.291,
+          "end": 21.391,
+          "matched": true
+        },
+        {
+          "text": "circles",
+          "start": 21.471,
+          "end": 22.173,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 22.313,
+          "end": 22.413,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 22.473,
+          "end": 22.614,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "Doja lies dreaming",
+      "start": 23.581,
+      "end": 24.962,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 23.581,
+          "end": 24.461,
+          "matched": true
+        },
+        {
+          "text": "lies",
+          "start": 24.461,
+          "end": 24.541,
+          "matched": false
+        },
+        {
+          "text": "dreaming",
+          "start": 24.541,
+          "end": 24.962,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "Where yellow flowers grow",
+      "start": 25.022,
+      "end": 26.802,
+      "words": [
+        {
+          "text": "Where",
+          "start": 25.022,
+          "end": 25.242,
+          "matched": true
+        },
+        {
+          "text": "yellow",
+          "start": 25.282,
+          "end": 25.902,
+          "matched": true
+        },
+        {
+          "text": "flowers",
+          "start": 25.962,
+          "end": 26.382,
+          "matched": true
+        },
+        {
+          "text": "grow",
+          "start": 26.462,
+          "end": 26.802,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "Bam hears a ball bounce",
+      "start": 27.423,
+      "end": 28.963,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 27.423,
+          "end": 27.723,
+          "matched": true
+        },
+        {
+          "text": "hears",
+          "start": 27.763,
+          "end": 28.063,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 28.123,
+          "end": 28.203,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 28.243,
+          "end": 28.583,
+          "matched": true
+        },
+        {
+          "text": "bounce",
+          "start": 28.583,
+          "end": 28.963,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "And suddenly goes",
+      "start": 28.963,
+      "end": 30.704,
+      "words": [
+        {
+          "text": "And",
+          "start": 28.963,
+          "end": 29.343,
+          "matched": false
+        },
+        {
+          "text": "suddenly",
+          "start": 29.343,
+          "end": 29.984,
+          "matched": true
+        },
+        {
+          "text": "goes",
+          "start": 30.084,
+          "end": 30.704,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "Golden as daylight",
+      "start": 31.264,
+      "end": 33.045,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 31.264,
+          "end": 31.764,
+          "matched": true
+        },
+        {
+          "text": "as",
+          "start": 31.864,
+          "end": 31.944,
+          "matched": true
+        },
+        {
+          "text": "daylight",
+          "start": 32.004,
+          "end": 33.045,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "Soft as the rain",
+      "start": 33.145,
+      "end": 34.385,
+      "words": [
+        {
+          "text": "Soft",
+          "start": 33.145,
+          "end": 33.445,
+          "matched": true
+        },
+        {
+          "text": "as",
+          "start": 33.525,
+          "end": 33.665,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 33.705,
+          "end": 33.845,
+          "matched": true
+        },
+        {
+          "text": "rain",
+          "start": 33.925,
+          "end": 34.385,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "One watches quietly",
+      "start": 35.206,
+      "end": 37.146,
+      "words": [
+        {
+          "text": "One",
+          "start": 35.206,
+          "end": 35.326,
+          "matched": true
+        },
+        {
+          "text": "watches",
+          "start": 35.366,
+          "end": 35.766,
+          "matched": true
+        },
+        {
+          "text": "quietly",
+          "start": 35.826,
+          "end": 37.146,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "One runs again",
+      "start": 37.166,
+      "end": 38.367,
+      "words": [
+        {
+          "text": "One",
+          "start": 37.166,
+          "end": 37.226,
+          "matched": true
+        },
+        {
+          "text": "runs",
+          "start": 37.286,
+          "end": 37.567,
+          "matched": true
+        },
+        {
+          "text": "again",
+          "start": 37.667,
+          "end": 38.367,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "Where are you going?",
+      "start": 38.927,
+      "end": 40.468,
+      "words": [
+        {
+          "text": "Where",
+          "start": 38.927,
+          "end": 39.207,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 39.307,
+          "end": 39.427,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 39.467,
+          "end": 39.627,
+          "matched": true
+        },
+        {
+          "text": "going?",
+          "start": 39.707,
+          "end": 40.468,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "Nobody knows",
+      "start": 40.888,
+      "end": 42.188,
+      "words": [
+        {
+          "text": "Nobody",
+          "start": 40.888,
+          "end": 41.548,
+          "matched": true
+        },
+        {
+          "text": "knows",
+          "start": 41.588,
+          "end": 42.188,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "Over the hillside",
+      "start": 42.929,
+      "end": 44.209,
+      "words": [
+        {
+          "text": "Over",
+          "start": 42.929,
+          "end": 43.249,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 43.329,
+          "end": 43.469,
+          "matched": true
+        },
+        {
+          "text": "hillside",
+          "start": 43.509,
+          "end": 44.209,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Where the warm river flows",
+      "start": 44.249,
+      "end": 46.03,
+      "words": [
+        {
+          "text": "Where",
+          "start": 44.249,
+          "end": 44.469,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 44.509,
+          "end": 44.669,
+          "matched": true
+        },
+        {
+          "text": "warm",
+          "start": 44.709,
+          "end": 45.03,
+          "matched": true
+        },
+        {
+          "text": "river",
+          "start": 45.09,
+          "end": 45.53,
+          "matched": true
+        },
+        {
+          "text": "flows",
+          "start": 45.65,
+          "end": 46.03,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "Run through the colours",
+      "start": 46.631,
+      "end": 48.252,
+      "words": [
+        {
+          "text": "Run",
+          "start": 46.631,
+          "end": 46.871,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 46.931,
+          "end": 47.271,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 47.331,
+          "end": 47.451,
+          "matched": true
+        },
+        {
+          "text": "colours",
+          "start": 47.551,
+          "end": 48.252,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Run through the light",
+      "start": 48.332,
+      "end": 49.794,
+      "words": [
+        {
+          "text": "Run",
+          "start": 48.332,
+          "end": 48.653,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 48.753,
+          "end": 49.053,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 49.093,
+          "end": 49.213,
+          "matched": true
+        },
+        {
+          "text": "light",
+          "start": 49.273,
+          "end": 49.794,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "Follow the fields",
+      "start": 50.455,
+      "end": 51.616,
+      "words": [
+        {
+          "text": "Follow",
+          "start": 50.455,
+          "end": 50.975,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 51.035,
+          "end": 51.135,
+          "matched": true
+        },
+        {
+          "text": "fields",
+          "start": 51.235,
+          "end": 51.616,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "Till they fall out of sight",
+      "start": 51.676,
+      "end": 53.658,
+      "words": [
+        {
+          "text": "Till",
+          "start": 51.676,
+          "end": 51.916,
+          "matched": true
+        },
+        {
+          "text": "they",
+          "start": 51.936,
+          "end": 52.096,
+          "matched": true
+        },
+        {
+          "text": "fall",
+          "start": 52.176,
+          "end": 52.657,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 52.797,
+          "end": 52.917,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 52.957,
+          "end": 53.037,
+          "matched": true
+        },
+        {
+          "text": "sight",
+          "start": 53.097,
+          "end": 53.658,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "I'll be beside you",
+      "start": 54.379,
+      "end": 55.74,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 54.379,
+          "end": 54.579,
+          "matched": true
+        },
+        {
+          "text": "be",
+          "start": 54.619,
+          "end": 54.759,
+          "matched": true
+        },
+        {
+          "text": "beside",
+          "start": 54.819,
+          "end": 55.48,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 55.52,
+          "end": 55.74,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "Wherever you roam",
+      "start": 55.8,
+      "end": 57.562,
+      "words": [
+        {
+          "text": "Wherever",
+          "start": 55.8,
+          "end": 56.721,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 56.741,
+          "end": 56.941,
+          "matched": true
+        },
+        {
+          "text": "roam",
+          "start": 57.021,
+          "end": 57.562,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "Two golden shadows",
+      "start": 58.123,
+      "end": 59.584,
+      "words": [
+        {
+          "text": "Two",
+          "start": 58.123,
+          "end": 58.383,
+          "matched": true
+        },
+        {
+          "text": "golden",
+          "start": 58.423,
+          "end": 58.803,
+          "matched": true
+        },
+        {
+          "text": "shadows",
+          "start": 58.883,
+          "end": 59.584,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "Will always come home",
+      "start": 59.624,
+      "end": 61.886,
+      "words": [
+        {
+          "text": "Will",
+          "start": 59.624,
+          "end": 59.864,
+          "matched": true
+        },
+        {
+          "text": "always",
+          "start": 60.165,
+          "end": 60.505,
+          "matched": true
+        },
+        {
+          "text": "come",
+          "start": 60.565,
+          "end": 60.765,
+          "matched": true
+        },
+        {
+          "text": "home",
+          "start": 60.785,
+          "end": 61.886,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "Doja sees kingdoms",
+      "start": 61.886,
+      "end": 74.956,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 61.886,
+          "end": 73.975,
+          "matched": false
+        },
+        {
+          "text": "sees",
+          "start": 73.975,
+          "end": 74.355,
+          "matched": true
+        },
+        {
+          "text": "kingdoms",
+          "start": 74.455,
+          "end": 74.956,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "Inside every tree",
+      "start": 75.016,
+      "end": 76.497,
+      "words": [
+        {
+          "text": "Inside",
+          "start": 75.016,
+          "end": 75.696,
+          "matched": true
+        },
+        {
+          "text": "every",
+          "start": 75.836,
+          "end": 76.057,
+          "matched": true
+        },
+        {
+          "text": "tree",
+          "start": 76.137,
+          "end": 76.497,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "Bam sees a tennis ball",
+      "start": 77.138,
+      "end": 78.879,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 77.138,
+          "end": 77.498,
+          "matched": true
+        },
+        {
+          "text": "sees",
+          "start": 77.578,
+          "end": 77.858,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 77.939,
+          "end": 77.999,
+          "matched": true
+        },
+        {
+          "text": "tennis",
+          "start": 78.059,
+          "end": 78.499,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 78.559,
+          "end": 78.879,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "Floating at sea",
+      "start": 79.0,
+      "end": 80.361,
+      "words": [
+        {
+          "text": "Floating",
+          "start": 79.0,
+          "end": 79.78,
+          "matched": true
+        },
+        {
+          "text": "at",
+          "start": 79.84,
+          "end": 79.941,
+          "matched": true
+        },
+        {
+          "text": "sea",
+          "start": 80.001,
+          "end": 80.361,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "One asks the questions",
+      "start": 81.302,
+      "end": 82.803,
+      "words": [
+        {
+          "text": "One",
+          "start": 81.302,
+          "end": 81.442,
+          "matched": true
+        },
+        {
+          "text": "asks",
+          "start": 81.522,
+          "end": 81.702,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 81.742,
+          "end": 81.822,
+          "matched": true
+        },
+        {
+          "text": "questions",
+          "start": 81.903,
+          "end": 82.803,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "One simply runs",
+      "start": 83.004,
+      "end": 84.325,
+      "words": [
+        {
+          "text": "One",
+          "start": 83.004,
+          "end": 83.204,
+          "matched": true
+        },
+        {
+          "text": "simply",
+          "start": 83.344,
+          "end": 83.784,
+          "matched": true
+        },
+        {
+          "text": "runs",
+          "start": 83.864,
+          "end": 84.325,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "Both disappear",
+      "start": 85.026,
+      "end": 86.187,
+      "words": [
+        {
+          "text": "Both",
+          "start": 85.026,
+          "end": 85.266,
+          "matched": true
+        },
+        {
+          "text": "disappear",
+          "start": 85.326,
+          "end": 86.187,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "In the afternoon sun",
+      "start": 86.567,
+      "end": 89.29,
+      "words": [
+        {
+          "text": "In",
+          "start": 86.567,
+          "end": 86.667,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 86.727,
+          "end": 86.928,
+          "matched": true
+        },
+        {
+          "text": "afternoon",
+          "start": 87.088,
+          "end": 87.788,
+          "matched": true
+        },
+        {
+          "text": "sun",
+          "start": 87.889,
+          "end": 89.29,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "Maybe the garden",
+      "start": 89.83,
+      "end": 91.152,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 89.83,
+          "end": 90.311,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 90.371,
+          "end": 90.491,
+          "matched": true
+        },
+        {
+          "text": "garden",
+          "start": 90.571,
+          "end": 91.152,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "Goes on without end",
+      "start": 91.532,
+      "end": 93.034,
+      "words": [
+        {
+          "text": "Goes",
+          "start": 91.532,
+          "end": 91.772,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 91.933,
+          "end": 92.033,
+          "matched": true
+        },
+        {
+          "text": "without",
+          "start": 92.073,
+          "end": 92.954,
+          "matched": true
+        },
+        {
+          "text": "end",
+          "start": 92.974,
+          "end": 93.034,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "Maybe the pathway",
+      "start": 93.674,
+      "end": 95.136,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 93.674,
+          "end": 94.135,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 94.195,
+          "end": 94.295,
+          "matched": true
+        },
+        {
+          "text": "pathway",
+          "start": 94.395,
+          "end": 95.136,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "Comes round again",
+      "start": 95.356,
+      "end": 96.777,
+      "words": [
+        {
+          "text": "Comes",
+          "start": 95.356,
+          "end": 95.576,
+          "matched": true
+        },
+        {
+          "text": "round",
+          "start": 95.656,
+          "end": 96.117,
+          "matched": true
+        },
+        {
+          "text": "again",
+          "start": 96.217,
+          "end": 96.777,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "Maybe tomorrow",
+      "start": 97.498,
+      "end": 98.939,
+      "words": [
+        {
+          "text": "Maybe",
+          "start": 97.498,
+          "end": 97.938,
+          "matched": true
+        },
+        {
+          "text": "tomorrow",
+          "start": 97.978,
+          "end": 98.939,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "We'll wake up and find",
+      "start": 99.159,
+      "end": 100.78,
+      "words": [
+        {
+          "text": "We'll",
+          "start": 99.159,
+          "end": 99.419,
+          "matched": true
+        },
+        {
+          "text": "wake",
+          "start": 99.459,
+          "end": 99.699,
+          "matched": true
+        },
+        {
+          "text": "up",
+          "start": 99.799,
+          "end": 99.899,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 99.979,
+          "end": 100.079,
+          "matched": true
+        },
+        {
+          "text": "find",
+          "start": 100.159,
+          "end": 100.78,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l39",
+      "text": "Golden pawprints",
+      "start": 101.34,
+      "end": 102.48,
+      "words": [
+        {
+          "text": "Golden",
+          "start": 101.34,
+          "end": 102.02,
+          "matched": true
+        },
+        {
+          "text": "pawprints",
+          "start": 102.1,
+          "end": 102.48,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l40",
+      "text": "All over the sky",
+      "start": 102.921,
+      "end": 105.742,
+      "words": [
+        {
+          "text": "All",
+          "start": 102.921,
+          "end": 103.081,
+          "matched": true
+        },
+        {
+          "text": "over",
+          "start": 103.401,
+          "end": 103.741,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 103.801,
+          "end": 103.901,
+          "matched": true
+        },
+        {
+          "text": "sky",
+          "start": 103.961,
+          "end": 105.742,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l41",
+      "text": "Run through the colours",
+      "start": 106.082,
+      "end": 107.763,
+      "words": [
+        {
+          "text": "Run",
+          "start": 106.082,
+          "end": 106.422,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 106.502,
+          "end": 106.782,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 106.842,
+          "end": 106.962,
+          "matched": true
+        },
+        {
+          "text": "colours",
+          "start": 107.062,
+          "end": 107.763,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l42",
+      "text": "Run through the light",
+      "start": 107.843,
+      "end": 109.363,
+      "words": [
+        {
+          "text": "Run",
+          "start": 107.843,
+          "end": 108.163,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 108.263,
+          "end": 108.563,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 108.583,
+          "end": 108.703,
+          "matched": true
+        },
+        {
+          "text": "light",
+          "start": 108.803,
+          "end": 109.363,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l43",
+      "text": "Follow the fields",
+      "start": 109.984,
+      "end": 111.124,
+      "words": [
+        {
+          "text": "Follow",
+          "start": 109.984,
+          "end": 110.484,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 110.544,
+          "end": 110.644,
+          "matched": true
+        },
+        {
+          "text": "fields",
+          "start": 110.744,
+          "end": 111.124,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l44",
+      "text": "Till they fall out of sight",
+      "start": 111.184,
+      "end": 113.225,
+      "words": [
+        {
+          "text": "Till",
+          "start": 111.184,
+          "end": 111.424,
+          "matched": true
+        },
+        {
+          "text": "they",
+          "start": 111.464,
+          "end": 111.624,
+          "matched": true
+        },
+        {
+          "text": "fall",
+          "start": 111.684,
+          "end": 112.185,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 112.345,
+          "end": 112.445,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 112.485,
+          "end": 112.565,
+          "matched": true
+        },
+        {
+          "text": "sight",
+          "start": 112.625,
+          "end": 113.225,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l45",
+      "text": "I'll be beside you",
+      "start": 143.857,
+      "end": 145.957,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 143.857,
+          "end": 143.937,
+          "matched": true
+        },
+        {
+          "text": "be",
+          "start": 144.857,
+          "end": 145.017,
+          "matched": true
+        },
+        {
+          "text": "beside",
+          "start": 145.057,
+          "end": 145.717,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 145.757,
+          "end": 145.957,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l46",
+      "text": "Wherever you roam",
+      "start": 145.997,
+      "end": 147.738,
+      "words": [
+        {
+          "text": "Wherever",
+          "start": 145.997,
+          "end": 146.937,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 146.998,
+          "end": 147.158,
+          "matched": true
+        },
+        {
+          "text": "roam",
+          "start": 147.218,
+          "end": 147.738,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l47",
+      "text": "Two golden shadows",
+      "start": 148.318,
+      "end": 149.798,
+      "words": [
+        {
+          "text": "Two",
+          "start": 148.318,
+          "end": 148.598,
+          "matched": true
+        },
+        {
+          "text": "golden",
+          "start": 148.658,
+          "end": 149.018,
+          "matched": true
+        },
+        {
+          "text": "shadows",
+          "start": 149.098,
+          "end": 149.798,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l48",
+      "text": "Will always come home",
+      "start": 149.858,
+      "end": 152.159,
+      "words": [
+        {
+          "text": "Will",
+          "start": 149.858,
+          "end": 150.158,
+          "matched": true
+        },
+        {
+          "text": "always",
+          "start": 150.458,
+          "end": 150.738,
+          "matched": true
+        },
+        {
+          "text": "come",
+          "start": 150.778,
+          "end": 151.018,
+          "matched": true
+        },
+        {
+          "text": "home",
+          "start": 151.059,
+          "end": 152.159,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l49",
+      "text": "Doja in sunlight",
+      "start": 152.219,
+      "end": 154.839,
+      "words": [
+        {
+          "text": "Doja",
+          "start": 152.219,
+          "end": 153.099,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 153.599,
+          "end": 153.759,
+          "matched": true
+        },
+        {
+          "text": "sunlight",
+          "start": 153.899,
+          "end": 154.839,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l50",
+      "text": "Bam in the blue",
+      "start": 156.08,
+      "end": 158.36,
+      "words": [
+        {
+          "text": "Bam",
+          "start": 156.08,
+          "end": 156.74,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 157.4,
+          "end": 157.52,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 157.56,
+          "end": 157.68,
+          "matched": true
+        },
+        {
+          "text": "blue",
+          "start": 157.74,
+          "end": 158.36,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l51",
+      "text": "Wherever this road goes",
+      "start": 158.7,
+      "end": 162.281,
+      "words": [
+        {
+          "text": "Wherever",
+          "start": 158.7,
+          "end": 159.421,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 159.461,
+          "end": 159.621,
+          "matched": true
+        },
+        {
+          "text": "road",
+          "start": 159.701,
+          "end": 160.301,
+          "matched": true
+        },
+        {
+          "text": "goes",
+          "start": 160.401,
+          "end": 162.281,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l52",
+      "text": "I'll follow you",
+      "start": 162.501,
+      "end": 164.082,
+      "words": [
+        {
+          "text": "I'll",
+          "start": 162.501,
+          "end": 162.641,
+          "matched": true
+        },
+        {
+          "text": "follow",
+          "start": 162.781,
+          "end": 163.402,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 163.482,
+          "end": 164.082,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l53",
+      "text": "Follow you...",
+      "start": 168.092,
+      "end": 173.595,
+      "words": [
+        {
+          "text": "Follow",
+          "start": 168.092,
+          "end": 169.873,
+          "matched": true
+        },
+        {
+          "text": "you...",
+          "start": 170.413,
+          "end": 173.595,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l54",
+      "text": "Follow you...",
+      "start": 174.316,
+      "end": 175.296,
+      "words": [
+        {
+          "text": "Follow",
+          "start": 174.316,
+          "end": 175.176,
+          "matched": true
+        },
+        {
+          "text": "you...",
+          "start": 175.196,
+          "end": 175.296,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l55",
+      "text": "Woof.",
+      "start": 175.296,
+      "end": 175.636,
+      "words": [
+        {
+          "text": "Woof.",
+          "start": 175.296,
+          "end": 175.636,
+          "matched": false
+        }
+      ]
+    }
+  ]
+}

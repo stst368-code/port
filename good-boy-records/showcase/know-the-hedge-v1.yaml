@@ -1,0 +1,143 @@
+title: know-the-hedge
+version: 1
+model: minimax H3
+state: active
+genre: hip-hop
+inspiration: Eric B. & Rakim - Juice
+duration: 200
+cover: know-the-hedge-v1.png
+caption: |
+  ### Global Metadata
+  **Basic Attributes:** BPM is 154. Key is D minor, and scale is minor. Golden-era East Coast hardcore hip-hop with jazz-funk sampling, frantic breakbeat energy, dark cinematic tension and an aggressive street-rap atmosphere.
+  **Global Emotional Progression:** The track begins at near-maximum confidence and momentum, immediately establishing a swaggering, unstoppable presence. The verses remain controlled but increasingly tense, with the vocal staying unnervingly calm while the rhythm underneath feels as though it is constantly accelerating. Choruses create sudden surges of density and confrontation. The bridge becomes obsessive and almost absurdly focused, briefly reducing the musical vocabulary before rebuilding toward the final verse. The outro reaches the song's most triumphant and chaotic point before abruptly stripping away, leaving a final impression of absolute confidence rather than a gentle resolution.
+  **Application Scenarios & Imagery:** A frantic pursuit through narrow streets, gardens, alleys and obstacles, shot like an early-1990s urban chase sequence. Everything feels kinetic, physical and slightly dangerous, while the performer remains completely unbothered by the chaos surrounding him.
+  **Sonics & Production Profile:** Raw, sample-driven and strongly rhythmic. Warm analog saturation, thick low mids, hard transient-heavy drums and restrained high-frequency polish. Narrow-to-moderate stereo width with the vocal firmly centred. Avoid modern trap production, glossy synth layers, Auto-Tune aesthetics or oversized sub-bass.
+  ### Vocal Details
+  **Vocal Gender & Timbre:** Singer A (Male), a deep, smooth baritone with an authoritative, cold and controlled tone.
+  **Vocal Style:** Rapid, technically precise rap delivered with striking calmness rather than shouting. Crisp consonants, tightly controlled breath, dense internal rhythm and an unhurried vocal attitude against the frantic beat. Verses should feel conversational and clinical; choruses become firmer and more emphatic without turning into yelling. The bridge uses clipped, spacious phrases with deliberate pauses. The final verse and outro increase rhythmic intensity while preserving the same controlled character.
+  **Harmony/Backing Vocals:** No sung harmonies. Select chorus phrases may receive tight male doubles or short group-response layers. Occasional doubled final words or punchlines may reinforce rhythmic impact.
+  **Vocal FX:** Very close-miked lead with subtle tape saturation, short room ambience and restrained slapback delay. Minimal processing beyond compression and EQ. Doubles may be slightly thinner and more distant than the lead.
+  ### Arrangement
+  **Instrument Lifecycle (Primary/Secondary):** A fast acoustic breakbeat, restless shaker pattern and active chromatic jazz-style bassline form the permanent foundation. Short dissonant brass stabs, turntable scratches and sparse urban-texture effects act as secondary elements and appear only for transitions, hooks and climactic moments.
+  **Groove & Foundation Progression:** The intro enters almost immediately at full velocity. During verses, brass and secondary textures disappear, leaving drums, bass and shaker in a tight repetitive pocket that gives maximum space to the rapper. The chorus retains the core loop but adds brass attacks, vocal doubles and harder drum accents, creating a sudden vertical increase in density. Verse 3 returns to the stripped foundation. The bridge removes much of the bass movement and reduces the beat to an obsessive skeletal pulse, then rebuilds progressively. Verse 4 restores the complete groove with increased fills and sharper accents. The outro becomes the densest passage, with the full rhythmic foundation, intermittent brass and scratches driving the final performance before elements disappear rapidly, leaving the bass phrase and residual ambience to end the track.
+  **Embellishments, Textures & Spatial FX:** Use brief scratches, reverse hits, filtered sample fragments and short brass blasts as punctuation rather than continuous decoration. Transitions should come primarily from dropouts and layer changes rather than risers or modern electronic effects.
+lyrics: |
+  [intro]
+  Chunk Lion productions
+  Know the hedge
+  Now listen' to the ledge
+  [verse]
+  Take the ball
+  I'll come take it right back
+  I won't stop
+  I'm straight on the attack
+  Charge through your ends
+  your yard
+  your garden
+  [verse]
+  I can't be stopped
+  and I ain't asking
+  no pardon me
+  Not for a treat
+  when a ball's involved
+  My focus won't retreat
+  Four paws down
+  full speed ahead
+  I'm a blur down the street
+  [verse]
+  My skull is titanium
+  just like these bars
+  it's hard
+  Smash through with my cranium
+  hear the way Chunk Lion roars
+  It's not hard
+  that ball is mine
+  Don't care where
+  don't care when
+  Don't care who
+  don't care why
+  Morning to night
+  ball hits the ground
+  and I'm ready to fight
+  [verse]
+  You throw it once
+  that's a contract
+  You thought it was yours?
+  That's nonsense
+  Ball's left your hand
+  transfer of title
+  Possession is law
+  and my retrieval is final
+  [verse]
+  Fence in the way?
+  Then the fence gets knocked down
+  Gate locked shut?
+  Gate gets knocked down
+  Human in the way?
+  Well...
+  you know the rest
+  [verse]
+  Bush to hedge
+  hedge to flowerbed
+  Flowerbed to your head
+  and boom—you're dead
+  Straight through the lot
+  singular focus
+  You think I've lost the plot?
+  Nah, my mind's on attack
+  [verse]
+  Ball.
+  Ball.
+  Where's the ball?
+  Over that wall?
+  Then goodbye wall.
+  Ball.
+  Ball.
+  Where's the ball?
+  In your hand?
+  That's just grand.
+  Ball.
+  Ball.
+  Where's the ball?
+  Floatin' down the river?
+  Good job I'm a swimmer.
+  [verse]
+  No pause for thought
+  no tactic or plan
+  Trajectory focused
+  on your throwin' hand
+  Eyes on the prize
+  I calculate flight
+  One bounce left
+  then I cut to the right
+  You reach down first?
+  Better reconsider
+  I'm built like a fridge
+  but like my lyrical flow
+  I move like a river
+  ain't no stoppin' me
+  Get in my way
+  i got right through ya'
+  [verse]
+  Chunk Lion roar
+  when I enter the race
+  Ears flying back
+  with the wind in my face
+  Shoulder through shrubbery
+  branches get parted
+  By the time you shout "Bam!"
+  I've already departed
+  Ball in my jaws
+  now the victory lap
+  You want it returned?
+  Come try take it back
+  Take one little step
+  and I'm straight on attack
+  You started this game
+  now you're caught in my trap
+  [outro]
+  And I'm done. 
+  Chunk Lion. 
+  2026.
+  And let me say... 
+  Peace!
