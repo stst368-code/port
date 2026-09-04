@@ -1,0 +1,2762 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 2,
+  "title": "you-make-me-holy!",
+  "song_version": 2,
+  "source_yaml": "you-make-me-holy!-v2.yaml",
+  "source_audio": "you-make-me-holy!-v2.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "runtime": {
+    "requested_device": "auto",
+    "demucs_device": "cuda",
+    "whisperx_device": "cuda",
+    "whisperx_compute_type": "float16",
+    "batch_size": 4,
+    "cpu_fallback_used": false
+  },
+  "generated_at": "2026-09-04T04:43:07+00:00",
+  "stats": {
+    "lyric_words": 384,
+    "recognised_words": 320,
+    "matched_words": 304,
+    "coverage": 0.7917
+  },
+  "quality": {
+    "rating": "review",
+    "review_threshold": 0.8,
+    "review_required": true,
+    "approved": false,
+    "usable_for_live_lyrics": false
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "You make me holy",
+      "start": 0.031,
+      "end": 1.153,
+      "words": [
+        {
+          "text": "You",
+          "start": 0.031,
+          "end": 0.131,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 0.171,
+          "end": 0.332,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 0.352,
+          "end": 0.492,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 0.632,
+          "end": 1.153,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "You make me turn my hands up onto the skies and pray",
+      "start": 2.336,
+      "end": 6.304,
+      "words": [
+        {
+          "text": "You",
+          "start": 2.336,
+          "end": 2.656,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 2.696,
+          "end": 2.957,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 3.017,
+          "end": 3.197,
+          "matched": true
+        },
+        {
+          "text": "turn",
+          "start": 3.318,
+          "end": 3.638,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 3.698,
+          "end": 3.899,
+          "matched": true
+        },
+        {
+          "text": "hands",
+          "start": 3.999,
+          "end": 4.34,
+          "matched": true
+        },
+        {
+          "text": "up",
+          "start": 4.44,
+          "end": 4.56,
+          "matched": true
+        },
+        {
+          "text": "onto",
+          "start": 4.741,
+          "end": 5.061,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 5.101,
+          "end": 5.202,
+          "matched": true
+        },
+        {
+          "text": "skies",
+          "start": 5.262,
+          "end": 5.703,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 5.763,
+          "end": 5.863,
+          "matched": true
+        },
+        {
+          "text": "pray",
+          "start": 5.983,
+          "end": 6.304,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "I could never complain whilst I have you",
+      "start": 7.085,
+      "end": 9.15,
+      "words": [
+        {
+          "text": "I",
+          "start": 7.085,
+          "end": 7.145,
+          "matched": true
+        },
+        {
+          "text": "could",
+          "start": 7.186,
+          "end": 7.346,
+          "matched": true
+        },
+        {
+          "text": "never",
+          "start": 7.386,
+          "end": 7.626,
+          "matched": true
+        },
+        {
+          "text": "complain",
+          "start": 7.707,
+          "end": 8.308,
+          "matched": true
+        },
+        {
+          "text": "whilst",
+          "start": 8.368,
+          "end": 8.548,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 8.749,
+          "end": 8.789,
+          "matched": true
+        },
+        {
+          "text": "have",
+          "start": 8.849,
+          "end": 8.989,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 9.069,
+          "end": 9.15,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "Click, c-c-click, c-c-click, click (Woof)",
+      "start": 9.15,
+      "end": 13.008,
+      "words": [
+        {
+          "text": "Click,",
+          "start": 9.15,
+          "end": 9.922,
+          "matched": false
+        },
+        {
+          "text": "c-c-click,",
+          "start": 9.922,
+          "end": 10.693,
+          "matched": false
+        },
+        {
+          "text": "c-c-click,",
+          "start": 10.693,
+          "end": 11.465,
+          "matched": false
+        },
+        {
+          "text": "click",
+          "start": 11.465,
+          "end": 12.236,
+          "matched": false
+        },
+        {
+          "text": "(Woof)",
+          "start": 12.236,
+          "end": 13.008,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "You like my holy books?",
+      "start": 13.008,
+      "end": 14.93,
+      "words": [
+        {
+          "text": "You",
+          "start": 13.008,
+          "end": 13.328,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 13.368,
+          "end": 13.588,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 13.689,
+          "end": 13.889,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 14.029,
+          "end": 14.509,
+          "matched": true
+        },
+        {
+          "text": "books?",
+          "start": 14.669,
+          "end": 14.93,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "I could lend them to you like a little garden fruit",
+      "start": 15.07,
+      "end": 17.532,
+      "words": [
+        {
+          "text": "I",
+          "start": 15.07,
+          "end": 15.09,
+          "matched": true
+        },
+        {
+          "text": "could",
+          "start": 15.15,
+          "end": 15.33,
+          "matched": true
+        },
+        {
+          "text": "lend",
+          "start": 15.35,
+          "end": 15.49,
+          "matched": true
+        },
+        {
+          "text": "them",
+          "start": 15.51,
+          "end": 15.63,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 15.67,
+          "end": 15.79,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 15.83,
+          "end": 15.97,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 16.03,
+          "end": 16.211,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 16.251,
+          "end": 16.291,
+          "matched": true
+        },
+        {
+          "text": "little",
+          "start": 16.351,
+          "end": 16.611,
+          "matched": true
+        },
+        {
+          "text": "garden",
+          "start": 16.671,
+          "end": 17.211,
+          "matched": true
+        },
+        {
+          "text": "fruit",
+          "start": 17.311,
+          "end": 17.532,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "Attitude and the prayer will save you",
+      "start": 18.232,
+      "end": 20.514,
+      "words": [
+        {
+          "text": "Attitude",
+          "start": 18.232,
+          "end": 19.033,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 19.073,
+          "end": 19.173,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 19.173,
+          "end": 19.333,
+          "matched": false
+        },
+        {
+          "text": "prayer",
+          "start": 19.333,
+          "end": 19.653,
+          "matched": true
+        },
+        {
+          "text": "will",
+          "start": 19.713,
+          "end": 19.894,
+          "matched": true
+        },
+        {
+          "text": "save",
+          "start": 19.974,
+          "end": 20.354,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 20.394,
+          "end": 20.514,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "Your holy saviour",
+      "start": 21.515,
+      "end": 22.516,
+      "words": [
+        {
+          "text": "Your",
+          "start": 21.515,
+          "end": 21.715,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 21.755,
+          "end": 21.975,
+          "matched": true
+        },
+        {
+          "text": "saviour",
+          "start": 22.035,
+          "end": 22.516,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "Red wine, holy bread, he can cure a tumor",
+      "start": 22.736,
+      "end": 25.118,
+      "words": [
+        {
+          "text": "Red",
+          "start": 22.736,
+          "end": 22.936,
+          "matched": true
+        },
+        {
+          "text": "wine,",
+          "start": 23.036,
+          "end": 23.336,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 23.376,
+          "end": 23.637,
+          "matched": true
+        },
+        {
+          "text": "bread,",
+          "start": 23.697,
+          "end": 24.017,
+          "matched": true
+        },
+        {
+          "text": "he",
+          "start": 24.057,
+          "end": 24.137,
+          "matched": true
+        },
+        {
+          "text": "can",
+          "start": 24.177,
+          "end": 24.297,
+          "matched": true
+        },
+        {
+          "text": "cure",
+          "start": 24.337,
+          "end": 24.577,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 24.617,
+          "end": 24.637,
+          "matched": true
+        },
+        {
+          "text": "tumor",
+          "start": 24.697,
+          "end": 25.118,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "Can't believe we'd ever let hands stray from him (no no)",
+      "start": 25.338,
+      "end": 28.761,
+      "words": [
+        {
+          "text": "Can't",
+          "start": 25.338,
+          "end": 25.518,
+          "matched": true
+        },
+        {
+          "text": "believe",
+          "start": 25.558,
+          "end": 25.858,
+          "matched": true
+        },
+        {
+          "text": "we'd",
+          "start": 25.898,
+          "end": 26.059,
+          "matched": true
+        },
+        {
+          "text": "ever",
+          "start": 26.119,
+          "end": 26.299,
+          "matched": true
+        },
+        {
+          "text": "let",
+          "start": 26.379,
+          "end": 26.579,
+          "matched": true
+        },
+        {
+          "text": "hands",
+          "start": 26.679,
+          "end": 26.939,
+          "matched": true
+        },
+        {
+          "text": "stray",
+          "start": 26.979,
+          "end": 27.279,
+          "matched": true
+        },
+        {
+          "text": "from",
+          "start": 27.36,
+          "end": 27.7,
+          "matched": true
+        },
+        {
+          "text": "him",
+          "start": 27.76,
+          "end": 28.621,
+          "matched": true
+        },
+        {
+          "text": "(no",
+          "start": 28.621,
+          "end": 28.691,
+          "matched": false
+        },
+        {
+          "text": "no)",
+          "start": 28.691,
+          "end": 28.761,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "I count my blessings, you count yours",
+      "start": 28.761,
+      "end": 30.662,
+      "words": [
+        {
+          "text": "I",
+          "start": 28.761,
+          "end": 28.901,
+          "matched": true
+        },
+        {
+          "text": "count",
+          "start": 28.941,
+          "end": 29.141,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 29.181,
+          "end": 29.301,
+          "matched": true
+        },
+        {
+          "text": "blessings,",
+          "start": 29.341,
+          "end": 29.802,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 29.822,
+          "end": 29.942,
+          "matched": true
+        },
+        {
+          "text": "count",
+          "start": 30.042,
+          "end": 30.302,
+          "matched": true
+        },
+        {
+          "text": "yours",
+          "start": 30.342,
+          "end": 30.662,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "Got a life of meaning too, call it his will",
+      "start": 30.702,
+      "end": 32.984,
+      "words": [
+        {
+          "text": "Got",
+          "start": 30.702,
+          "end": 30.882,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 30.922,
+          "end": 30.982,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 31.023,
+          "end": 31.183,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 31.263,
+          "end": 31.323,
+          "matched": true
+        },
+        {
+          "text": "meaning",
+          "start": 31.363,
+          "end": 31.643,
+          "matched": true
+        },
+        {
+          "text": "too,",
+          "start": 31.703,
+          "end": 31.903,
+          "matched": true
+        },
+        {
+          "text": "call",
+          "start": 32.023,
+          "end": 32.223,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 32.304,
+          "end": 32.384,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 32.444,
+          "end": 32.644,
+          "matched": true
+        },
+        {
+          "text": "will",
+          "start": 32.704,
+          "end": 32.984,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "Bet your contribution that I'ma pray here",
+      "start": 32.984,
+      "end": 35.586,
+      "words": [
+        {
+          "text": "Bet",
+          "start": 32.984,
+          "end": 33.505,
+          "matched": false
+        },
+        {
+          "text": "your",
+          "start": 33.505,
+          "end": 33.645,
+          "matched": true
+        },
+        {
+          "text": "contribution",
+          "start": 33.685,
+          "end": 34.325,
+          "matched": true
+        },
+        {
+          "text": "that",
+          "start": 34.365,
+          "end": 34.525,
+          "matched": true
+        },
+        {
+          "text": "I'ma",
+          "start": 34.746,
+          "end": 34.966,
+          "matched": true
+        },
+        {
+          "text": "pray",
+          "start": 35.026,
+          "end": 35.346,
+          "matched": true
+        },
+        {
+          "text": "here",
+          "start": 35.386,
+          "end": 35.586,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "Absoloute gospel",
+      "start": 36.067,
+      "end": 37.288,
+      "words": [
+        {
+          "text": "Absoloute",
+          "start": 36.067,
+          "end": 36.587,
+          "matched": true
+        },
+        {
+          "text": "gospel",
+          "start": 36.667,
+          "end": 37.288,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "Wise headed brother, holy hearted sister",
+      "start": 37.368,
+      "end": 39.329,
+      "words": [
+        {
+          "text": "Wise",
+          "start": 37.368,
+          "end": 37.968,
+          "matched": true
+        },
+        {
+          "text": "headed",
+          "start": 37.968,
+          "end": 38.028,
+          "matched": false
+        },
+        {
+          "text": "brother,",
+          "start": 38.028,
+          "end": 38.328,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 38.328,
+          "end": 38.689,
+          "matched": false
+        },
+        {
+          "text": "hearted",
+          "start": 38.689,
+          "end": 39.009,
+          "matched": true
+        },
+        {
+          "text": "sister",
+          "start": 39.029,
+          "end": 39.329,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Living life so good, we were born in his garden",
+      "start": 39.369,
+      "end": 41.671,
+      "words": [
+        {
+          "text": "Living",
+          "start": 39.369,
+          "end": 39.649,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 39.689,
+          "end": 39.83,
+          "matched": true
+        },
+        {
+          "text": "so",
+          "start": 39.85,
+          "end": 39.99,
+          "matched": true
+        },
+        {
+          "text": "good,",
+          "start": 40.03,
+          "end": 40.33,
+          "matched": true
+        },
+        {
+          "text": "we",
+          "start": 40.37,
+          "end": 40.47,
+          "matched": true
+        },
+        {
+          "text": "were",
+          "start": 40.51,
+          "end": 40.65,
+          "matched": true
+        },
+        {
+          "text": "born",
+          "start": 40.69,
+          "end": 41.051,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 41.111,
+          "end": 41.171,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 41.191,
+          "end": 41.331,
+          "matched": true
+        },
+        {
+          "text": "garden",
+          "start": 41.351,
+          "end": 41.671,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "Share a verse with me (believer)",
+      "start": 41.691,
+      "end": 42.48,
+      "words": [
+        {
+          "text": "Share",
+          "start": 41.691,
+          "end": 41.871,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 41.931,
+          "end": 41.991,
+          "matched": true
+        },
+        {
+          "text": "verse",
+          "start": 42.011,
+          "end": 42.192,
+          "matched": true
+        },
+        {
+          "text": "with",
+          "start": 42.232,
+          "end": 42.412,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 42.432,
+          "end": 42.472,
+          "matched": true
+        },
+        {
+          "text": "(believer)",
+          "start": 42.472,
+          "end": 42.48,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Shine the lords light upon he",
+      "start": 42.48,
+      "end": 42.527,
+      "words": [
+        {
+          "text": "Shine",
+          "start": 42.48,
+          "end": 42.488,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 42.488,
+          "end": 42.496,
+          "matched": false
+        },
+        {
+          "text": "lords",
+          "start": 42.496,
+          "end": 42.503,
+          "matched": false
+        },
+        {
+          "text": "light",
+          "start": 42.503,
+          "end": 42.511,
+          "matched": false
+        },
+        {
+          "text": "upon",
+          "start": 42.511,
+          "end": 42.519,
+          "matched": false
+        },
+        {
+          "text": "he",
+          "start": 42.519,
+          "end": 42.527,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "Count the days until we preach again (it's tomorrow)",
+      "start": 42.527,
+      "end": 42.597,
+      "words": [
+        {
+          "text": "Count",
+          "start": 42.527,
+          "end": 42.535,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 42.535,
+          "end": 42.543,
+          "matched": false
+        },
+        {
+          "text": "days",
+          "start": 42.543,
+          "end": 42.55,
+          "matched": false
+        },
+        {
+          "text": "until",
+          "start": 42.55,
+          "end": 42.558,
+          "matched": false
+        },
+        {
+          "text": "we",
+          "start": 42.558,
+          "end": 42.566,
+          "matched": false
+        },
+        {
+          "text": "preach",
+          "start": 42.566,
+          "end": 42.574,
+          "matched": false
+        },
+        {
+          "text": "again",
+          "start": 42.574,
+          "end": 42.582,
+          "matched": false
+        },
+        {
+          "text": "(it's",
+          "start": 42.582,
+          "end": 42.59,
+          "matched": false
+        },
+        {
+          "text": "tomorrow)",
+          "start": 42.59,
+          "end": 42.597,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "I'm holy",
+      "start": 42.597,
+      "end": 42.613,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 42.597,
+          "end": 42.605,
+          "matched": false
+        },
+        {
+          "text": "holy",
+          "start": 42.605,
+          "end": 42.613,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "You raise my life up then you say, (Don't be bad)",
+      "start": 42.613,
+      "end": 42.699,
+      "words": [
+        {
+          "text": "You",
+          "start": 42.613,
+          "end": 42.621,
+          "matched": false
+        },
+        {
+          "text": "raise",
+          "start": 42.621,
+          "end": 42.629,
+          "matched": false
+        },
+        {
+          "text": "my",
+          "start": 42.629,
+          "end": 42.637,
+          "matched": false
+        },
+        {
+          "text": "life",
+          "start": 42.637,
+          "end": 42.645,
+          "matched": false
+        },
+        {
+          "text": "up",
+          "start": 42.645,
+          "end": 42.652,
+          "matched": false
+        },
+        {
+          "text": "then",
+          "start": 42.652,
+          "end": 42.66,
+          "matched": false
+        },
+        {
+          "text": "you",
+          "start": 42.66,
+          "end": 42.668,
+          "matched": false
+        },
+        {
+          "text": "say,",
+          "start": 42.668,
+          "end": 42.676,
+          "matched": false
+        },
+        {
+          "text": "(Don't",
+          "start": 42.676,
+          "end": 42.684,
+          "matched": false
+        },
+        {
+          "text": "be",
+          "start": 42.684,
+          "end": 42.692,
+          "matched": false
+        },
+        {
+          "text": "bad)",
+          "start": 42.692,
+          "end": 42.699,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "You know your way around a Holy book, (call you Dad)",
+      "start": 42.699,
+      "end": 42.786,
+      "words": [
+        {
+          "text": "You",
+          "start": 42.699,
+          "end": 42.707,
+          "matched": false
+        },
+        {
+          "text": "know",
+          "start": 42.707,
+          "end": 42.715,
+          "matched": false
+        },
+        {
+          "text": "your",
+          "start": 42.715,
+          "end": 42.723,
+          "matched": false
+        },
+        {
+          "text": "way",
+          "start": 42.723,
+          "end": 42.731,
+          "matched": false
+        },
+        {
+          "text": "around",
+          "start": 42.731,
+          "end": 42.739,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 42.739,
+          "end": 42.747,
+          "matched": false
+        },
+        {
+          "text": "Holy",
+          "start": 42.747,
+          "end": 42.754,
+          "matched": false
+        },
+        {
+          "text": "book,",
+          "start": 42.754,
+          "end": 42.762,
+          "matched": false
+        },
+        {
+          "text": "(call",
+          "start": 42.762,
+          "end": 42.77,
+          "matched": false
+        },
+        {
+          "text": "you",
+          "start": 42.77,
+          "end": 42.778,
+          "matched": false
+        },
+        {
+          "text": "Dad)",
+          "start": 42.778,
+          "end": 42.786,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "Throwing sermons every time I go to Church (Preach brother, preach)",
+      "start": 42.786,
+      "end": 42.872,
+      "words": [
+        {
+          "text": "Throwing",
+          "start": 42.786,
+          "end": 42.794,
+          "matched": false
+        },
+        {
+          "text": "sermons",
+          "start": 42.794,
+          "end": 42.801,
+          "matched": false
+        },
+        {
+          "text": "every",
+          "start": 42.801,
+          "end": 42.809,
+          "matched": false
+        },
+        {
+          "text": "time",
+          "start": 42.809,
+          "end": 42.817,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 42.817,
+          "end": 42.825,
+          "matched": false
+        },
+        {
+          "text": "go",
+          "start": 42.825,
+          "end": 42.833,
+          "matched": false
+        },
+        {
+          "text": "to",
+          "start": 42.833,
+          "end": 42.841,
+          "matched": false
+        },
+        {
+          "text": "Church",
+          "start": 42.841,
+          "end": 42.848,
+          "matched": false
+        },
+        {
+          "text": "(Preach",
+          "start": 42.848,
+          "end": 42.856,
+          "matched": false
+        },
+        {
+          "text": "brother,",
+          "start": 42.856,
+          "end": 42.864,
+          "matched": false
+        },
+        {
+          "text": "preach)",
+          "start": 42.864,
+          "end": 42.872,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "I'm glad, give big thanks, I'm glad (Praise the lord)",
+      "start": 42.872,
+      "end": 44.875,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 42.872,
+          "end": 42.952,
+          "matched": true
+        },
+        {
+          "text": "glad,",
+          "start": 42.992,
+          "end": 43.072,
+          "matched": true
+        },
+        {
+          "text": "give",
+          "start": 43.132,
+          "end": 43.253,
+          "matched": true
+        },
+        {
+          "text": "big",
+          "start": 43.273,
+          "end": 43.353,
+          "matched": true
+        },
+        {
+          "text": "thanks,",
+          "start": 43.653,
+          "end": 43.873,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 43.913,
+          "end": 43.993,
+          "matched": true
+        },
+        {
+          "text": "glad",
+          "start": 44.014,
+          "end": 44.314,
+          "matched": true
+        },
+        {
+          "text": "(Praise",
+          "start": 44.334,
+          "end": 44.534,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 44.554,
+          "end": 44.634,
+          "matched": true
+        },
+        {
+          "text": "lord)",
+          "start": 44.674,
+          "end": 44.875,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "You make me holy",
+      "start": 64.179,
+      "end": 65.159,
+      "words": [
+        {
+          "text": "You",
+          "start": 64.179,
+          "end": 64.319,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 64.359,
+          "end": 64.499,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 64.539,
+          "end": 64.639,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 64.719,
+          "end": 65.159,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "You make me turn my hands up onto the skies and pray",
+      "start": 65.94,
+      "end": 70.283,
+      "words": [
+        {
+          "text": "You",
+          "start": 65.94,
+          "end": 66.64,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 66.7,
+          "end": 66.961,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 67.021,
+          "end": 67.161,
+          "matched": true
+        },
+        {
+          "text": "turn",
+          "start": 67.301,
+          "end": 67.661,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 67.721,
+          "end": 67.921,
+          "matched": true
+        },
+        {
+          "text": "hands",
+          "start": 68.021,
+          "end": 68.342,
+          "matched": true
+        },
+        {
+          "text": "up",
+          "start": 68.422,
+          "end": 68.542,
+          "matched": true
+        },
+        {
+          "text": "onto",
+          "start": 68.742,
+          "end": 69.002,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 69.062,
+          "end": 69.162,
+          "matched": true
+        },
+        {
+          "text": "skies",
+          "start": 69.242,
+          "end": 69.702,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 69.783,
+          "end": 69.903,
+          "matched": true
+        },
+        {
+          "text": "pray",
+          "start": 69.983,
+          "end": 70.283,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "I could never complain whilst I have you",
+      "start": 70.743,
+      "end": 74.886,
+      "words": [
+        {
+          "text": "I",
+          "start": 70.743,
+          "end": 70.803,
+          "matched": true
+        },
+        {
+          "text": "could",
+          "start": 70.843,
+          "end": 71.023,
+          "matched": true
+        },
+        {
+          "text": "never",
+          "start": 71.063,
+          "end": 71.284,
+          "matched": true
+        },
+        {
+          "text": "complain",
+          "start": 71.364,
+          "end": 71.944,
+          "matched": true
+        },
+        {
+          "text": "whilst",
+          "start": 71.944,
+          "end": 72.264,
+          "matched": false
+        },
+        {
+          "text": "I",
+          "start": 72.264,
+          "end": 72.344,
+          "matched": true
+        },
+        {
+          "text": "have",
+          "start": 72.384,
+          "end": 72.664,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 72.704,
+          "end": 74.886,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "Click, c-c-click, c-c-click, click (Woof)",
+      "start": 74.886,
+      "end": 75.446,
+      "words": [
+        {
+          "text": "Click,",
+          "start": 74.886,
+          "end": 74.998,
+          "matched": false
+        },
+        {
+          "text": "c-c-click,",
+          "start": 74.998,
+          "end": 75.11,
+          "matched": false
+        },
+        {
+          "text": "c-c-click,",
+          "start": 75.11,
+          "end": 75.222,
+          "matched": false
+        },
+        {
+          "text": "click",
+          "start": 75.222,
+          "end": 75.334,
+          "matched": false
+        },
+        {
+          "text": "(Woof)",
+          "start": 75.334,
+          "end": 75.446,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "You like my holy books?",
+      "start": 75.446,
+      "end": 78.929,
+      "words": [
+        {
+          "text": "You",
+          "start": 75.446,
+          "end": 77.328,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 77.388,
+          "end": 77.628,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 77.708,
+          "end": 77.908,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 78.028,
+          "end": 78.508,
+          "matched": true
+        },
+        {
+          "text": "books?",
+          "start": 78.668,
+          "end": 78.929,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "I could lend them to you like a little garden fruit",
+      "start": 79.089,
+      "end": 81.57,
+      "words": [
+        {
+          "text": "I",
+          "start": 79.089,
+          "end": 79.109,
+          "matched": true
+        },
+        {
+          "text": "could",
+          "start": 79.169,
+          "end": 79.329,
+          "matched": true
+        },
+        {
+          "text": "lend",
+          "start": 79.349,
+          "end": 79.509,
+          "matched": true
+        },
+        {
+          "text": "them",
+          "start": 79.529,
+          "end": 79.629,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 79.689,
+          "end": 79.809,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 79.849,
+          "end": 79.989,
+          "matched": true
+        },
+        {
+          "text": "like",
+          "start": 80.029,
+          "end": 80.209,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 80.249,
+          "end": 80.31,
+          "matched": true
+        },
+        {
+          "text": "little",
+          "start": 80.37,
+          "end": 80.63,
+          "matched": true
+        },
+        {
+          "text": "garden",
+          "start": 80.67,
+          "end": 81.23,
+          "matched": true
+        },
+        {
+          "text": "fruit",
+          "start": 81.29,
+          "end": 81.57,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "Attitude and the prayer will save you",
+      "start": 82.211,
+      "end": 84.472,
+      "words": [
+        {
+          "text": "Attitude",
+          "start": 82.211,
+          "end": 83.051,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 83.091,
+          "end": 83.191,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 83.191,
+          "end": 83.332,
+          "matched": false
+        },
+        {
+          "text": "prayer",
+          "start": 83.332,
+          "end": 83.672,
+          "matched": true
+        },
+        {
+          "text": "will",
+          "start": 83.712,
+          "end": 83.912,
+          "matched": true
+        },
+        {
+          "text": "save",
+          "start": 83.972,
+          "end": 84.332,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 84.372,
+          "end": 84.472,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "Hello, waitress",
+      "start": 85.673,
+      "end": 86.894,
+      "words": [
+        {
+          "text": "Hello,",
+          "start": 85.673,
+          "end": 85.993,
+          "matched": true
+        },
+        {
+          "text": "waitress",
+          "start": 85.993,
+          "end": 86.894,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "I want this bread for dinner, paper plate it",
+      "start": 86.894,
+      "end": 88.835,
+      "words": [
+        {
+          "text": "I",
+          "start": 86.894,
+          "end": 86.954,
+          "matched": true
+        },
+        {
+          "text": "want",
+          "start": 86.994,
+          "end": 87.174,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 87.194,
+          "end": 87.294,
+          "matched": true
+        },
+        {
+          "text": "bread",
+          "start": 87.354,
+          "end": 87.534,
+          "matched": true
+        },
+        {
+          "text": "for",
+          "start": 87.554,
+          "end": 87.654,
+          "matched": true
+        },
+        {
+          "text": "dinner,",
+          "start": 87.674,
+          "end": 87.974,
+          "matched": true
+        },
+        {
+          "text": "paper",
+          "start": 87.994,
+          "end": 88.615,
+          "matched": true
+        },
+        {
+          "text": "plate",
+          "start": 88.615,
+          "end": 88.725,
+          "matched": false
+        },
+        {
+          "text": "it",
+          "start": 88.725,
+          "end": 88.835,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "Cut this loaf  first, let's share and enjoy it",
+      "start": 88.835,
+      "end": 90.816,
+      "words": [
+        {
+          "text": "Cut",
+          "start": 88.835,
+          "end": 88.995,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 89.015,
+          "end": 89.115,
+          "matched": true
+        },
+        {
+          "text": "loaf",
+          "start": 89.195,
+          "end": 89.395,
+          "matched": true
+        },
+        {
+          "text": "first,",
+          "start": 89.495,
+          "end": 89.815,
+          "matched": true
+        },
+        {
+          "text": "let's",
+          "start": 89.855,
+          "end": 89.975,
+          "matched": true
+        },
+        {
+          "text": "share",
+          "start": 89.995,
+          "end": 90.236,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 90.296,
+          "end": 90.376,
+          "matched": true
+        },
+        {
+          "text": "enjoy",
+          "start": 90.416,
+          "end": 90.736,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 90.756,
+          "end": 90.816,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "I'm abrasive?",
+      "start": 91.056,
+      "end": 91.696,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 91.056,
+          "end": 91.196,
+          "matched": true
+        },
+        {
+          "text": "abrasive?",
+          "start": 91.236,
+          "end": 91.696,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "I'm a follower, devout and unbroken",
+      "start": 91.856,
+      "end": 93.497,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 91.856,
+          "end": 91.956,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 91.976,
+          "end": 91.996,
+          "matched": true
+        },
+        {
+          "text": "follower,",
+          "start": 92.076,
+          "end": 92.537,
+          "matched": true
+        },
+        {
+          "text": "devout",
+          "start": 92.557,
+          "end": 92.897,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 92.937,
+          "end": 93.017,
+          "matched": true
+        },
+        {
+          "text": "unbroken",
+          "start": 93.057,
+          "end": 93.497,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "Holy preaching, spread the good word",
+      "start": 93.697,
+      "end": 94.998,
+      "words": [
+        {
+          "text": "Holy",
+          "start": 93.697,
+          "end": 93.957,
+          "matched": true
+        },
+        {
+          "text": "preaching,",
+          "start": 93.998,
+          "end": 94.298,
+          "matched": true
+        },
+        {
+          "text": "spread",
+          "start": 94.318,
+          "end": 94.498,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 94.538,
+          "end": 94.638,
+          "matched": true
+        },
+        {
+          "text": "good",
+          "start": 94.678,
+          "end": 94.818,
+          "matched": true
+        },
+        {
+          "text": "word",
+          "start": 94.838,
+          "end": 94.998,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "Brain-expanding preacher, coming for you, I'm contagious (ha ha)",
+      "start": 95.018,
+      "end": 97.86,
+      "words": [
+        {
+          "text": "Brain-expanding",
+          "start": 95.018,
+          "end": 95.658,
+          "matched": true
+        },
+        {
+          "text": "preacher,",
+          "start": 95.678,
+          "end": 95.999,
+          "matched": true
+        },
+        {
+          "text": "coming",
+          "start": 96.019,
+          "end": 96.299,
+          "matched": true
+        },
+        {
+          "text": "for",
+          "start": 96.319,
+          "end": 96.439,
+          "matched": true
+        },
+        {
+          "text": "you,",
+          "start": 96.479,
+          "end": 96.639,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 96.699,
+          "end": 96.819,
+          "matched": true
+        },
+        {
+          "text": "contagious",
+          "start": 96.839,
+          "end": 97.339,
+          "matched": true
+        },
+        {
+          "text": "(ha",
+          "start": 97.339,
+          "end": 97.6,
+          "matched": false
+        },
+        {
+          "text": "ha)",
+          "start": 97.6,
+          "end": 97.86,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l39",
+      "text": "Protecting what is sacred",
+      "start": 97.86,
+      "end": 99.02,
+      "words": [
+        {
+          "text": "Protecting",
+          "start": 97.86,
+          "end": 98.32,
+          "matched": true
+        },
+        {
+          "text": "what",
+          "start": 98.36,
+          "end": 98.5,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 98.56,
+          "end": 98.62,
+          "matched": true
+        },
+        {
+          "text": "sacred",
+          "start": 98.66,
+          "end": 99.02,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l40",
+      "text": "I am living good before your holy words",
+      "start": 99.12,
+      "end": 100.881,
+      "words": [
+        {
+          "text": "I",
+          "start": 99.12,
+          "end": 99.18,
+          "matched": true
+        },
+        {
+          "text": "am",
+          "start": 99.22,
+          "end": 99.32,
+          "matched": true
+        },
+        {
+          "text": "living",
+          "start": 99.36,
+          "end": 99.641,
+          "matched": true
+        },
+        {
+          "text": "good",
+          "start": 99.681,
+          "end": 99.841,
+          "matched": true
+        },
+        {
+          "text": "before",
+          "start": 99.861,
+          "end": 100.161,
+          "matched": true
+        },
+        {
+          "text": "your",
+          "start": 100.181,
+          "end": 100.321,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 100.381,
+          "end": 100.621,
+          "matched": true
+        },
+        {
+          "text": "words",
+          "start": 100.661,
+          "end": 100.881,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l41",
+      "text": "I always preach it",
+      "start": 100.921,
+      "end": 101.662,
+      "words": [
+        {
+          "text": "I",
+          "start": 100.921,
+          "end": 101.021,
+          "matched": true
+        },
+        {
+          "text": "always",
+          "start": 101.061,
+          "end": 101.281,
+          "matched": true
+        },
+        {
+          "text": "preach",
+          "start": 101.341,
+          "end": 101.542,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 101.582,
+          "end": 101.662,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l42",
+      "text": "Now you're crying and you're shaking?",
+      "start": 101.702,
+      "end": 103.002,
+      "words": [
+        {
+          "text": "Now",
+          "start": 101.702,
+          "end": 101.802,
+          "matched": true
+        },
+        {
+          "text": "you're",
+          "start": 101.822,
+          "end": 101.982,
+          "matched": true
+        },
+        {
+          "text": "crying",
+          "start": 102.002,
+          "end": 102.342,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 102.382,
+          "end": 102.462,
+          "matched": true
+        },
+        {
+          "text": "you're",
+          "start": 102.482,
+          "end": 102.622,
+          "matched": true
+        },
+        {
+          "text": "shaking?",
+          "start": 102.662,
+          "end": 103.002,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l43",
+      "text": "Take your tears and enjoy the lords gifts",
+      "start": 103.022,
+      "end": 104.323,
+      "words": [
+        {
+          "text": "Take",
+          "start": 103.022,
+          "end": 103.162,
+          "matched": true
+        },
+        {
+          "text": "your",
+          "start": 103.182,
+          "end": 103.302,
+          "matched": true
+        },
+        {
+          "text": "tears",
+          "start": 103.323,
+          "end": 103.523,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 103.543,
+          "end": 103.603,
+          "matched": true
+        },
+        {
+          "text": "enjoy",
+          "start": 103.623,
+          "end": 103.863,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 103.883,
+          "end": 103.963,
+          "matched": true
+        },
+        {
+          "text": "lords",
+          "start": 104.003,
+          "end": 104.163,
+          "matched": true
+        },
+        {
+          "text": "gifts",
+          "start": 104.183,
+          "end": 104.323,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l44",
+      "text": "Your beautiful",
+      "start": 104.343,
+      "end": 104.963,
+      "words": [
+        {
+          "text": "Your",
+          "start": 104.343,
+          "end": 104.483,
+          "matched": true
+        },
+        {
+          "text": "beautiful",
+          "start": 104.503,
+          "end": 104.963,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l45",
+      "text": "I'm holy",
+      "start": 106.83,
+      "end": 107.39,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 106.83,
+          "end": 106.99,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 107.03,
+          "end": 107.39,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l46",
+      "text": "You raise my life up then you say, (Don't be bad)",
+      "start": 107.671,
+      "end": 110.012,
+      "words": [
+        {
+          "text": "You",
+          "start": 107.671,
+          "end": 107.851,
+          "matched": true
+        },
+        {
+          "text": "raise",
+          "start": 107.971,
+          "end": 108.151,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 108.171,
+          "end": 108.311,
+          "matched": true
+        },
+        {
+          "text": "life",
+          "start": 108.351,
+          "end": 108.511,
+          "matched": true
+        },
+        {
+          "text": "up",
+          "start": 108.571,
+          "end": 108.651,
+          "matched": true
+        },
+        {
+          "text": "then",
+          "start": 108.671,
+          "end": 108.811,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 108.831,
+          "end": 108.951,
+          "matched": true
+        },
+        {
+          "text": "say,",
+          "start": 108.971,
+          "end": 109.271,
+          "matched": true
+        },
+        {
+          "text": "(Don't",
+          "start": 109.331,
+          "end": 109.511,
+          "matched": true
+        },
+        {
+          "text": "be",
+          "start": 109.551,
+          "end": 109.652,
+          "matched": true
+        },
+        {
+          "text": "bad)",
+          "start": 109.672,
+          "end": 110.012,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l47",
+      "text": "You know your way around a Holy book, (call you Dad)",
+      "start": 110.152,
+      "end": 112.693,
+      "words": [
+        {
+          "text": "You",
+          "start": 110.152,
+          "end": 110.292,
+          "matched": true
+        },
+        {
+          "text": "know",
+          "start": 110.332,
+          "end": 110.472,
+          "matched": true
+        },
+        {
+          "text": "your",
+          "start": 110.512,
+          "end": 110.672,
+          "matched": true
+        },
+        {
+          "text": "way",
+          "start": 110.712,
+          "end": 110.852,
+          "matched": true
+        },
+        {
+          "text": "around",
+          "start": 110.932,
+          "end": 111.192,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 111.192,
+          "end": 111.352,
+          "matched": false
+        },
+        {
+          "text": "Holy",
+          "start": 111.352,
+          "end": 111.632,
+          "matched": true
+        },
+        {
+          "text": "book,",
+          "start": 111.672,
+          "end": 111.913,
+          "matched": true
+        },
+        {
+          "text": "(call",
+          "start": 111.993,
+          "end": 112.173,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 112.193,
+          "end": 112.313,
+          "matched": true
+        },
+        {
+          "text": "Dad)",
+          "start": 112.333,
+          "end": 112.693,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l48",
+      "text": "Throwing sermons every time I go to Church (Preach brother, preach)",
+      "start": 112.973,
+      "end": 115.894,
+      "words": [
+        {
+          "text": "Throwing",
+          "start": 112.973,
+          "end": 113.293,
+          "matched": true
+        },
+        {
+          "text": "sermons",
+          "start": 113.313,
+          "end": 113.673,
+          "matched": true
+        },
+        {
+          "text": "every",
+          "start": 113.753,
+          "end": 113.954,
+          "matched": true
+        },
+        {
+          "text": "time",
+          "start": 113.994,
+          "end": 114.174,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 114.214,
+          "end": 114.314,
+          "matched": true
+        },
+        {
+          "text": "go",
+          "start": 114.354,
+          "end": 114.494,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 114.514,
+          "end": 114.594,
+          "matched": true
+        },
+        {
+          "text": "Church",
+          "start": 114.654,
+          "end": 114.954,
+          "matched": true
+        },
+        {
+          "text": "(Preach",
+          "start": 114.994,
+          "end": 115.294,
+          "matched": true
+        },
+        {
+          "text": "brother,",
+          "start": 115.314,
+          "end": 115.634,
+          "matched": true
+        },
+        {
+          "text": "preach)",
+          "start": 115.674,
+          "end": 115.894,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l49",
+      "text": "I'm glad, give big thanks, I'm glad (Praise the lord)",
+      "start": 115.914,
+      "end": 122.517,
+      "words": [
+        {
+          "text": "I'm",
+          "start": 115.914,
+          "end": 116.014,
+          "matched": true
+        },
+        {
+          "text": "glad,",
+          "start": 116.034,
+          "end": 116.315,
+          "matched": true
+        },
+        {
+          "text": "give",
+          "start": 116.355,
+          "end": 116.615,
+          "matched": true
+        },
+        {
+          "text": "big",
+          "start": 116.675,
+          "end": 116.935,
+          "matched": true
+        },
+        {
+          "text": "thanks,",
+          "start": 116.995,
+          "end": 117.175,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 117.215,
+          "end": 117.335,
+          "matched": true
+        },
+        {
+          "text": "glad",
+          "start": 117.355,
+          "end": 117.675,
+          "matched": true
+        },
+        {
+          "text": "(Praise",
+          "start": 121.657,
+          "end": 121.837,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 121.877,
+          "end": 121.997,
+          "matched": true
+        },
+        {
+          "text": "lord)",
+          "start": 122.017,
+          "end": 122.517,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l50",
+      "text": "You make me holy",
+      "start": 124.018,
+      "end": 125.019,
+      "words": [
+        {
+          "text": "You",
+          "start": 124.018,
+          "end": 124.178,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 124.198,
+          "end": 124.558,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 124.578,
+          "end": 124.678,
+          "matched": true
+        },
+        {
+          "text": "holy",
+          "start": 124.738,
+          "end": 125.019,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l51",
+      "text": "You make me turn my hands up onto the skies and pray",
+      "start": 125.039,
+      "end": 128.92,
+      "words": [
+        {
+          "text": "You",
+          "start": 125.039,
+          "end": 125.319,
+          "matched": true
+        },
+        {
+          "text": "make",
+          "start": 125.379,
+          "end": 125.619,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 125.679,
+          "end": 125.919,
+          "matched": true
+        },
+        {
+          "text": "turn",
+          "start": 125.999,
+          "end": 126.319,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 126.359,
+          "end": 126.579,
+          "matched": true
+        },
+        {
+          "text": "hands",
+          "start": 126.699,
+          "end": 127.02,
+          "matched": true
+        },
+        {
+          "text": "up",
+          "start": 127.1,
+          "end": 127.2,
+          "matched": true
+        },
+        {
+          "text": "onto",
+          "start": 127.42,
+          "end": 127.7,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 127.74,
+          "end": 127.9,
+          "matched": true
+        },
+        {
+          "text": "skies",
+          "start": 127.92,
+          "end": 128.36,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 128.44,
+          "end": 128.54,
+          "matched": true
+        },
+        {
+          "text": "pray",
+          "start": 128.64,
+          "end": 128.92,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l52",
+      "text": "I could never complain whilst I have you",
+      "start": 129.401,
+      "end": 131.522,
+      "words": [
+        {
+          "text": "I",
+          "start": 129.401,
+          "end": 129.481,
+          "matched": true
+        },
+        {
+          "text": "could",
+          "start": 129.481,
+          "end": 129.701,
+          "matched": false
+        },
+        {
+          "text": "never",
+          "start": 129.701,
+          "end": 129.941,
+          "matched": true
+        },
+        {
+          "text": "complain",
+          "start": 130.021,
+          "end": 130.621,
+          "matched": true
+        },
+        {
+          "text": "whilst",
+          "start": 130.681,
+          "end": 130.901,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 130.921,
+          "end": 131.001,
+          "matched": true
+        },
+        {
+          "text": "have",
+          "start": 131.061,
+          "end": 131.322,
+          "matched": true
+        },
+        {
+          "text": "you",
+          "start": 131.362,
+          "end": 131.522,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l53",
+      "text": "Click, c-c-click, c-c-click, click (Woof)",
+      "start": 131.522,
+      "end": 132.562,
+      "words": [
+        {
+          "text": "Click,",
+          "start": 131.522,
+          "end": 131.675,
+          "matched": false
+        },
+        {
+          "text": "c-c-click,",
+          "start": 131.675,
+          "end": 131.829,
+          "matched": false
+        },
+        {
+          "text": "c-c-click,",
+          "start": 131.829,
+          "end": 131.982,
+          "matched": false
+        },
+        {
+          "text": "click",
+          "start": 131.982,
+          "end": 132.222,
+          "matched": true
+        },
+        {
+          "text": "(Woof)",
+          "start": 132.222,
+          "end": 132.562,
+          "matched": false
+        }
+      ]
+    }
+  ]
+}
