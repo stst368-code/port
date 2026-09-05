@@ -1,0 +1,157 @@
+title: twist-your-mind
+version: 1
+model: minimax H3
+state: active
+genre: hyperpop
+inspiration: Gene Kelly & Donald O'Connor – Moses Supposes et al
+duration: 360
+cover: twist-your-mind-v1.png
+caption: |
+  Global Metadata
+  Minimal mid-2010s alternative rap and spacey trap with an underground UK feel. Slow, heavy half-time bounce around 68–70 BPM, or approximately 136–140 BPM in double-time counting. Keep the production sparse, repetitive and hypnotic rather than constantly evolving: rounded sub-bass, dry punchy kick, tight snare, simple crisp hi-hats, restrained trap percussion and a small eerie synthetic motif repeating through most of the track. Harmony should remain minimal and loop-based, creating a slightly sinister but playful nocturnal atmosphere. The groove should feel relaxed and confident despite the fast vocal phrasing. Preserve substantial empty space around the vocal. Avoid hyperpop maximalism, glitch-heavy production, dramatic drops, dense synth layers, EDM effects, rock instrumentation and excessive transitional sound design.
+  Vocal Details
+  Female lead vocal with a youthful, bright, slightly nasal timbre and clear British-accented rap delivery. Performance is cheeky, dry, sexually provocative and self-assured rather than manic. Verses use tightly articulated conversational rap with quick internal rhymes and playful changes of emphasis, but maintain a steady underlying cadence. Pre-choruses become slightly more melodic and sing-song without turning into full pop singing. Choruses are deliberately tiny and repetitive, delivered as a catchy chant with light doubling rather than a huge layered hook. Keep the lead close, dry and intelligible. Use only occasional restrained ad-libs or doubles; avoid constant vocal warping, exaggerated character voices and disruptive effects.
+  Arrangement
+  [intro]
+  Establish the core bass, drum and eerie synth loop immediately but sparsely, leaving pronounced gaps around the fragmented opening vocal. Keep the atmosphere restrained and slightly strange.
+  [verse]
+  Bring the full established groove into place without adding new instrumentation. Keep the backing repetitive and spacious, allowing the tightly articulated vocal phrasing to provide most of the rhythmic movement.
+  [chorus]
+  Maintain essentially the same groove. Introduce the short repeated chant with light vocal doubling and a modest increase in bass and drum weight, but avoid turning it into a large pop chorus.
+  [verse]
+  Return directly to the sparse central loop. Keep the instrumental stable while the vocal becomes denser, quicker and more conversational, with brief ad-libs occupying the spaces between phrases.
+  [chorus]
+  Restore the established chant essentially unchanged. Preserve its repetition and familiarity rather than increasing the scale.
+  [verse]
+  Maintain the same central groove while the tongue-twisting vocal patterns become increasingly intricate. Keep the beat relaxed underneath the faster articulation and preserve clear empty space around the lead.
+  [chorus]
+  Repeat the established chorus with the same restrained doubling and modest rhythmic reinforcement.
+  [verse]
+  Keep the instrumental loop stubbornly stable while the vocal complexity increases further. Allow increasingly compressed phrasing, rapid consonants and call-and-response ad-libs to create the sense of acceleration without changing the underlying tempo.
+  [chorus]
+  Return once more to the familiar chant with minimal variation, providing a simple rhythmic reset before the final escalation.
+  [verse]
+  Treat the final extended verse as the vocal and rhythmic climax. Begin over the established sparse groove, then progressively tighten the vocal spacing as the multi-syllabic words and repeated place names accumulate. Allow the delivery to become increasingly rapid and relentless while keeping articulation clear. The drums may gain slightly stronger hi-hat activity and percussion toward the end, but the core bass and eerie synth loop should remain unchanged. Avoid a dramatic drop or large instrumental build; the escalating vocal itself should create the climax.
+  [outro]
+  Strip the groove back slightly beneath the final short nonsense-word permutations. Return to the loose, playful spacing of the opening, using minimal bass, percussion and the established synth motif. End abruptly and simply after the final vocal response rather than building toward a conventional musical resolution.
+lyrics: |
+  [intro]
+  Moses...
+  supposes... (hmm?)
+  his toeses...
+  are Roses... (yeah)
+  But Moses...
+  supposes...
+  Erroneously... (oh no!)
+  [verse]
+  Moses supposes his toeses are Roses
+  But Moses supposes Erroneously
+  Moses he knowses his toeses aren't roses
+  As Moses supposes his toeses to be!
+  Moses supposes his toeses are Roses
+  But Moses supposes Erroneously
+  [chorus]
+  A mose is a mose! (mose)
+  A rose is a rose! (rose)
+  A toes is a toes! (toes)
+  mose (mose) rose (rose) toes (toes)
+  Hooptie doodie doodle
+  doodle doodie hooptie
+  (ha ha ha ha ha ha)
+  [verse]
+  Peter (Peter)
+  Piper (Piper)
+  Peter Piper picked a peck of pickled peppers (peppers)
+  A peck of pickled peppers Peter Piper picked (picked)
+  If Peter Piper picked a peck of pickled peppers (hmm)
+  Where's the peck of pickled peppers Peter Piper picked? (where is it?)
+  (But)
+  How much wood would a woodchuck chuck if a woodchuck could chuck wood?
+  if a woodchuck could chuck wood How much wood would a woodchuck chuck
+  (What about Mary?)
+  Well, she sells seashells by the seashore.
+  the shells she sells are seashells, I'm sure (sure)
+  [chorus]
+  A mose is a mose! (mose)
+  A rose is a rose! (rose)
+  A toes is a toes! (toes)
+  mose (mose) rose (rose) toes (toes)
+  Hooptie doodie doodle
+  doodle doodie hooptie
+  (ha ha ha ha ha ha)
+  [verse]
+  well
+  I wish to wish the wish you wish to wish
+  but if you wish the wish the witch wishes
+  I won't wish the wish you wish to wish
+  One one was a racehorse
+  two two was one too
+  one one won one race
+  and two two won one too
+  I thought a thought (tell me more?)
+  but the thought I thought
+  wasn't the thought I thought I thought (hmmmmmmm)
+  (ha ha)
+  [chorus]
+  A mose is a mose! (mose)
+  A rose is a rose! (rose)
+  A toes is a toes! (toes)
+  mose (mose) rose (rose) toes (toes)
+  Hooptie doodie doodle
+  doodle doodie hooptie
+  (ha ha ha ha ha ha)
+  [verse]
+  Red lorry, yellow lorry
+  lorry yellow, lorry red (vroom vroom)
+  Red lorry, yellow lorry
+  lorry yellow, lorry red (vroom vroom)
+  Red lorry, yellow lorry
+  lorry yellow, lorry red (vroom vroom)
+  Crisp crusts crackle crunchily (crackle)
+  Round the rugged rock, the ragged rascal ran
+  If two witches were watching two wrist watches
+  which witch would watch which wrist watch? (tick tock)
+  If “there” is there (there)
+  and “their” is theirs (their)
+  and “they’re” means they are (they're)
+  then where are they? (huh?)
+  (ha ha)
+  [chorus]
+  A mose is a mose! (mose)
+  A rose is a rose! (rose)
+  A toes is a toes! (toes)
+  mose (mose) rose (rose) toes (toes)
+  Hooptie doodie doodle
+  doodle doodie hooptie
+  (ha ha ha ha ha ha)
+  [bridge]
+  Very well, very well, very well...
+  (huh?)
+  Birming-ham
+  Notting-ham
+  Bucking-ham
+  Rotherham, Oldham, Durham, Grantham
+  Dagenham, Chatham, Rainham, Gillingham
+  Faversham, Fareham, Horsham, Chesham
+  Evesham-Melksham-Chippenham-Hexham
+  Swaffham-Dereham-Wymondham-Downham
+  Tottenham-Twickenham-Altrincham-Amersham
+  (ha ha)
+  Ports-mouth (mouth)
+  Plymouth, Falmouth, Exmouth
+  Teignmouth-Weymouth,
+  Tynemouth-Bournemouth
+  Norwich-Ipswich-Harwich-Sandwich
+  Northwich-Middlewich-Nantwich-Droitwich
+  Manchester-Winchester-Chester
+  Colchester-Dorchester-Cirencester
+  Oxford-Watford-Guildford-Salford
+  Hereford-Chelmsford-Stamford-Bedford
+  Bradford-Stafford-Dartford
+  (you've lost me)
+  ha ha
+  [outro]
+  A mose a rose a tose (tose)
+  A rose a tose a mose (mose)
+  A tose a mose a rose (rose)
+  (ha ha ha ha ha ha)
