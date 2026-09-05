@@ -4,7 +4,7 @@
   "title": "paws-off-the-velvet",
   "song_version": 4,
   "source_yaml": "paws-off-the-velvet-v4.yaml",
-  "source_audio": "paws-off-the-velvet_v4.flac",
+  "source_audio": "paws-off-the-velvet-v4.flac",
   "language": "en",
   "engine": "demucs:htdemucs+whisperx:large-v3",
   "runtime": {
