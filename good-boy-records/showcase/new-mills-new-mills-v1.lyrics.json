@@ -26,7 +26,7 @@
     "rating": "excellent",
     "review_threshold": 0.8,
     "review_required": false,
-    "approved": false,
+    "approved": true,
     "usable_for_live_lyrics": true
   },
   "lines": [
