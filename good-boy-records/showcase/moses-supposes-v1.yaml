@@ -1,0 +1,78 @@
+title: moses-supposes
+version: 1
+model: minimax H3
+state: active
+genre: hyperpop
+inspiration: Gene Kelly & Donald O'Connor – Moses Supposes
+duration: 220
+cover: moses-supposes-v1.png
+caption: |
+  Global Metadata
+  Minimal mid-2010s alternative rap and spacey trap with an underground UK feel. Slow, heavy half-time bounce around 68–70 BPM, or approximately 136–140 BPM in double-time counting. Keep the production sparse, repetitive and hypnotic rather than constantly evolving: rounded sub-bass, dry punchy kick, tight snare, simple crisp hi-hats, restrained trap percussion and a small eerie synthetic motif repeating through most of the track. Harmony should remain minimal and loop-based, creating a slightly sinister but playful nocturnal atmosphere. The groove should feel relaxed and confident despite the fast vocal phrasing. Preserve substantial empty space around the vocal. Avoid hyperpop maximalism, glitch-heavy production, dramatic drops, dense synth layers, EDM effects, rock instrumentation and excessive transitional sound design.
+  Vocal Details
+  Female lead vocal with a youthful, bright, slightly nasal timbre and clear British-accented rap delivery. Performance is cheeky, dry, sexually provocative and self-assured rather than manic. Verses use tightly articulated conversational rap with quick internal rhymes and playful changes of emphasis, but maintain a steady underlying cadence. Pre-choruses become slightly more melodic and sing-song without turning into full pop singing. Choruses are deliberately tiny and repetitive, delivered as a catchy chant with light doubling rather than a huge layered hook. Keep the lead close, dry and intelligible. Use only occasional restrained ad-libs or doubles; avoid constant vocal warping, exaggerated character voices and disruptive effects.
+  Arrangement
+  [intro]
+  Establish the core bass, drum and eerie synth loop immediately. Keep it simple and stable.
+  [chorus]
+  Introduce the short repeated vocal hook over essentially the same groove, with only slight vocal doubling and a modest increase in bass weight.
+  [verse]
+  Maintain the established instrumental loop. Let rhythmic interest come primarily from the rapper’s flow rather than changing the backing track.
+  [pre-chorus]
+  Pull the drums back slightly and allow the vocal to become more melodic. Keep the same harmonic atmosphere.
+  [chorus]
+  Restore the full groove and repeated chant. Add only subtle reinforcement.
+  [post-chorus]
+  Reduce to bass, percussion and repeated vocal fragments without introducing new musical ideas.
+  [verse]
+  Return to the same central groove with slightly fuller drums while preserving the sparse production.
+  [outro]
+  Repeat the central vocal motif over the established beat, then finish simply without a dramatic build or elaborate ending.
+lyrics: |
+  [intro]
+  Moses...
+  supposes... (hmm?)
+  his toeses...
+  are Roses... (yeah)
+  But Moses...
+  supposes...
+  Erroneously... (oh no!)
+  [chorus]
+  Moses supposes his toeses are Roses
+  But Moses supposes Erroneously
+  Moses he knowses his toeses aren't roses
+  As Moses supposes his toeses to be!
+  Moses supposes his toeses are Roses
+  But Moses supposes Erroneously
+  [verse]
+  Moses he knowses his toeses aren't roses (does he?)
+  As Moses supposes his toeses to be!
+  Moses supposes his toeses are Roses (what?)
+  But Moses supposes Erroneously
+  A mose is a mose! (mose)
+  A rose is a rose! (rose)
+  A toes is a toes! (toes)
+  (ha ha ha ha ha ha)
+  [pre-chorus]
+  Hooptie doodie doodle
+  [chorus]
+  Moses supposes his toeses are Roses,
+  But Moses supposes Erroneously,
+  For Moses he knowses his toeses arent roses,
+  As Moses supposes his toeses to be!
+  [post-chorus]
+  Moses (Moses supposes his toeses are roses)
+  Moses (Moses supposes erroneously)
+  Moses (Moses supposes his toeses are roses)
+  As Moses supposes his toeses to be!
+  [verse]
+  A Rose is a rose is a rose is a rose is (yeah yeah yeah)
+  A rose is what Moses supposes his toes is (no no no)
+  Couldn't be a lily or a daphi daphi dilli
+  It's gotta be a rose cuz it rhymes with mose!
+  Moses!
+  Moses!
+  Moses!
+  [instrumental]
+  [outro]
+  (ha ha ha ha ha ha)

@@ -1,0 +1,1580 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 2,
+  "title": "moses-supposes",
+  "song_version": 1,
+  "source_yaml": "moses-supposes-v1.yaml",
+  "source_audio": "moses-supposes-v1.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "runtime": {
+    "requested_device": "auto",
+    "demucs_device": "cuda",
+    "whisperx_device": "cuda",
+    "whisperx_compute_type": "float16",
+    "batch_size": 4,
+    "cpu_fallback_used": false
+  },
+  "generated_at": "2026-09-05T17:45:51+00:00",
+  "stats": {
+    "lyric_words": 207,
+    "recognised_words": 219,
+    "matched_words": 130,
+    "coverage": 0.628
+  },
+  "quality": {
+    "rating": "poor",
+    "review_threshold": 0.8,
+    "review_required": true,
+    "approved": false,
+    "usable_for_live_lyrics": false
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "Moses...",
+      "start": 0.331,
+      "end": 0.912,
+      "words": [
+        {
+          "text": "Moses...",
+          "start": 0.331,
+          "end": 0.912,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "supposes... (hmm?)",
+      "start": 2.113,
+      "end": 3.054,
+      "words": [
+        {
+          "text": "supposes...",
+          "start": 2.113,
+          "end": 3.034,
+          "matched": true
+        },
+        {
+          "text": "(hmm?)",
+          "start": 3.034,
+          "end": 3.054,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "his toeses...",
+      "start": 3.054,
+      "end": 6.136,
+      "words": [
+        {
+          "text": "his",
+          "start": 3.054,
+          "end": 5.415,
+          "matched": true
+        },
+        {
+          "text": "toeses...",
+          "start": 5.536,
+          "end": 6.136,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "are Roses... (yeah)",
+      "start": 7.237,
+      "end": 10.159,
+      "words": [
+        {
+          "text": "are",
+          "start": 7.237,
+          "end": 7.357,
+          "matched": true
+        },
+        {
+          "text": "Roses...",
+          "start": 7.397,
+          "end": 8.018,
+          "matched": true
+        },
+        {
+          "text": "(yeah)",
+          "start": 8.018,
+          "end": 10.159,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "But Moses...",
+      "start": 10.159,
+      "end": 11.08,
+      "words": [
+        {
+          "text": "But",
+          "start": 10.159,
+          "end": 10.4,
+          "matched": true
+        },
+        {
+          "text": "Moses...",
+          "start": 10.48,
+          "end": 11.08,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "supposes...",
+      "start": 12.001,
+      "end": 12.942,
+      "words": [
+        {
+          "text": "supposes...",
+          "start": 12.001,
+          "end": 12.942,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "Erroneously... (oh no!)",
+      "start": 14.683,
+      "end": 17.746,
+      "words": [
+        {
+          "text": "Erroneously...",
+          "start": 14.683,
+          "end": 15.564,
+          "matched": true
+        },
+        {
+          "text": "(oh",
+          "start": 15.584,
+          "end": 15.624,
+          "matched": true
+        },
+        {
+          "text": "no!)",
+          "start": 17.185,
+          "end": 17.746,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "Moses supposes his toeses are Roses",
+      "start": 20.968,
+      "end": 23.272,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 20.968,
+          "end": 21.509,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 21.589,
+          "end": 22.35,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 22.41,
+          "end": 22.491,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 22.531,
+          "end": 22.691,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 22.771,
+          "end": 22.851,
+          "matched": true
+        },
+        {
+          "text": "Roses",
+          "start": 22.891,
+          "end": 23.272,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "But Moses supposes Erroneously",
+      "start": 23.312,
+      "end": 25.936,
+      "words": [
+        {
+          "text": "But",
+          "start": 23.312,
+          "end": 23.432,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 23.472,
+          "end": 23.973,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 24.053,
+          "end": 24.814,
+          "matched": true
+        },
+        {
+          "text": "Erroneously",
+          "start": 24.814,
+          "end": 25.936,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "Moses he knowses his toeses aren't roses",
+      "start": 25.936,
+      "end": 28.099,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 25.936,
+          "end": 26.397,
+          "matched": true
+        },
+        {
+          "text": "he",
+          "start": 26.417,
+          "end": 26.537,
+          "matched": true
+        },
+        {
+          "text": "knowses",
+          "start": 26.557,
+          "end": 26.898,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 27.038,
+          "end": 27.138,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 27.178,
+          "end": 27.358,
+          "matched": true
+        },
+        {
+          "text": "aren't",
+          "start": 27.458,
+          "end": 27.639,
+          "matched": true
+        },
+        {
+          "text": "roses",
+          "start": 27.679,
+          "end": 28.099,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "As Moses supposes his toeses to be!",
+      "start": 28.18,
+      "end": 30.343,
+      "words": [
+        {
+          "text": "As",
+          "start": 28.18,
+          "end": 28.32,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 28.42,
+          "end": 28.861,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 28.881,
+          "end": 29.482,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 29.522,
+          "end": 29.622,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 29.662,
+          "end": 29.962,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 29.982,
+          "end": 30.083,
+          "matched": true
+        },
+        {
+          "text": "be!",
+          "start": 30.123,
+          "end": 30.343,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "Moses supposes his toeses are Roses",
+      "start": 40.775,
+      "end": 43.077,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 40.775,
+          "end": 41.296,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 41.376,
+          "end": 42.116,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 42.176,
+          "end": 42.296,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 42.316,
+          "end": 42.477,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 42.557,
+          "end": 42.637,
+          "matched": true
+        },
+        {
+          "text": "Roses",
+          "start": 42.657,
+          "end": 43.077,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "But Moses supposes Erroneously",
+      "start": 43.097,
+      "end": 45.539,
+      "words": [
+        {
+          "text": "But",
+          "start": 43.097,
+          "end": 43.237,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 43.257,
+          "end": 43.778,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 43.858,
+          "end": 44.598,
+          "matched": true
+        },
+        {
+          "text": "Erroneously",
+          "start": 44.698,
+          "end": 45.539,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "Moses he knowses his toeses aren't roses (does he?)",
+      "start": 45.719,
+      "end": 47.981,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 45.719,
+          "end": 46.18,
+          "matched": true
+        },
+        {
+          "text": "he",
+          "start": 46.22,
+          "end": 46.34,
+          "matched": true
+        },
+        {
+          "text": "knowses",
+          "start": 46.34,
+          "end": 46.84,
+          "matched": false
+        },
+        {
+          "text": "his",
+          "start": 46.84,
+          "end": 46.94,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 46.98,
+          "end": 47.16,
+          "matched": true
+        },
+        {
+          "text": "aren't",
+          "start": 47.24,
+          "end": 47.401,
+          "matched": true
+        },
+        {
+          "text": "roses",
+          "start": 47.441,
+          "end": 47.901,
+          "matched": true
+        },
+        {
+          "text": "(does",
+          "start": 47.901,
+          "end": 47.941,
+          "matched": false
+        },
+        {
+          "text": "he?)",
+          "start": 47.941,
+          "end": 47.981,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "As Moses supposes his toeses to be!",
+      "start": 47.981,
+      "end": 50.183,
+      "words": [
+        {
+          "text": "As",
+          "start": 47.981,
+          "end": 48.101,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 48.181,
+          "end": 48.642,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 48.682,
+          "end": 49.282,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 49.302,
+          "end": 49.422,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 49.442,
+          "end": 49.722,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 49.903,
+          "end": 50.003,
+          "matched": true
+        },
+        {
+          "text": "be!",
+          "start": 50.043,
+          "end": 50.183,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Moses supposes his toeses are Roses (what?)",
+      "start": 50.683,
+      "end": 53.005,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 50.683,
+          "end": 51.204,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 51.284,
+          "end": 52.024,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 52.084,
+          "end": 52.184,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 52.225,
+          "end": 52.385,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 52.445,
+          "end": 52.525,
+          "matched": true
+        },
+        {
+          "text": "Roses",
+          "start": 52.565,
+          "end": 52.985,
+          "matched": true
+        },
+        {
+          "text": "(what?)",
+          "start": 52.985,
+          "end": 53.005,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "But Moses supposes Erroneously",
+      "start": 53.005,
+      "end": 55.447,
+      "words": [
+        {
+          "text": "But",
+          "start": 53.005,
+          "end": 53.125,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 53.165,
+          "end": 53.686,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 53.766,
+          "end": 54.506,
+          "matched": true
+        },
+        {
+          "text": "Erroneously",
+          "start": 54.606,
+          "end": 55.447,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "A mose is a mose! (mose)",
+      "start": 55.447,
+      "end": 61.672,
+      "words": [
+        {
+          "text": "A",
+          "start": 55.447,
+          "end": 55.627,
+          "matched": false
+        },
+        {
+          "text": "mose",
+          "start": 55.627,
+          "end": 56.148,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 57.028,
+          "end": 57.149,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 60.171,
+          "end": 60.191,
+          "matched": true
+        },
+        {
+          "text": "mose!",
+          "start": 60.451,
+          "end": 61.032,
+          "matched": true
+        },
+        {
+          "text": "(mose)",
+          "start": 61.212,
+          "end": 61.672,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "A rose is a rose! (rose)",
+      "start": 62.793,
+      "end": 65.255,
+      "words": [
+        {
+          "text": "A",
+          "start": 62.793,
+          "end": 62.873,
+          "matched": true
+        },
+        {
+          "text": "rose",
+          "start": 62.893,
+          "end": 63.514,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 63.514,
+          "end": 63.594,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 63.594,
+          "end": 63.674,
+          "matched": true
+        },
+        {
+          "text": "rose!",
+          "start": 63.674,
+          "end": 63.694,
+          "matched": false
+        },
+        {
+          "text": "(rose)",
+          "start": 63.694,
+          "end": 65.255,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "A toes is a toes! (toes)",
+      "start": 65.275,
+      "end": 66.927,
+      "words": [
+        {
+          "text": "A",
+          "start": 65.275,
+          "end": 65.355,
+          "matched": true
+        },
+        {
+          "text": "toes",
+          "start": 65.355,
+          "end": 65.706,
+          "matched": false
+        },
+        {
+          "text": "is",
+          "start": 65.706,
+          "end": 66.056,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 66.056,
+          "end": 66.136,
+          "matched": true
+        },
+        {
+          "text": "toes!",
+          "start": 66.136,
+          "end": 66.532,
+          "matched": false
+        },
+        {
+          "text": "(toes)",
+          "start": 66.532,
+          "end": 66.927,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "(ha ha ha ha ha ha)",
+      "start": 66.927,
+      "end": 69.302,
+      "words": [
+        {
+          "text": "(ha",
+          "start": 66.927,
+          "end": 67.323,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 67.323,
+          "end": 67.719,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 67.719,
+          "end": 68.115,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 68.115,
+          "end": 68.51,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 68.51,
+          "end": 68.906,
+          "matched": false
+        },
+        {
+          "text": "ha)",
+          "start": 68.906,
+          "end": 69.302,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "Hooptie doodie doodle",
+      "start": 69.302,
+      "end": 70.489,
+      "words": [
+        {
+          "text": "Hooptie",
+          "start": 69.302,
+          "end": 69.698,
+          "matched": false
+        },
+        {
+          "text": "doodie",
+          "start": 69.698,
+          "end": 70.093,
+          "matched": false
+        },
+        {
+          "text": "doodle",
+          "start": 70.093,
+          "end": 70.489,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "Moses supposes his toeses are Roses,",
+      "start": 70.489,
+      "end": 72.77,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 70.489,
+          "end": 70.989,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 70.989,
+          "end": 71.869,
+          "matched": false
+        },
+        {
+          "text": "his",
+          "start": 71.869,
+          "end": 71.989,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 72.009,
+          "end": 72.169,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 72.249,
+          "end": 72.329,
+          "matched": true
+        },
+        {
+          "text": "Roses,",
+          "start": 72.35,
+          "end": 72.77,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "But Moses supposes Erroneously,",
+      "start": 73.55,
+      "end": 75.051,
+      "words": [
+        {
+          "text": "But",
+          "start": 73.55,
+          "end": 73.69,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 73.73,
+          "end": 74.291,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 74.291,
+          "end": 74.671,
+          "matched": false
+        },
+        {
+          "text": "Erroneously,",
+          "start": 74.671,
+          "end": 75.051,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "For Moses he knowses his toeses arent roses,",
+      "start": 75.051,
+      "end": 77.572,
+      "words": [
+        {
+          "text": "For",
+          "start": 75.051,
+          "end": 75.431,
+          "matched": false
+        },
+        {
+          "text": "Moses",
+          "start": 75.431,
+          "end": 75.871,
+          "matched": true
+        },
+        {
+          "text": "he",
+          "start": 75.891,
+          "end": 76.011,
+          "matched": true
+        },
+        {
+          "text": "knowses",
+          "start": 76.031,
+          "end": 76.352,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 76.532,
+          "end": 76.612,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 76.652,
+          "end": 76.832,
+          "matched": true
+        },
+        {
+          "text": "arent",
+          "start": 76.932,
+          "end": 77.052,
+          "matched": true
+        },
+        {
+          "text": "roses,",
+          "start": 77.132,
+          "end": 77.572,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "As Moses supposes his toeses to be!",
+      "start": 77.672,
+      "end": 79.793,
+      "words": [
+        {
+          "text": "As",
+          "start": 77.672,
+          "end": 77.812,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 77.892,
+          "end": 78.333,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 78.413,
+          "end": 78.953,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 78.993,
+          "end": 79.093,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 79.133,
+          "end": 79.433,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 79.453,
+          "end": 79.573,
+          "matched": true
+        },
+        {
+          "text": "be!",
+          "start": 79.593,
+          "end": 79.793,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "Moses (Moses supposes his toeses are roses)",
+      "start": 80.354,
+      "end": 82.655,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 80.354,
+          "end": 80.874,
+          "matched": true
+        },
+        {
+          "text": "(Moses",
+          "start": 81.134,
+          "end": 81.414,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 81.414,
+          "end": 81.494,
+          "matched": false
+        },
+        {
+          "text": "his",
+          "start": 81.494,
+          "end": 81.574,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 81.614,
+          "end": 82.055,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 82.135,
+          "end": 82.215,
+          "matched": true
+        },
+        {
+          "text": "roses)",
+          "start": 82.255,
+          "end": 82.655,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "Moses (Moses supposes erroneously)",
+      "start": 90.319,
+      "end": 93.381,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 90.319,
+          "end": 90.779,
+          "matched": true
+        },
+        {
+          "text": "(Moses",
+          "start": 91.039,
+          "end": 91.32,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 91.32,
+          "end": 92.35,
+          "matched": false
+        },
+        {
+          "text": "erroneously)",
+          "start": 92.35,
+          "end": 93.381,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "Moses (Moses supposes his toeses are roses)",
+      "start": 93.381,
+      "end": 97.523,
+      "words": [
+        {
+          "text": "Moses",
+          "start": 93.381,
+          "end": 93.821,
+          "matched": true
+        },
+        {
+          "text": "(Moses",
+          "start": 95.242,
+          "end": 95.722,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 95.722,
+          "end": 96.342,
+          "matched": false
+        },
+        {
+          "text": "his",
+          "start": 96.342,
+          "end": 96.422,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 96.462,
+          "end": 96.902,
+          "matched": true
+        },
+        {
+          "text": "are",
+          "start": 96.983,
+          "end": 97.063,
+          "matched": true
+        },
+        {
+          "text": "roses)",
+          "start": 97.083,
+          "end": 97.523,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "As Moses supposes his toeses to be!",
+      "start": 98.718,
+      "end": 107.406,
+      "words": [
+        {
+          "text": "As",
+          "start": 98.718,
+          "end": 98.818,
+          "matched": true
+        },
+        {
+          "text": "Moses",
+          "start": 98.918,
+          "end": 99.359,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 99.439,
+          "end": 99.999,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 100.039,
+          "end": 100.32,
+          "matched": true
+        },
+        {
+          "text": "toeses",
+          "start": 100.4,
+          "end": 105.825,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 105.825,
+          "end": 106.616,
+          "matched": false
+        },
+        {
+          "text": "be!",
+          "start": 106.616,
+          "end": 107.406,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "A Rose is a rose is a rose is a rose is (yeah yeah yeah)",
+      "start": 107.406,
+      "end": 114.108,
+      "words": [
+        {
+          "text": "A",
+          "start": 107.406,
+          "end": 108.197,
+          "matched": false
+        },
+        {
+          "text": "Rose",
+          "start": 108.197,
+          "end": 108.988,
+          "matched": false
+        },
+        {
+          "text": "is",
+          "start": 108.988,
+          "end": 109.088,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 109.088,
+          "end": 109.468,
+          "matched": false
+        },
+        {
+          "text": "rose",
+          "start": 109.468,
+          "end": 109.869,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 109.869,
+          "end": 110.499,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 110.499,
+          "end": 111.13,
+          "matched": false
+        },
+        {
+          "text": "rose",
+          "start": 111.13,
+          "end": 111.761,
+          "matched": false
+        },
+        {
+          "text": "is",
+          "start": 111.761,
+          "end": 112.391,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 112.391,
+          "end": 113.022,
+          "matched": false
+        },
+        {
+          "text": "rose",
+          "start": 113.022,
+          "end": 113.652,
+          "matched": false
+        },
+        {
+          "text": "is",
+          "start": 113.652,
+          "end": 113.732,
+          "matched": true
+        },
+        {
+          "text": "(yeah",
+          "start": 113.732,
+          "end": 113.857,
+          "matched": false
+        },
+        {
+          "text": "yeah",
+          "start": 113.857,
+          "end": 113.983,
+          "matched": false
+        },
+        {
+          "text": "yeah)",
+          "start": 113.983,
+          "end": 114.108,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "A rose is what Moses supposes his toes is (no no no)",
+      "start": 114.108,
+      "end": 116.563,
+      "words": [
+        {
+          "text": "A",
+          "start": 114.108,
+          "end": 114.233,
+          "matched": false
+        },
+        {
+          "text": "rose",
+          "start": 114.233,
+          "end": 114.713,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 114.713,
+          "end": 114.853,
+          "matched": false
+        },
+        {
+          "text": "what",
+          "start": 114.853,
+          "end": 114.993,
+          "matched": false
+        },
+        {
+          "text": "Moses",
+          "start": 114.993,
+          "end": 115.454,
+          "matched": true
+        },
+        {
+          "text": "supposes",
+          "start": 115.534,
+          "end": 116.074,
+          "matched": true
+        },
+        {
+          "text": "his",
+          "start": 116.114,
+          "end": 116.214,
+          "matched": true
+        },
+        {
+          "text": "toes",
+          "start": 116.255,
+          "end": 116.515,
+          "matched": true
+        },
+        {
+          "text": "is",
+          "start": 116.515,
+          "end": 116.527,
+          "matched": false
+        },
+        {
+          "text": "(no",
+          "start": 116.527,
+          "end": 116.539,
+          "matched": false
+        },
+        {
+          "text": "no",
+          "start": 116.539,
+          "end": 116.551,
+          "matched": false
+        },
+        {
+          "text": "no)",
+          "start": 116.551,
+          "end": 116.563,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "Couldn't be a lily or a daphi daphi dilli",
+      "start": 116.563,
+      "end": 116.671,
+      "words": [
+        {
+          "text": "Couldn't",
+          "start": 116.563,
+          "end": 116.575,
+          "matched": false
+        },
+        {
+          "text": "be",
+          "start": 116.575,
+          "end": 116.587,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 116.587,
+          "end": 116.599,
+          "matched": false
+        },
+        {
+          "text": "lily",
+          "start": 116.599,
+          "end": 116.611,
+          "matched": false
+        },
+        {
+          "text": "or",
+          "start": 116.611,
+          "end": 116.623,
+          "matched": false
+        },
+        {
+          "text": "a",
+          "start": 116.623,
+          "end": 116.635,
+          "matched": false
+        },
+        {
+          "text": "daphi",
+          "start": 116.635,
+          "end": 116.647,
+          "matched": false
+        },
+        {
+          "text": "daphi",
+          "start": 116.647,
+          "end": 116.659,
+          "matched": false
+        },
+        {
+          "text": "dilli",
+          "start": 116.659,
+          "end": 116.671,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "It's gotta be a rose cuz it rhymes with mose!",
+      "start": 116.671,
+      "end": 117.461,
+      "words": [
+        {
+          "text": "It's",
+          "start": 116.671,
+          "end": 116.683,
+          "matched": false
+        },
+        {
+          "text": "gotta",
+          "start": 116.683,
+          "end": 116.695,
+          "matched": false
+        },
+        {
+          "text": "be",
+          "start": 116.695,
+          "end": 117.356,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 117.356,
+          "end": 117.371,
+          "matched": false
+        },
+        {
+          "text": "rose",
+          "start": 117.371,
+          "end": 117.386,
+          "matched": false
+        },
+        {
+          "text": "cuz",
+          "start": 117.386,
+          "end": 117.401,
+          "matched": false
+        },
+        {
+          "text": "it",
+          "start": 117.401,
+          "end": 117.416,
+          "matched": false
+        },
+        {
+          "text": "rhymes",
+          "start": 117.416,
+          "end": 117.431,
+          "matched": false
+        },
+        {
+          "text": "with",
+          "start": 117.431,
+          "end": 117.446,
+          "matched": false
+        },
+        {
+          "text": "mose!",
+          "start": 117.446,
+          "end": 117.461,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "Moses!",
+      "start": 117.461,
+      "end": 117.476,
+      "words": [
+        {
+          "text": "Moses!",
+          "start": 117.461,
+          "end": 117.476,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "Moses!",
+      "start": 117.476,
+      "end": 117.996,
+      "words": [
+        {
+          "text": "Moses!",
+          "start": 117.476,
+          "end": 117.996,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "Moses!",
+      "start": 118.096,
+      "end": 118.477,
+      "words": [
+        {
+          "text": "Moses!",
+          "start": 118.096,
+          "end": 118.477,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "(ha ha ha ha ha ha)",
+      "start": 118.477,
+      "end": 120.517,
+      "words": [
+        {
+          "text": "(ha",
+          "start": 118.477,
+          "end": 118.817,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 118.817,
+          "end": 119.157,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 119.157,
+          "end": 119.497,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 119.497,
+          "end": 119.837,
+          "matched": false
+        },
+        {
+          "text": "ha",
+          "start": 119.837,
+          "end": 120.177,
+          "matched": false
+        },
+        {
+          "text": "ha)",
+          "start": 120.177,
+          "end": 120.517,
+          "matched": false
+        }
+      ]
+    }
+  ]
+}

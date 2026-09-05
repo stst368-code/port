@@ -15,7 +15,7 @@
     "batch_size": 4,
     "cpu_fallback_used": false
   },
-  "generated_at": "2026-08-31T23:14:58+00:00",
+  "generated_at": "2026-09-05T17:43:00+00:00",
   "stats": {
     "lyric_words": 163,
     "recognised_words": 167,
@@ -33,31 +33,31 @@
     {
       "id": "l1",
       "text": "Start spreadin' the toys",
-      "start": 14.681,
-      "end": 18.244,
+      "start": 14.683,
+      "end": 18.186,
       "words": [
         {
           "text": "Start",
-          "start": 14.681,
-          "end": 15.642,
+          "start": 14.683,
+          "end": 15.644,
           "matched": true
         },
         {
           "text": "spreadin'",
-          "start": 15.802,
-          "end": 16.463,
+          "start": 15.784,
+          "end": 16.464,
           "matched": true
         },
         {
           "text": "the",
-          "start": 16.543,
-          "end": 16.643,
+          "start": 16.544,
+          "end": 16.645,
           "matched": true
         },
         {
           "text": "toys",
-          "start": 16.783,
-          "end": 18.244,
+          "start": 16.785,
+          "end": 18.186,
           "matched": true
         }
       ]
@@ -65,24 +65,24 @@
     {
       "id": "l2",
       "text": "I'm leavin' today",
-      "start": 19.806,
+      "start": 19.807,
       "end": 21.688,
       "words": [
         {
           "text": "I'm",
-          "start": 19.806,
-          "end": 20.126,
+          "start": 19.807,
+          "end": 20.007,
           "matched": true
         },
         {
           "text": "leavin'",
-          "start": 20.306,
-          "end": 20.847,
+          "start": 20.307,
+          "end": 20.828,
           "matched": true
         },
         {
           "text": "today",
-          "start": 20.887,
+          "start": 20.888,
           "end": 21.688,
           "matched": true
         }
@@ -91,19 +91,19 @@
     {
       "id": "l3",
       "text": "I want to be a part of it",
-      "start": 23.409,
+      "start": 23.41,
       "end": 25.331,
       "words": [
         {
           "text": "I",
-          "start": 23.409,
-          "end": 23.509,
+          "start": 23.41,
+          "end": 23.49,
           "matched": true
         },
         {
           "text": "want",
-          "start": 23.529,
-          "end": 23.729,
+          "start": 23.53,
+          "end": 23.73,
           "matched": true
         },
         {
@@ -126,7 +126,7 @@
         },
         {
           "text": "part",
-          "start": 24.35,
+          "start": 24.351,
           "end": 24.971,
           "matched": true
         },
@@ -138,7 +138,7 @@
         },
         {
           "text": "it",
-          "start": 25.251,
+          "start": 25.231,
           "end": 25.331,
           "matched": true
         }
@@ -148,30 +148,30 @@
       "id": "l4",
       "text": "New Mills, New Mills",
       "start": 26.212,
-      "end": 28.234,
+      "end": 28.214,
       "words": [
         {
           "text": "New",
           "start": 26.212,
-          "end": 26.652,
+          "end": 26.632,
           "matched": true
         },
         {
           "text": "Mills,",
-          "start": 26.752,
+          "start": 26.753,
           "end": 27.233,
           "matched": true
         },
         {
           "text": "New",
           "start": 27.313,
-          "end": 27.693,
+          "end": 27.673,
           "matched": true
         },
         {
           "text": "Mills",
           "start": 27.833,
-          "end": 28.234,
+          "end": 28.214,
           "matched": true
         }
       ]
@@ -206,7 +206,7 @@
       "id": "l6",
       "text": "Are longin' to stray",
       "start": 37.044,
-      "end": 38.845,
+      "end": 38.865,
       "words": [
         {
           "text": "Are",
@@ -229,7 +229,7 @@
         {
           "text": "stray",
           "start": 38.205,
-          "end": 38.845,
+          "end": 38.865,
           "matched": true
         }
       ]
@@ -305,7 +305,7 @@
         {
           "text": "New",
           "start": 44.41,
-          "end": 44.79,
+          "end": 44.77,
           "matched": true
         },
         {
@@ -320,7 +320,7 @@
       "id": "l9",
       "text": "I wanna wake up",
       "start": 48.314,
-      "end": 49.615,
+      "end": 49.595,
       "words": [
         {
           "text": "I",
@@ -343,7 +343,7 @@
         {
           "text": "up",
           "start": 49.535,
-          "end": 49.615,
+          "end": 49.595,
           "matched": true
         }
       ]
@@ -396,7 +396,7 @@
       "id": "l11",
       "text": "And find I'm king of the hill",
       "start": 54.919,
-      "end": 56.841,
+      "end": 56.821,
       "words": [
         {
           "text": "And",
@@ -437,7 +437,7 @@
         {
           "text": "hill",
           "start": 56.501,
-          "end": 56.841,
+          "end": 56.821,
           "matched": true
         }
       ]
@@ -446,7 +446,7 @@
       "id": "l12",
       "text": "Top of the heap",
       "start": 56.961,
-      "end": 57.722,
+      "end": 57.782,
       "words": [
         {
           "text": "Top",
@@ -469,7 +469,7 @@
         {
           "text": "heap",
           "start": 57.542,
-          "end": 57.722,
+          "end": 57.782,
           "matched": true
         }
       ]
@@ -510,7 +510,7 @@
       "id": "l14",
       "text": "Are melting away",
       "start": 66.887,
-      "end": 68.627,
+      "end": 68.647,
       "words": [
         {
           "text": "Are",
@@ -521,13 +521,13 @@
         {
           "text": "melting",
           "start": 67.287,
-          "end": 67.887,
+          "end": 67.907,
           "matched": true
         },
         {
           "text": "away",
           "start": 67.927,
-          "end": 68.627,
+          "end": 68.647,
           "matched": true
         }
       ]
@@ -700,7 +700,7 @@
       "id": "l19",
       "text": "It's up to you",
       "start": 82.971,
-      "end": 84.652,
+      "end": 84.672,
       "words": [
         {
           "text": "It's",
@@ -717,13 +717,13 @@
         {
           "text": "to",
           "start": 83.612,
-          "end": 83.912,
+          "end": 83.892,
           "matched": true
         },
         {
           "text": "you",
           "start": 83.972,
-          "end": 84.652,
+          "end": 84.672,
           "matched": true
         }
       ]
@@ -731,18 +731,18 @@
     {
       "id": "l20",
       "text": "New Mills, New Mills",
-      "start": 84.652,
-      "end": 87.993,
+      "start": 84.672,
+      "end": 87.953,
       "words": [
         {
           "text": "New",
-          "start": 84.652,
-          "end": 85.722,
+          "start": 84.672,
+          "end": 85.733,
           "matched": false
         },
         {
           "text": "Mills,",
-          "start": 85.722,
+          "start": 85.733,
           "end": 86.793,
           "matched": false
         },
@@ -755,7 +755,7 @@
         {
           "text": "Mills",
           "start": 87.353,
-          "end": 87.993,
+          "end": 87.953,
           "matched": true
         }
       ]
@@ -764,12 +764,12 @@
       "id": "l21",
       "text": "New Mills, New Mills",
       "start": 88.91,
-      "end": 92.053,
+      "end": 92.133,
       "words": [
         {
           "text": "New",
           "start": 88.91,
-          "end": 89.391,
+          "end": 89.37,
           "matched": true
         },
         {
@@ -787,7 +787,7 @@
         {
           "text": "Mills",
           "start": 91.532,
-          "end": 92.053,
+          "end": 92.133,
           "matched": true
         }
       ]
@@ -795,13 +795,13 @@
     {
       "id": "l22",
       "text": "I want to wake up",
-      "start": 92.073,
+      "start": 94.875,
       "end": 96.116,
       "words": [
         {
           "text": "I",
-          "start": 92.073,
-          "end": 92.093,
+          "start": 94.875,
+          "end": 94.895,
           "matched": true
         },
         {
@@ -1031,12 +1031,12 @@
     {
       "id": "l29",
       "text": "Are melting away",
-      "start": 117.119,
+      "start": 117.099,
       "end": 118.862,
       "words": [
         {
           "text": "Are",
-          "start": 117.119,
+          "start": 117.099,
           "end": 117.5,
           "matched": true
         },
@@ -1063,7 +1063,7 @@
         {
           "text": "I'll",
           "start": 120.405,
-          "end": 120.746,
+          "end": 120.726,
           "matched": true
         },
         {
@@ -1086,7 +1086,7 @@
         },
         {
           "text": "new",
-          "start": 121.407,
+          "start": 121.387,
           "end": 121.627,
           "matched": true
         },
@@ -1114,7 +1114,7 @@
       "id": "l31",
       "text": "In old New Mills",
       "start": 123.591,
-      "end": 125.454,
+      "end": 125.494,
       "words": [
         {
           "text": "In",
@@ -1137,7 +1137,7 @@
         {
           "text": "Mills",
           "start": 124.973,
-          "end": 125.454,
+          "end": 125.494,
           "matched": true
         }
       ]
@@ -1145,12 +1145,12 @@
     {
       "id": "l32",
       "text": "Annddd-uh if I can make it there",
-      "start": 125.454,
+      "start": 125.494,
       "end": 146.301,
       "words": [
         {
           "text": "Annddd-uh",
-          "start": 125.454,
+          "start": 125.494,
           "end": 145.2,
           "matched": false
         },
@@ -1181,12 +1181,12 @@
         {
           "text": "it",
           "start": 145.88,
-          "end": 145.921,
+          "end": 145.92,
           "matched": true
         },
         {
           "text": "there",
-          "start": 145.981,
+          "start": 145.98,
           "end": 146.301,
           "matched": true
         }
@@ -1196,7 +1196,7 @@
       "id": "l33",
       "text": "I'm gonna make it anywhere",
       "start": 147.342,
-      "end": 149.545,
+      "end": 149.544,
       "words": [
         {
           "text": "I'm",
@@ -1207,13 +1207,13 @@
         {
           "text": "gonna",
           "start": 147.502,
-          "end": 147.723,
+          "end": 147.722,
           "matched": true
         },
         {
           "text": "make",
-          "start": 147.763,
-          "end": 148.063,
+          "start": 147.762,
+          "end": 148.062,
           "matched": true
         },
         {
@@ -1225,7 +1225,7 @@
         {
           "text": "anywhere",
           "start": 148.363,
-          "end": 149.545,
+          "end": 149.544,
           "matched": true
         }
       ]
@@ -1233,13 +1233,13 @@
     {
       "id": "l34",
       "text": "It's-up-to-you",
-      "start": 149.665,
-      "end": 149.825,
+      "start": 149.664,
+      "end": 149.824,
       "words": [
         {
           "text": "It's-up-to-you",
-          "start": 149.665,
-          "end": 149.825,
+          "start": 149.664,
+          "end": 149.824,
           "matched": true
         }
       ]
@@ -1247,19 +1247,19 @@
     {
       "id": "l35",
       "text": "New Millssss!",
-      "start": 153.389,
-      "end": 154.39,
+      "start": 153.388,
+      "end": 154.369,
       "words": [
         {
           "text": "New",
-          "start": 153.389,
-          "end": 153.83,
+          "start": 153.388,
+          "end": 153.828,
           "matched": true
         },
         {
           "text": "Millssss!",
-          "start": 153.93,
-          "end": 154.39,
+          "start": 153.928,
+          "end": 154.369,
           "matched": true
         }
       ]
@@ -1267,19 +1267,19 @@
     {
       "id": "l36",
       "text": "New Millssss!",
-      "start": 157.614,
-      "end": 158.915,
+      "start": 157.612,
+      "end": 158.893,
       "words": [
         {
           "text": "New",
-          "start": 157.614,
-          "end": 158.075,
+          "start": 157.612,
+          "end": 158.072,
           "matched": true
         },
         {
           "text": "Millssss!",
-          "start": 158.155,
-          "end": 158.915,
+          "start": 158.153,
+          "end": 158.893,
           "matched": true
         }
       ]
@@ -1287,19 +1287,19 @@
     {
       "id": "l37",
       "text": "New Mills!",
-      "start": 161.799,
-      "end": 164.081,
+      "start": 161.796,
+      "end": 164.018,
       "words": [
         {
           "text": "New",
-          "start": 161.799,
-          "end": 162.259,
+          "start": 161.796,
+          "end": 162.257,
           "matched": true
         },
         {
           "text": "Mills!",
-          "start": 162.319,
-          "end": 164.081,
+          "start": 162.317,
+          "end": 164.018,
           "matched": true
         }
       ]
