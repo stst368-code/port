@@ -4,12 +4,13 @@ title: About Good Boy Records
 order: 1
 ---
 
-*Placeholder — replace this file with your own words.*
-
-Good Boy Records is a made-up label for AI-generated music, run out of a
-converted mill in Derbyshire by two golden retrievers with strong opinions
-about seating arrangements.
+Good Boy Records is run out of a converted mill in Derbyshire by two golden 
+retrievers with strong opinions about seating arrangements and a passion for
+chasing balls beyond the gate.
 
 Each cassette on the wall is one generated take. Songs usually have several
 versions; they sit together in the magazine so you can hear how a track moved
-between attempts.
+between attempts or styles.
+
+This page will document the process for building the music and act as a general
+introduction to AI and diffusion.

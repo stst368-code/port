@@ -1,0 +1,229 @@
+/* Read-only ComfyUI workflow viewer. No ComfyUI runtime or backend required. */
+.comfy-workflow {
+  --cw-height: 620px;
+  width: 100%;
+  height: var(--cw-height);
+  margin: 1.25rem 0 1.6rem;
+  border: 1px solid #6d4b25;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0c0a09;
+  box-shadow: 0 12px 32px rgba(52, 34, 12, 0.22), inset 0 0 0 1px rgba(255,255,255,0.025);
+  color: #ddd5c8;
+  font-family: var(--mono, Consolas, monospace);
+}
+
+.gbr-folder-body:has(.comfy-workflow) { max-width: none; }
+
+.cw-toolbar {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0 0.55rem 0 0.7rem;
+  border-bottom: 1px solid #5b3d20;
+  background: linear-gradient(180deg, #24170e, #100b08);
+  color: #e0b56d;
+  user-select: none;
+}
+
+.cw-title { min-width: 0; display: flex; align-items: baseline; gap: 0.65rem; }
+.cw-title strong { font-size: 0.65rem; letter-spacing: 0.13em; white-space: nowrap; }
+.cw-meta { color: #8f785f; font-size: 0.5rem; letter-spacing: 0.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cw-actions { flex: none; display: flex; gap: 0.3rem; }
+.cw-actions button {
+  min-width: 30px;
+  height: 26px;
+  padding: 0 0.45rem;
+  border: 1px solid #604423;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #2a1b10, #120c08);
+  color: #d7a75b;
+  font: 700 0.52rem/1 var(--mono, Consolas, monospace);
+  letter-spacing: 0.07em;
+}
+.cw-actions button:hover { border-color: #a56f2c; color: #ffd28a; }
+
+.cw-stage {
+  position: relative;
+  height: calc(100% - 42px);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  background-color: #151312;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.032) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+}
+.cw-stage[data-dragging="true"] { cursor: grabbing; }
+.cw-stage:focus-visible { outline: 2px solid #c68537; outline-offset: -2px; border-radius: 0; }
+
+.cw-loading, .cw-error {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: #a99378;
+  font-size: 0.72rem;
+}
+.cw-error { color: #e29878; }
+
+.cw-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.cw-world--animate { transition: transform 180ms ease; }
+
+.cw-group {
+  position: absolute;
+  z-index: 0;
+  border: 3px solid #745434;
+  border-radius: 12px;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.22);
+}
+.cw-group-title {
+  position: absolute;
+  left: 14px;
+  top: -34px;
+  min-width: 140px;
+  padding: 6px 10px;
+  border-radius: 5px 5px 0 0;
+  color: #f6ead7;
+  font: 700 17px/1.2 var(--mono, Consolas, monospace);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 2px #000;
+}
+
+.cw-links {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+}
+.cw-links path {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0.92;
+  filter: drop-shadow(0 2px 1px rgba(0,0,0,0.55));
+}
+
+.cw-node {
+  position: absolute;
+  z-index: 3;
+  min-width: 120px;
+  min-height: 64px;
+  overflow: hidden;
+  border: 2px solid rgba(0,0,0,0.78);
+  border-radius: 9px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.58), inset 0 0 0 1px rgba(255,255,255,0.055);
+  color: #e9e5df;
+  font: 14px/1.35 var(--mono, Consolas, monospace);
+  pointer-events: none;
+}
+.cw-node--muted { opacity: 0.58; }
+.cw-node-head {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 10px;
+  background: var(--cw-node-head);
+  color: #fff;
+  box-shadow: inset 0 -1px rgba(0,0,0,0.45), inset 0 1px rgba(255,255,255,0.08);
+  text-shadow: 0 1px 2px #000;
+}
+.cw-node-head strong { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; }
+.cw-node-head span { opacity: 0.58; font-size: 10px; }
+
+.cw-ports { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; padding: 7px 8px 3px; }
+.cw-port-list { min-width: 0; }
+.cw-port-list--out { text-align: right; }
+.cw-port { height: 24px; display: flex; align-items: center; gap: 6px; min-width: 0; color: #d9d4cd; }
+.cw-port-list--out .cw-port { justify-content: flex-end; }
+.cw-port span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.cw-port i {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--port);
+  border: 2px solid rgba(0,0,0,0.65);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.24);
+}
+
+.cw-widgets {
+  margin: 2px 8px 24px;
+  display: grid;
+  gap: 6px;
+  overflow: hidden;
+}
+.cw-widget { min-width: 0; }
+.cw-widget-key {
+  margin: 0 0 2px;
+  color: #aaa097;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.cw-widget-value {
+  min-height: 23px;
+  padding: 3px 6px;
+  border: 1px solid rgba(0,0,0,0.8);
+  border-radius: 4px;
+  background: rgba(9,8,7,0.58);
+  color: #e7e1d9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cw-widget-value--multi {
+  white-space: pre-wrap;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  line-height: 1.32;
+}
+.cw-node-type {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 5px;
+  color: rgba(235,228,220,0.45);
+  font-size: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.comfy-workflow:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #090807;
+}
+.comfy-workflow:fullscreen .cw-toolbar { height: 48px; }
+.comfy-workflow:fullscreen .cw-stage { height: calc(100vh - 48px); }
+
+@media (max-width: 640px) {
+  .comfy-workflow { --cw-height: 520px; }
+  .cw-meta { display: none; }
+  .cw-title strong { font-size: 0.56rem; }
+  .cw-actions button { padding-inline: 0.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cw-world--animate { transition-duration: 1ms; }
+}

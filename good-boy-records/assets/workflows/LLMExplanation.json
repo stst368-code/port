@@ -1,0 +1,1005 @@
+{
+  "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
+  "revision": 0,
+  "last_node_id": 3427,
+  "last_link_id": 1531,
+  "nodes": [
+    {
+      "id": 3389,
+      "type": "MiniMaxMusic3TextEncode",
+      "pos": [
+        -900,
+        10130
+      ],
+      "size": [
+        690,
+        570
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1522
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            1516,
+            1525
+          ]
+        },
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "links": [
+            1517
+          ]
+        }
+      ],
+      "title": "MiniMax Music 3 Encode",
+      "properties": {
+        "Node name for S&R": "MiniMaxMusic3TextEncode",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0,
+        "fixed",
+        160,
+        1.7,
+        50
+      ],
+      "widgets_values_named": {
+        "caption": "",
+        "lyrics": "",
+        "seed": 0,
+        "control_after_generate": "fixed",
+        "max_duration": 160,
+        "cfg_scale": 1.7,
+        "top_k": 50
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 3395,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        0,
+        10330
+      ],
+      "size": [
+        300,
+        70
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 1516
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            1509
+          ]
+        }
+      ],
+      "title": "Negative = Zero",
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3396,
+      "type": "EmptyMiniMaxMusic3LatentAudio",
+      "pos": [
+        0,
+        10530
+      ],
+      "size": [
+        300,
+        90
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "seconds"
+          },
+          "link": 1517
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            1510
+          ]
+        }
+      ],
+      "title": "MiniMax Latent",
+      "properties": {
+        "Node name for S&R": "EmptyMiniMaxMusic3LatentAudio",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0"
+      },
+      "widgets_values": [
+        160,
+        1
+      ],
+      "widgets_values_named": {
+        "seconds": 160,
+        "batch_size": 1
+      },
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 3401,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        2600,
+        10230
+      ],
+      "size": [
+        300,
+        170
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 1514
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 1523
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            1526
+          ]
+        }
+      ],
+      "title": "Decode",
+      "properties": {
+        "Node name for S&R": "VAEDecodeAudio",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3402,
+      "type": "KSampler",
+      "pos": [
+        1430,
+        10530
+      ],
+      "size": [
+        370,
+        270
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1524
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 1525
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 1509
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 1510
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            1514
+          ]
+        }
+      ],
+      "title": "MiniMax Sampler",
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        30,
+        1.7,
+        "euler",
+        "simple",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 0,
+        "control_after_generate": "fixed",
+        "steps": 30,
+        "cfg": 1.7,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1
+      },
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 3404,
+      "type": "CLIPLoader",
+      "pos": [
+        -2400,
+        10530
+      ],
+      "size": [
+        910,
+        170
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1522
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "minimax_music3_text_encoder_pruned_int8_convrot.safetensors",
+        "minimax",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "minimax_music3_text_encoder_pruned_int8_convrot.safetensors",
+        "type": "minimax",
+        "device": "default"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3405,
+      "type": "VAELoader",
+      "pos": [
+        2300,
+        10530
+      ],
+      "size": [
+        330,
+        70
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1523
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_music3_dav.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_music3_dav.safetensors"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3406,
+      "type": "UNETLoader",
+      "pos": [
+        900,
+        10130
+      ],
+      "size": [
+        400,
+        170
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1524
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "minimax_music3_dit_fp16.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "minimax_music3_dit_fp16.safetensors",
+        "weight_dtype": "default"
+      },
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 3407,
+      "type": "SaveAudioAdvanced",
+      "pos": [
+        3000,
+        10230
+      ],
+      "size": [
+        300,
+        140
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 1526
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "GoodBoyRecords/",
+        "flac"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "GoodBoyRecords/",
+        "format": "flac"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3408,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -2400,
+        10130
+      ],
+      "size": [
+        900,
+        270
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "What's a CLIP?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "CLIP (Text Encoder)",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "This node loads the CLIP model, or \"Contrastive Language-Image Pre-training\", classically linked to image generation, for tasks like music generation it's more accurate to call this a \"Text Encoder\".\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n\n"
+      ],
+      "widgets_values_named": {
+        "value": "This node loads the CLIP model, or \"Contrastive Language-Image Pre-training\", classically linked to image generation, for tasks like music generation it's more accurate to call this a \"Text Encoder\".\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n\n"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3409,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -2390,
+        10840
+      ],
+      "size": [
+        490,
+        260
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "What's with the file name?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "minimax_music3_text_encoder_pruned_int8_convrot.safetensors",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nminimax_music3_ = the model family this model belongs to\ntext_encoder_ = the role of the model\npruned_ = reduced weight model\nint8_ = precision level\nconvrot = the process used to quantize this version of the model\n.safetensors = the file format"
+      ],
+      "widgets_values_named": {
+        "value": "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nminimax_music3_ = the model family this model belongs to\ntext_encoder_ = the role of the model\npruned_ = reduced weight model\nint8_ = precision level\nconvrot = the process used to quantize this version of the model\n.safetensors = the file format"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3419,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        1550,
+        8950
+      ],
+      "size": [
+        800,
+        670
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "How can one number be more precise than another?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Precision",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Precision defines the accuracy and scope of knowledge.\n\nWhen looking at precision we're usually looking at precision values that are Floating Points or Brain-floating Points. With levels of FP32, FP16, BF16 or INT8 most typically seen.\n\nImagine we're in a workshop, we need to measure something, on the table infront of us is an assortment of rulers.\n\nSome rulers are longer than others, some rules measure in centimetres, others in millimetres. Each ruler has a fixed range of tasks it is able to complete, a  10cm long ruler can't measure a 20cm long item, a measurement needed in millimetres can't accurately be taken in centimetres.\n\nThe numeric value on our precision level signifies how many digits each vector is in length, an FP32 vector is 32 digits long, an INT8 vector is 8 digits long.\n\nSadly, precision is not simple enough to stop there.\n\nThese are exponential values, meaning the computer does not use all of those bits simply to write out one long number. Instead, a floating-point value is split into separate parts: a sign, an exponent, and a fraction.\n\nThis is similar to scientific notation. Instead of writing 120,000, we could write 1.2 × 10⁵. The 1.2 provides the precise value, while the 10⁵ determines its scale. Computers do essentially the same thing, except they work in binary, so the scale is based on powers of 2 rather than powers of 10.\n\nFor example, the same basic value can be moved across vastly different scales:\n\na. 1.25 × 2⁻³  = 0.15625\nb. 1.25 × 2⁰   = 1.25\nc. 1.25 × 2³   = 10\nd. 1.25 × 2¹⁰  = 1280\n\nThe exponent therefore controls the length of our ruler, determining the range of values it can represent. The fraction controls how finely marked that ruler is, determining how precisely values within that range can be represented.\n\nThis is why two 16-bit formats can behave very differently. FP16 gives more of its available bits to the fraction, producing finer measurements, but fewer to the exponent, giving it a smaller overall range. BF16 does the opposite: it uses the same 8-bit exponent as FP32, giving it a similarly enormous range, but has fewer fraction bits and therefore coarser precision."
+      ],
+      "widgets_values_named": {
+        "value": "Precision defines the accuracy and scope of knowledge.\n\nWhen looking at precision we're usually looking at precision values that are Floating Points or Brain-floating Points. With levels of FP32, FP16, BF16 or INT8 most typically seen.\n\nImagine we're in a workshop, we need to measure something, on the table infront of us is an assortment of rulers.\n\nSome rulers are longer than others, some rules measure in centimetres, others in millimetres. Each ruler has a fixed range of tasks it is able to complete, a  10cm long ruler can't measure a 20cm long item, a measurement needed in millimetres can't accurately be taken in centimetres.\n\nThe numeric value on our precision level signifies how many digits each vector is in length, an FP32 vector is 32 digits long, an INT8 vector is 8 digits long.\n\nSadly, precision is not simple enough to stop there.\n\nThese are exponential values, meaning the computer does not use all of those bits simply to write out one long number. Instead, a floating-point value is split into separate parts: a sign, an exponent, and a fraction.\n\nThis is similar to scientific notation. Instead of writing 120,000, we could write 1.2 × 10⁵. The 1.2 provides the precise value, while the 10⁵ determines its scale. Computers do essentially the same thing, except they work in binary, so the scale is based on powers of 2 rather than powers of 10.\n\nFor example, the same basic value can be moved across vastly different scales:\n\na. 1.25 × 2⁻³  = 0.15625\nb. 1.25 × 2⁰   = 1.25\nc. 1.25 × 2³   = 10\nd. 1.25 × 2¹⁰  = 1280\n\nThe exponent therefore controls the length of our ruler, determining the range of values it can represent. The fraction controls how finely marked that ruler is, determining how precisely values within that range can be represented.\n\nThis is why two 16-bit formats can behave very differently. FP16 gives more of its available bits to the fraction, producing finer measurements, but fewer to the exponent, giving it a smaller overall range. BF16 does the opposite: it uses the same 8-bit exponent as FP32, giving it a similarly enormous range, but has fewer fraction bits and therefore coarser precision."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3420,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        1550,
+        8550
+      ],
+      "size": [
+        500,
+        270
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "How can a digital thing have a weight?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Weights",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Weights are knowledge.\n\nMore specifically, they're the vectors (data) learned by an LLM during training.\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
+      ],
+      "widgets_values_named": {
+        "value": "Weights are knowledge.\n\nMore specifically, they're the vectors (data) learned by an LLM during training.\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3421,
+      "type": "PrimitiveString",
+      "pos": [
+        -2900,
+        7460
+      ],
+      "size": [
+        500,
+        70
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Tell me more...",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1531
+          ]
+        }
+      ],
+      "title": "Alright, I'm here, tell me more",
+      "properties": {
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "what do all these parameters mean?"
+      ],
+      "widgets_values_named": {
+        "value": "what do all these parameters mean?"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3422,
+      "type": "Reroute",
+      "pos": [
+        -2090,
+        7490
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 1531
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3423,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        2450,
+        8950
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Tokenizer",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Tokenizer",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Before text reaches the text encoder, a tokenizer breaks it into smaller units called tokens. A token may represent a whole word, part of a word, punctuation or another recurring text pattern.\n\nThe tokenizer used during inference generally needs to match the one the encoder was trained with, because changing how text is divided changes what numerical inputs the model receives.\n\nYou may have heard of \"tokens\" if you've ever looked at purchasing an AI subscription or API access, this is one of the more common ways to commercialise AI models, by billing the user based on the number of tokens they consume."
+      ],
+      "widgets_values_named": {
+        "value": "Before text reaches the text encoder, a tokenizer breaks it into smaller units called tokens. A token may represent a whole word, part of a word, punctuation or another recurring text pattern.\n\nThe tokenizer used during inference generally needs to match the one the encoder was trained with, because changing how text is divided changes what numerical inputs the model receives.\n\nYou may have heard of \"tokens\" if you've ever looked at purchasing an AI subscription or API access, this is one of the more common ways to commercialise AI models, by billing the user based on the number of tokens they consume."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3424,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        2150,
+        8550
+      ],
+      "size": [
+        600,
+        270
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Embeddings / Conditioning",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Embeddings / Conditioning",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "An embedding is the numerical representation of information.\n\nIt is the output of the text encoder.\n\nA text encoder converts words and phrases into arrays of numbers (vectors) that represent their meaning and relationships. These embeddings are then supplied to the generation model as conditioning, guiding what it produces without passing the original text directly into the model."
+      ],
+      "widgets_values_named": {
+        "value": "An embedding is the numerical representation of information.\n\nIt is the output of the text encoder.\n\nA text encoder converts words and phrases into arrays of numbers (vectors) that represent their meaning and relationships. These embeddings are then supplied to the generation model as conditioning, guiding what it produces without passing the original text directly into the model."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3425,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        890,
+        9020
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Quantization",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "\nAlways with a \"Z\" :(\n\nTypes\nMethods"
+      ],
+      "widgets_values_named": {
+        "value": "\nAlways with a \"Z\" :(\n\nTypes\nMethods"
+      }
+    },
+    {
+      "id": 3426,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        630,
+        9300
+      ],
+      "size": [
+        870,
+        500
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "File Types",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
+      ],
+      "widgets_values_named": {
+        "value": "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
+      }
+    }
+  ],
+  "links": [
+    [
+      1509,
+      3395,
+      0,
+      3402,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      1510,
+      3396,
+      0,
+      3402,
+      3,
+      "LATENT"
+    ],
+    [
+      1514,
+      3402,
+      0,
+      3401,
+      0,
+      "LATENT"
+    ],
+    [
+      1516,
+      3389,
+      0,
+      3395,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      1517,
+      3389,
+      1,
+      3396,
+      0,
+      "FLOAT"
+    ],
+    [
+      1522,
+      3404,
+      0,
+      3389,
+      0,
+      "CLIP"
+    ],
+    [
+      1523,
+      3405,
+      0,
+      3401,
+      1,
+      "VAE"
+    ],
+    [
+      1524,
+      3406,
+      0,
+      3402,
+      0,
+      "MODEL"
+    ],
+    [
+      1525,
+      3389,
+      0,
+      3402,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      1526,
+      3401,
+      0,
+      3407,
+      0,
+      "AUDIO"
+    ],
+    [
+      1531,
+      3421,
+      0,
+      3422,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "CLIP (Text Encoder)",
+      "bounding": [
+        -2500,
+        10000,
+        1200,
+        1200
+      ],
+      "color": "#b58b2a",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "LLM",
+      "bounding": [
+        -1000,
+        10000,
+        1400,
+        1200
+      ],
+      "color": "#b06634",
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Sampler",
+      "bounding": [
+        700,
+        10000,
+        1200,
+        1200
+      ],
+      "color": "#a1309b",
+      "flags": {}
+    },
+    {
+      "id": 6,
+      "title": "LLM",
+      "bounding": [
+        2200,
+        10000,
+        1200,
+        1200
+      ],
+      "color": "#A88",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.23579476910000619,
+      "offset": [
+        2347.2249741774613,
+        -6552.055011787147
+      ]
+    },
+    "frontendVersion": "1.49.6"
+  },
+  "version": 0.4
+}

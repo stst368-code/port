@@ -138,6 +138,32 @@ def render_markdown(source: str) -> str:
             i += 1
             continue
 
+        # Read-only ComfyUI workflow embed for the side-folder Markdown.
+        # Syntax: [comfy-workflow: filename.json height=620 focus=3404]
+        workflow = re.match(r"^\[comfy-workflow:\s*([^\]\s]+)(.*?)\]$", stripped, re.IGNORECASE)
+        if workflow:
+            flush_paragraph()
+            close_list()
+            source = workflow.group(1).strip()
+            options = workflow.group(2) or ""
+            # Keep the directive deliberately local: workflow JSON lives under
+            # assets/workflows so a Markdown file cannot turn this into an
+            # arbitrary remote embed.
+            source = Path(source).name
+            height_match = re.search(r"\bheight=(\d{3,4})\b", options, re.IGNORECASE)
+            focus_match = re.search(r"\bfocus=(\d+)\b", options, re.IGNORECASE)
+            height = max(320, min(1100, int(height_match.group(1)))) if height_match else 620
+            attrs = [
+                'class="comfy-workflow"',
+                f'data-workflow="assets/workflows/{html.escape(source, quote=True)}"',
+                f'data-height="{height}"',
+            ]
+            if focus_match:
+                attrs.append(f'data-focus="{html.escape(focus_match.group(1), quote=True)}"')
+            out.append("<div " + " ".join(attrs) + "></div>")
+            i += 1
+            continue
+
         # Simple pipe tables. A table begins with a row followed by a separator.
         if "|" in stripped and i + 1 < len(lines):
             separator = lines[i + 1].strip()

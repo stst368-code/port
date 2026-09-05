@@ -7,6 +7,7 @@
 <title>Good Boy Records</title>
 <meta name="description" content="Good Boy Records cassette player">
 <link rel="stylesheet" href="assets/css/v7.css">
+<link rel="stylesheet" href="assets/css/comfy-workflow.css">
 </head>
 <body>
 <main class="gbr-app">
@@ -158,6 +159,7 @@
     <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-about" data-folder="about" aria-controls="gbr-folder-about" aria-selected="false"><span>About</span></button>
     <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-process" data-folder="process" aria-controls="gbr-folder-process" aria-selected="false"><span>Process</span></button>
     <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-notes" data-folder="notes" aria-controls="gbr-folder-notes" aria-selected="false"><span>Notes</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-workflow" data-folder="workflow" aria-controls="gbr-folder-workflow" aria-selected="false"><span>Workflow</span></button>
   </div>
   <div class="gbr-folder-drawer" id="gbr-folder-drawer">
     <button class="gbr-folder-close" type="button" id="gbr-folder-close" aria-label="Close notes">&times;</button>
@@ -179,12 +181,16 @@ order: 3
 ---</code></pre>
 <p><code>tab</code> is the label down the side, so keep it short — about twelve characters before it starts to crowd the others. <code>order</code> sorts the tabs top to bottom.</p>
 <p>The body takes the usual Markdown: headings, lists, tables, quotes, links, <code>inline code</code> and fenced blocks. Delete a file to remove its tab; remove them all and the tabs disappear entirely.</p></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-workflow" aria-labelledby="gbr-tab-workflow" tabindex="-1" hidden><h2 class="gbr-folder-title">MiniMax Music 3 workflow</h2><div class="gbr-folder-body"><p>This is the actual ComfyUI workflow used for the explanation, rendered directly from the saved workflow JSON. It is <strong>read-only</strong>: drag to pan, use the mouse wheel or the +/- buttons to zoom, and use <strong>FIT</strong> or <strong>FULLSCREEN</strong> when you want to inspect the whole graph.</p>
+<div class="comfy-workflow" data-workflow="assets/workflows/LLMExplanation.json" data-height="650"></div>
+<p>The viewer reads the node positions, groups, links, inputs, outputs and saved widget values from the workflow file. It does not need ComfyUI, any custom nodes, the model files, or a Python backend in order to display it.</p></div></article>
   </div>
 </aside>
 
   <audio id="gbr-audio" preload="metadata"></audio>
 </main>
 <script id="catalogue-data" type="application/json">[]</script>
+<script src="assets/js/comfy-workflow.js" defer></script>
 <script src="assets/js/v7.js" defer></script>
 </body>
 </html>

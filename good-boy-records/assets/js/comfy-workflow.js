@@ -1,0 +1,483 @@
+(function () {
+  "use strict";
+
+  var TYPE_COLORS = {
+    CLIP: "#d6ad45",
+    CONDITIONING: "#d1843b",
+    MODEL: "#a875d6",
+    LATENT: "#8f65c7",
+    VAE: "#c76666",
+    AUDIO: "#5b9ecf",
+    FLOAT: "#70a86d",
+    INT: "#78a86d",
+    STRING: "#c9c4b8",
+    IMAGE: "#6ca7a0"
+  };
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function alphaColor(value, alpha) {
+    if (!value) return "rgba(110, 90, 70, " + alpha + ")";
+    var hex = String(value).trim();
+    if (/^#[0-9a-f]{3}$/i.test(hex)) {
+      hex = "#" + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+    }
+    if (/^#[0-9a-f]{6}$/i.test(hex)) {
+      var r = parseInt(hex.slice(1, 3), 16);
+      var g = parseInt(hex.slice(3, 5), 16);
+      var b = parseInt(hex.slice(5, 7), 16);
+      return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+    }
+    return value;
+  }
+
+  function portColor(type) {
+    return TYPE_COLORS[type] || "#9d9182";
+  }
+
+  function normaliseSize(node) {
+    var size = node && node.size;
+    if (Array.isArray(size)) return [Number(size[0]) || 260, Number(size[1]) || 120];
+    if (size && typeof size === "object") {
+      return [Number(size[0] || size.width) || 260, Number(size[1] || size.height) || 120];
+    }
+    return [260, 120];
+  }
+
+  function normalisePos(node) {
+    var pos = node && node.pos;
+    if (Array.isArray(pos)) return [Number(pos[0]) || 0, Number(pos[1]) || 0];
+    if (pos && typeof pos === "object") {
+      return [Number(pos[0] || pos.x) || 0, Number(pos[1] || pos.y) || 0];
+    }
+    return [0, 0];
+  }
+
+  function formatValue(value) {
+    if (value == null) return "";
+    if (typeof value === "string") return value;
+    if (typeof value === "number" || typeof value === "boolean") return String(value);
+    try { return JSON.stringify(value, null, 2); }
+    catch (_) { return String(value); }
+  }
+
+  function widgetEntries(node) {
+    var named = node.widgets_values_named;
+    if (named && typeof named === "object" && !Array.isArray(named)) {
+      return Object.keys(named).map(function (key) {
+        return { key: key, value: formatValue(named[key]) };
+      });
+    }
+
+    var values = Array.isArray(node.widgets_values) ? node.widgets_values : [];
+    if (!values.length) return [];
+
+    var inputs = Array.isArray(node.inputs) ? node.inputs : [];
+    if ((node.type === "PrimitiveString" || node.type === "PrimitiveStringMultiline") && values.length) {
+      var label = (inputs[0] && (inputs[0].label || inputs[0].name)) || "value";
+      return [{ key: label, value: formatValue(values[0]) }];
+    }
+
+    return values.map(function (value, index) {
+      return { key: "value " + (index + 1), value: formatValue(value) };
+    });
+  }
+
+  function WorkflowViewer(root) {
+    this.root = root;
+    this.stage = null;
+    this.world = null;
+    this.workflow = null;
+    this.nodeMap = new Map();
+    this.shiftX = 0;
+    this.shiftY = 0;
+    this.worldWidth = 1;
+    this.worldHeight = 1;
+    this.scale = 1;
+    this.panX = 0;
+    this.panY = 0;
+    this.drag = null;
+    this.initialFitDone = false;
+    this.focusNode = root.dataset.focus ? String(root.dataset.focus) : "";
+    this.buildShell();
+    this.load();
+  }
+
+  WorkflowViewer.prototype.buildShell = function () {
+    var height = clamp(parseInt(this.root.dataset.height || "620", 10) || 620, 320, 1100);
+    this.root.style.setProperty("--cw-height", height + "px");
+    this.root.innerHTML =
+      '<div class="cw-toolbar">' +
+        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong><span class="cw-meta">Loading...</span></div>' +
+        '<div class="cw-actions">' +
+          '<button type="button" data-cw-action="out" aria-label="Zoom out">−</button>' +
+          '<button type="button" data-cw-action="in" aria-label="Zoom in">+</button>' +
+          '<button type="button" data-cw-action="fit">FIT</button>' +
+          '<button type="button" data-cw-action="fullscreen">FULLSCREEN</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="cw-stage" tabindex="0" aria-label="Read-only ComfyUI workflow. Drag to pan and use the mouse wheel to zoom.">' +
+        '<div class="cw-loading">Loading workflow…</div>' +
+      '</div>';
+
+    this.stage = this.root.querySelector(".cw-stage");
+    this.bindControls();
+  };
+
+  WorkflowViewer.prototype.bindControls = function () {
+    var self = this;
+    this.root.querySelectorAll("[data-cw-action]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var action = button.dataset.cwAction;
+        if (action === "fit") self.fit(true);
+        if (action === "in") self.zoomBy(1.2);
+        if (action === "out") self.zoomBy(1 / 1.2);
+        if (action === "fullscreen") self.toggleFullscreen();
+      });
+    });
+
+    this.stage.addEventListener("wheel", function (event) {
+      if (!self.world) return;
+      event.preventDefault();
+      var rect = self.stage.getBoundingClientRect();
+      var x = event.clientX - rect.left;
+      var y = event.clientY - rect.top;
+      var factor = Math.exp(-event.deltaY * 0.0015);
+      self.zoomAt(x, y, factor);
+    }, { passive: false });
+
+    this.stage.addEventListener("pointerdown", function (event) {
+      if (!self.world || event.button !== 0) return;
+      self.drag = { x: event.clientX, y: event.clientY, panX: self.panX, panY: self.panY };
+      self.stage.setPointerCapture(event.pointerId);
+      self.stage.dataset.dragging = "true";
+    });
+
+    this.stage.addEventListener("pointermove", function (event) {
+      if (!self.drag) return;
+      self.panX = self.drag.panX + (event.clientX - self.drag.x);
+      self.panY = self.drag.panY + (event.clientY - self.drag.y);
+      self.applyTransform();
+    });
+
+    function finishPointer(event) {
+      if (!self.drag) return;
+      self.drag = null;
+      self.stage.dataset.dragging = "false";
+      try { self.stage.releasePointerCapture(event.pointerId); } catch (_) {}
+    }
+    this.stage.addEventListener("pointerup", finishPointer);
+    this.stage.addEventListener("pointercancel", finishPointer);
+
+    this.stage.addEventListener("keydown", function (event) {
+      if (event.key === "+" || event.key === "=") { event.preventDefault(); self.zoomBy(1.15); }
+      else if (event.key === "-") { event.preventDefault(); self.zoomBy(1 / 1.15); }
+      else if (event.key === "0") { event.preventDefault(); self.fit(true); }
+      else if (event.key === "ArrowLeft") { event.preventDefault(); self.panX += 40; self.applyTransform(); }
+      else if (event.key === "ArrowRight") { event.preventDefault(); self.panX -= 40; self.applyTransform(); }
+      else if (event.key === "ArrowUp") { event.preventDefault(); self.panY += 40; self.applyTransform(); }
+      else if (event.key === "ArrowDown") { event.preventDefault(); self.panY -= 40; self.applyTransform(); }
+    });
+
+    if ("ResizeObserver" in window) {
+      this.resizeObserver = new ResizeObserver(function () {
+        if (!self.world) return;
+        var rect = self.stage.getBoundingClientRect();
+        if (rect.width > 40 && rect.height > 40 && !self.initialFitDone) {
+          self.initialFitDone = true;
+          self.fit(false);
+        }
+      });
+      this.resizeObserver.observe(this.stage);
+    } else {
+      window.addEventListener("resize", function () { if (self.world) self.fit(false); });
+    }
+  };
+
+  WorkflowViewer.prototype.load = function () {
+    var self = this;
+    var src = this.root.dataset.workflow;
+    fetch(src, { cache: "no-cache" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response.json();
+      })
+      .then(function (workflow) {
+        self.workflow = workflow;
+        self.render();
+      })
+      .catch(function (error) {
+        self.stage.innerHTML = '<div class="cw-error"><strong>Workflow could not be loaded.</strong><br>' + escapeHtml(error.message) + '</div>';
+        var meta = self.root.querySelector(".cw-meta");
+        if (meta) meta.textContent = "LOAD ERROR";
+      });
+  };
+
+  WorkflowViewer.prototype.bounds = function () {
+    var items = [];
+    var nodes = Array.isArray(this.workflow.nodes) ? this.workflow.nodes : [];
+    var groups = Array.isArray(this.workflow.groups) ? this.workflow.groups : [];
+
+    nodes.forEach(function (node) {
+      var p = normalisePos(node);
+      var s = normaliseSize(node);
+      items.push([p[0], p[1], s[0], s[1]]);
+    });
+    groups.forEach(function (group) {
+      if (Array.isArray(group.bounding) && group.bounding.length >= 4) {
+        items.push(group.bounding.map(Number));
+      }
+    });
+
+    if (!items.length) return { minX: 0, minY: 0, maxX: 1000, maxY: 700 };
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    items.forEach(function (r) {
+      minX = Math.min(minX, r[0]); minY = Math.min(minY, r[1]);
+      maxX = Math.max(maxX, r[0] + r[2]); maxY = Math.max(maxY, r[1] + r[3]);
+    });
+    return { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
+  };
+
+  WorkflowViewer.prototype.render = function () {
+    var self = this;
+    var bounds = this.bounds();
+    var margin = 100;
+    this.shiftX = margin - bounds.minX;
+    this.shiftY = margin - bounds.minY;
+    this.worldWidth = Math.max(1, bounds.maxX - bounds.minX + margin * 2);
+    this.worldHeight = Math.max(1, bounds.maxY - bounds.minY + margin * 2);
+
+    this.stage.innerHTML = '<div class="cw-world"></div>';
+    this.world = this.stage.querySelector(".cw-world");
+    this.world.style.width = this.worldWidth + "px";
+    this.world.style.height = this.worldHeight + "px";
+
+    this.renderGroups();
+    this.renderLinks();
+    this.renderNodes();
+
+    var nodes = Array.isArray(this.workflow.nodes) ? this.workflow.nodes.length : 0;
+    var links = Array.isArray(this.workflow.links) ? this.workflow.links.length : 0;
+    var meta = this.root.querySelector(".cw-meta");
+    if (meta) meta.textContent = nodes + " NODES / " + links + " LINKS / READ ONLY";
+
+    requestAnimationFrame(function () {
+      var rect = self.stage.getBoundingClientRect();
+      if (rect.width > 40 && rect.height > 40) {
+        self.initialFitDone = true;
+        if (self.focusNode) self.focus(self.focusNode);
+        else self.fit(false);
+      }
+    });
+  };
+
+  WorkflowViewer.prototype.renderGroups = function () {
+    var self = this;
+    (this.workflow.groups || []).forEach(function (group) {
+      if (!Array.isArray(group.bounding) || group.bounding.length < 4) return;
+      var b = group.bounding.map(Number);
+      var el = document.createElement("div");
+      el.className = "cw-group";
+      el.style.left = (b[0] + self.shiftX) + "px";
+      el.style.top = (b[1] + self.shiftY) + "px";
+      el.style.width = b[2] + "px";
+      el.style.height = b[3] + "px";
+      el.style.borderColor = group.color || "#795b34";
+      el.style.background = alphaColor(group.color, 0.10);
+      var title = document.createElement("div");
+      title.className = "cw-group-title";
+      title.textContent = group.title || "Group";
+      title.style.background = alphaColor(group.color, 0.78);
+      el.appendChild(title);
+      self.world.appendChild(el);
+    });
+  };
+
+  WorkflowViewer.prototype.portY = function (node, slot, output) {
+    var p = normalisePos(node);
+    var list = output ? (node.outputs || []) : (node.inputs || []);
+    var count = Math.max(1, list.length);
+    var row = 24;
+    var y = p[1] + this.shiftY + 42 + clamp(Number(slot) || 0, 0, count - 1) * row;
+    return y;
+  };
+
+  WorkflowViewer.prototype.renderLinks = function () {
+    var self = this;
+    var svgNS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(svgNS, "svg");
+    svg.classList.add("cw-links");
+    svg.setAttribute("width", this.worldWidth);
+    svg.setAttribute("height", this.worldHeight);
+    svg.setAttribute("viewBox", "0 0 " + this.worldWidth + " " + this.worldHeight);
+
+    (this.workflow.nodes || []).forEach(function (node) { self.nodeMap.set(String(node.id), node); });
+
+    (this.workflow.links || []).forEach(function (link) {
+      if (!Array.isArray(link) || link.length < 6) return;
+      var from = self.nodeMap.get(String(link[1]));
+      var to = self.nodeMap.get(String(link[3]));
+      if (!from || !to) return;
+      var fp = normalisePos(from), fs = normaliseSize(from), tp = normalisePos(to);
+      var x1 = fp[0] + self.shiftX + fs[0];
+      var y1 = self.portY(from, link[2], true);
+      var x2 = tp[0] + self.shiftX;
+      var y2 = self.portY(to, link[4], false);
+      var bend = Math.max(55, Math.abs(x2 - x1) * 0.45);
+      var path = document.createElementNS(svgNS, "path");
+      path.setAttribute("d", "M " + x1 + " " + y1 + " C " + (x1 + bend) + " " + y1 + ", " + (x2 - bend) + " " + y2 + ", " + x2 + " " + y2);
+      path.setAttribute("stroke", portColor(link[5]));
+      path.setAttribute("data-link-type", link[5] || "");
+      svg.appendChild(path);
+    });
+
+    this.world.appendChild(svg);
+  };
+
+  WorkflowViewer.prototype.renderNodes = function () {
+    var self = this;
+    (this.workflow.nodes || []).forEach(function (node) {
+      var p = normalisePos(node), s = normaliseSize(node);
+      var el = document.createElement("section");
+      el.className = "cw-node" + (node.mode && node.mode !== 0 ? " cw-node--muted" : "");
+      el.dataset.nodeId = String(node.id);
+      el.style.left = (p[0] + self.shiftX) + "px";
+      el.style.top = (p[1] + self.shiftY) + "px";
+      el.style.width = s[0] + "px";
+      el.style.height = s[1] + "px";
+      el.style.background = node.bgcolor || "#25211f";
+      el.style.setProperty("--cw-node-head", node.color || "#44362e");
+
+      var title = node.title || node.type || ("Node " + node.id);
+      var header = document.createElement("header");
+      header.className = "cw-node-head";
+      header.innerHTML = '<strong>' + escapeHtml(title) + '</strong><span>#' + escapeHtml(node.id) + '</span>';
+      el.appendChild(header);
+
+      var ports = document.createElement("div");
+      ports.className = "cw-ports";
+      var inputs = document.createElement("div");
+      inputs.className = "cw-port-list cw-port-list--in";
+      (node.inputs || []).forEach(function (input) {
+        var row = document.createElement("div");
+        row.className = "cw-port";
+        row.innerHTML = '<i style="--port:' + escapeHtml(portColor(input.type)) + '"></i><span>' + escapeHtml(input.label || input.name || input.type || "input") + '</span>';
+        inputs.appendChild(row);
+      });
+      var outputs = document.createElement("div");
+      outputs.className = "cw-port-list cw-port-list--out";
+      (node.outputs || []).forEach(function (output) {
+        var row = document.createElement("div");
+        row.className = "cw-port";
+        row.innerHTML = '<span>' + escapeHtml(output.name || output.type || "output") + '</span><i style="--port:' + escapeHtml(portColor(output.type)) + '"></i>';
+        outputs.appendChild(row);
+      });
+      ports.appendChild(inputs);
+      ports.appendChild(outputs);
+      el.appendChild(ports);
+
+      var widgets = widgetEntries(node);
+      if (widgets.length) {
+        var body = document.createElement("div");
+        body.className = "cw-widgets";
+        widgets.forEach(function (entry) {
+          var field = document.createElement("div");
+          field.className = "cw-widget";
+          var value = entry.value;
+          var multiline = value.indexOf("\n") !== -1 || value.length > 90;
+          field.innerHTML = '<div class="cw-widget-key">' + escapeHtml(entry.key) + '</div>' +
+            '<div class="cw-widget-value' + (multiline ? ' cw-widget-value--multi' : '') + '">' + escapeHtml(value || "—") + '</div>';
+          body.appendChild(field);
+        });
+        el.appendChild(body);
+      }
+
+      var type = document.createElement("div");
+      type.className = "cw-node-type";
+      type.textContent = node.type || "Unknown node";
+      el.appendChild(type);
+      self.world.appendChild(el);
+    });
+  };
+
+  WorkflowViewer.prototype.applyTransform = function () {
+    if (!this.world) return;
+    this.world.style.transform = "translate(" + this.panX + "px," + this.panY + "px) scale(" + this.scale + ")";
+  };
+
+  WorkflowViewer.prototype.fit = function (animate) {
+    if (!this.world) return;
+    var rect = this.stage.getBoundingClientRect();
+    if (rect.width < 40 || rect.height < 40) return;
+    var pad = 28;
+    this.scale = clamp(Math.min((rect.width - pad * 2) / this.worldWidth, (rect.height - pad * 2) / this.worldHeight), 0.035, 1.8);
+    this.panX = (rect.width - this.worldWidth * this.scale) / 2;
+    this.panY = (rect.height - this.worldHeight * this.scale) / 2;
+    if (animate) this.world.classList.add("cw-world--animate");
+    this.applyTransform();
+    if (animate) setTimeout(function (world) { world.classList.remove("cw-world--animate"); }, 220, this.world);
+  };
+
+  WorkflowViewer.prototype.focus = function (id) {
+    var node = this.nodeMap.get(String(id));
+    if (!node || !this.world) { this.fit(false); return; }
+    var rect = this.stage.getBoundingClientRect();
+    if (rect.width < 40 || rect.height < 40) return;
+    var p = normalisePos(node), s = normaliseSize(node);
+    var x = p[0] + this.shiftX, y = p[1] + this.shiftY;
+    this.scale = clamp(Math.min((rect.width * 0.72) / s[0], (rect.height * 0.72) / s[1]), 0.12, 1.15);
+    this.panX = rect.width / 2 - (x + s[0] / 2) * this.scale;
+    this.panY = rect.height / 2 - (y + s[1] / 2) * this.scale;
+    this.applyTransform();
+  };
+
+  WorkflowViewer.prototype.zoomAt = function (x, y, factor) {
+    var old = this.scale;
+    var next = clamp(old * factor, 0.035, 3.0);
+    this.panX = x - (x - this.panX) * (next / old);
+    this.panY = y - (y - this.panY) * (next / old);
+    this.scale = next;
+    this.applyTransform();
+  };
+
+  WorkflowViewer.prototype.zoomBy = function (factor) {
+    var rect = this.stage.getBoundingClientRect();
+    this.zoomAt(rect.width / 2, rect.height / 2, factor);
+  };
+
+  WorkflowViewer.prototype.toggleFullscreen = function () {
+    var self = this;
+    if (document.fullscreenElement === this.root) {
+      document.exitFullscreen();
+      return;
+    }
+    if (this.root.requestFullscreen) {
+      this.root.requestFullscreen().then(function () {
+        setTimeout(function () { self.fit(false); }, 80);
+      }).catch(function () {});
+    }
+  };
+
+  function boot() {
+    document.querySelectorAll(".comfy-workflow[data-workflow]").forEach(function (root) {
+      if (!root.dataset.cwReady) {
+        root.dataset.cwReady = "true";
+        new WorkflowViewer(root);
+      }
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
