@@ -4,8 +4,11 @@ title: MiniMax Music 3 workflow
 order: 4
 ---
 
-This is the actual ComfyUI workflow used for the explanation, rendered directly from the saved workflow JSON. It is **read-only**: drag to pan, use the mouse wheel or the +/- buttons to zoom, and use **FIT** or **FULLSCREEN** when you want to inspect the whole graph.
+This is a ComfyUI workflow used for music generation, I've simplified the graph to make it easier to understand, but the essential elements all remain present.
 
-[comfy-workflow: LLMExplanation.json height=650]
+Each section or node is accompanied by text descriptions of their function, follow the graph from left to right to see how these songs are made.
 
-The viewer reads the node positions, groups, links, inputs, outputs and saved widget values from the workflow file. It does not need ComfyUI, any custom nodes, the model files, or a Python backend in order to display it.
+[comfy-workflow: LLMExplanation.json height=850]
+
+Drag to pan, use the mouse wheel or the +/- buttons to zoom, and use **FIT** or **FULLSCREEN** if you want to inspect the whole graph.
+
