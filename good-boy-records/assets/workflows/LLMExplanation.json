@@ -16,7 +16,7 @@
         460
       ],
       "flags": {},
-      "order": 30,
+      "order": 28,
       "mode": 0,
       "showAdvanced": false,
       "inputs": [
@@ -82,7 +82,7 @@
         70
       ],
       "flags": {},
-      "order": 32,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
@@ -121,7 +121,7 @@
         170
       ],
       "flags": {},
-      "order": 33,
+      "order": 31,
       "mode": 0,
       "inputs": [
         {
@@ -171,7 +171,7 @@
         170
       ],
       "flags": {},
-      "order": 35,
+      "order": 33,
       "mode": 0,
       "inputs": [
         {
@@ -215,7 +215,7 @@
         270
       ],
       "flags": {},
-      "order": 34,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
@@ -403,7 +403,7 @@
         140
       ],
       "flags": {},
-      "order": 36,
+      "order": 34,
       "mode": 0,
       "inputs": [
         {
@@ -911,7 +911,7 @@
         270
       ],
       "flags": {},
-      "order": 31,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
@@ -1374,74 +1374,6 @@
       }
     },
     {
-      "id": 3448,
-      "type": "LoadVideo",
-      "pos": [
-        1810,
-        10490
-      ],
-      "size": [
-        290,
-        310
-      ],
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "VIDEO",
-          "type": "VIDEO",
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadVideo"
-      },
-      "widgets_values": [
-        "diffusion_visualised.mp4",
-        "image"
-      ],
-      "widgets_values_named": {
-        "file": "diffusion_visualised.mp4",
-        "upload": "image"
-      }
-    },
-    {
-      "id": 3449,
-      "type": "LoadVideo",
-      "pos": [
-        -2270,
-        8300
-      ],
-      "size": [
-        290,
-        310
-      ],
-      "flags": {},
-      "order": 25,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "VIDEO",
-          "type": "VIDEO",
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadVideo"
-      },
-      "widgets_values": [
-        "diffusion_visualised.mp4",
-        "image"
-      ],
-      "widgets_values_named": {
-        "file": "diffusion_visualised.mp4",
-        "upload": "image"
-      }
-    },
-    {
       "id": 3450,
       "type": "LoadAudio",
       "pos": [
@@ -1453,7 +1385,7 @@
         140
       ],
       "flags": {},
-      "order": 26,
+      "order": 24,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1488,7 +1420,7 @@
         160
       ],
       "flags": {},
-      "order": 27,
+      "order": 25,
       "mode": 0,
       "inputs": [
         {
@@ -1533,7 +1465,7 @@
         170
       ],
       "flags": {},
-      "order": 28,
+      "order": 26,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1569,7 +1501,7 @@
         160
       ],
       "flags": {},
-      "order": 29,
+      "order": 27,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1584,12 +1516,12 @@
         "Node name for S&R": "LoadAudio"
       },
       "widgets_values": [
-        "empty-latent-post-sample.flac",
+        "empty-latent-post-sample.mp3",
         null,
         null
       ],
       "widgets_values_named": {
-        "audio": "empty-latent-post-sample.flac",
+        "audio": "empty-latent-post-sample.mp3",
         "upload": null
       }
     }
@@ -2326,10 +2258,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.2357947691000025,
+      "scale": 1.191817653772735,
       "offset": [
-        5698.980528097138,
-        -7317.337093347813
+        106.02324860302838,
+        -10932.00697047713
       ]
     },
     "frontendVersion": "1.49.6"
