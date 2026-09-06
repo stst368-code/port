@@ -1,5 +1,5 @@
 ---
-tab: Workflow
+tab: Music Workflow
 title: MiniMax Music 3 workflow
 order: 4
 ---

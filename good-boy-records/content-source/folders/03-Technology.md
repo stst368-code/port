@@ -19,6 +19,8 @@ Software:
 AI:
 	ACE-Step-1.5: https://github.com/ace-step/ACE-Step-1.5
 	MiniMax-Music3: https://github.com/MiniMax-AI/MiniMax-Music3
+	Whisper: https://huggingface.co/openai/whisper-large-v3
+	Demucs: https://github.com/adefossez/demucs
 
 Services:
 	RunPod: https://www.runpod.io/

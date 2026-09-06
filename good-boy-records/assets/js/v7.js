@@ -2167,19 +2167,18 @@
 
   function folderWidthLimits() {
     var tabWidth = parseFloat(getComputedStyle(folders.root).getPropertyValue("--tab-w")) || 34;
-    var max = Math.max(280, window.innerWidth - tabWidth - 14);
-    var min = Math.min(420, max);
+    var max = Math.max(220, window.innerWidth - tabWidth - 14);
+    /* Desktop keeps a sensible reading width. On touch-sized screens allow the
+       sheet to contract to roughly 55% of the viewport, so dragging the rail
+       actually has somewhere to go rather than being a decorative lie. */
+    var mobile = window.matchMedia("(max-width: 860px)").matches;
+    var desiredMin = mobile ? Math.max(220, window.innerWidth * 0.55) : 420;
+    var min = Math.min(desiredMin, max);
     return { min: min, max: max };
   }
 
   function setFolderWidth(width, save) {
     if (!folders.root || !folders.drawer) return;
-    /* On phone-sized layouts the drawer deliberately occupies the full width. */
-    if (window.matchMedia("(max-width: 860px)").matches) {
-      folders.root.style.removeProperty("--folder-drawer-width");
-      if (folders.resizer) folders.resizer.removeAttribute("aria-valuenow");
-      return;
-    }
     var limits = folderWidthLimits();
     width = clamp(limits.min, Number(width) || 760, limits.max);
     folders.root.style.setProperty("--folder-drawer-width", Math.round(width) + "px");
@@ -2224,7 +2223,6 @@
     }
 
     folders.resizer.addEventListener("pointerdown", function (event) {
-      if (window.matchMedia("(max-width: 860px)").matches) return;
       if (event.pointerType === "mouse" && event.button !== 0) return;
       event.preventDefault();
       event.stopPropagation();
@@ -2252,7 +2250,6 @@
     });
 
     folders.resizer.addEventListener("keydown", function (event) {
-      if (window.matchMedia("(max-width: 860px)").matches) return;
       var current = folders.drawer.getBoundingClientRect().width;
       var limits = folderWidthLimits();
       var next = current;

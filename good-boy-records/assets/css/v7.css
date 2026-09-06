@@ -1722,14 +1722,17 @@ input:disabled { opacity: 0.4; }
 }
 
 /* The drawer is anchored to the right, so dragging its left edge leftwards
-   makes it wider and dragging rightwards gives the player its space back. */
+   makes it wider and dragging rightwards gives the player its space back.
+   Keep the handle INSIDE the drawer edge. When the drawer is full-width on a
+   phone there is literally no off-canvas space to draw into, which made the
+   previous negative-left handle look as though it did not exist. */
 .gbr-folder-resizer {
   position: absolute;
   z-index: 8;
   top: 0;
   bottom: 0;
-  left: -16px;
-  width: 32px;
+  left: 0;
+  width: 44px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -1738,53 +1741,53 @@ input:disabled { opacity: 0.4; }
   pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
 }
-/* A continuous rail makes the resize target obvious instead of hiding an
-   18px invisible hit area on the edge of a cream sheet. */
+/* Permanent visible rail, not merely a hover affordance. */
 .gbr-folder-resizer::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 14px;
-  width: 4px;
-  background: linear-gradient(90deg, rgba(255,246,218,.72), #9b6529 45%, #70451c 55%, rgba(54,31,10,.28));
-  box-shadow: -2px 0 7px rgba(0,0,0,.18), 2px 0 7px rgba(0,0,0,.12);
-  opacity: .82;
-  transition: width 120ms ease, left 120ms ease, opacity 120ms ease, box-shadow 120ms ease;
+  left: 0;
+  width: 9px;
+  border-right: 1px solid rgba(72,44,16,.72);
+  background: linear-gradient(90deg, #6e451e 0 2px, #c49550 2px 5px, #8a5725 5px 8px, rgba(246,226,187,.9) 8px 9px);
+  box-shadow: 2px 0 9px rgba(42,24,7,.30);
+  opacity: 1;
+  transition: width 120ms ease, box-shadow 120ms ease, filter 120ms ease;
 }
 .gbr-folder-resizer::after {
   content: "↔";
   position: absolute;
-  left: 1px;
+  left: 7px;
   top: 50%;
-  width: 30px;
-  height: 84px;
+  width: 34px;
+  height: 96px;
   transform: translateY(-50%);
   display: grid;
   place-items: center;
-  border: 2px solid #8c612c;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #f5e5c0, #d8ba80);
-  color: #4b3114;
-  box-shadow: 0 3px 12px rgba(30,17,5,.42), inset 1px 0 rgba(255,249,229,.78);
-  font: 800 1rem/1 var(--mono);
-  opacity: .96;
+  border: 2px solid #71481f;
+  border-left-width: 3px;
+  border-radius: 0 9px 9px 0;
+  background: linear-gradient(90deg, #c99d5e, #f1dfb5 48%, #d3ad70);
+  color: #39230d;
+  box-shadow: 3px 4px 14px rgba(30,17,5,.46), inset 1px 0 rgba(255,249,229,.8);
+  font: 900 1.1rem/1 var(--mono);
+  opacity: 1;
   transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
 }
 .gbr-folder-resizer:hover::before,
 .gbr-folder-resizer:focus-visible::before,
 .gbr-folders[data-resizing="true"] .gbr-folder-resizer::before {
-  left: 13px;
-  width: 6px;
-  opacity: 1;
-  box-shadow: 0 0 12px rgba(174,111,41,.52);
+  width: 11px;
+  filter: brightness(1.12);
+  box-shadow: 2px 0 14px rgba(174,111,41,.58);
 }
 .gbr-folder-resizer:hover::after,
 .gbr-folder-resizer:focus-visible::after,
 .gbr-folders[data-resizing="true"] .gbr-folder-resizer::after {
   transform: translateY(-50%) scale(1.06);
-  background: linear-gradient(90deg, #fff0c9, #e8c88b);
-  box-shadow: 0 3px 16px rgba(30,17,5,.5), 0 0 0 2px rgba(169,105,42,.22);
+  background: linear-gradient(90deg, #ddb476, #fff0c9 48%, #e5c186);
+  box-shadow: 3px 4px 18px rgba(30,17,5,.54), 0 0 0 2px rgba(169,105,42,.24);
 }
 .gbr-folder-resizer:focus-visible { outline: 3px solid #c77e31; outline-offset: -4px; }
 .gbr-folders[data-resizing="true"] .gbr-folder-drawer { transition: none; }
@@ -1908,10 +1911,14 @@ html.gbr-folder-resize-active { user-select: none; }
 }
 
 @media (max-width: 860px) {
-  :root { --folder-tab-w: 36px; }
-  .gbr-folder-tab { min-height: 80px; padding: 0.85rem 0; font-size: 0.58rem; letter-spacing: 0.11em; }
-  .gbr-folder-drawer { width: calc(100vw - var(--tab-w)); min-width: 0; }
-  .gbr-folder-resizer { display: none; }
+  :root { --folder-tab-w: 40px; }
+  .gbr-folder-tab { min-height: 84px; padding: 0.9rem 0; font-size: 0.62rem; letter-spacing: 0.11em; }
+  /* Keep the drawer full-width by default, but let the JS-set width shrink it.
+     The resize handle stays visible and touchable on phones/tablets. */
+  .gbr-folder-drawer { min-width: 0; }
+  .gbr-folder-resizer { width: 48px; }
+  .gbr-folder-resizer::after { width: 38px; height: 104px; font-size: 1.2rem; }
+  .gbr-folder-sheet { padding-left: clamp(2.8rem, 9vw, 3.6rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
