@@ -1,7 +1,7 @@
 {
   "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
   "revision": 0,
-  "last_node_id": 3454,
+  "last_node_id": 3456,
   "last_link_id": 1544,
   "nodes": [
     {
@@ -16,7 +16,7 @@
         460
       ],
       "flags": {},
-      "order": 28,
+      "order": 30,
       "mode": 0,
       "showAdvanced": false,
       "inputs": [
@@ -82,7 +82,7 @@
         70
       ],
       "flags": {},
-      "order": 30,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
@@ -121,7 +121,7 @@
         170
       ],
       "flags": {},
-      "order": 31,
+      "order": 33,
       "mode": 0,
       "inputs": [
         {
@@ -171,7 +171,7 @@
         170
       ],
       "flags": {},
-      "order": 33,
+      "order": 35,
       "mode": 0,
       "inputs": [
         {
@@ -215,7 +215,7 @@
         270
       ],
       "flags": {},
-      "order": 32,
+      "order": 34,
       "mode": 0,
       "inputs": [
         {
@@ -403,7 +403,7 @@
         140
       ],
       "flags": {},
-      "order": 34,
+      "order": 36,
       "mode": 0,
       "inputs": [
         {
@@ -911,7 +911,7 @@
         270
       ],
       "flags": {},
-      "order": 29,
+      "order": 31,
       "mode": 0,
       "inputs": [
         {
@@ -984,7 +984,7 @@
         11330
       ],
       "size": [
-        890,
+        880,
         460
       ],
       "flags": {},
@@ -1328,12 +1328,12 @@
         "Node name for S&R": "LoadAudio"
       },
       "widgets_values": [
-        "empty-latent-pre-sample.mp3",
+        "INT8-short-example-song.mp3",
         null,
         null
       ],
       "widgets_values_named": {
-        "audio": "empty-latent-pre-sample.mp3",
+        "audio": "INT8-short-example-song.mp3",
         "upload": null
       }
     },
@@ -1364,12 +1364,12 @@
         "Node name for S&R": "LoadAudio"
       },
       "widgets_values": [
-        "empty-latent-pre-sample.mp3",
+        "FP8-short-example-song.mp3",
         null,
         null
       ],
       "widgets_values_named": {
-        "audio": "empty-latent-pre-sample.mp3",
+        "audio": "FP8-short-example-song.mp3",
         "upload": null
       }
     },
@@ -1522,6 +1522,81 @@
       ],
       "widgets_values_named": {
         "audio": "empty-latent-post-sample.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3455,
+      "type": "CLIPLoader",
+      "pos": [
+        -2360,
+        12100
+      ],
+      "size": [
+        980,
+        150
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "showAdvanced": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "minimax_music3_text_encoder_fp8_e4m3fn.safetensors",
+        "minimax",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "minimax_music3_text_encoder_fp8_e4m3fn.safetensors",
+        "type": "minimax",
+        "device": "default"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3456,
+      "type": "LoadAudio",
+      "pos": [
+        -2360,
+        12290
+      ],
+      "size": [
+        980,
+        160
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "title": "And yes... I did rent a pod just to generate a full unquant version at FP32... here you go....",
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "empty-latent-pre-sample.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "empty-latent-pre-sample.mp3",
         "upload": null
       }
     }
@@ -1809,7 +1884,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 16,
-          "lastNodeId": 3454,
+          "lastNodeId": 3456,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -1950,7 +2025,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 16,
-          "lastNodeId": 3454,
+          "lastNodeId": 3456,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2117,7 +2192,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 16,
-          "lastNodeId": 3454,
+          "lastNodeId": 3456,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2258,10 +2333,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1.191817653772735,
+      "scale": 0.23579476910000355,
       "offset": [
-        106.02324860302838,
-        -10932.00697047713
+        6838.433454060472,
+        -6756.416095720295
       ]
     },
     "frontendVersion": "1.49.6"
