@@ -117,6 +117,10 @@ check("Spotify Markdown directive is supported",
       "[spotify:" in (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")
       and "open.spotify.com/embed" in (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")
       and ".gbr-spotify-embed" in css)
+check("feedback-form Markdown directive is supported",
+      "[feedback-form:" in (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")
+      and "forms.cloud.microsoft" in (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")
+      and ".gbr-feedback-embed" in css)
 
 # --- meters, console and power ---------------------------------------------
 check("meters are a side-by-side pair", "meterSplit" in js and "drawMeterFace" in js)

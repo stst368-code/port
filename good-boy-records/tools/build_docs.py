@@ -176,6 +176,44 @@ def render_markdown(source: str) -> str:
             i += 1
             continue
 
+        # Embedded feedback form.  This deliberately accepts only Microsoft Forms
+        # response/embed URLs, rather than turning the Markdown renderer into a
+        # general arbitrary-iframe escape hatch.
+        # Syntax: [feedback-form: https://forms.cloud.microsoft/r/FORM_ID]
+        feedback = re.match(r"^\[feedback-form:\s*(.+?)\s*\]$", stripped, re.IGNORECASE)
+        if feedback:
+            flush_paragraph()
+            close_list()
+            payload = feedback.group(1).strip()
+            md_link = re.fullmatch(r"\[([^\]]+)\]\((https?://[^)]+)\)", payload, re.IGNORECASE)
+            url = (md_link.group(2) if md_link else payload).strip()
+            form_url = re.fullmatch(
+                r"https?://(?:www\.)?(?:forms\.cloud\.microsoft|forms\.office\.com|forms\.microsoft\.com)/[^\s<>]+",
+                url,
+                re.IGNORECASE,
+            )
+            if form_url:
+                safe_url = html.escape(url, quote=True)
+                out.append(
+                    '<div class="gbr-feedback-embed">'
+                    f'<iframe src="{safe_url}" title="Good Boy Records request form" '
+                    'loading="lazy" frameborder="0" allowfullscreen '
+                    'referrerpolicy="strict-origin-when-cross-origin"></iframe>'
+                    '<p class="gbr-feedback-fallback">'
+                    f'If the form does not appear here, <a href="{safe_url}" target="_blank" '
+                    'rel="noopener noreferrer">open it in a new tab</a>.'
+                    '</p>'
+                    '</div>'
+                )
+            else:
+                out.append(
+                    '<p class="gbr-embed-error"><strong>Feedback form:</strong> '
+                    'expected a Microsoft Forms URL from forms.cloud.microsoft, '
+                    'forms.office.com or forms.microsoft.com.</p>'
+                )
+            i += 1
+            continue
+
         # Read-only ComfyUI workflow embed for the side-folder Markdown.
         # Syntax: [comfy-workflow: filename.json height=620 focus=3404]
         workflow = re.match(r"^\[comfy-workflow:\s*([^\]\s]+)(.*?)\]$", stripped, re.IGNORECASE)

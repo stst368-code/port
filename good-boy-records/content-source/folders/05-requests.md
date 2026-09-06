@@ -4,7 +4,7 @@ title: Requests
 order: 5
 ---
 
-If you've a request for a cover or otherwise, feel free
-to ping something into the form below.
+If you've got a request for a cover, or anything else you'd like to hear, drop it
+into the form below.
 
-[feedback-form: https://forms.cloud.microsoft/r/Gwx8tMhHke ]
+[feedback-form: https://forms.cloud.microsoft/r/Gwx8tMhHke]
