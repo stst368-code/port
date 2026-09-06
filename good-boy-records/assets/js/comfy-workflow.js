@@ -481,9 +481,10 @@
     var p = normalisePos(node);
     var list = output ? (node.outputs || []) : (node.inputs || []);
     var count = Math.max(1, list.length);
-    var row = 24;
-    /* Header 32px + port padding 7px + half a 24px row. */
-    var y = p[1] + this.shiftY + 51 + clamp(Number(slot) || 0, 0, count - 1) * row;
+    var row = 20;
+    /* Matches the compact read-only node chrome: 28px header + 4px top
+       padding + half a 20px port row. */
+    var y = p[1] + this.shiftY + 42 + clamp(Number(slot) || 0, 0, count - 1) * row;
     return y;
   };
 
@@ -610,6 +611,12 @@
       if (widgets.length) {
         var body = document.createElement("div");
         body.className = "cw-widgets";
+        var multiCount = widgets.reduce(function (count, entry) {
+          var value = String(entry.value == null ? "" : entry.value);
+          return count + ((value.indexOf("\n") !== -1 || value.length > 90) ? 1 : 0);
+        }, 0);
+        if (widgets.length === 1 && multiCount === 1) body.classList.add("cw-widgets--single-multi");
+        if (widgets.length >= 3) body.classList.add("cw-widgets--dense");
         widgets.forEach(function (entry) {
           var field = document.createElement("div");
           field.className = "cw-widget";

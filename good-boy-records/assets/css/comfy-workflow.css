@@ -152,39 +152,64 @@
   min-width: 120px;
   min-height: 64px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   border: 2px solid rgba(0,0,0,0.78);
   border-radius: 9px;
   box-shadow: 0 8px 18px rgba(0,0,0,0.58), inset 0 0 0 1px rgba(255,255,255,0.055);
   color: #e9e5df;
-  font: 14px/1.35 var(--mono, Consolas, monospace);
+  font: 12px/1.28 var(--mono, Consolas, monospace);
   pointer-events: none;
+  box-sizing: border-box;
 }
+.cw-node *, .cw-node *::before, .cw-node *::after { box-sizing: border-box; }
 .cw-node--muted { opacity: 0.58; }
 .cw-node-head {
-  height: 32px;
+  flex: 0 0 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 0 10px;
+  gap: 8px;
+  padding: 0 8px;
   background: var(--cw-node-head);
   color: #fff;
   box-shadow: inset 0 -1px rgba(0,0,0,0.45), inset 0 1px rgba(255,255,255,0.08);
   text-shadow: 0 1px 2px #000;
 }
-.cw-node-head strong { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; }
-.cw-node-head span { opacity: 0.58; font-size: 10px; }
+.cw-node-head strong {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  line-height: 1;
+}
+.cw-node-head span { opacity: 0.58; font-size: 9px; line-height: 1; }
 
-.cw-ports { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; padding: 7px 8px 3px; }
+.cw-ports {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 8px;
+  padding: 4px 7px 1px;
+}
 .cw-port-list { min-width: 0; }
 .cw-port-list--out { text-align: right; }
-.cw-port { height: 24px; display: flex; align-items: center; gap: 6px; min-width: 0; color: #d9d4cd; }
+.cw-port {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  color: #d9d4cd;
+  line-height: 1;
+}
 .cw-port-list--out .cw-port { justify-content: flex-end; }
 .cw-port span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .cw-port i {
   flex: 0 0 auto;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--port);
   border: 2px solid rgba(0,0,0,0.65);
@@ -192,22 +217,27 @@
 }
 
 .cw-widgets {
-  margin: 2px 8px 24px;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 1px 7px 15px;
   display: grid;
-  gap: 6px;
+  align-content: start;
+  gap: 3px;
   overflow: hidden;
 }
-.cw-widget { min-width: 0; }
+.cw-widget { min-width: 0; min-height: 0; }
 .cw-widget-key {
-  margin: 0 0 2px;
+  margin: 0 0 1px;
   color: #aaa097;
-  font-size: 10px;
-  letter-spacing: 0.05em;
+  font-size: 9px;
+  line-height: 10px;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
 }
 .cw-widget-value {
-  min-height: 23px;
-  padding: 3px 6px;
+  height: 20px;
+  min-height: 20px;
+  padding: 2px 5px;
   border: 1px solid rgba(0,0,0,0.8);
   border-radius: 4px;
   background: rgba(9,8,7,0.58);
@@ -215,20 +245,47 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 14px;
 }
 .cw-widget-value--multi {
+  height: auto;
+  min-height: 20px;
+  max-height: 68px;
   white-space: pre-wrap;
   overflow: hidden;
   overflow-wrap: anywhere;
-  line-height: 1.32;
+  line-height: 1.24;
 }
+/* A single multiline widget is normally an explanatory/text node. Give its
+   textarea the node's remaining height instead of letting the text push the
+   rest of the node out of alignment. */
+.cw-widgets--single-multi {
+  grid-template-rows: minmax(0, 1fr);
+  align-content: stretch;
+}
+.cw-widgets--single-multi .cw-widget {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+}
+.cw-widgets--single-multi .cw-widget-value--multi {
+  flex: 1 1 auto;
+  height: auto;
+  max-height: none;
+  min-height: 0;
+}
+.cw-widgets--dense { gap: 2px; }
+.cw-widgets--dense .cw-widget-key { font-size: 8.5px; line-height: 9px; }
+.cw-widgets--dense .cw-widget-value { height: 19px; min-height: 19px; padding-block: 1px; }
+
 .cw-node-type {
   position: absolute;
-  left: 9px;
-  right: 9px;
-  bottom: 5px;
+  left: 8px;
+  right: 8px;
+  bottom: 4px;
   color: rgba(235,228,220,0.45);
-  font-size: 9px;
+  font-size: 8px;
+  line-height: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -269,7 +326,9 @@
 .cw-media {
   position: relative;
   z-index: 4;
-  margin: 8px 8px 24px;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 5px 7px 15px;
   min-width: 0;
   border: 1px solid rgba(0,0,0,.82);
   border-radius: 5px;
@@ -280,8 +339,8 @@
 }
 .cw-media--image,
 .cw-media--video {
-  height: calc(100% - 66px);
-  min-height: 54px;
+  height: auto;
+  min-height: 42px;
   display: grid;
   grid-template-rows: minmax(0,1fr) auto;
 }
@@ -297,13 +356,14 @@
 .cw-media video,
 .cw-media audio { pointer-events: auto; }
 .cw-media--audio {
-  margin-top: 10px;
-  padding: 5px;
+  flex: 0 0 auto;
+  margin-top: 4px;
+  padding: 4px;
 }
 .cw-media audio {
   display: block;
   width: 100%;
-  height: 38px;
+  height: 34px;
 }
 .cw-media-name {
   padding: 4px 6px;
