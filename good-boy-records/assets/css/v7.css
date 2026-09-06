@@ -1728,11 +1728,11 @@ input:disabled { opacity: 0.4; }
    previous negative-left handle look as though it did not exist. */
 .gbr-folder-resizer {
   position: absolute;
-  z-index: 8;
+  z-index: 20;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 44px;
+  width: 54px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -1741,53 +1741,60 @@ input:disabled { opacity: 0.4; }
   pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
 }
-/* Permanent visible rail, not merely a hover affordance. */
+/* The first version relied on a small pseudo-element at x=0. That was easy to
+   lose against the paper edge and, on older generated pages, the separator
+   element did not exist at all. This one is intentionally unmistakable: a
+   full-height brass rail plus a centred grab block that sits inside the
+   drawer. */
 .gbr-folder-resizer::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 9px;
-  border-right: 1px solid rgba(72,44,16,.72);
-  background: linear-gradient(90deg, #6e451e 0 2px, #c49550 2px 5px, #8a5725 5px 8px, rgba(246,226,187,.9) 8px 9px);
-  box-shadow: 2px 0 9px rgba(42,24,7,.30);
-  opacity: 1;
-  transition: width 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+  width: 14px;
+  border-right: 2px solid #5a3614;
+  background:
+    linear-gradient(90deg,
+      #3b210b 0 2px,
+      #9d652c 2px 5px,
+      #e0b66e 5px 8px,
+      #8c5421 8px 11px,
+      #f4d79c 11px 14px);
+  box-shadow:
+    3px 0 0 rgba(66, 39, 13, 0.28),
+    7px 0 16px rgba(50, 28, 8, 0.26);
 }
 .gbr-folder-resizer::after {
-  content: "↔";
+  content: "⇔";
   position: absolute;
-  left: 7px;
+  left: 11px;
   top: 50%;
-  width: 34px;
-  height: 96px;
+  width: 42px;
+  height: 118px;
   transform: translateY(-50%);
   display: grid;
   place-items: center;
-  border: 2px solid #71481f;
+  border: 2px solid #5b3716;
   border-left-width: 3px;
-  border-radius: 0 9px 9px 0;
-  background: linear-gradient(90deg, #c99d5e, #f1dfb5 48%, #d3ad70);
-  color: #39230d;
-  box-shadow: 3px 4px 14px rgba(30,17,5,.46), inset 1px 0 rgba(255,249,229,.8);
-  font: 900 1.1rem/1 var(--mono);
+  border-radius: 0 10px 10px 0;
+  background: linear-gradient(90deg, #b77c39, #f1d49b 52%, #c68e49);
+  color: #2f1b08;
+  box-shadow:
+    4px 5px 18px rgba(29, 16, 4, 0.52),
+    inset 1px 0 rgba(255, 248, 224, 0.82);
+  font: 900 1.35rem/1 var(--mono);
   opacity: 1;
-  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
-}
-.gbr-folder-resizer:hover::before,
-.gbr-folder-resizer:focus-visible::before,
-.gbr-folders[data-resizing="true"] .gbr-folder-resizer::before {
-  width: 11px;
-  filter: brightness(1.12);
-  box-shadow: 2px 0 14px rgba(174,111,41,.58);
+  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
 }
 .gbr-folder-resizer:hover::after,
 .gbr-folder-resizer:focus-visible::after,
 .gbr-folders[data-resizing="true"] .gbr-folder-resizer::after {
-  transform: translateY(-50%) scale(1.06);
-  background: linear-gradient(90deg, #ddb476, #fff0c9 48%, #e5c186);
-  box-shadow: 3px 4px 18px rgba(30,17,5,.54), 0 0 0 2px rgba(169,105,42,.24);
+  transform: translateY(-50%) scale(1.07);
+  filter: brightness(1.12);
+  box-shadow:
+    4px 5px 22px rgba(29, 16, 4, 0.58),
+    0 0 0 3px rgba(190, 126, 53, 0.28);
 }
 .gbr-folder-resizer:focus-visible { outline: 3px solid #c77e31; outline-offset: -4px; }
 .gbr-folders[data-resizing="true"] .gbr-folder-drawer { transition: none; }
@@ -1819,7 +1826,7 @@ html.gbr-folder-resize-active { user-select: none; }
   height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: clamp(1.4rem, 4vw, 2.9rem) clamp(1.1rem, 3.5vw, 3rem);
+  padding: clamp(1.4rem, 4vw, 2.9rem) clamp(1.1rem, 3.5vw, 3rem) clamp(1.4rem, 4vw, 2.9rem) clamp(3.6rem, 5vw, 4.4rem);
   color: #352714;
   font-family: var(--serif);
   font-size: clamp(0.9rem, 1.05vw, 1.02rem);
@@ -1916,9 +1923,9 @@ html.gbr-folder-resize-active { user-select: none; }
   /* Keep the drawer full-width by default, but let the JS-set width shrink it.
      The resize handle stays visible and touchable on phones/tablets. */
   .gbr-folder-drawer { min-width: 0; }
-  .gbr-folder-resizer { width: 48px; }
-  .gbr-folder-resizer::after { width: 38px; height: 104px; font-size: 1.2rem; }
-  .gbr-folder-sheet { padding-left: clamp(2.8rem, 9vw, 3.6rem); }
+  .gbr-folder-resizer { width: 58px; }
+  .gbr-folder-resizer::after { width: 44px; height: 112px; font-size: 1.35rem; }
+  .gbr-folder-sheet { padding-left: clamp(3.8rem, 12vw, 4.6rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

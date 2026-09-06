@@ -2196,8 +2196,24 @@
   }
 
   function initFolderResize() {
+    if (!folders.drawer) return;
+
+    /* Older generated pages do not contain the resize separator because the
+       drawer existed before resizing was added.  Create it at runtime so a
+       CSS/JS drop-in patch upgrades those pages too, instead of requiring the
+       whole site to be regenerated merely to obtain one div. */
     folders.resizer = $("gbr-folder-resizer");
-    if (!folders.resizer || !folders.drawer) return;
+    if (!folders.resizer) {
+      folders.resizer = document.createElement("div");
+      folders.resizer.className = "gbr-folder-resizer";
+      folders.resizer.id = "gbr-folder-resizer";
+      folders.resizer.setAttribute("role", "separator");
+      folders.resizer.setAttribute("tabindex", "0");
+      folders.resizer.setAttribute("aria-orientation", "vertical");
+      folders.resizer.setAttribute("aria-label", "Resize notes panel");
+      folders.resizer.setAttribute("title", "Drag to resize; double-click to reset");
+      folders.drawer.insertBefore(folders.resizer, folders.drawer.firstChild);
+    }
 
     var savedWidth = parseFloat(recall("gbr:folder-width"));
     setFolderWidth(Number.isFinite(savedWidth) ? savedWidth : 760, false);
