@@ -279,17 +279,17 @@
       "id": 3404,
       "type": "CLIPLoader",
       "pos": [
-        -2400,
-        10530
+        -2390,
+        10440
       ],
       "size": [
-        910,
-        170
+        980,
+        160
       ],
       "flags": {},
       "order": 0,
       "mode": 0,
-      "showAdvanced": true,
+      "showAdvanced": false,
       "inputs": [],
       "outputs": [
         {
@@ -439,8 +439,8 @@
         10130
       ],
       "size": [
-        900,
-        270
+        1000,
+        170
       ],
       "flags": {},
       "order": 3,
@@ -468,10 +468,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "This node loads our text encoder as is the starting point of the workflow.\n\nCLIP is enforced in some UI elements here, it's a limitation of ComfyUI. For the purposes of this workflow CLIP == text encoder, but they are two different things in reality.\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n"
+        "This node loads our text encoder and is the starting point of the workflow. The \"CLIP\" naming is a limitation of ComfyUI. CLIPs are not technically the same thing as text encoders in this context.\n\nText encoders are highly specialised translators and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it. Essentially, it takes our natural language input and transforms it into embeddings the model can understand."
       ],
       "widgets_values_named": {
-        "value": "This node loads our text encoder as is the starting point of the workflow.\n\nCLIP is enforced in some UI elements here, it's a limitation of ComfyUI. For the purposes of this workflow CLIP == text encoder, but they are two different things in reality.\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n"
+        "value": "This node loads our text encoder and is the starting point of the workflow. The \"CLIP\" naming is a limitation of ComfyUI. CLIPs are not technically the same thing as text encoders in this context.\n\nText encoders are highly specialised translators and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it. Essentially, it takes our natural language input and transforms it into embeddings the model can understand."
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -481,11 +481,11 @@
       "type": "PrimitiveStringMultiline",
       "pos": [
         -2400,
-        10830
+        10930
       ],
       "size": [
-        900,
-        470
+        1000,
+        370
       ],
       "flags": {},
       "order": 4,
@@ -513,10 +513,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nTo help explain, I've also created a node to load another text encoder for this same workflow below. The encoder above is approx. 8.9GB in file size, whereas the one below is 10.6GB. They're essentially the same model, only the unit above has been quantized to reduce file size and increase speed / hardware compatibility (VRAM). See the main explanation notes overhead to understand this further.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\n"
+        "To help explain the file names, I've created another node for this same workflow below. The encoder above is 8.9GB, whereas the one below is 10.6GB. They're the same model, only the one above has been quantized more than the one below. See the main explanation sections overhead for more info on this.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\nEach track has a song underneath it, both songs were generated with the exact same seed and configuration, the only difference is the text encoder used. Have a listen to each and see if you can spot the difference!"
       ],
       "widgets_values_named": {
-        "value": "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nTo help explain, I've also created a node to load another text encoder for this same workflow below. The encoder above is approx. 8.9GB in file size, whereas the one below is 10.6GB. They're essentially the same model, only the unit above has been quantized to reduce file size and increase speed / hardware compatibility (VRAM). See the main explanation notes overhead to understand this further.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\n"
+        "value": "To help explain the file names, I've created another node for this same workflow below. The encoder above is 8.9GB, whereas the one below is 10.6GB. They're the same model, only the one above has been quantized more than the one below. See the main explanation sections overhead for more info on this.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\nEach track has a song underneath it, both songs were generated with the exact same seed and configuration, the only difference is the text encoder used. Have a listen to each and see if you can spot the difference!"
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -1176,17 +1176,17 @@
       "id": 3442,
       "type": "CLIPLoader",
       "pos": [
-        -2400,
-        11430
+        -2390,
+        11440
       ],
       "size": [
-        900,
-        170
+        980,
+        150
       ],
       "flags": {},
       "order": 19,
       "mode": 0,
-      "showAdvanced": true,
+      "showAdvanced": false,
       "inputs": [],
       "outputs": [
         {
@@ -1305,12 +1305,12 @@
       "id": 3445,
       "type": "LoadAudio",
       "pos": [
-        -2730,
-        10550
+        -2390,
+        10640
       ],
       "size": [
-        290,
-        140
+        980,
+        150
       ],
       "flags": {},
       "order": 22,
@@ -1323,6 +1323,7 @@
           "links": null
         }
       ],
+      "title": "Song generated using the pruned INT8 model",
       "properties": {
         "Node name for S&R": "LoadAudio"
       },
@@ -1340,12 +1341,12 @@
       "id": 3446,
       "type": "LoadAudio",
       "pos": [
-        -2760,
-        11430
+        -2390,
+        11630
       ],
       "size": [
-        290,
-        140
+        980,
+        160
       ],
       "flags": {},
       "order": 23,
@@ -1358,6 +1359,7 @@
           "links": null
         }
       ],
+      "title": "The same song, using the FP8 model",
       "properties": {
         "Node name for S&R": "LoadAudio"
       },
@@ -1842,6 +1844,30 @@
       ],
       "color": "#b06634",
       "flags": {}
+    },
+    {
+      "id": 15,
+      "title": "FP8",
+      "bounding": [
+        -2400,
+        11370,
+        1000,
+        430
+      ],
+      "color": "#b58b2a",
+      "flags": {}
+    },
+    {
+      "id": 16,
+      "title": "INT8",
+      "bounding": [
+        -2400,
+        10370,
+        1000,
+        430
+      ],
+      "color": "#b58b2a",
+      "flags": {}
     }
   ],
   "definitions": {
@@ -1850,7 +1876,7 @@
         "id": "084ffd0d-0b8d-4bef-9f33-69db7b55d157",
         "version": 1,
         "state": {
-          "lastGroupId": 14,
+          "lastGroupId": 16,
           "lastNodeId": 3454,
           "lastLinkId": 1544,
           "lastRerouteId": 0
@@ -1991,7 +2017,7 @@
         "id": "500a870a-bcd9-412b-9290-7a274a6cd88a",
         "version": 1,
         "state": {
-          "lastGroupId": 14,
+          "lastGroupId": 16,
           "lastNodeId": 3454,
           "lastLinkId": 1544,
           "lastRerouteId": 0
@@ -2158,7 +2184,7 @@
         "id": "ea857344-20d0-436d-bb2d-573102f02109",
         "version": 1,
         "state": {
-          "lastGroupId": 14,
+          "lastGroupId": 16,
           "lastNodeId": 3454,
           "lastLinkId": 1544,
           "lastRerouteId": 0
@@ -2300,10 +2326,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.16105100000000006,
+      "scale": 0.2357947691000025,
       "offset": [
-        6482.796358036852,
-        -6610.931416176558
+        5698.980528097138,
+        -7317.337093347813
       ]
     },
     "frontendVersion": "1.49.6"
