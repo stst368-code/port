@@ -1,7 +1,7 @@
 {
   "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
   "revision": 0,
-  "last_node_id": 3460,
+  "last_node_id": 3465,
   "last_link_id": 1544,
   "nodes": [
     {
@@ -163,12 +163,12 @@
       "id": 3401,
       "type": "VAEDecodeAudio",
       "pos": [
-        3700,
-        10130
+        4110,
+        10140
       ],
       "size": [
-        300,
-        170
+        280,
+        150
       ],
       "flags": {},
       "order": 39,
@@ -395,12 +395,12 @@
       "id": 3407,
       "type": "SaveAudioAdvanced",
       "pos": [
-        4190,
-        10130
+        4610,
+        10140
       ],
       "size": [
-        310,
-        140
+        280,
+        150
       ],
       "flags": {},
       "order": 40,
@@ -513,10 +513,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "To help explain the file names, I've created another node for this same workflow below. The encoder above is 8.9GB, whereas the one below is 10.6GB. They're the same model, only the one above has been quantized more than the one below. See the main explanation sections overhead for more info on this.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\nEach track has a song underneath it, both songs were generated with the exact same seed and configuration, the only difference is the text encoder used. Have a listen to each and see if you can spot the difference!"
+        "To help explain the file names, I've created another node for this same workflow below. The encoder above is 8.9GB, whereas the one below is 10.6GB. They're the same model, only the one above has been quantized more than the one below. See the main explanation sections overhead for more info on this.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\nEach track has a song underneath it, both songs were generated with the exact same prompt, the only difference is the text encoder used. Have a listen to each and see if you can spot the difference!"
       ],
       "widgets_values_named": {
-        "value": "To help explain the file names, I've created another node for this same workflow below. The encoder above is 8.9GB, whereas the one below is 10.6GB. They're the same model, only the one above has been quantized more than the one below. See the main explanation sections overhead for more info on this.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\nEach track has a song underneath it, both songs were generated with the exact same seed and configuration, the only difference is the text encoder used. Have a listen to each and see if you can spot the difference!"
+        "value": "To help explain the file names, I've created another node for this same workflow below. The encoder above is 8.9GB, whereas the one below is 10.6GB. They're the same model, only the one above has been quantized more than the one below. See the main explanation sections overhead for more info on this.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\nEach track has a song underneath it, both songs were generated with the exact same prompt, the only difference is the text encoder used. Have a listen to each and see if you can spot the difference!"
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -567,51 +567,6 @@
       "bgcolor": "#533"
     },
     {
-      "id": 3420,
-      "type": "PrimitiveStringMultiline",
-      "pos": [
-        -2410,
-        7540
-      ],
-      "size": [
-        500,
-        270
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "How can a digital thing have a weight?",
-          "name": "value",
-          "type": "STRING",
-          "widget": {
-            "name": "value"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": []
-        }
-      ],
-      "title": "Weights",
-      "properties": {
-        "Node name for S&R": "PrimitiveStringMultiline"
-      },
-      "widgets_values": [
-        "Weights are the numerical parameters learned during training.\n\nMore weights, more capacity. What the model learns depends on its training.\n\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
-      ],
-      "widgets_values_named": {
-        "value": "Weights are the numerical parameters learned during training.\n\nMore weights, more capacity. What the model learns depends on its training.\n\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
-      },
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
       "id": 3423,
       "type": "PrimitiveStringMultiline",
       "pos": [
@@ -623,7 +578,7 @@
         270
       ],
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -670,7 +625,7 @@
         180
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -706,72 +661,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 3425,
-      "type": "PrimitiveStringMultiline",
-      "pos": [
-        -2440,
-        7880
-      ],
-      "size": [
-        400,
-        200
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": []
-        }
-      ],
-      "title": "Quantization",
-      "properties": {
-        "Node name for S&R": "PrimitiveStringMultiline"
-      },
-      "widgets_values": [
-        "\nAlways with a \"Z\" :(\n\nTypes\nMethods"
-      ],
-      "widgets_values_named": {
-        "value": "\nAlways with a \"Z\" :(\n\nTypes\nMethods"
-      }
-    },
-    {
-      "id": 3426,
-      "type": "PrimitiveStringMultiline",
-      "pos": [
-        -2850,
-        6750
-      ],
-      "size": [
-        870,
-        500
-      ],
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": []
-        }
-      ],
-      "title": "File Types",
-      "properties": {
-        "Node name for S&R": "PrimitiveStringMultiline"
-      },
-      "widgets_values": [
-        "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
-      ],
-      "widgets_values_named": {
-        "value": "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
-      }
-    },
-    {
       "id": 3428,
       "type": "PrimitiveStringMultiline",
       "pos": [
@@ -783,7 +672,7 @@
         1050
       ],
       "flags": {},
-      "order": 11,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -828,7 +717,7 @@
         470
       ],
       "flags": {},
-      "order": 12,
+      "order": 9,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -864,7 +753,7 @@
         180
       ],
       "flags": {},
-      "order": 13,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -954,7 +843,7 @@
         670
       ],
       "flags": {},
-      "order": 14,
+      "order": 11,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -988,7 +877,7 @@
         460
       ],
       "flags": {},
-      "order": 15,
+      "order": 12,
       "mode": 0,
       "showAdvanced": true,
       "inputs": [
@@ -1049,7 +938,7 @@
         770
       ],
       "flags": {},
-      "order": 16,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -1094,7 +983,7 @@
         360
       ],
       "flags": {},
-      "order": 17,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -1139,7 +1028,7 @@
         250
       ],
       "flags": {},
-      "order": 18,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
@@ -1184,7 +1073,7 @@
         150
       ],
       "flags": {},
-      "order": 19,
+      "order": 16,
       "mode": 0,
       "showAdvanced": false,
       "inputs": [],
@@ -1215,7 +1104,7 @@
       "id": 3443,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        3700,
+        4090,
         10430
       ],
       "size": [
@@ -1223,7 +1112,7 @@
         570
       ],
       "flags": {},
-      "order": 20,
+      "order": 17,
       "mode": 0,
       "inputs": [
         {
@@ -1268,7 +1157,7 @@
         250
       ],
       "flags": {},
-      "order": 21,
+      "order": 18,
       "mode": 0,
       "inputs": [
         {
@@ -1313,7 +1202,7 @@
         150
       ],
       "flags": {},
-      "order": 22,
+      "order": 19,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1349,7 +1238,7 @@
         160
       ],
       "flags": {},
-      "order": 23,
+      "order": 20,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1377,15 +1266,15 @@
       "id": 3450,
       "type": "LoadAudio",
       "pos": [
-        3200,
-        11430
+        3210,
+        11440
       ],
       "size": [
-        500,
-        170
+        480,
+        150
       ],
       "flags": {},
-      "order": 24,
+      "order": 21,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1420,7 +1309,7 @@
         160
       ],
       "flags": {},
-      "order": 25,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
@@ -1465,7 +1354,7 @@
         170
       ],
       "flags": {},
-      "order": 26,
+      "order": 23,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1501,7 +1390,7 @@
         160
       ],
       "flags": {},
-      "order": 27,
+      "order": 24,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1529,15 +1418,15 @@
       "id": 3455,
       "type": "CLIPLoader",
       "pos": [
-        -2360,
-        12100
+        -2430,
+        12860
       ],
       "size": [
         980,
         150
       ],
       "flags": {},
-      "order": 28,
+      "order": 25,
       "mode": 0,
       "showAdvanced": false,
       "inputs": [],
@@ -1568,15 +1457,15 @@
       "id": 3456,
       "type": "LoadAudio",
       "pos": [
-        -2360,
-        12290
+        -2430,
+        13050
       ],
       "size": [
         980,
         160
       ],
       "flags": {},
-      "order": 29,
+      "order": 26,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1608,11 +1497,11 @@
         11130
       ],
       "size": [
-        1300,
+        1700,
         170
       ],
       "flags": {},
-      "order": 30,
+      "order": 27,
       "mode": 0,
       "inputs": [
         {
@@ -1649,15 +1538,15 @@
       "id": 3458,
       "type": "LoadAudio",
       "pos": [
-        3700,
-        11430
+        3810,
+        11440
       ],
       "size": [
-        500,
-        170
+        490,
+        150
       ],
       "flags": {},
-      "order": 31,
+      "order": 28,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1685,18 +1574,18 @@
       "type": "PrimitiveStringMultiline",
       "pos": [
         3210,
-        11640
+        11630
       ],
       "size": [
-        490,
-        180
+        480,
+        160
       ],
       "flags": {},
-      "order": 32,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
-          "label": "Play me out!",
+          "label": "Maxis will buy this.",
           "name": "value",
           "type": "STRING",
           "widget": {
@@ -1717,10 +1606,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "This track was made when I was testing a different audio generation model, Acestep 1.5, which does use a negative conditioning. I accidentally left the positive conditioning disconnected from the sampler and had hooked the negative conditioning into the positive input as well as the negative input.\n\nThe result... it invented a new language, which sounds almost identical to the sims?"
+        "This track was made testing a different audio model, Acestep 1.5, which does use negative conditioning. I accidentally left the negative conditioning connected to the positive input as well as the negative input.\n\nThe result... it invented a new language, which sounds almost identical to the sims?"
       ],
       "widgets_values_named": {
-        "value": "This track was made when I was testing a different audio generation model, Acestep 1.5, which does use a negative conditioning. I accidentally left the positive conditioning disconnected from the sampler and had hooked the negative conditioning into the positive input as well as the negative input.\n\nThe result... it invented a new language, which sounds almost identical to the sims?"
+        "value": "This track was made testing a different audio model, Acestep 1.5, which does use negative conditioning. I accidentally left the negative conditioning connected to the positive input as well as the negative input.\n\nThe result... it invented a new language, which sounds almost identical to the sims?"
       },
       "color": "#322",
       "bgcolor": "#533"
@@ -1729,19 +1618,19 @@
       "id": 3460,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        3700,
+        3810,
         11640
       ],
       "size": [
-        490,
-        180
+        480,
+        150
       ],
       "flags": {},
-      "order": 33,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
-          "label": "Play me out!",
+          "label": "Where is this one going?",
           "name": "value",
           "type": "STRING",
           "widget": {
@@ -1762,13 +1651,114 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "This is what happens when you tweak the CFG really high, 4.0 in this case.\n\nOne moment, it's a little degraded but sounds like a normal track, the next it dives into avant-garde Yoko Ono meets the poetry club night, frantic, chaotic energy.\n\nFunnily enough, the same base song as the previous track... hmm...."
+        "This is what happens when you tweak the CFG really high, 4.0 in this case.\nOne moment, it sounds somewhat normal, the next it dives into avant-garde Yoko Ono meets the poetry club, frantic, chaotic energy.\n\nFunnily enough, the same base song as the previous track... hmm...."
       ],
       "widgets_values_named": {
-        "value": "This is what happens when you tweak the CFG really high, 4.0 in this case.\n\nOne moment, it's a little degraded but sounds like a normal track, the next it dives into avant-garde Yoko Ono meets the poetry club night, frantic, chaotic energy.\n\nFunnily enough, the same base song as the previous track... hmm...."
+        "value": "This is what happens when you tweak the CFG really high, 4.0 in this case.\nOne moment, it sounds somewhat normal, the next it dives into avant-garde Yoko Ono meets the poetry club, frantic, chaotic energy.\n\nFunnily enough, the same base song as the previous track... hmm...."
       },
       "color": "#322",
       "bgcolor": "#533"
+    },
+    {
+      "id": 3463,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        4410,
+        11640
+      ],
+      "size": [
+        480,
+        150
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Coming soon...",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Example Songs",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3464,
+      "type": "LoadAudio",
+      "pos": [
+        4410,
+        11440
+      ],
+      "size": [
+        490,
+        150
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "paws-off-the-velvet-insanity.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "paws-off-the-velvet-insanity.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3465,
+      "type": "b295524e-cc95-4891-8f4c-02332d48287e",
+      "pos": [
+        -2120,
+        8010
+      ],
+      "size": [
+        225,
+        38
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "WIP",
+      "properties": {
+        "previewExposures": []
+      }
     }
   ],
   "links": [
@@ -1920,7 +1910,7 @@
       "bounding": [
         3100,
         10000,
-        1500,
+        1900,
         1900
       ],
       "color": "#A88",
@@ -2045,6 +2035,18 @@
       ],
       "color": "#b58b2a",
       "flags": {}
+    },
+    {
+      "id": 17,
+      "title": "coming soon",
+      "bounding": [
+        -2440,
+        12790,
+        1000,
+        430
+      ],
+      "color": "#3f789e",
+      "flags": {}
     }
   ],
   "definitions": {
@@ -2053,8 +2055,8 @@
         "id": "084ffd0d-0b8d-4bef-9f33-69db7b55d157",
         "version": 1,
         "state": {
-          "lastGroupId": 16,
-          "lastNodeId": 3460,
+          "lastGroupId": 17,
+          "lastNodeId": 3465,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2194,8 +2196,8 @@
         "id": "500a870a-bcd9-412b-9290-7a274a6cd88a",
         "version": 1,
         "state": {
-          "lastGroupId": 16,
-          "lastNodeId": 3460,
+          "lastGroupId": 17,
+          "lastNodeId": 3465,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2361,8 +2363,8 @@
         "id": "ea857344-20d0-436d-bb2d-573102f02109",
         "version": 1,
         "state": {
-          "lastGroupId": 16,
-          "lastNodeId": 3460,
+          "lastGroupId": 17,
+          "lastNodeId": 3465,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2497,16 +2499,170 @@
           }
         ],
         "extra": {}
+      },
+      {
+        "id": "b295524e-cc95-4891-8f4c-02332d48287e",
+        "version": 1,
+        "state": {
+          "lastGroupId": 17,
+          "lastNodeId": 3465,
+          "lastLinkId": 1544,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "WIP",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            -3038,
+            7376,
+            128,
+            48
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            -1850,
+            7376,
+            128,
+            48
+          ]
+        },
+        "inputs": [],
+        "outputs": [],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 3420,
+            "type": "PrimitiveStringMultiline",
+            "pos": [
+              -2410,
+              7540
+            ],
+            "size": [
+              500,
+              270
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [
+              {
+                "label": "How can a digital thing have a weight?",
+                "localized_name": "value",
+                "name": "value",
+                "type": "STRING",
+                "widget": {
+                  "name": "value"
+                },
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "STRING",
+                "name": "STRING",
+                "type": "STRING",
+                "links": []
+              }
+            ],
+            "title": "Weights",
+            "properties": {
+              "Node name for S&R": "PrimitiveStringMultiline"
+            },
+            "widgets_values": [
+              "Weights are the numerical parameters learned during training.\n\nMore weights, more capacity. What the model learns depends on its training.\n\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
+            ],
+            "widgets_values_named": {
+              "value": "Weights are the numerical parameters learned during training.\n\nMore weights, more capacity. What the model learns depends on its training.\n\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
+            },
+            "color": "#322",
+            "bgcolor": "#533"
+          },
+          {
+            "id": 3425,
+            "type": "PrimitiveStringMultiline",
+            "pos": [
+              -2440,
+              7880
+            ],
+            "size": [
+              400,
+              200
+            ],
+            "flags": {},
+            "order": 1,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "STRING",
+                "name": "STRING",
+                "type": "STRING",
+                "links": []
+              }
+            ],
+            "title": "Quantization",
+            "properties": {
+              "Node name for S&R": "PrimitiveStringMultiline"
+            },
+            "widgets_values": [
+              "\nAlways with a \"Z\" :(\n\nTypes\nMethods"
+            ],
+            "widgets_values_named": {
+              "value": "\nAlways with a \"Z\" :(\n\nTypes\nMethods"
+            }
+          },
+          {
+            "id": 3426,
+            "type": "PrimitiveStringMultiline",
+            "pos": [
+              -2850,
+              6750
+            ],
+            "size": [
+              870,
+              500
+            ],
+            "flags": {},
+            "order": 2,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "STRING",
+                "name": "STRING",
+                "type": "STRING",
+                "links": []
+              }
+            ],
+            "title": "File Types",
+            "properties": {
+              "Node name for S&R": "PrimitiveStringMultiline"
+            },
+            "widgets_values": [
+              "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
+            ],
+            "widgets_values_named": {
+              "value": "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
+            }
+          }
+        ],
+        "groups": [],
+        "links": [],
+        "extra": {}
       }
     ]
   },
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.505447028499302,
+      "scale": 0.12100000000000231,
       "offset": [
-        -857.8043374887314,
-        -10105.555683191287
+        4074.859129568129,
+        -3196.1150419096452
       ]
     },
     "frontendVersion": "1.49.6"
