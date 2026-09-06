@@ -14,3 +14,9 @@ between attempts or styles.
 
 This page will document the process for building the music and act as a general
 introduction to AI and diffusion.
+
+Whilst we are two good dogs, we do have to warn you, many songs or links to songs
+on this page contain explicit language or sing about subject matters that may 
+offend.
+
+Please don't play this around your children.

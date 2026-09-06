@@ -138,6 +138,44 @@ def render_markdown(source: str) -> str:
             i += 1
             continue
 
+        # Spotify embed. The slightly redundant Markdown-link form is useful in
+        # editors because the URL remains clickable in the source:
+        # [spotify: [https://open.spotify.com/playlist/ID](https://open.spotify.com/playlist/ID)]
+        # A bare URL is accepted too: [spotify: https://open.spotify.com/playlist/ID]
+        spotify = re.match(r"^\[spotify:\s*(.+?)\s*\]$", stripped, re.IGNORECASE)
+        if spotify:
+            flush_paragraph()
+            close_list()
+            payload = spotify.group(1).strip()
+            md_link = re.fullmatch(r"\[([^\]]+)\]\((https?://[^)]+)\)", payload, re.IGNORECASE)
+            url = md_link.group(2) if md_link else payload
+            spotify_url = re.fullmatch(
+                r"https?://(?:www\.)?open\.spotify\.com/(playlist|album|track|artist|show|episode)/([A-Za-z0-9]+)(?:[/?#].*)?",
+                url,
+                re.IGNORECASE,
+            )
+            if spotify_url:
+                kind = spotify_url.group(1).lower()
+                item_id = spotify_url.group(2)
+                embed_url = f"https://open.spotify.com/embed/{kind}/{item_id}"
+                out.append(
+                    '<div class="gbr-spotify-embed">'
+                    f'<iframe src="{html.escape(embed_url, quote=True)}" '
+                    f'title="Spotify {html.escape(kind, quote=True)} player" '
+                    'loading="lazy" frameborder="0" allowfullscreen '
+                    'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" '
+                    'referrerpolicy="strict-origin-when-cross-origin"></iframe>'
+                    '</div>'
+                )
+            else:
+                # Invalid/foreign URLs remain visible instead of silently vanishing.
+                out.append(
+                    '<p class="gbr-embed-error"><strong>Spotify embed:</strong> '
+                    'expected an open.spotify.com playlist, album, track, artist, show or episode URL.</p>'
+                )
+            i += 1
+            continue
+
         # Read-only ComfyUI workflow embed for the side-folder Markdown.
         # Syntax: [comfy-workflow: filename.json height=620 focus=3404]
         workflow = re.match(r"^\[comfy-workflow:\s*([^\]\s]+)(.*?)\]$", stripped, re.IGNORECASE)

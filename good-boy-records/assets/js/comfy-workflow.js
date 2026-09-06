@@ -108,7 +108,12 @@
     this.panX = 0;
     this.panY = 0;
     this.drag = null;
+    this.pointers = new Map();
+    this.gesture = null;
     this.initialFitDone = false;
+    this.lastStageWidth = 0;
+    this.lastStageHeight = 0;
+    this.lastTapAt = 0;
     this.focusNode = root.dataset.focus ? String(root.dataset.focus) : "";
     this.buildShell();
     this.load();
@@ -119,7 +124,7 @@
     this.root.style.setProperty("--cw-height", height + "px");
     this.root.innerHTML =
       '<div class="cw-toolbar">' +
-        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong><span class="cw-meta">Loading...</span></div>' +
+        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong><span class="cw-meta">Loading...</span><span class="cw-navhint">DRAG · PINCH · WHEEL</span></div>' +
         '<div class="cw-actions">' +
           '<button type="button" data-cw-action="out" aria-label="Zoom out">−</button>' +
           '<button type="button" data-cw-action="in" aria-label="Zoom in">+</button>' +
@@ -127,7 +132,7 @@
           '<button type="button" data-cw-action="fullscreen">FULLSCREEN</button>' +
         '</div>' +
       '</div>' +
-      '<div class="cw-stage" tabindex="0" aria-label="Read-only ComfyUI workflow. Drag to pan and use the mouse wheel to zoom.">' +
+      '<div class="cw-stage" tabindex="0" aria-label="Read-only ComfyUI workflow. Drag with a mouse or one finger to pan. Pinch or use the mouse wheel to zoom.">' +
         '<div class="cw-loading">Loading workflow…</div>' +
       '</div>';
 
@@ -141,44 +146,150 @@
       button.addEventListener("click", function () {
         var action = button.dataset.cwAction;
         if (action === "fit") self.fit(true);
-        if (action === "in") self.zoomBy(1.2);
-        if (action === "out") self.zoomBy(1 / 1.2);
+        if (action === "in") self.zoomBy(1.18);
+        if (action === "out") self.zoomBy(1 / 1.18);
         if (action === "fullscreen") self.toggleFullscreen();
       });
     });
 
+    /* Keep the canvas grid attached to the graph. A stationary grid while the
+       nodes move is subtle, but it makes panning feel uncannily wrong. */
     this.stage.addEventListener("wheel", function (event) {
       if (!self.world) return;
       event.preventDefault();
       var rect = self.stage.getBoundingClientRect();
       var x = event.clientX - rect.left;
       var y = event.clientY - rect.top;
-      var factor = Math.exp(-event.deltaY * 0.0015);
+      var delta = event.deltaY;
+      if (event.deltaMode === 1) delta *= 16;
+      else if (event.deltaMode === 2) delta *= rect.height;
+      delta = clamp(delta, -160, 160);
+      var factor = Math.exp(-delta * 0.0024);
       self.zoomAt(x, y, factor);
     }, { passive: false });
 
+    function point(event) {
+      var rect = self.stage.getBoundingClientRect();
+      return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    }
+
+    function firstTwoPointers() {
+      var values = Array.from(self.pointers.values());
+      return values.length >= 2 ? [values[0], values[1]] : null;
+    }
+
+    function distance(a, b) {
+      var dx = b.x - a.x, dy = b.y - a.y;
+      return Math.max(1, Math.hypot(dx, dy));
+    }
+
+    function midpoint(a, b) {
+      return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+    }
+
+    function beginPan(id, p) {
+      self.gesture = {
+        mode: "pan",
+        id: id,
+        x: p.x,
+        y: p.y,
+        panX: self.panX,
+        panY: self.panY,
+        moved: false
+      };
+    }
+
+    function beginPinch() {
+      var pair = firstTwoPointers();
+      if (!pair) return;
+      var mid = midpoint(pair[0], pair[1]);
+      self.gesture = {
+        mode: "pinch",
+        distance: distance(pair[0], pair[1]),
+        scale: self.scale,
+        panX: self.panX,
+        panY: self.panY,
+        midX: mid.x,
+        midY: mid.y,
+        worldX: (mid.x - self.panX) / self.scale,
+        worldY: (mid.y - self.panY) / self.scale
+      };
+    }
+
     this.stage.addEventListener("pointerdown", function (event) {
-      if (!self.world || event.button !== 0) return;
-      self.drag = { x: event.clientX, y: event.clientY, panX: self.panX, panY: self.panY };
-      self.stage.setPointerCapture(event.pointerId);
+      if (!self.world) return;
+      /* Touch/pen pointer events do not need a mouse-button test. */
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      event.preventDefault();
+      var p = point(event);
+      self.pointers.set(event.pointerId, p);
+      try { self.stage.setPointerCapture(event.pointerId); } catch (_) {}
       self.stage.dataset.dragging = "true";
-    });
+      if (self.pointers.size >= 2) beginPinch();
+      else beginPan(event.pointerId, p);
+    }, { passive: false });
 
     this.stage.addEventListener("pointermove", function (event) {
-      if (!self.drag) return;
-      self.panX = self.drag.panX + (event.clientX - self.drag.x);
-      self.panY = self.drag.panY + (event.clientY - self.drag.y);
+      if (!self.pointers.has(event.pointerId)) return;
+      event.preventDefault();
+      var p = point(event);
+      self.pointers.set(event.pointerId, p);
+
+      if (self.pointers.size >= 2) {
+        if (!self.gesture || self.gesture.mode !== "pinch") beginPinch();
+        var pair = firstTwoPointers();
+        if (!pair || !self.gesture) return;
+        var mid = midpoint(pair[0], pair[1]);
+        var next = clamp(self.gesture.scale * (distance(pair[0], pair[1]) / self.gesture.distance), 0.035, 3.0);
+        self.scale = next;
+        self.panX = mid.x - self.gesture.worldX * next;
+        self.panY = mid.y - self.gesture.worldY * next;
+        self.applyTransform();
+        return;
+      }
+
+      if (!self.gesture || self.gesture.mode !== "pan") beginPan(event.pointerId, p);
+      if (!self.gesture || self.gesture.id !== event.pointerId) return;
+      var dx = p.x - self.gesture.x;
+      var dy = p.y - self.gesture.y;
+      if (Math.abs(dx) + Math.abs(dy) > 3) self.gesture.moved = true;
+      self.panX = self.gesture.panX + dx;
+      self.panY = self.gesture.panY + dy;
       self.applyTransform();
-    });
+    }, { passive: false });
 
     function finishPointer(event) {
-      if (!self.drag) return;
-      self.drag = null;
-      self.stage.dataset.dragging = "false";
+      if (!self.pointers.has(event.pointerId)) return;
+      var wasMoved = self.gesture && self.gesture.moved;
+      self.pointers.delete(event.pointerId);
       try { self.stage.releasePointerCapture(event.pointerId); } catch (_) {}
+
+      if (self.pointers.size >= 2) {
+        beginPinch();
+      } else if (self.pointers.size === 1) {
+        var remaining = self.pointers.entries().next().value;
+        beginPan(remaining[0], remaining[1]);
+      } else {
+        self.gesture = null;
+        self.stage.dataset.dragging = "false";
+        /* Double tap/click on empty canvas is a quick way home. */
+        if (!wasMoved) {
+          var now = performance.now();
+          if (now - self.lastTapAt < 320) {
+            self.lastTapAt = 0;
+            self.fit(true);
+          } else {
+            self.lastTapAt = now;
+          }
+        }
+      }
     }
     this.stage.addEventListener("pointerup", finishPointer);
     this.stage.addEventListener("pointercancel", finishPointer);
+    this.stage.addEventListener("lostpointercapture", function (event) {
+      if (self.pointers.has(event.pointerId)) finishPointer(event);
+    });
+    this.stage.addEventListener("contextmenu", function (event) { event.preventDefault(); });
 
     this.stage.addEventListener("keydown", function (event) {
       if (event.key === "+" || event.key === "=") { event.preventDefault(); self.zoomBy(1.15); }
@@ -194,14 +305,37 @@
       this.resizeObserver = new ResizeObserver(function () {
         if (!self.world) return;
         var rect = self.stage.getBoundingClientRect();
-        if (rect.width > 40 && rect.height > 40 && !self.initialFitDone) {
+        if (rect.width <= 40 || rect.height <= 40) return;
+        if (!self.initialFitDone) {
           self.initialFitDone = true;
-          self.fit(false);
+          self.lastStageWidth = rect.width;
+          self.lastStageHeight = rect.height;
+          if (self.focusNode) self.focus(self.focusNode);
+          else self.fit(false);
+          return;
         }
+        /* When the folder drawer is resized, preserve the graph point that was
+           in the middle of the viewport instead of leaving the view displaced. */
+        if (self.lastStageWidth && self.lastStageHeight) {
+          self.panX += (rect.width - self.lastStageWidth) / 2;
+          self.panY += (rect.height - self.lastStageHeight) / 2;
+        }
+        self.lastStageWidth = rect.width;
+        self.lastStageHeight = rect.height;
+        self.applyTransform();
       });
       this.resizeObserver.observe(this.stage);
     } else {
-      window.addEventListener("resize", function () { if (self.world) self.fit(false); });
+      window.addEventListener("resize", function () {
+        if (!self.world) return;
+        var rect = self.stage.getBoundingClientRect();
+        if (rect.width <= 40 || rect.height <= 40) return;
+        self.panX += (rect.width - (self.lastStageWidth || rect.width)) / 2;
+        self.panY += (rect.height - (self.lastStageHeight || rect.height)) / 2;
+        self.lastStageWidth = rect.width;
+        self.lastStageHeight = rect.height;
+        self.applyTransform();
+      });
     }
   };
 
@@ -309,7 +443,8 @@
     var list = output ? (node.outputs || []) : (node.inputs || []);
     var count = Math.max(1, list.length);
     var row = 24;
-    var y = p[1] + this.shiftY + 42 + clamp(Number(slot) || 0, 0, count - 1) * row;
+    /* Header 32px + port padding 7px + half a 24px row. */
+    var y = p[1] + this.shiftY + 51 + clamp(Number(slot) || 0, 0, count - 1) * row;
     return y;
   };
 
@@ -330,9 +465,9 @@
       var to = self.nodeMap.get(String(link[3]));
       if (!from || !to) return;
       var fp = normalisePos(from), fs = normaliseSize(from), tp = normalisePos(to);
-      var x1 = fp[0] + self.shiftX + fs[0];
+      var x1 = fp[0] + self.shiftX + fs[0] - 16;
       var y1 = self.portY(from, link[2], true);
-      var x2 = tp[0] + self.shiftX;
+      var x2 = tp[0] + self.shiftX + 16;
       var y2 = self.portY(to, link[4], false);
       var bend = Math.max(55, Math.abs(x2 - x1) * 0.45);
       var path = document.createElementNS(svgNS, "path");
@@ -413,7 +548,17 @@
 
   WorkflowViewer.prototype.applyTransform = function () {
     if (!this.world) return;
-    this.world.style.transform = "translate(" + this.panX + "px," + this.panY + "px) scale(" + this.scale + ")";
+    this.world.style.transform = "translate3d(" + this.panX + "px," + this.panY + "px,0) scale(" + this.scale + ")";
+    /* Move and scale the grid with the graph, including the coordinate shift
+       introduced when we normalise negative ComfyUI canvas positions. */
+    var gridX = this.panX + this.shiftX * this.scale;
+    var gridY = this.panY + this.shiftY * this.scale;
+    var minor = Math.max(8, 20 * this.scale);
+    var major = Math.max(32, 80 * this.scale);
+    this.stage.style.setProperty("--cw-grid-x", gridX + "px");
+    this.stage.style.setProperty("--cw-grid-y", gridY + "px");
+    this.stage.style.setProperty("--cw-grid-minor", minor + "px");
+    this.stage.style.setProperty("--cw-grid-major", major + "px");
   };
 
   WorkflowViewer.prototype.fit = function (animate) {
@@ -424,6 +569,8 @@
     this.scale = clamp(Math.min((rect.width - pad * 2) / this.worldWidth, (rect.height - pad * 2) / this.worldHeight), 0.035, 1.8);
     this.panX = (rect.width - this.worldWidth * this.scale) / 2;
     this.panY = (rect.height - this.worldHeight * this.scale) / 2;
+    this.lastStageWidth = rect.width;
+    this.lastStageHeight = rect.height;
     if (animate) this.world.classList.add("cw-world--animate");
     this.applyTransform();
     if (animate) setTimeout(function (world) { world.classList.remove("cw-world--animate"); }, 220, this.world);
@@ -439,6 +586,8 @@
     this.scale = clamp(Math.min((rect.width * 0.72) / s[0], (rect.height * 0.72) / s[1]), 0.12, 1.15);
     this.panX = rect.width / 2 - (x + s[0] / 2) * this.scale;
     this.panY = rect.height / 2 - (y + s[1] / 2) * this.scale;
+    this.lastStageWidth = rect.width;
+    this.lastStageHeight = rect.height;
     this.applyTransform();
   };
 
