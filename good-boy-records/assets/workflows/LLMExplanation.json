@@ -1,7 +1,7 @@
 {
   "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
   "revision": 0,
-  "last_node_id": 3456,
+  "last_node_id": 3460,
   "last_link_id": 1544,
   "nodes": [
     {
@@ -16,7 +16,7 @@
         460
       ],
       "flags": {},
-      "order": 30,
+      "order": 34,
       "mode": 0,
       "showAdvanced": false,
       "inputs": [
@@ -82,7 +82,7 @@
         70
       ],
       "flags": {},
-      "order": 32,
+      "order": 36,
       "mode": 0,
       "inputs": [
         {
@@ -121,7 +121,7 @@
         170
       ],
       "flags": {},
-      "order": 33,
+      "order": 37,
       "mode": 0,
       "inputs": [
         {
@@ -171,7 +171,7 @@
         170
       ],
       "flags": {},
-      "order": 35,
+      "order": 39,
       "mode": 0,
       "inputs": [
         {
@@ -215,7 +215,7 @@
         270
       ],
       "flags": {},
-      "order": 34,
+      "order": 38,
       "mode": 0,
       "inputs": [
         {
@@ -403,7 +403,7 @@
         140
       ],
       "flags": {},
-      "order": 36,
+      "order": 40,
       "mode": 0,
       "inputs": [
         {
@@ -911,7 +911,7 @@
         270
       ],
       "flags": {},
-      "order": 31,
+      "order": 35,
       "mode": 0,
       "inputs": [
         {
@@ -1220,7 +1220,7 @@
       ],
       "size": [
         800,
-        670
+        570
       ],
       "flags": {},
       "order": 20,
@@ -1265,7 +1265,7 @@
       ],
       "size": [
         380,
-        350
+        250
       ],
       "flags": {},
       "order": 21,
@@ -1293,10 +1293,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "VAE files are often the smallest sized within a diffusion workflow.\n\nThis VAE for example is only 211MB, so 50+ times smaller than the FP8 text encoder we talked about at the start of this workflow.\n\nFor this reason, it is extremely uncommon to find quantized VAE models.\n\nAs with the previous models, we have the model family included in the name, \"minimax_music3_\" and the file type is again .safetensors. The new element here is \"dav\" which tells us it is meant for audio.\n\n\"dav\" meaning \"Decoder-Audio-VAE\""
+        "VAE files are often the smallest sized within a workflow.\n\nThis VAE for example is only 211MB, so 50+ times smaller than the FP8 text encoder we talked about at the start of this workflow.\n\nAs with the previous models, we have the model family included in the name, \"minimax_music3_\" and the file type is again .safetensors. The new element here is \"dav\" which tells us it is meant for audio.\n\n\"dav\" meaning \"Decoder-Audio-VAE\""
       ],
       "widgets_values_named": {
-        "value": "VAE files are often the smallest sized within a diffusion workflow.\n\nThis VAE for example is only 211MB, so 50+ times smaller than the FP8 text encoder we talked about at the start of this workflow.\n\nFor this reason, it is extremely uncommon to find quantized VAE models.\n\nAs with the previous models, we have the model family included in the name, \"minimax_music3_\" and the file type is again .safetensors. The new element here is \"dav\" which tells us it is meant for audio.\n\n\"dav\" meaning \"Decoder-Audio-VAE\""
+        "value": "VAE files are often the smallest sized within a workflow.\n\nThis VAE for example is only 211MB, so 50+ times smaller than the FP8 text encoder we talked about at the start of this workflow.\n\nAs with the previous models, we have the model family included in the name, \"minimax_music3_\" and the file type is again .safetensors. The new element here is \"dav\" which tells us it is meant for audio.\n\n\"dav\" meaning \"Decoder-Audio-VAE\""
       },
       "color": "#322",
       "bgcolor": "#533"
@@ -1377,12 +1377,12 @@
       "id": 3450,
       "type": "LoadAudio",
       "pos": [
-        3510,
-        11310
+        3200,
+        11430
       ],
       "size": [
-        290,
-        140
+        500,
+        170
       ],
       "flags": {},
       "order": 24,
@@ -1399,12 +1399,12 @@
         "Node name for S&R": "LoadAudio"
       },
       "widgets_values": [
-        "empty-latent-pre-sample.mp3",
+        "paws-off-the-velvet-sims-language.mp3",
         null,
         null
       ],
       "widgets_values_named": {
-        "audio": "empty-latent-pre-sample.mp3",
+        "audio": "paws-off-the-velvet-sims-language.mp3",
         "upload": null
       }
     },
@@ -1599,6 +1599,176 @@
         "audio": "empty-latent-pre-sample.mp3",
         "upload": null
       }
+    },
+    {
+      "id": 3457,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        3200,
+        11130
+      ],
+      "size": [
+        1300,
+        170
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Play me out!",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Example Songs",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "That's it and that's all. Below are a few totally unhinged generations which happily found their way onto my SSD whilst I was learning this model and process.\n\nThey're not featured on the main player of this site, below is the only place to hear them.\n\nThanks for reading and enjoy the madness below!"
+      ],
+      "widgets_values_named": {
+        "value": "That's it and that's all. Below are a few totally unhinged generations which happily found their way onto my SSD whilst I was learning this model and process.\n\nThey're not featured on the main player of this site, below is the only place to hear them.\n\nThanks for reading and enjoy the madness below!"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3458,
+      "type": "LoadAudio",
+      "pos": [
+        3700,
+        11430
+      ],
+      "size": [
+        500,
+        170
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "paws-off-the-velvet-insanity.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "paws-off-the-velvet-insanity.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3459,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        3210,
+        11640
+      ],
+      "size": [
+        490,
+        180
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Play me out!",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Example Songs",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "This track was made when I was testing a different audio generation model, Acestep 1.5, which does use a negative conditioning. I accidentally left the positive conditioning disconnected from the sampler and had hooked the negative conditioning into the positive input as well as the negative input.\n\nThe result... it invented a new language, which sounds almost identical to the sims?"
+      ],
+      "widgets_values_named": {
+        "value": "This track was made when I was testing a different audio generation model, Acestep 1.5, which does use a negative conditioning. I accidentally left the positive conditioning disconnected from the sampler and had hooked the negative conditioning into the positive input as well as the negative input.\n\nThe result... it invented a new language, which sounds almost identical to the sims?"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3460,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        3700,
+        11640
+      ],
+      "size": [
+        490,
+        180
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Play me out!",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Example Songs",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "This is what happens when you tweak the CFG really high, 4.0 in this case.\n\nOne moment, it's a little degraded but sounds like a normal track, the next it dives into avant-garde Yoko Ono meets the poetry club night, frantic, chaotic energy.\n\nFunnily enough, the same base song as the previous track... hmm...."
+      ],
+      "widgets_values_named": {
+        "value": "This is what happens when you tweak the CFG really high, 4.0 in this case.\n\nOne moment, it's a little degraded but sounds like a normal track, the next it dives into avant-garde Yoko Ono meets the poetry club night, frantic, chaotic energy.\n\nFunnily enough, the same base song as the previous track... hmm...."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
     }
   ],
   "links": [
@@ -1823,7 +1993,7 @@
         3200,
         10470,
         400,
-        630
+        530
       ],
       "color": "#A88",
       "flags": {}
@@ -1884,7 +2054,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 16,
-          "lastNodeId": 3456,
+          "lastNodeId": 3460,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2025,7 +2195,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 16,
-          "lastNodeId": 3456,
+          "lastNodeId": 3460,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2192,7 +2362,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 16,
-          "lastNodeId": 3456,
+          "lastNodeId": 3460,
           "lastLinkId": 1544,
           "lastRerouteId": 0
         },
@@ -2333,10 +2503,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.23579476910000355,
+      "scale": 0.505447028499302,
       "offset": [
-        6838.433454060472,
-        -6756.416095720295
+        -857.8043374887314,
+        -10105.555683191287
       ]
     },
     "frontendVersion": "1.49.6"
