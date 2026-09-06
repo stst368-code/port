@@ -1,8 +1,8 @@
 {
   "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
   "revision": 0,
-  "last_node_id": 3427,
-  "last_link_id": 1531,
+  "last_node_id": 3436,
+  "last_link_id": 1543,
   "nodes": [
     {
       "id": 3389,
@@ -16,7 +16,7 @@
         570
       ],
       "flags": {},
-      "order": 12,
+      "order": 16,
       "mode": 0,
       "showAdvanced": true,
       "inputs": [
@@ -82,7 +82,7 @@
         70
       ],
       "flags": {},
-      "order": 14,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -121,7 +121,7 @@
         90
       ],
       "flags": {},
-      "order": 15,
+      "order": 20,
       "mode": 0,
       "inputs": [
         {
@@ -171,7 +171,7 @@
         170
       ],
       "flags": {},
-      "order": 17,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
@@ -215,7 +215,7 @@
         270
       ],
       "flags": {},
-      "order": 16,
+      "order": 21,
       "mode": 0,
       "inputs": [
         {
@@ -403,7 +403,7 @@
         140
       ],
       "flags": {},
-      "order": 18,
+      "order": 23,
       "mode": 0,
       "inputs": [
         {
@@ -525,12 +525,12 @@
       "id": 3419,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        1550,
-        8950
+        -410,
+        7950
       ],
       "size": [
         800,
-        670
+        690
       ],
       "flags": {},
       "order": 5,
@@ -570,8 +570,8 @@
       "id": 3420,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        1550,
-        8550
+        -1020,
+        7920
       ],
       "size": [
         500,
@@ -670,7 +670,7 @@
         26
       ],
       "flags": {},
-      "order": 13,
+      "order": 17,
       "mode": 0,
       "inputs": [
         {
@@ -697,12 +697,12 @@
       "id": 3423,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        2450,
-        8950
+        510,
+        8670
       ],
       "size": [
-        460,
-        300
+        600,
+        280
       ],
       "flags": {},
       "order": 8,
@@ -722,7 +722,9 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": []
+          "links": [
+            1540
+          ]
         }
       ],
       "title": "Tokenizer",
@@ -735,15 +737,15 @@
       "widgets_values_named": {
         "value": "Before text reaches the text encoder, a tokenizer breaks it into smaller units called tokens. A token may represent a whole word, part of a word, punctuation or another recurring text pattern.\n\nThe tokenizer used during inference generally needs to match the one the encoder was trained with, because changing how text is divided changes what numerical inputs the model receives.\n\nYou may have heard of \"tokens\" if you've ever looked at purchasing an AI subscription or API access, this is one of the more common ways to commercialise AI models, by billing the user based on the number of tokens they consume."
       },
-      "color": "#322",
-      "bgcolor": "#533"
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
       "id": 3424,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        2150,
-        8550
+        510,
+        9070
       ],
       "size": [
         600,
@@ -767,7 +769,9 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": []
+          "links": [
+            1541
+          ]
         }
       ],
       "title": "Embeddings / Conditioning",
@@ -780,15 +784,15 @@
       "widgets_values_named": {
         "value": "An embedding is the numerical representation of information.\n\nIt is the output of the text encoder.\n\nA text encoder converts words and phrases into arrays of numbers (vectors) that represent their meaning and relationships. These embeddings are then supplied to the generation model as conditioning, guiding what it produces without passing the original text directly into the model."
       },
-      "color": "#322",
-      "bgcolor": "#533"
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
       "id": 3425,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        890,
-        9020
+        -1050,
+        8260
       ],
       "size": [
         400,
@@ -820,8 +824,8 @@
       "id": 3426,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        630,
-        9300
+        -1460,
+        7130
       ],
       "size": [
         870,
@@ -847,6 +851,211 @@
       ],
       "widgets_values_named": {
         "value": "\nmlx\nlora\n\nThere are many file types, or references to groups of files that you'll come across when running AI models. It can be confusing at first, hopefully what you've read so far, and what you'll read further along will help piece together the jigsaw so that these terms and types make sense.\n\nAt it's core, there are three main types of model file we're concerned with for workflows such as this, those being:\n\n1. UNet (DiT), this is our work horse. These are neural networking models which when graphed are typically U shaped, a large input comes in, it is compressed down and understood by the machine in its base form and then uncompressed back to full size for return to the human operator. Also referred to as DiT, or Diffusion Transformer, it is the very basis of the current world of AI we're using. A generation is born out of pure noise and refined, or diffused, until it resembles the planned output.\n\n2. Text Encoder, the interpreter between the humans input and the UNets engine.\n\n3. VAE, similar to a text encoder, the VAE receives the output of the UNet and assembles the vectors into the final form before handing it back to the human.\n\nThese items may be packaged individually, as they are in this workflow or they may be packaged together in a single file called a Checkpoint.\n\nThe formats these items are typically found in are .safetensors and .gguf.\n\nThese are the file types used to save, compress, and read those models on your storage drive.\n\nSafetensors: This is the modern industry standard format for saving AI weights. It is highly secure (cannot hide malicious computer viruses like older .ckpt files could) and loads into your computer's memory incredibly fast.\n\nGGUF: This is a specialized compression format. While standard .safetensors files usually store models in high precision (FP16 or FP32), GGUF squishes the file size down (Quantization) to Q4, Q5, or Q8. This allows you to run massive \"engines\" on cheaper consumer graphics cards without losing much quality.\n\nSpecialisations\n\nThere are other outlying file types or quantizations which are typically very specific to the workflow being ran. Neither are being used within this workflow, but it is worth being aware of them as they are very common.\n\nMLX: This is an open-source machine learning framework built by Apple specifically for Apple Silicon (M1, M2, M3, M4 chips). Think of it as a specialized fuel efficient engine mapping tuned specifically for Mac hardware, bypassing standard Windows/Nvidia-centric tools.\n\nLoRA (Low-Rank Adaptation): This is an aftermarket modification or \"plugin\" (like adding a custom spoiler or turbocharger). Instead of retraining a massive 20GB checkpoint to learn a new art style or specific character, you train a tiny 100MB LoRA file and inject it into the UNet while it runs.\n\n\n"
+      }
+    },
+    {
+      "id": 3428,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -900,
+        10830
+      ],
+      "size": [
+        700,
+        870
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Sampling?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Large Language M.... Music?....",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Here we are, the beating heart of this workflow, whilst this does NOT make our song it is the most important component of this entire workflow.\n\nYou can change model precisions all day long, but what's written above will drive the quality of your final output more than any increase in parameter count can.\n\nThis is the LLM (Large Language Model), we feed it a caption and a lyric set, it will take that natural language information and process it into an exact description of how the song should sound (based on its training) which gets passed to our sampler for generation.\n\nSo, what do we tell it?\n\nCaption:\n\nLyrics:\n\nA few other variables available:\n\nSeed: \nThe starting point for diffusion, think of it as a ball in a bingo wheel. It's starting point would be the seed, then through the diffusion process the wheel turns and the ball moves through the wheel until the wheel stops. It's seemingly random, almost impossible to predict where it will end and the ball it started next to could finish in the opposite position. This may sound like a variable of little use, but if you find a seed the leads to your bingo ball getting picked (i.e. the seed produces a good song structure), then you can reliably repeat generations of the same song adjusting other variables, captions or lyrics to fine tune the final product. It is hard to overstate the importance of tracking seeds!\n\nMax Duration: \nWith this specific model, we don't define an exact track time, only a maximum and the model will generate a track that lasts up to the maximum boundary based on what it calculates to be the ideal BPM et al.\n\nCFG Scale:\nCFG (Classifier-Free Guidance) controls prompt adherence. Think of it as the parents of the AI model as its working. Lower CFG values would be those parents after a long day of work, maybe a bottle or two, half keeping an eye on their child as it plays with matches. Higher CFG values, same parents, but their parents are coming over for dinner, they're in full \"eyes in the back of my head\" mode, nothing goes uncorrected, that child will have to do whatever they say.\n\nCFG is a tough variable to get right and likely one of the ones you'll find yourself adjusting and doubting yourself over the effect being a net positive or negative.\n\nFor this model in particular, CFG 1.7 is about the sweet spot, however I have found when working on tracks that are supposed to sound a little more vintage or like they're playing off a cassette a CFG of 1.2 can make the experience feel more authentic.\n\n\nTop K:\nTop K sampling controls the range of vectors that are available per token. Imagine you 'had' the number 100 and I told you that you can choose any number either side of 100 +/- 50, you effectively have 100 values you can pick. It may work well that you can pick such a wide range, or I may find that actually I need you to stick closer to the origin point, so I adjust the Top K value down to 10 and now your range is dramatically reduced and more predictable.\n\nTop K controls the LLMs ability to control variation. As it is searching its probabilistic dictionary, this parameter controls how 'far' it is allowed to look away from its origin point. Higher values will produce greater levels of creative insanity, lower levels will be more locked in and perhaps mundane. Throughout my testing with MiniMax I have found zero value in changing this from 50."
+      ],
+      "widgets_values_named": {
+        "value": "Here we are, the beating heart of this workflow, whilst this does NOT make our song it is the most important component of this entire workflow.\n\nYou can change model precisions all day long, but what's written above will drive the quality of your final output more than any increase in parameter count can.\n\nThis is the LLM (Large Language Model), we feed it a caption and a lyric set, it will take that natural language information and process it into an exact description of how the song should sound (based on its training) which gets passed to our sampler for generation.\n\nSo, what do we tell it?\n\nCaption:\n\nLyrics:\n\nA few other variables available:\n\nSeed: \nThe starting point for diffusion, think of it as a ball in a bingo wheel. It's starting point would be the seed, then through the diffusion process the wheel turns and the ball moves through the wheel until the wheel stops. It's seemingly random, almost impossible to predict where it will end and the ball it started next to could finish in the opposite position. This may sound like a variable of little use, but if you find a seed the leads to your bingo ball getting picked (i.e. the seed produces a good song structure), then you can reliably repeat generations of the same song adjusting other variables, captions or lyrics to fine tune the final product. It is hard to overstate the importance of tracking seeds!\n\nMax Duration: \nWith this specific model, we don't define an exact track time, only a maximum and the model will generate a track that lasts up to the maximum boundary based on what it calculates to be the ideal BPM et al.\n\nCFG Scale:\nCFG (Classifier-Free Guidance) controls prompt adherence. Think of it as the parents of the AI model as its working. Lower CFG values would be those parents after a long day of work, maybe a bottle or two, half keeping an eye on their child as it plays with matches. Higher CFG values, same parents, but their parents are coming over for dinner, they're in full \"eyes in the back of my head\" mode, nothing goes uncorrected, that child will have to do whatever they say.\n\nCFG is a tough variable to get right and likely one of the ones you'll find yourself adjusting and doubting yourself over the effect being a net positive or negative.\n\nFor this model in particular, CFG 1.7 is about the sweet spot, however I have found when working on tracks that are supposed to sound a little more vintage or like they're playing off a cassette a CFG of 1.2 can make the experience feel more authentic.\n\n\nTop K:\nTop K sampling controls the range of vectors that are available per token. Imagine you 'had' the number 100 and I told you that you can choose any number either side of 100 +/- 50, you effectively have 100 values you can pick. It may work well that you can pick such a wide range, or I may find that actually I need you to stick closer to the origin point, so I adjust the Top K value down to 10 and now your range is dramatically reduced and more predictable.\n\nTop K controls the LLMs ability to control variation. As it is searching its probabilistic dictionary, this parameter controls how 'far' it is allowed to look away from its origin point. Higher values will produce greater levels of creative insanity, lower levels will be more locked in and perhaps mundane. Throughout my testing with MiniMax I have found zero value in changing this from 50."
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 3430,
+      "type": "084ffd0d-0b8d-4bef-9f33-69db7b55d157",
+      "pos": [
+        -410,
+        7470
+      ],
+      "size": [
+        800,
+        470
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "previewExposures": [
+          {
+            "name": "$$canvas-image-preview",
+            "sourceNodeId": "3429",
+            "sourcePreviewName": "$$canvas-image-preview"
+          }
+        ]
+      },
+      "widgets_values": [
+        "understanding-precision.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "understanding-precision.png",
+        "upload": "image"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3433,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        510,
+        8260
+      ],
+      "size": [
+        600,
+        280
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Natural Language",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1539
+          ]
+        }
+      ],
+      "title": "Natural Language",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "This is the descriptor used for what you're reading, what you write, it's the HUMAN language, the natural one.\n\nAll prompts start here and pass through the following chain to become conditioned into a format that the LLM understands and can work with."
+      ],
+      "widgets_values_named": {
+        "value": "This is the descriptor used for what you're reading, what you write, it's the HUMAN language, the natural one.\n\nAll prompts start here and pass through the following chain to become conditioned into a format that the LLM understands and can work with."
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 3434,
+      "type": "500a870a-bcd9-412b-9290-7a274a6cd88a",
+      "pos": [
+        1310,
+        8670
+      ],
+      "size": [
+        400,
+        270
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Natural Language",
+          "name": "string_1",
+          "type": "STRING",
+          "link": 1539
+        },
+        {
+          "label": "Tokenizer",
+          "name": "string_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 1540
+        },
+        {
+          "label": "Embedding / Conditioning",
+          "name": "string_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": 1541
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "previewExposures": []
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 3436,
+      "type": "ea857344-20d0-436d-bb2d-573102f02109",
+      "pos": [
+        510,
+        7470
+      ],
+      "size": [
+        1200,
+        670
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "previewExposures": [
+          {
+            "name": "$$canvas-image-preview",
+            "sourceNodeId": "3435",
+            "sourcePreviewName": "$$canvas-image-preview"
+          }
+        ]
+      },
+      "widgets_values": [
+        "understanding-embeddings.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "understanding-embeddings.png",
+        "upload": "image"
       }
     }
   ],
@@ -938,6 +1147,30 @@
       3422,
       0,
       "STRING"
+    ],
+    [
+      1539,
+      3433,
+      0,
+      3434,
+      0,
+      "STRING"
+    ],
+    [
+      1540,
+      3423,
+      0,
+      3434,
+      1,
+      "STRING"
+    ],
+    [
+      1541,
+      3424,
+      0,
+      3434,
+      2,
+      "STRING"
     ]
   ],
   "groups": [
@@ -960,7 +1193,7 @@
         -1000,
         10000,
         1400,
-        1200
+        1800
       ],
       "color": "#b06634",
       "flags": {}
@@ -988,15 +1221,492 @@
       ],
       "color": "#A88",
       "flags": {}
+    },
+    {
+      "id": 7,
+      "title": "Precision",
+      "bounding": [
+        -420,
+        7400,
+        820,
+        1250
+      ],
+      "color": "#444",
+      "flags": {}
+    },
+    {
+      "id": 8,
+      "title": "Natural Language to Embeddings",
+      "bounding": [
+        500,
+        7400,
+        1220,
+        1950
+      ],
+      "color": "#444",
+      "flags": {}
     }
   ],
+  "definitions": {
+    "subgraphs": [
+      {
+        "id": "084ffd0d-0b8d-4bef-9f33-69db7b55d157",
+        "version": 1,
+        "state": {
+          "lastGroupId": 8,
+          "lastNodeId": 3436,
+          "lastLinkId": 1543,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "Precision",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            -1078,
+            8502,
+            128,
+            88
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            -40,
+            8502,
+            128,
+            48
+          ]
+        },
+        "inputs": [
+          {
+            "id": "55fe2163-f457-4538-bb4e-a8cd93a7fb7a",
+            "name": "image",
+            "type": "COMBO",
+            "linkIds": [
+              1532
+            ],
+            "pos": [
+              -974,
+              8526
+            ]
+          },
+          {
+            "id": "5c47cafb-ad25-4fd2-a4c9-051502d1a16c",
+            "name": "upload",
+            "type": "IMAGEUPLOAD",
+            "linkIds": [
+              1533
+            ],
+            "pos": [
+              -974,
+              8546
+            ]
+          }
+        ],
+        "outputs": [],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 3429,
+            "type": "LoadImage",
+            "pos": [
+              -890,
+              8380
+            ],
+            "size": [
+              790,
+              330
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "COMBO",
+                "widget": {
+                  "name": "image"
+                },
+                "link": 1532
+              },
+              {
+                "localized_name": "choose file to upload",
+                "name": "upload",
+                "type": "IMAGEUPLOAD",
+                "widget": {
+                  "name": "upload"
+                },
+                "link": 1533
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": null
+              },
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": null
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "LoadImage"
+            },
+            "widgets_values": [
+              "understanding-precision.png",
+              "image"
+            ],
+            "widgets_values_named": {
+              "image": "understanding-precision.png",
+              "upload": "image"
+            }
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 1532,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 3429,
+            "target_slot": 0,
+            "type": "COMBO"
+          },
+          {
+            "id": 1533,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 3429,
+            "target_slot": 1,
+            "type": "IMAGEUPLOAD"
+          }
+        ],
+        "extra": {}
+      },
+      {
+        "id": "500a870a-bcd9-412b-9290-7a274a6cd88a",
+        "version": 1,
+        "state": {
+          "lastGroupId": 8,
+          "lastNodeId": 3436,
+          "lastLinkId": 1543,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "From A to 0.1837, -0.5214, 0.0912, 0.7741, -0.3088",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            1812,
+            7810,
+            194.970703125,
+            108
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            2330,
+            7840,
+            128,
+            48
+          ]
+        },
+        "inputs": [
+          {
+            "id": "af4d0eb1-2780-4b98-bc43-e0110ef8d423",
+            "name": "string_1",
+            "type": "STRING",
+            "linkIds": [
+              1538
+            ],
+            "localized_name": "string_1",
+            "label": "Natural Language",
+            "pos": [
+              1982.970703125,
+              7834
+            ]
+          },
+          {
+            "id": "5ede99b5-fb98-4e32-a4e9-22f5e5585203",
+            "name": "string_2",
+            "type": "STRING",
+            "linkIds": [
+              1536
+            ],
+            "localized_name": "string_2",
+            "label": "Tokenizer",
+            "shape": 7,
+            "pos": [
+              1982.970703125,
+              7854
+            ]
+          },
+          {
+            "id": "088dfeb0-aee5-4fd2-8114-c664bcb86c42",
+            "name": "string_3",
+            "type": "STRING",
+            "linkIds": [
+              1537
+            ],
+            "label": "Embedding / Conditioning",
+            "shape": 7,
+            "pos": [
+              1982.970703125,
+              7874
+            ]
+          }
+        ],
+        "outputs": [],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 3432,
+            "type": "JoinStringMulti",
+            "pos": [
+              2000,
+              7770
+            ],
+            "size": [
+              270,
+              220
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "string_1",
+                "name": "string_1",
+                "type": "STRING",
+                "link": 1538
+              },
+              {
+                "localized_name": "string_2",
+                "name": "string_2",
+                "shape": 7,
+                "type": "STRING",
+                "link": 1536
+              },
+              {
+                "name": "string_3",
+                "shape": 7,
+                "type": "STRING",
+                "link": 1537
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "string",
+                "name": "string",
+                "type": "STRING",
+                "links": null
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "JoinStringMulti"
+            },
+            "widgets_values": [
+              3,
+              " ",
+              false,
+              null
+            ],
+            "widgets_values_named": {
+              "inputcount": 3,
+              "delimiter": " ",
+              "return_list": false,
+              "Update inputs": null
+            }
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 1538,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 3432,
+            "target_slot": 0,
+            "type": "STRING"
+          },
+          {
+            "id": 1536,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 3432,
+            "target_slot": 1,
+            "type": "STRING"
+          },
+          {
+            "id": 1537,
+            "origin_id": -10,
+            "origin_slot": 2,
+            "target_id": 3432,
+            "target_slot": 2,
+            "type": "STRING"
+          }
+        ],
+        "extra": {}
+      },
+      {
+        "id": "ea857344-20d0-436d-bb2d-573102f02109",
+        "version": 1,
+        "state": {
+          "lastGroupId": 8,
+          "lastNodeId": 3436,
+          "lastLinkId": 1543,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "NL-Embeddings",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            1072,
+            6912,
+            128,
+            48
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            1602.78125,
+            6912,
+            128,
+            48
+          ]
+        },
+        "inputs": [
+          {
+            "id": "7b03b70f-a723-4d16-b2c8-e53d934030ff",
+            "name": "image",
+            "type": "COMBO",
+            "linkIds": [
+              1542
+            ],
+            "pos": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": "20a53cec-3376-46e2-84c3-ddb03e172418",
+            "name": "upload",
+            "type": "IMAGEUPLOAD",
+            "linkIds": [
+              1543
+            ],
+            "pos": [
+              0,
+              0
+            ]
+          }
+        ],
+        "outputs": [],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 3435,
+            "type": "LoadImage",
+            "pos": [
+              1260,
+              6790
+            ],
+            "size": [
+              290,
+              330
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "COMBO",
+                "widget": {
+                  "name": "image"
+                },
+                "link": 1542
+              },
+              {
+                "localized_name": "choose file to upload",
+                "name": "upload",
+                "type": "IMAGEUPLOAD",
+                "widget": {
+                  "name": "upload"
+                },
+                "link": 1543
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": null
+              },
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": null
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "LoadImage"
+            },
+            "widgets_values": [
+              "understanding-embeddings.png",
+              "image"
+            ],
+            "widgets_values_named": {
+              "image": "understanding-embeddings.png",
+              "upload": "image"
+            }
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 1542,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 3435,
+            "target_slot": 0,
+            "type": "COMBO"
+          },
+          {
+            "id": 1543,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 3435,
+            "target_slot": 1,
+            "type": "IMAGEUPLOAD"
+          }
+        ],
+        "extra": {}
+      }
+    ]
+  },
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.23579476910000619,
+      "scale": 0.25937424601000864,
       "offset": [
-        2347.2249741774613,
-        -6552.055011787147
+        4680.256329511365,
+        -6884.190431587276
       ]
     },
     "frontendVersion": "1.49.6"
