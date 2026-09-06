@@ -1,22 +1,22 @@
 {
   "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
   "revision": 0,
-  "last_node_id": 3444,
-  "last_link_id": 1543,
+  "last_node_id": 3454,
+  "last_link_id": 1544,
   "nodes": [
     {
       "id": 3389,
       "type": "MiniMaxMusic3TextEncode",
       "pos": [
-        -900,
-        10130
+        -890,
+        10140
       ],
       "size": [
-        700,
-        570
+        680,
+        460
       ],
       "flags": {},
-      "order": 22,
+      "order": 30,
       "mode": 0,
       "showAdvanced": false,
       "inputs": [
@@ -82,7 +82,7 @@
         70
       ],
       "flags": {},
-      "order": 24,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
@@ -121,7 +121,7 @@
         170
       ],
       "flags": {},
-      "order": 25,
+      "order": 33,
       "mode": 0,
       "inputs": [
         {
@@ -163,7 +163,7 @@
       "id": 3401,
       "type": "VAEDecodeAudio",
       "pos": [
-        3200,
+        3700,
         10130
       ],
       "size": [
@@ -171,7 +171,7 @@
         170
       ],
       "flags": {},
-      "order": 27,
+      "order": 35,
       "mode": 0,
       "inputs": [
         {
@@ -207,7 +207,7 @@
       "id": 3402,
       "type": "KSampler",
       "pos": [
-        1700,
+        2200,
         10530
       ],
       "size": [
@@ -215,7 +215,7 @@
         270
       ],
       "flags": {},
-      "order": 26,
+      "order": 34,
       "mode": 0,
       "inputs": [
         {
@@ -320,11 +320,11 @@
       "id": 3405,
       "type": "VAELoader",
       "pos": [
-        2700,
-        10530
+        3210,
+        10630
       ],
       "size": [
-        400,
+        380,
         70
       ],
       "flags": {},
@@ -356,12 +356,12 @@
       "id": 3406,
       "type": "UNETLoader",
       "pos": [
-        1200,
-        10130
+        1710,
+        10140
       ],
       "size": [
-        400,
-        170
+        390,
+        160
       ],
       "flags": {},
       "order": 2,
@@ -395,7 +395,7 @@
       "id": 3407,
       "type": "SaveAudioAdvanced",
       "pos": [
-        3690,
+        4190,
         10130
       ],
       "size": [
@@ -403,7 +403,7 @@
         140
       ],
       "flags": {},
-      "order": 28,
+      "order": 36,
       "mode": 0,
       "inputs": [
         {
@@ -775,12 +775,12 @@
       "id": 3428,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -900,
-        10830
+        -890,
+        10740
       ],
       "size": [
-        700,
-        970
+        680,
+        1050
       ],
       "flags": {},
       "order": 11,
@@ -911,7 +911,7 @@
         270
       ],
       "flags": {},
-      "order": 23,
+      "order": 31,
       "mode": 0,
       "inputs": [
         {
@@ -980,12 +980,12 @@
       "id": 3437,
       "type": "MiniMaxMusic3TextEncode",
       "pos": [
-        -100,
-        11230
+        -190,
+        11330
       ],
       "size": [
-        800,
-        570
+        890,
+        460
       ],
       "flags": {},
       "order": 15,
@@ -1041,7 +1041,7 @@
       "id": 3438,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        1200,
+        1700,
         10930
       ],
       "size": [
@@ -1086,12 +1086,12 @@
       "id": 3440,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -100,
+        -90,
         10730
       ],
       "size": [
-        800,
-        370
+        780,
+        360
       ],
       "flags": {},
       "order": 17,
@@ -1131,12 +1131,12 @@
       "id": 3441,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        1700,
-        10130
+        2210,
+        10140
       ],
       "size": [
-        500,
-        270
+        480,
+        250
       ],
       "flags": {},
       "order": 18,
@@ -1215,7 +1215,7 @@
       "id": 3443,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        3200,
+        3700,
         10430
       ],
       "size": [
@@ -1260,12 +1260,12 @@
       "id": 3444,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        2700,
-        10730
+        3210,
+        10740
       ],
       "size": [
-        400,
-        370
+        380,
+        350
       ],
       "flags": {},
       "order": 21,
@@ -1300,6 +1300,296 @@
       },
       "color": "#322",
       "bgcolor": "#533"
+    },
+    {
+      "id": 3445,
+      "type": "LoadAudio",
+      "pos": [
+        -2730,
+        10550
+      ],
+      "size": [
+        290,
+        140
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "empty-latent-pre-sample.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "empty-latent-pre-sample.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3446,
+      "type": "LoadAudio",
+      "pos": [
+        -2760,
+        11430
+      ],
+      "size": [
+        290,
+        140
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "empty-latent-pre-sample.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "empty-latent-pre-sample.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3448,
+      "type": "LoadVideo",
+      "pos": [
+        1810,
+        10490
+      ],
+      "size": [
+        290,
+        310
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadVideo"
+      },
+      "widgets_values": [
+        "diffusion_visualised.mp4",
+        "image"
+      ],
+      "widgets_values_named": {
+        "file": "diffusion_visualised.mp4",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 3449,
+      "type": "LoadVideo",
+      "pos": [
+        -2270,
+        8300
+      ],
+      "size": [
+        290,
+        310
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadVideo"
+      },
+      "widgets_values": [
+        "diffusion_visualised.mp4",
+        "image"
+      ],
+      "widgets_values_named": {
+        "file": "diffusion_visualised.mp4",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 3450,
+      "type": "LoadAudio",
+      "pos": [
+        3510,
+        11310
+      ],
+      "size": [
+        290,
+        140
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "empty-latent-pre-sample.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "empty-latent-pre-sample.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3451,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        810,
+        11140
+      ],
+      "size": [
+        380,
+        160
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Mind your ears....",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "The Empty Latent",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "If you were wondering... as the empty latent object IS a latent object, we can pass this into our VAE and hear what is being passed to the sampler... though it's not pleasant!"
+      ],
+      "widgets_values_named": {
+        "value": "If you were wondering... as the empty latent object IS a latent object, we can pass this into our VAE and hear what is being passed to the sampler... though it's not pleasant!"
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 3452,
+      "type": "LoadAudio",
+      "pos": [
+        810,
+        11430
+      ],
+      "size": [
+        380,
+        170
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": []
+        }
+      ],
+      "title": "Here's the empty latent audio",
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "empty-latent-pre-sample.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "empty-latent-pre-sample.mp3",
+        "upload": null
+      }
+    },
+    {
+      "id": 3453,
+      "type": "LoadAudio",
+      "pos": [
+        810,
+        11630
+      ],
+      "size": [
+        380,
+        160
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "title": "Here's what that exact empty latent became",
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "empty-latent-post-sample.flac",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "empty-latent-post-sample.flac",
+        "upload": null
+      }
     }
   ],
   "links": [
@@ -1427,7 +1717,7 @@
       "bounding": [
         -1000,
         10000,
-        1800,
+        2300,
         1900
       ],
       "color": "#b06634",
@@ -1437,7 +1727,7 @@
       "id": 5,
       "title": "Sampler",
       "bounding": [
-        1100,
+        1600,
         10000,
         1200,
         1900
@@ -1449,7 +1739,7 @@
       "id": 6,
       "title": "Decoding and Output",
       "bounding": [
-        2600,
+        3100,
         10000,
         1500,
         1900
@@ -1480,6 +1770,78 @@
       ],
       "color": "#444",
       "flags": {}
+    },
+    {
+      "id": 9,
+      "title": "The Empty Latent",
+      "bounding": [
+        800,
+        11070,
+        400,
+        730
+      ],
+      "color": "#b06634",
+      "flags": {}
+    },
+    {
+      "id": 10,
+      "title": "LLM Outputs",
+      "bounding": [
+        -100,
+        10100,
+        800,
+        1000
+      ],
+      "color": "#b06634",
+      "flags": {}
+    },
+    {
+      "id": 11,
+      "title": "The Diffusion Model",
+      "bounding": [
+        1700,
+        10070,
+        1000,
+        330
+      ],
+      "color": "#a1309b",
+      "flags": {}
+    },
+    {
+      "id": 12,
+      "title": "VAE Model",
+      "bounding": [
+        3200,
+        10470,
+        400,
+        630
+      ],
+      "color": "#A88",
+      "flags": {}
+    },
+    {
+      "id": 13,
+      "title": "LLM",
+      "bounding": [
+        -900,
+        10070,
+        700,
+        1730
+      ],
+      "color": "#b06634",
+      "flags": {}
+    },
+    {
+      "id": 14,
+      "title": "LLM",
+      "bounding": [
+        -200,
+        11170,
+        900,
+        630
+      ],
+      "color": "#b06634",
+      "flags": {}
     }
   ],
   "definitions": {
@@ -1488,9 +1850,9 @@
         "id": "084ffd0d-0b8d-4bef-9f33-69db7b55d157",
         "version": 1,
         "state": {
-          "lastGroupId": 8,
-          "lastNodeId": 3444,
-          "lastLinkId": 1543,
+          "lastGroupId": 14,
+          "lastNodeId": 3454,
+          "lastLinkId": 1544,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -1629,9 +1991,9 @@
         "id": "500a870a-bcd9-412b-9290-7a274a6cd88a",
         "version": 1,
         "state": {
-          "lastGroupId": 8,
-          "lastNodeId": 3444,
-          "lastLinkId": 1543,
+          "lastGroupId": 14,
+          "lastNodeId": 3454,
+          "lastLinkId": 1544,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -1796,9 +2158,9 @@
         "id": "ea857344-20d0-436d-bb2d-573102f02109",
         "version": 1,
         "state": {
-          "lastGroupId": 8,
-          "lastNodeId": 3444,
-          "lastLinkId": 1543,
+          "lastGroupId": 14,
+          "lastNodeId": 3454,
+          "lastLinkId": 1544,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -1938,10 +2300,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.28531167061102153,
+      "scale": 0.13310000000001274,
       "offset": [
-        4658.663866299548,
-        -8739.845811309786
+        4533.267254959623,
+        -4270.7154415667555
       ]
     },
     "frontendVersion": "1.49.6"

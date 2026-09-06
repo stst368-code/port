@@ -263,3 +263,56 @@
 @media (prefers-reduced-motion: reduce) {
   .cw-world--animate { transition-duration: 1ms; }
 }
+
+/* Media previews referenced by ComfyUI loader/subgraph nodes.  These are the
+   only interactive parts inside otherwise read-only workflow nodes. */
+.cw-media {
+  position: relative;
+  z-index: 4;
+  margin: 8px 8px 24px;
+  min-width: 0;
+  border: 1px solid rgba(0,0,0,.82);
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(4,4,4,.56);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
+  pointer-events: auto;
+}
+.cw-media--image,
+.cw-media--video {
+  height: calc(100% - 66px);
+  min-height: 54px;
+  display: grid;
+  grid-template-rows: minmax(0,1fr) auto;
+}
+.cw-media img,
+.cw-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  background: #080706;
+}
+.cw-media video,
+.cw-media audio { pointer-events: auto; }
+.cw-media--audio {
+  margin-top: 10px;
+  padding: 5px;
+}
+.cw-media audio {
+  display: block;
+  width: 100%;
+  height: 38px;
+}
+.cw-media-name {
+  padding: 4px 6px;
+  color: #a99d91;
+  background: rgba(15,12,10,.92);
+  font-size: 9px;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cw-media--audio .cw-media-name { padding-bottom: 1px; }

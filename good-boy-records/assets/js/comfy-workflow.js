@@ -14,6 +14,43 @@
     IMAGE: "#6ca7a0"
   };
 
+
+  var MEDIA_EXTENSIONS = {
+    image: /\.(?:png|jpe?g|webp|gif|svg|avif)$/i,
+    video: /\.(?:mp4|webm|mov|m4v|ogv)$/i,
+    audio: /\.(?:mp3|flac|wav|ogg|oga|m4a|aac|opus)$/i
+  };
+
+  function safeMediaPath(value) {
+    var raw = String(value || "").trim().replace(/\\/g, "/");
+    if (!raw || raw.charAt(0) === "/") return "";
+    var parts = raw.split("/");
+    if (parts.some(function (part) { return !part || part === "." || part === ".."; })) return "";
+    return parts.map(function (part) { return encodeURIComponent(part); }).join("/");
+  }
+
+  function mediaInfo(node) {
+    var named = node && node.widgets_values_named;
+    var values = [];
+    if (named && typeof named === "object" && !Array.isArray(named)) {
+      ["audio", "file", "image"].forEach(function (key) {
+        if (typeof named[key] === "string") values.push(named[key]);
+      });
+    }
+    if (Array.isArray(node && node.widgets_values)) {
+      node.widgets_values.forEach(function (value) {
+        if (typeof value === "string") values.push(value);
+      });
+    }
+    for (var i = 0; i < values.length; i += 1) {
+      var value = values[i];
+      if (MEDIA_EXTENSIONS.audio.test(value)) return { kind: "audio", file: value };
+      if (MEDIA_EXTENSIONS.video.test(value)) return { kind: "video", file: value };
+      if (MEDIA_EXTENSIONS.image.test(value)) return { kind: "image", file: value };
+    }
+    return null;
+  }
+
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
@@ -115,6 +152,7 @@
     this.lastStageHeight = 0;
     this.lastTapAt = 0;
     this.focusNode = root.dataset.focus ? String(root.dataset.focus) : "";
+    this.mediaRoot = String(root.dataset.mediaRoot || "assets/workflow-media").replace(/\/+$/, "");
     this.buildShell();
     this.load();
   }
@@ -218,6 +256,7 @@
 
     this.stage.addEventListener("pointerdown", function (event) {
       if (!self.world) return;
+      if (event.target && event.target.closest && event.target.closest(".cw-media-interactive")) return;
       /* Touch/pen pointer events do not need a mouse-button test. */
       if (event.pointerType === "mouse" && event.button !== 0) return;
       event.preventDefault();
@@ -522,7 +561,52 @@
       ports.appendChild(outputs);
       el.appendChild(ports);
 
-      var widgets = widgetEntries(node);
+      var media = mediaInfo(node);
+      if (media) {
+        var safePath = safeMediaPath(media.file);
+        if (safePath) {
+          var folder = media.kind === "audio" ? "audio" : "images";
+          var mediaUrl = self.mediaRoot + "/" + folder + "/" + safePath;
+          var mediaBox = document.createElement("div");
+          mediaBox.className = "cw-media cw-media--" + media.kind + " cw-media-interactive";
+          if (media.kind === "image") {
+            var image = document.createElement("img");
+            image.src = mediaUrl;
+            image.alt = media.file;
+            image.loading = "lazy";
+            image.draggable = false;
+            mediaBox.appendChild(image);
+          } else if (media.kind === "video") {
+            var video = document.createElement("video");
+            video.src = mediaUrl;
+            video.controls = true;
+            video.preload = "metadata";
+            video.playsInline = true;
+            mediaBox.appendChild(video);
+          } else {
+            var audio = document.createElement("audio");
+            audio.src = mediaUrl;
+            audio.controls = true;
+            audio.preload = "metadata";
+            mediaBox.appendChild(audio);
+          }
+          var mediaName = document.createElement("div");
+          mediaName.className = "cw-media-name";
+          mediaName.textContent = media.file;
+          mediaBox.appendChild(mediaName);
+          ["pointerdown", "pointermove", "pointerup", "click", "dblclick"].forEach(function (eventName) {
+            mediaBox.addEventListener(eventName, function (event) { event.stopPropagation(); });
+          });
+          el.appendChild(mediaBox);
+        }
+      }
+
+      var widgets = widgetEntries(node).filter(function (entry) {
+        if (!media) return true;
+        var key = String(entry.key || "").toLowerCase();
+        if (key === "audio" || key === "file" || key === "image" || key === "upload") return false;
+        return entry.value !== media.file;
+      });
       if (widgets.length) {
         var body = document.createElement("div");
         body.className = "cw-widgets";

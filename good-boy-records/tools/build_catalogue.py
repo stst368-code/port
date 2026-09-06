@@ -42,6 +42,7 @@ except ImportError:  # pragma: no cover
 
 import build_docs
 import build_folders
+import build_workflow_media
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -585,6 +586,9 @@ def build(strict: bool) -> int:
 
     report = Report()
     print("Reading content sources")
+    build_workflow_media.sync(report)
+    if report.errors:
+        return report.summarise(strict)
     tracks = load_tracks(report)
     if report.errors:
         return report.summarise(strict)
