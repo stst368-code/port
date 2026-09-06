@@ -2143,7 +2143,7 @@
      page entirely when content-source/folders is empty, so everything here
      no-ops rather than guarding at every call site. */
 
-  var folders = { root: null, drawer: null, tabs: [], sheets: [], lastTab: null };
+  var folders = { root: null, drawer: null, resizer: null, tabs: [], sheets: [], lastTab: null, resize: null };
 
   function setFolder(id) {
     if (!folders.root) return;
@@ -2165,10 +2165,117 @@
     if (restoreFocus && folders.lastTab) folders.lastTab.focus();
   }
 
+  function folderWidthLimits() {
+    var tabWidth = parseFloat(getComputedStyle(folders.root).getPropertyValue("--tab-w")) || 34;
+    var max = Math.max(280, window.innerWidth - tabWidth - 14);
+    var min = Math.min(420, max);
+    return { min: min, max: max };
+  }
+
+  function setFolderWidth(width, save) {
+    if (!folders.root || !folders.drawer) return;
+    /* On phone-sized layouts the drawer deliberately occupies the full width. */
+    if (window.matchMedia("(max-width: 860px)").matches) {
+      folders.root.style.removeProperty("--folder-drawer-width");
+      if (folders.resizer) folders.resizer.removeAttribute("aria-valuenow");
+      return;
+    }
+    var limits = folderWidthLimits();
+    width = clamp(limits.min, Number(width) || 760, limits.max);
+    folders.root.style.setProperty("--folder-drawer-width", Math.round(width) + "px");
+    if (folders.resizer) {
+      folders.resizer.setAttribute("aria-valuemin", String(Math.round(limits.min)));
+      folders.resizer.setAttribute("aria-valuemax", String(Math.round(limits.max)));
+      folders.resizer.setAttribute("aria-valuenow", String(Math.round(width)));
+    }
+    if (save) remember("gbr:folder-width", String(Math.round(width)));
+  }
+
+  function resetFolderWidth() {
+    try { localStorage.removeItem("gbr:folder-width"); } catch (_) {}
+    setFolderWidth(760, false);
+  }
+
+  function initFolderResize() {
+    folders.resizer = $("gbr-folder-resizer");
+    if (!folders.resizer || !folders.drawer) return;
+
+    var savedWidth = parseFloat(recall("gbr:folder-width"));
+    setFolderWidth(Number.isFinite(savedWidth) ? savedWidth : 760, false);
+
+    function moveResize(event) {
+      if (!folders.resize || event.pointerId !== folders.resize.pointerId) return;
+      /* Use the drawer's fixed right edge rather than accumulating deltas. This
+         keeps the handle glued to the pointer even if the browser drops or
+         coalesces pointermove events while crossing the scrim/workflow. */
+      event.preventDefault();
+      setFolderWidth(folders.resize.right - event.clientX, false);
+    }
+
+    function finishResize(event) {
+      if (!folders.resize || (event.pointerId != null && event.pointerId !== folders.resize.pointerId)) return;
+      var pointerId = folders.resize.pointerId;
+      var width = folders.drawer.getBoundingClientRect().width;
+      folders.resize = null;
+      folders.root.dataset.resizing = "false";
+      document.documentElement.classList.remove("gbr-folder-resize-active");
+      try { folders.resizer.releasePointerCapture(pointerId); } catch (_) {}
+      setFolderWidth(width, true);
+    }
+
+    folders.resizer.addEventListener("pointerdown", function (event) {
+      if (window.matchMedia("(max-width: 860px)").matches) return;
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      event.preventDefault();
+      event.stopPropagation();
+      var rect = folders.drawer.getBoundingClientRect();
+      folders.resize = { right: rect.right, pointerId: event.pointerId };
+      folders.root.dataset.resizing = "true";
+      document.documentElement.classList.add("gbr-folder-resize-active");
+      try { folders.resizer.setPointerCapture(event.pointerId); } catch (_) {}
+      moveResize(event);
+    });
+
+    /* Track globally as well as using pointer capture. It is deliberately
+       redundant: resize should continue when the pointer crosses the dimmed
+       page, an iframe, or the workflow canvas instead of mysteriously dying. */
+    window.addEventListener("pointermove", moveResize, { passive: false });
+    window.addEventListener("pointerup", finishResize);
+    window.addEventListener("pointercancel", finishResize);
+    folders.resizer.addEventListener("lostpointercapture", function (event) {
+      if (folders.resize && event.pointerId === folders.resize.pointerId) finishResize(event);
+    });
+
+    folders.resizer.addEventListener("dblclick", function (event) {
+      event.preventDefault();
+      resetFolderWidth();
+    });
+
+    folders.resizer.addEventListener("keydown", function (event) {
+      if (window.matchMedia("(max-width: 860px)").matches) return;
+      var current = folders.drawer.getBoundingClientRect().width;
+      var limits = folderWidthLimits();
+      var next = current;
+      if (event.key === "ArrowLeft") next = current + (event.shiftKey ? 100 : 40);
+      else if (event.key === "ArrowRight") next = current - (event.shiftKey ? 100 : 40);
+      else if (event.key === "Home") next = limits.min;
+      else if (event.key === "End") next = limits.max;
+      else return;
+      event.preventDefault();
+      setFolderWidth(next, true);
+    });
+
+    window.addEventListener("resize", function () {
+      var current = parseFloat(recall("gbr:folder-width")) || folders.drawer.getBoundingClientRect().width || 760;
+      setFolderWidth(current, false);
+    });
+  }
+
   function initFolders() {
     folders.root = $("gbr-folders");
     if (!folders.root) return;
     folders.drawer = $("gbr-folder-drawer");
+    initFolderResize();
     folders.tabs = Array.prototype.slice.call(folders.root.querySelectorAll(".gbr-folder-tab"));
     folders.sheets = Array.prototype.slice.call(folders.root.querySelectorAll(".gbr-folder-sheet"));
 
