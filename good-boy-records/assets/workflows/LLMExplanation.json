@@ -1,7 +1,7 @@
 {
   "id": "7c63de25-6be6-4e51-8769-00aff2f5d58e",
   "revision": 0,
-  "last_node_id": 3436,
+  "last_node_id": 3444,
   "last_link_id": 1543,
   "nodes": [
     {
@@ -12,13 +12,13 @@
         10130
       ],
       "size": [
-        690,
+        700,
         570
       ],
       "flags": {},
-      "order": 16,
+      "order": 22,
       "mode": 0,
-      "showAdvanced": true,
+      "showAdvanced": false,
       "inputs": [
         {
           "name": "clip",
@@ -82,7 +82,7 @@
         70
       ],
       "flags": {},
-      "order": 19,
+      "order": 24,
       "mode": 0,
       "inputs": [
         {
@@ -114,14 +114,14 @@
       "type": "EmptyMiniMaxMusic3LatentAudio",
       "pos": [
         0,
-        10530
+        10430
       ],
       "size": [
         300,
-        90
+        170
       ],
       "flags": {},
-      "order": 20,
+      "order": 25,
       "mode": 0,
       "inputs": [
         {
@@ -163,15 +163,15 @@
       "id": 3401,
       "type": "VAEDecodeAudio",
       "pos": [
-        2600,
-        10230
+        3200,
+        10130
       ],
       "size": [
         300,
         170
       ],
       "flags": {},
-      "order": 22,
+      "order": 27,
       "mode": 0,
       "inputs": [
         {
@@ -207,15 +207,15 @@
       "id": 3402,
       "type": "KSampler",
       "pos": [
-        1430,
+        1700,
         10530
       ],
       "size": [
-        370,
+        500,
         270
       ],
       "flags": {},
-      "order": 21,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
@@ -320,11 +320,11 @@
       "id": 3405,
       "type": "VAELoader",
       "pos": [
-        2300,
+        2700,
         10530
       ],
       "size": [
-        330,
+        400,
         70
       ],
       "flags": {},
@@ -356,7 +356,7 @@
       "id": 3406,
       "type": "UNETLoader",
       "pos": [
-        900,
+        1200,
         10130
       ],
       "size": [
@@ -395,15 +395,15 @@
       "id": 3407,
       "type": "SaveAudioAdvanced",
       "pos": [
-        3000,
-        10230
+        3690,
+        10130
       ],
       "size": [
-        300,
+        310,
         140
       ],
       "flags": {},
-      "order": 23,
+      "order": 28,
       "mode": 0,
       "inputs": [
         {
@@ -447,7 +447,7 @@
       "mode": 0,
       "inputs": [
         {
-          "label": "What's a CLIP?",
+          "label": "Why are you saying text encoder? Everything says CLIP?",
           "name": "value",
           "type": "STRING",
           "widget": {
@@ -463,15 +463,15 @@
           "links": null
         }
       ],
-      "title": "CLIP (Text Encoder)",
+      "title": "Text Encoder",
       "properties": {
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "This node loads the CLIP model, or \"Contrastive Language-Image Pre-training\", classically linked to image generation, for tasks like music generation it's more accurate to call this a \"Text Encoder\".\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n\n"
+        "This node loads our text encoder as is the starting point of the workflow.\n\nCLIP is enforced in some UI elements here, it's a limitation of ComfyUI. For the purposes of this workflow CLIP == text encoder, but they are two different things in reality.\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n"
       ],
       "widgets_values_named": {
-        "value": "This node loads the CLIP model, or \"Contrastive Language-Image Pre-training\", classically linked to image generation, for tasks like music generation it's more accurate to call this a \"Text Encoder\".\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n\n"
+        "value": "This node loads our text encoder as is the starting point of the workflow.\n\nCLIP is enforced in some UI elements here, it's a limitation of ComfyUI. For the purposes of this workflow CLIP == text encoder, but they are two different things in reality.\n\nEssentially, this is the translator that accepts our human/natural language input and passes it to our LLM in a language which it can understand, known as \"embeddings\".\n\nText encoders are highly specialised and are defined at the point where the LLM itself is trained. The way the LLM is trained, the way it is presented data during its training, is the same embedding formatting that is later used to talk to it.\n"
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -480,12 +480,12 @@
       "id": 3409,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -2390,
-        10840
+        -2400,
+        10830
       ],
       "size": [
-        490,
-        260
+        900,
+        470
       ],
       "flags": {},
       "order": 4,
@@ -508,15 +508,15 @@
           "links": []
         }
       ],
-      "title": "minimax_music3_text_encoder_pruned_int8_convrot.safetensors",
+      "title": "minimax_music3_text_encoder",
       "properties": {
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nminimax_music3_ = the model family this model belongs to\ntext_encoder_ = the role of the model\npruned_ = reduced weight model\nint8_ = precision level\nconvrot = the process used to quantize this version of the model\n.safetensors = the file format"
+        "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nTo help explain, I've also created a node to load another text encoder for this same workflow below. The encoder above is approx. 8.9GB in file size, whereas the one below is 10.6GB. They're essentially the same model, only the unit above has been quantized to reduce file size and increase speed / hardware compatibility (VRAM). See the main explanation notes overhead to understand this further.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\n"
       ],
       "widgets_values_named": {
-        "value": "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nminimax_music3_ = the model family this model belongs to\ntext_encoder_ = the role of the model\npruned_ = reduced weight model\nint8_ = precision level\nconvrot = the process used to quantize this version of the model\n.safetensors = the file format"
+        "value": "All good models embed common characteristics within the model file name, making it easy to understand what it is, what it does and how it's been... baked.\n\nTo help explain, I've also created a node to load another text encoder for this same workflow below. The encoder above is approx. 8.9GB in file size, whereas the one below is 10.6GB. They're essentially the same model, only the unit above has been quantized to reduce file size and increase speed / hardware compatibility (VRAM). See the main explanation notes overhead to understand this further.\n\nBoth file names begin \"minimax_music3_\", this is the family of models they belong to, often includes the developers name and/or a generation name. Think of this like ChatGPT 5.6 or Claude Opus, it's the Minimax family, specifically the music3 model.\n\nEach file then explicitly states it's role, \"text_encoder\", makes it very clear what these do.\n\nNow we have divergence, model above \"pruned_int8\" vs below \"fp8\". As mentioned above, the model actually hooked into this workflow is quantized to enable faster generation, the model below is technically compressed too, but to a less significant degree. The subject of compression/quantization gets complex fast, if you wish to understand it further please look at the main explanation notes overhead where I dive into the detail more.\n\nAgain our file names differ, above we have \"convrot\" and below we have \"e4m3fn\". These are the compression algorithms used to reach the level of quantization each model has been compressed to. Meaning there may be several different INT8 and FP8 variants available where individuals have used different algorithms to compress. I have personally yet to find any reason to worry about one algorithm being better than another.\n\nAnd finally \".safetensors\", the file format. More on this in the main explanation notes overhead.\n\n"
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -525,12 +525,12 @@
       "id": 3419,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -410,
-        7950
+        -2400,
+        9210
       ],
       "size": [
-        800,
-        690
+        1000,
+        590
       ],
       "flags": {},
       "order": 5,
@@ -558,10 +558,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "Precision defines the accuracy and scope of knowledge.\n\nWhen looking at precision we're usually looking at precision values that are Floating Points or Brain-floating Points. With levels of FP32, FP16, BF16 or INT8 most typically seen.\n\nImagine we're in a workshop, we need to measure something, on the table infront of us is an assortment of rulers.\n\nSome rulers are longer than others, some rules measure in centimetres, others in millimetres. Each ruler has a fixed range of tasks it is able to complete, a  10cm long ruler can't measure a 20cm long item, a measurement needed in millimetres can't accurately be taken in centimetres.\n\nThe numeric value on our precision level signifies how many digits each vector is in length, an FP32 vector is 32 digits long, an INT8 vector is 8 digits long.\n\nSadly, precision is not simple enough to stop there.\n\nThese are exponential values, meaning the computer does not use all of those bits simply to write out one long number. Instead, a floating-point value is split into separate parts: a sign, an exponent, and a fraction.\n\nThis is similar to scientific notation. Instead of writing 120,000, we could write 1.2 × 10⁵. The 1.2 provides the precise value, while the 10⁵ determines its scale. Computers do essentially the same thing, except they work in binary, so the scale is based on powers of 2 rather than powers of 10.\n\nFor example, the same basic value can be moved across vastly different scales:\n\na. 1.25 × 2⁻³  = 0.15625\nb. 1.25 × 2⁰   = 1.25\nc. 1.25 × 2³   = 10\nd. 1.25 × 2¹⁰  = 1280\n\nThe exponent therefore controls the length of our ruler, determining the range of values it can represent. The fraction controls how finely marked that ruler is, determining how precisely values within that range can be represented.\n\nThis is why two 16-bit formats can behave very differently. FP16 gives more of its available bits to the fraction, producing finer measurements, but fewer to the exponent, giving it a smaller overall range. BF16 does the opposite: it uses the same 8-bit exponent as FP32, giving it a similarly enormous range, but has fewer fraction bits and therefore coarser precision."
+        "Precision defines how accurately, and over what numerical range, the model's values can be represented, how many pages it has in its book of knowledge.\n\nWhen looking at precision we're usually looking at precision values that are Floating Points or Brain-floating Points. With levels of FP32, FP16, BF16 or INT8 most typically seen.\n\nImagine we're in a workshop, we need to measure something, on the table infront of us is an assortment of rulers.\n\nSome rulers are longer than others, some rules measure in centimetres, others in millimetres. Each ruler has a fixed range of tasks it is able to complete, a  10cm long ruler can't measure a 20cm long item, a measurement needed in millimetres can't accurately be taken in centimetres.\n\nThe numeric value on our precision level signifies how many digits each vector is in length, an FP32 vector is expressed over 32 digits, an INT8 vector is expressed over 8 digits.\n\nSadly, precision is not simple enough to stop there.\n\nThese are exponential values, meaning the computer does not use all of those bits simply to write out one long number. Instead, a floating-point value is split into separate parts: a sign, an exponent, and a fraction.\n\nThis is similar to scientific notation. Instead of writing 120,000, we could write 1.2 × 10⁵. The 1.2 provides the precise value, while the 10⁵ determines its scale. Computers do essentially the same thing, except they work in binary, so the scale is based on powers of 2 rather than powers of 10.\n\nFor example, the same basic value can be moved across vastly different scales:\n\na. 1.25 × 2⁻³  = 0.15625\nb. 1.25 × 2⁰   = 1.25\nc. 1.25 × 2³   = 10\nd. 1.25 × 2¹⁰  = 1280\n\nThe exponent therefore controls the length of our ruler, determining the range of values it can represent. The fraction controls how finely marked that ruler is, determining how precisely values within that range can be represented.\n\nThis is why two 16-bit formats can behave very differently. FP16 gives more of its available bits to the fraction, producing finer measurements, but fewer to the exponent, giving it a smaller overall range. BF16 does the opposite: it uses the same 8-bit exponent as FP32, giving it a similarly enormous range, but has fewer fraction bits and therefore coarser precision."
       ],
       "widgets_values_named": {
-        "value": "Precision defines the accuracy and scope of knowledge.\n\nWhen looking at precision we're usually looking at precision values that are Floating Points or Brain-floating Points. With levels of FP32, FP16, BF16 or INT8 most typically seen.\n\nImagine we're in a workshop, we need to measure something, on the table infront of us is an assortment of rulers.\n\nSome rulers are longer than others, some rules measure in centimetres, others in millimetres. Each ruler has a fixed range of tasks it is able to complete, a  10cm long ruler can't measure a 20cm long item, a measurement needed in millimetres can't accurately be taken in centimetres.\n\nThe numeric value on our precision level signifies how many digits each vector is in length, an FP32 vector is 32 digits long, an INT8 vector is 8 digits long.\n\nSadly, precision is not simple enough to stop there.\n\nThese are exponential values, meaning the computer does not use all of those bits simply to write out one long number. Instead, a floating-point value is split into separate parts: a sign, an exponent, and a fraction.\n\nThis is similar to scientific notation. Instead of writing 120,000, we could write 1.2 × 10⁵. The 1.2 provides the precise value, while the 10⁵ determines its scale. Computers do essentially the same thing, except they work in binary, so the scale is based on powers of 2 rather than powers of 10.\n\nFor example, the same basic value can be moved across vastly different scales:\n\na. 1.25 × 2⁻³  = 0.15625\nb. 1.25 × 2⁰   = 1.25\nc. 1.25 × 2³   = 10\nd. 1.25 × 2¹⁰  = 1280\n\nThe exponent therefore controls the length of our ruler, determining the range of values it can represent. The fraction controls how finely marked that ruler is, determining how precisely values within that range can be represented.\n\nThis is why two 16-bit formats can behave very differently. FP16 gives more of its available bits to the fraction, producing finer measurements, but fewer to the exponent, giving it a smaller overall range. BF16 does the opposite: it uses the same 8-bit exponent as FP32, giving it a similarly enormous range, but has fewer fraction bits and therefore coarser precision."
+        "value": "Precision defines how accurately, and over what numerical range, the model's values can be represented, how many pages it has in its book of knowledge.\n\nWhen looking at precision we're usually looking at precision values that are Floating Points or Brain-floating Points. With levels of FP32, FP16, BF16 or INT8 most typically seen.\n\nImagine we're in a workshop, we need to measure something, on the table infront of us is an assortment of rulers.\n\nSome rulers are longer than others, some rules measure in centimetres, others in millimetres. Each ruler has a fixed range of tasks it is able to complete, a  10cm long ruler can't measure a 20cm long item, a measurement needed in millimetres can't accurately be taken in centimetres.\n\nThe numeric value on our precision level signifies how many digits each vector is in length, an FP32 vector is expressed over 32 digits, an INT8 vector is expressed over 8 digits.\n\nSadly, precision is not simple enough to stop there.\n\nThese are exponential values, meaning the computer does not use all of those bits simply to write out one long number. Instead, a floating-point value is split into separate parts: a sign, an exponent, and a fraction.\n\nThis is similar to scientific notation. Instead of writing 120,000, we could write 1.2 × 10⁵. The 1.2 provides the precise value, while the 10⁵ determines its scale. Computers do essentially the same thing, except they work in binary, so the scale is based on powers of 2 rather than powers of 10.\n\nFor example, the same basic value can be moved across vastly different scales:\n\na. 1.25 × 2⁻³  = 0.15625\nb. 1.25 × 2⁰   = 1.25\nc. 1.25 × 2³   = 10\nd. 1.25 × 2¹⁰  = 1280\n\nThe exponent therefore controls the length of our ruler, determining the range of values it can represent. The fraction controls how finely marked that ruler is, determining how precisely values within that range can be represented.\n\nThis is why two 16-bit formats can behave very differently. FP16 gives more of its available bits to the fraction, producing finer measurements, but fewer to the exponent, giving it a smaller overall range. BF16 does the opposite: it uses the same 8-bit exponent as FP32, giving it a similarly enormous range, but has fewer fraction bits and therefore coarser precision."
       },
       "color": "#322",
       "bgcolor": "#533"
@@ -570,8 +570,8 @@
       "id": 3420,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -1020,
-        7920
+        -2410,
+        7540
       ],
       "size": [
         500,
@@ -603,92 +603,10 @@
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "Weights are knowledge.\n\nMore specifically, they're the vectors (data) learned by an LLM during training.\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
+        "Weights are the numerical parameters learned during training.\n\nMore weights, more capacity. What the model learns depends on its training.\n\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
       ],
       "widgets_values_named": {
-        "value": "Weights are knowledge.\n\nMore specifically, they're the vectors (data) learned by an LLM during training.\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
-      },
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 3421,
-      "type": "PrimitiveString",
-      "pos": [
-        -2900,
-        7460
-      ],
-      "size": [
-        500,
-        70
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "Tell me more...",
-          "name": "value",
-          "type": "STRING",
-          "widget": {
-            "name": "value"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            1531
-          ]
-        }
-      ],
-      "title": "Alright, I'm here, tell me more",
-      "properties": {
-        "Node name for S&R": "PrimitiveString"
-      },
-      "widgets_values": [
-        "what do all these parameters mean?"
-      ],
-      "widgets_values_named": {
-        "value": "what do all these parameters mean?"
-      },
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 3422,
-      "type": "Reroute",
-      "pos": [
-        -2090,
-        7490
-      ],
-      "size": [
-        75,
-        26
-      ],
-      "flags": {},
-      "order": 17,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "",
-          "type": "*",
-          "link": 1531
-        }
-      ],
-      "outputs": [
-        {
-          "name": "",
-          "type": "STRING",
-          "links": []
-        }
-      ],
-      "properties": {
-        "showOutputText": false,
-        "horizontal": false
+        "value": "Weights are the numerical parameters learned during training.\n\nMore weights, more capacity. What the model learns depends on its training.\n\n\nThey determine how strongly different pieces of information influence one another as data passes through the model.\n\nA trained model may contain millions, billions or now even trillions of these values, and the model file primarily exists to store them.\n\nMore weight, more knowledge."
       },
       "color": "#322",
       "bgcolor": "#533"
@@ -697,15 +615,15 @@
       "id": 3423,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        510,
-        8670
+        -900,
+        9230
       ],
       "size": [
-        600,
-        280
+        900,
+        270
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -744,15 +662,15 @@
       "id": 3424,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        510,
-        9070
+        -900,
+        9630
       ],
       "size": [
-        600,
-        270
+        900,
+        180
       ],
       "flags": {},
-      "order": 9,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -791,15 +709,15 @@
       "id": 3425,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -1050,
-        8260
+        -2440,
+        7880
       ],
       "size": [
         400,
         200
       ],
       "flags": {},
-      "order": 10,
+      "order": 9,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -824,15 +742,15 @@
       "id": 3426,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        -1460,
-        7130
+        -2850,
+        6750
       ],
       "size": [
         870,
         500
       ],
       "flags": {},
-      "order": 11,
+      "order": 10,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -862,14 +780,14 @@
       ],
       "size": [
         700,
-        870
+        970
       ],
       "flags": {},
-      "order": 12,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
-          "label": "Sampling?",
+          "label": "Large Language M.... Music?...",
           "name": "value",
           "type": "STRING",
           "widget": {
@@ -885,15 +803,15 @@
           "links": null
         }
       ],
-      "title": "Large Language M.... Music?....",
+      "title": "Large Language Model",
       "properties": {
         "Node name for S&R": "PrimitiveStringMultiline"
       },
       "widgets_values": [
-        "Here we are, the beating heart of this workflow, whilst this does NOT make our song it is the most important component of this entire workflow.\n\nYou can change model precisions all day long, but what's written above will drive the quality of your final output more than any increase in parameter count can.\n\nThis is the LLM (Large Language Model), we feed it a caption and a lyric set, it will take that natural language information and process it into an exact description of how the song should sound (based on its training) which gets passed to our sampler for generation.\n\nSo, what do we tell it?\n\nCaption:\n\nLyrics:\n\nA few other variables available:\n\nSeed: \nThe starting point for diffusion, think of it as a ball in a bingo wheel. It's starting point would be the seed, then through the diffusion process the wheel turns and the ball moves through the wheel until the wheel stops. It's seemingly random, almost impossible to predict where it will end and the ball it started next to could finish in the opposite position. This may sound like a variable of little use, but if you find a seed the leads to your bingo ball getting picked (i.e. the seed produces a good song structure), then you can reliably repeat generations of the same song adjusting other variables, captions or lyrics to fine tune the final product. It is hard to overstate the importance of tracking seeds!\n\nMax Duration: \nWith this specific model, we don't define an exact track time, only a maximum and the model will generate a track that lasts up to the maximum boundary based on what it calculates to be the ideal BPM et al.\n\nCFG Scale:\nCFG (Classifier-Free Guidance) controls prompt adherence. Think of it as the parents of the AI model as its working. Lower CFG values would be those parents after a long day of work, maybe a bottle or two, half keeping an eye on their child as it plays with matches. Higher CFG values, same parents, but their parents are coming over for dinner, they're in full \"eyes in the back of my head\" mode, nothing goes uncorrected, that child will have to do whatever they say.\n\nCFG is a tough variable to get right and likely one of the ones you'll find yourself adjusting and doubting yourself over the effect being a net positive or negative.\n\nFor this model in particular, CFG 1.7 is about the sweet spot, however I have found when working on tracks that are supposed to sound a little more vintage or like they're playing off a cassette a CFG of 1.2 can make the experience feel more authentic.\n\n\nTop K:\nTop K sampling controls the range of vectors that are available per token. Imagine you 'had' the number 100 and I told you that you can choose any number either side of 100 +/- 50, you effectively have 100 values you can pick. It may work well that you can pick such a wide range, or I may find that actually I need you to stick closer to the origin point, so I adjust the Top K value down to 10 and now your range is dramatically reduced and more predictable.\n\nTop K controls the LLMs ability to control variation. As it is searching its probabilistic dictionary, this parameter controls how 'far' it is allowed to look away from its origin point. Higher values will produce greater levels of creative insanity, lower levels will be more locked in and perhaps mundane. Throughout my testing with MiniMax I have found zero value in changing this from 50."
+        "Here we are, the beating heart of this workflow, whilst this does NOT make our song it is the most important component of this entire workflow.\n\nYou can change model precisions all day long, but what's written above will drive the quality of your final output more than any increase in parameter count can.\n\nThis is the LLM (Large Language Model), we feed it a caption and a lyric set, it will take that natural language information and process it into an exact description of how the song should sound (based on its training) which gets passed to our sampler for generation in the form of structured conditioning.\n\nSo, what do we tell it?\n\nCaption:\n\nLyrics:\n\nA few other variables available:\n\nSeed: \nThe starting point for diffusion, think of it as a ball in a bingo wheel. It's starting point would be the seed, then through the diffusion process the wheel turns and the ball moves through the wheel until the wheel stops. It's seemingly random, almost impossible to predict where it will end and the ball it started next to could finish in the opposite position. This may sound like a variable of little use, but if you find a seed the leads to your bingo ball getting picked (i.e. the seed produces a good song structure), then you can reliably repeat generations of the same song adjusting other variables, captions or lyrics to fine tune the final product. It is hard to overstate the importance of tracking seeds!\n\nMax Duration: \nWith this specific model, we don't define an exact track time, only a maximum and the model will generate a track that lasts up to the maximum boundary based on what it calculates to be the ideal BPM et al.\n\nCFG Scale:\nCFG (Classifier-Free Guidance) controls prompt adherence. Think of it as the parents of the AI model as its working. Lower CFG values would be those parents after a long day of work, maybe a bottle or two, half keeping an eye on their child as it plays with matches. Higher CFG values, same parents, but their parents are coming over for dinner, they're in full \"eyes in the back of my head\" mode, nothing goes uncorrected, that child will have to do whatever they say.\n\nCFG is a tough variable to get right and likely one of the ones you'll find yourself adjusting and doubting yourself over the effect being a net positive or negative.\n\nFor this model in particular, CFG 1.7 is about the sweet spot, however I have found when working on tracks that are supposed to sound a little more vintage or like they're playing off a cassette a CFG of 1.2 can make the experience feel more authentic.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/cfg/\n\nTop K:\nTop K sampling controls the range of vectors that are available per token. Imagine you 'had' the number 100 and I told you that you can choose any number either side of 100 +/- 50, you effectively have 100 values you can pick. It may work well that you can pick such a wide range, or I may find that actually I need you to stick closer to the origin point, so I adjust the Top K value down to 10 and now your range is dramatically reduced and more predictable.\n\nTop K controls the LLMs ability to control variation. As it is searching its probabilistic dictionary, this parameter controls how 'far' it is allowed to look away from its origin point. Higher values will produce greater levels of creative insanity, lower levels will be more locked in and perhaps mundane. Throughout my testing with MiniMax I have found zero value in changing this from 50."
       ],
       "widgets_values_named": {
-        "value": "Here we are, the beating heart of this workflow, whilst this does NOT make our song it is the most important component of this entire workflow.\n\nYou can change model precisions all day long, but what's written above will drive the quality of your final output more than any increase in parameter count can.\n\nThis is the LLM (Large Language Model), we feed it a caption and a lyric set, it will take that natural language information and process it into an exact description of how the song should sound (based on its training) which gets passed to our sampler for generation.\n\nSo, what do we tell it?\n\nCaption:\n\nLyrics:\n\nA few other variables available:\n\nSeed: \nThe starting point for diffusion, think of it as a ball in a bingo wheel. It's starting point would be the seed, then through the diffusion process the wheel turns and the ball moves through the wheel until the wheel stops. It's seemingly random, almost impossible to predict where it will end and the ball it started next to could finish in the opposite position. This may sound like a variable of little use, but if you find a seed the leads to your bingo ball getting picked (i.e. the seed produces a good song structure), then you can reliably repeat generations of the same song adjusting other variables, captions or lyrics to fine tune the final product. It is hard to overstate the importance of tracking seeds!\n\nMax Duration: \nWith this specific model, we don't define an exact track time, only a maximum and the model will generate a track that lasts up to the maximum boundary based on what it calculates to be the ideal BPM et al.\n\nCFG Scale:\nCFG (Classifier-Free Guidance) controls prompt adherence. Think of it as the parents of the AI model as its working. Lower CFG values would be those parents after a long day of work, maybe a bottle or two, half keeping an eye on their child as it plays with matches. Higher CFG values, same parents, but their parents are coming over for dinner, they're in full \"eyes in the back of my head\" mode, nothing goes uncorrected, that child will have to do whatever they say.\n\nCFG is a tough variable to get right and likely one of the ones you'll find yourself adjusting and doubting yourself over the effect being a net positive or negative.\n\nFor this model in particular, CFG 1.7 is about the sweet spot, however I have found when working on tracks that are supposed to sound a little more vintage or like they're playing off a cassette a CFG of 1.2 can make the experience feel more authentic.\n\n\nTop K:\nTop K sampling controls the range of vectors that are available per token. Imagine you 'had' the number 100 and I told you that you can choose any number either side of 100 +/- 50, you effectively have 100 values you can pick. It may work well that you can pick such a wide range, or I may find that actually I need you to stick closer to the origin point, so I adjust the Top K value down to 10 and now your range is dramatically reduced and more predictable.\n\nTop K controls the LLMs ability to control variation. As it is searching its probabilistic dictionary, this parameter controls how 'far' it is allowed to look away from its origin point. Higher values will produce greater levels of creative insanity, lower levels will be more locked in and perhaps mundane. Throughout my testing with MiniMax I have found zero value in changing this from 50."
+        "value": "Here we are, the beating heart of this workflow, whilst this does NOT make our song it is the most important component of this entire workflow.\n\nYou can change model precisions all day long, but what's written above will drive the quality of your final output more than any increase in parameter count can.\n\nThis is the LLM (Large Language Model), we feed it a caption and a lyric set, it will take that natural language information and process it into an exact description of how the song should sound (based on its training) which gets passed to our sampler for generation in the form of structured conditioning.\n\nSo, what do we tell it?\n\nCaption:\n\nLyrics:\n\nA few other variables available:\n\nSeed: \nThe starting point for diffusion, think of it as a ball in a bingo wheel. It's starting point would be the seed, then through the diffusion process the wheel turns and the ball moves through the wheel until the wheel stops. It's seemingly random, almost impossible to predict where it will end and the ball it started next to could finish in the opposite position. This may sound like a variable of little use, but if you find a seed the leads to your bingo ball getting picked (i.e. the seed produces a good song structure), then you can reliably repeat generations of the same song adjusting other variables, captions or lyrics to fine tune the final product. It is hard to overstate the importance of tracking seeds!\n\nMax Duration: \nWith this specific model, we don't define an exact track time, only a maximum and the model will generate a track that lasts up to the maximum boundary based on what it calculates to be the ideal BPM et al.\n\nCFG Scale:\nCFG (Classifier-Free Guidance) controls prompt adherence. Think of it as the parents of the AI model as its working. Lower CFG values would be those parents after a long day of work, maybe a bottle or two, half keeping an eye on their child as it plays with matches. Higher CFG values, same parents, but their parents are coming over for dinner, they're in full \"eyes in the back of my head\" mode, nothing goes uncorrected, that child will have to do whatever they say.\n\nCFG is a tough variable to get right and likely one of the ones you'll find yourself adjusting and doubting yourself over the effect being a net positive or negative.\n\nFor this model in particular, CFG 1.7 is about the sweet spot, however I have found when working on tracks that are supposed to sound a little more vintage or like they're playing off a cassette a CFG of 1.2 can make the experience feel more authentic.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/cfg/\n\nTop K:\nTop K sampling controls the range of vectors that are available per token. Imagine you 'had' the number 100 and I told you that you can choose any number either side of 100 +/- 50, you effectively have 100 values you can pick. It may work well that you can pick such a wide range, or I may find that actually I need you to stick closer to the origin point, so I adjust the Top K value down to 10 and now your range is dramatically reduced and more predictable.\n\nTop K controls the LLMs ability to control variation. As it is searching its probabilistic dictionary, this parameter controls how 'far' it is allowed to look away from its origin point. Higher values will produce greater levels of creative insanity, lower levels will be more locked in and perhaps mundane. Throughout my testing with MiniMax I have found zero value in changing this from 50."
       },
       "color": "#332922",
       "bgcolor": "#593930"
@@ -902,15 +820,15 @@
       "id": 3430,
       "type": "084ffd0d-0b8d-4bef-9f33-69db7b55d157",
       "pos": [
-        -410,
-        7470
+        -2400,
+        8730
       ],
       "size": [
-        800,
+        1000,
         470
       ],
       "flags": {},
-      "order": 13,
+      "order": 12,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -938,15 +856,15 @@
       "id": 3433,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        510,
-        8260
+        -900,
+        8930
       ],
       "size": [
-        600,
-        280
+        900,
+        180
       ],
       "flags": {},
-      "order": 14,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -985,15 +903,15 @@
       "id": 3434,
       "type": "500a870a-bcd9-412b-9290-7a274a6cd88a",
       "pos": [
-        1310,
-        8670
+        300,
+        8930
       ],
       "size": [
         400,
         270
       ],
       "flags": {},
-      "order": 18,
+      "order": 23,
       "mode": 0,
       "inputs": [
         {
@@ -1028,15 +946,15 @@
       "id": 3436,
       "type": "ea857344-20d0-436d-bb2d-573102f02109",
       "pos": [
-        510,
-        7470
+        -900,
+        8130
       ],
       "size": [
-        1200,
+        1600,
         670
       ],
       "flags": {},
-      "order": 15,
+      "order": 14,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -1057,6 +975,331 @@
         "image": "understanding-embeddings.png",
         "upload": "image"
       }
+    },
+    {
+      "id": 3437,
+      "type": "MiniMaxMusic3TextEncode",
+      "pos": [
+        -100,
+        11230
+      ],
+      "size": [
+        800,
+        570
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": []
+        },
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "links": []
+        }
+      ],
+      "title": "Example of a completed prompt",
+      "properties": {
+        "Node name for S&R": "MiniMaxMusic3TextEncode",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0"
+      },
+      "widgets_values": [
+        "Global Metadata\n\nMinimal mid-2010s alternative rap and spacey trap with an underground UK feel. Slow, heavy half-time bounce around 68–70 BPM, or approximately 136–140 BPM in double-time counting. Keep the production sparse, repetitive and hypnotic rather than constantly evolving: rounded sub-bass, dry punchy kick, tight snare, simple crisp hi-hats, restrained trap percussion and a small eerie synthetic motif repeating through most of the track. Harmony should remain minimal and loop-based, creating a slightly sinister but playful nocturnal atmosphere. The groove should feel relaxed and confident despite the fast vocal phrasing. Preserve substantial empty space around the vocal. Avoid hyperpop maximalism, glitch-heavy production, dramatic drops, dense synth layers, EDM effects, rock instrumentation and excessive transitional sound design.\n\nVocal Details\n\nFemale lead vocal with a youthful, bright, slightly nasal timbre and clear British-accented rap delivery. Performance is cheeky, dry, provocative and self-assured rather than manic. Verses use tightly articulated conversational rap with quick internal rhymes and playful changes of emphasis, but maintain a steady underlying cadence. Pre-choruses become slightly more melodic and sing-song without turning into full pop singing. Choruses are deliberately tiny and repetitive, delivered as a catchy chant with light doubling rather than a huge layered hook. Keep the lead close, dry and intelligible. Use only occasional restrained ad-libs or doubles; avoid constant vocal warping, exaggerated character voices and disruptive effects.\n\nArrangement\n\n[intro]\n\nEstablish the core bass, drum and eerie synth loop immediately\n\n[verse]\n\nBring the full established groove into place without. Keep the backing repetitive and spacious.\n\n[chorus]\n\nMaintain essentially the same groove. Introduce the short repeated chant with light vocal doubling and a modest increase in bass and drum weight, but avoid turning it into a large pop chorus.\n\n[verse]\n\nReturn directly to the central loop. Keep the instrumental stable while the vocal becomes denser, quicker and more conversational, with brief ad-libs occupying the spaces between phrases.\n\n[chorus]\n\nRestore the established chant essentially unchanged. Preserve its repetition and familiarity rather than increasing the scale.\n\n[verse]\n\nMaintain the same central groove while the tongue-twisting vocal patterns become increasingly intricate. Keep the beat relaxed underneath the faster articulation and preserve clear empty space around the lead.\n\n[chorus]\n\nRepeat the established chorus with the doubling and modest rhythmic reinforcement.\n\n[verse]\n\nthe vocal complexity increases further. Allow increasingly compressed phrasing, rapid consonants and call-and-response ad-libs to create the sense of acceleration without changing the underlying tempo.\n\n[chorus]\n\nReturn once more to the familiar chant, providing a simple rhythmic reset before the final escalation.\n\n[verse]\n\nTreat the final extended verse as the vocal and rhythmic climax. Begin over the established groove, then progressively tighten the vocal spacing as the multi-syllabic words and repeated place names accumulate. Allow the delivery to become increasingly rapid and relentless while keeping articulation clear. The drums may gain slightly stronger hi-hat activity and percussion toward the end, but the core bass and eerie synth loop should remain unchanged. Avoid a dramatic drop or large instrumental build; the escalating vocal itself should create the climax.\n\n[outro]\n\nStrip the groove back slightly beneath the final short word permutations. Return to the loose, playful spacing of the opening, using bass, percussion and the established synth motif. End abruptly and simply after the final vocal response rather than building toward a conventional musical resolution.\n",
+        "[intro]\nMoses...\nsupposes... (hmm?)\nhis toeses...\nare Roses... (yeah)\nBut Moses...\nsupposes...\nErroneously... (oh no!)\n[verse]\nMoses supposes his toeses are Roses\nBut Moses supposes Erroneously\nMoses he knowses his toeses aren't roses\nAs Moses supposes his toeses to be!\nMoses supposes his toeses are Roses\nBut Moses supposes Erroneously\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose (mose) rose (rose) toes (toes)\nHooptie doodie doodle\ndoodle doodie hooptie\n(ha ha ha ha ha ha)\n[verse]\nPeter (Peter)\nPiper (Piper)\nPeter Piper picked a peck of pickled peppers (peppers)\nA peck of pickled peppers Peter Piper picked (picked)\nIf Peter Piper picked a peck of pickled peppers (hmm)\nWhere's the peck of pickled peppers Peter Piper picked? (where is it?)\n(But)\nHow much wood would a woodchuck chuck if a woodchuck could chuck wood?\nif a woodchuck could chuck wood How much wood would a woodchuck chuck\n(What about Mary?)\nWell, she sells seashells by the seashore.\nthe shells she sells are seashells, I'm sure (sure)\nSix sticky skeletons and Silas sees six swans\nSharp sharks seek snacks and Selfish shellfish sellers\n(meow!)\nkitty cat? kitty kitty cat cat?\nwould a kit-kat eating kitty kat eat a kit-kat snapped?\nor would that kitten kitty-kat eat its kit-kat whole?\nwould it make any difference if that kitty-kat was a city-cat?\nwould the kitty-kat-city-cat eat it's city-bitty-kit-kat snapped?\nor would the city-kitty-kat be sitting-pretty-kat\nnot a fussy-pussy but a busy little pussy-cat?\nbusy kitty, pretty kitty\npicky kitty, city kitty\nbitty kit-kat, ate its kitty-kat\nwhich kitty gets the kitty's kit-kat?\nand which kitty-kat is the real twa-(no!)\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose (mose) rose (rose) toes (toes)\nHooptie doodie doodle\ndoodle doodie hooptie\ndoodle doodle doodie \nhooptie\n(ha ha ha ha ha ha)\n[verse]\nwell\nI wish to wish the wish you wish to wish\nbut if you wish the wish the witch wishes\nI won't wish the wish you wish to wish\nI wish you were the fish in my dish\nFresh fried fish, fish fresh fried,\nfried fish fresh, fish fried fresh\n(fish fish!)\nFour fresh fish flashed fins at five fat frogs\nfive fat frogs flipped fast from five flat logs\nSix slick snakes slipped straight through six small slots\nwhile six shocked sheep shouted\n(stop stop stop!)\n(neighhhh)\nOne one was a racehorse\ntwo two was one too\none one won one race\nand two two won one too\nEleven elves licked eleven little licorice lollipops\nI thought a thought (tell me more?)\nbut the thought I thought\nwasn't the thought I thought I thought (hmm)\n....\n(ha-ha-ha-ha)\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose-(mose) rose-(rose) toes-(toes)\nHooptie doodie doodle\ndoodle doodie hooptie\n(ha ha ha ha ha ha)\ndoodle doodle \ndoodie doodie \nhooptie hooptie\nhoo\n[verse]\nRed lorry, yellow lorry\nlorry yellow, lorry red (vroom vroom)\nRed lorry, yellow lorry\nlorry yellow, lorry red (vroom vroom)\nRed lorry, yellow lorry\nlorry yellow, lorry red (vroom vroom)\nRed leather, yellow leather\nyellow leather, leather red\nred-dead-bed-head-simon-sed\n(what?)\nCrisp crusts crackle crunchily (crackle)\nRound the rugged rock, the ragged rascal ran\nIf two witches were watching two wrist watches\nwhich witch would watch which wrist watch? (tick tock)\nIf “there” is there (there)\nand “their” is theirs (their)\nand “they’re” means they are (they're)\nthen where are they? (huh?)\n(ha ha)\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose-(mose)-rose-(rose)-toes-(toes)\nHooptie doodie doodle\ndoodle doodie hooptie\n(mwha ha ha ha ha ha)\n[bridge]\nVery well, very well, very well...\n(huh?)\nBirming-ham\nNotting-ham\nBucking-ham\nRotherham, Oldham, Durham, Grantham\nDagenham, Chatham, Rainham, Gillingham\nFaversham, Fareham, Horsham, Chesham\nEvesham-Melksham-Chippenham-Hexham\nSwaffham-Dereham-Wymondham-Downham\nTottenham-Twickenham-Altrincham-Amersham\n(ha ha)\nPorts-mouth (mouth)\nPlymouth, Falmouth, Exmouth\nTeignmouth-Weymouth,\nTynemouth-Bournemouth\nNorwich-Ipswich-Harwich-Sandwich\nNorthwich-Middlewich-Nantwich-Droitwich\nManchester-Winchester-Chester\nColchester-Dorchester-Cirencester\nOxford-Watford-Guildford-Salford\nHereford-Chelmsford-Stamford-Bedford\nBradford-Stafford-Dartford\n(you've lost me)\nha ha\n[outro]\nA mose a rose a tose (tose)\nA rose a tose a mose (mose)\nA tose a mose a rose (rose)\n(ha ha ha ha ha ha)",
+        282325001232432,
+        "fixed",
+        290,
+        1.7,
+        50
+      ],
+      "widgets_values_named": {
+        "caption": "Global Metadata\n\nMinimal mid-2010s alternative rap and spacey trap with an underground UK feel. Slow, heavy half-time bounce around 68–70 BPM, or approximately 136–140 BPM in double-time counting. Keep the production sparse, repetitive and hypnotic rather than constantly evolving: rounded sub-bass, dry punchy kick, tight snare, simple crisp hi-hats, restrained trap percussion and a small eerie synthetic motif repeating through most of the track. Harmony should remain minimal and loop-based, creating a slightly sinister but playful nocturnal atmosphere. The groove should feel relaxed and confident despite the fast vocal phrasing. Preserve substantial empty space around the vocal. Avoid hyperpop maximalism, glitch-heavy production, dramatic drops, dense synth layers, EDM effects, rock instrumentation and excessive transitional sound design.\n\nVocal Details\n\nFemale lead vocal with a youthful, bright, slightly nasal timbre and clear British-accented rap delivery. Performance is cheeky, dry, provocative and self-assured rather than manic. Verses use tightly articulated conversational rap with quick internal rhymes and playful changes of emphasis, but maintain a steady underlying cadence. Pre-choruses become slightly more melodic and sing-song without turning into full pop singing. Choruses are deliberately tiny and repetitive, delivered as a catchy chant with light doubling rather than a huge layered hook. Keep the lead close, dry and intelligible. Use only occasional restrained ad-libs or doubles; avoid constant vocal warping, exaggerated character voices and disruptive effects.\n\nArrangement\n\n[intro]\n\nEstablish the core bass, drum and eerie synth loop immediately\n\n[verse]\n\nBring the full established groove into place without. Keep the backing repetitive and spacious.\n\n[chorus]\n\nMaintain essentially the same groove. Introduce the short repeated chant with light vocal doubling and a modest increase in bass and drum weight, but avoid turning it into a large pop chorus.\n\n[verse]\n\nReturn directly to the central loop. Keep the instrumental stable while the vocal becomes denser, quicker and more conversational, with brief ad-libs occupying the spaces between phrases.\n\n[chorus]\n\nRestore the established chant essentially unchanged. Preserve its repetition and familiarity rather than increasing the scale.\n\n[verse]\n\nMaintain the same central groove while the tongue-twisting vocal patterns become increasingly intricate. Keep the beat relaxed underneath the faster articulation and preserve clear empty space around the lead.\n\n[chorus]\n\nRepeat the established chorus with the doubling and modest rhythmic reinforcement.\n\n[verse]\n\nthe vocal complexity increases further. Allow increasingly compressed phrasing, rapid consonants and call-and-response ad-libs to create the sense of acceleration without changing the underlying tempo.\n\n[chorus]\n\nReturn once more to the familiar chant, providing a simple rhythmic reset before the final escalation.\n\n[verse]\n\nTreat the final extended verse as the vocal and rhythmic climax. Begin over the established groove, then progressively tighten the vocal spacing as the multi-syllabic words and repeated place names accumulate. Allow the delivery to become increasingly rapid and relentless while keeping articulation clear. The drums may gain slightly stronger hi-hat activity and percussion toward the end, but the core bass and eerie synth loop should remain unchanged. Avoid a dramatic drop or large instrumental build; the escalating vocal itself should create the climax.\n\n[outro]\n\nStrip the groove back slightly beneath the final short word permutations. Return to the loose, playful spacing of the opening, using bass, percussion and the established synth motif. End abruptly and simply after the final vocal response rather than building toward a conventional musical resolution.\n",
+        "lyrics": "[intro]\nMoses...\nsupposes... (hmm?)\nhis toeses...\nare Roses... (yeah)\nBut Moses...\nsupposes...\nErroneously... (oh no!)\n[verse]\nMoses supposes his toeses are Roses\nBut Moses supposes Erroneously\nMoses he knowses his toeses aren't roses\nAs Moses supposes his toeses to be!\nMoses supposes his toeses are Roses\nBut Moses supposes Erroneously\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose (mose) rose (rose) toes (toes)\nHooptie doodie doodle\ndoodle doodie hooptie\n(ha ha ha ha ha ha)\n[verse]\nPeter (Peter)\nPiper (Piper)\nPeter Piper picked a peck of pickled peppers (peppers)\nA peck of pickled peppers Peter Piper picked (picked)\nIf Peter Piper picked a peck of pickled peppers (hmm)\nWhere's the peck of pickled peppers Peter Piper picked? (where is it?)\n(But)\nHow much wood would a woodchuck chuck if a woodchuck could chuck wood?\nif a woodchuck could chuck wood How much wood would a woodchuck chuck\n(What about Mary?)\nWell, she sells seashells by the seashore.\nthe shells she sells are seashells, I'm sure (sure)\nSix sticky skeletons and Silas sees six swans\nSharp sharks seek snacks and Selfish shellfish sellers\n(meow!)\nkitty cat? kitty kitty cat cat?\nwould a kit-kat eating kitty kat eat a kit-kat snapped?\nor would that kitten kitty-kat eat its kit-kat whole?\nwould it make any difference if that kitty-kat was a city-cat?\nwould the kitty-kat-city-cat eat it's city-bitty-kit-kat snapped?\nor would the city-kitty-kat be sitting-pretty-kat\nnot a fussy-pussy but a busy little pussy-cat?\nbusy kitty, pretty kitty\npicky kitty, city kitty\nbitty kit-kat, ate its kitty-kat\nwhich kitty gets the kitty's kit-kat?\nand which kitty-kat is the real twa-(no!)\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose (mose) rose (rose) toes (toes)\nHooptie doodie doodle\ndoodle doodie hooptie\ndoodle doodle doodie \nhooptie\n(ha ha ha ha ha ha)\n[verse]\nwell\nI wish to wish the wish you wish to wish\nbut if you wish the wish the witch wishes\nI won't wish the wish you wish to wish\nI wish you were the fish in my dish\nFresh fried fish, fish fresh fried,\nfried fish fresh, fish fried fresh\n(fish fish!)\nFour fresh fish flashed fins at five fat frogs\nfive fat frogs flipped fast from five flat logs\nSix slick snakes slipped straight through six small slots\nwhile six shocked sheep shouted\n(stop stop stop!)\n(neighhhh)\nOne one was a racehorse\ntwo two was one too\none one won one race\nand two two won one too\nEleven elves licked eleven little licorice lollipops\nI thought a thought (tell me more?)\nbut the thought I thought\nwasn't the thought I thought I thought (hmm)\n....\n(ha-ha-ha-ha)\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose-(mose) rose-(rose) toes-(toes)\nHooptie doodie doodle\ndoodle doodie hooptie\n(ha ha ha ha ha ha)\ndoodle doodle \ndoodie doodie \nhooptie hooptie\nhoo\n[verse]\nRed lorry, yellow lorry\nlorry yellow, lorry red (vroom vroom)\nRed lorry, yellow lorry\nlorry yellow, lorry red (vroom vroom)\nRed lorry, yellow lorry\nlorry yellow, lorry red (vroom vroom)\nRed leather, yellow leather\nyellow leather, leather red\nred-dead-bed-head-simon-sed\n(what?)\nCrisp crusts crackle crunchily (crackle)\nRound the rugged rock, the ragged rascal ran\nIf two witches were watching two wrist watches\nwhich witch would watch which wrist watch? (tick tock)\nIf “there” is there (there)\nand “their” is theirs (their)\nand “they’re” means they are (they're)\nthen where are they? (huh?)\n(ha ha)\n[chorus]\nA mose is a mose! (mose)\nA rose is a rose! (rose)\nA toes is a toes! (toes)\nmose-(mose)-rose-(rose)-toes-(toes)\nHooptie doodie doodle\ndoodle doodie hooptie\n(mwha ha ha ha ha ha)\n[bridge]\nVery well, very well, very well...\n(huh?)\nBirming-ham\nNotting-ham\nBucking-ham\nRotherham, Oldham, Durham, Grantham\nDagenham, Chatham, Rainham, Gillingham\nFaversham, Fareham, Horsham, Chesham\nEvesham-Melksham-Chippenham-Hexham\nSwaffham-Dereham-Wymondham-Downham\nTottenham-Twickenham-Altrincham-Amersham\n(ha ha)\nPorts-mouth (mouth)\nPlymouth, Falmouth, Exmouth\nTeignmouth-Weymouth,\nTynemouth-Bournemouth\nNorwich-Ipswich-Harwich-Sandwich\nNorthwich-Middlewich-Nantwich-Droitwich\nManchester-Winchester-Chester\nColchester-Dorchester-Cirencester\nOxford-Watford-Guildford-Salford\nHereford-Chelmsford-Stamford-Bedford\nBradford-Stafford-Dartford\n(you've lost me)\nha ha\n[outro]\nA mose a rose a tose (tose)\nA rose a tose a mose (mose)\nA tose a mose a rose (rose)\n(ha ha ha ha ha ha)",
+        "seed": 282325001232432,
+        "control_after_generate": "fixed",
+        "max_duration": 290,
+        "cfg_scale": 1.7,
+        "top_k": 50
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 3438,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        1200,
+        10930
+      ],
+      "size": [
+        1000,
+        770
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Sampling?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Sampler",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "The sampler is where our actual song is built.\n\nWe've taken our input prompt, converted it to the embeddings via our text encoder, passed it through our LLM to generate exact direction on what the song should be and now the diffusion model will turn that direction into a real song (almost).\n\nThere are once again a set of parameters used to control the sampler, some will be familiar by now.\n\nSeed\nThe function of this seed is identical to the the one found in our LLM step, in this workflow it has significantly less impact on the final song output as the direction built by the LLM is largely what drives this workflow.\n\nSteps\nThe value entered here has the biggest impact upon generation time (assuming you're not offloading your model weights!) as it controls the number of passes the sampler will make over the latent object. Each additional step adds another full pass. There is a clear correlation between number of steps and quality of the final output supplied by the sampler. However, that doesn't mean you should crank the steps way up and wait for pure gold... in the case of this workflow, it's relatively harmless to use a high step count, but in my testing anything over 40 steps offered little noticeable improvement in quality. \n\nSome models and workflows will be harmed by step counts being too high and result in overprocessing of the latent object, always check what advice is given for the a specific model/workflow and fine tune it from there.\n\nCFG\nThe function of this CFG is identical to the the one found in our LLM step, in this workflow it has significantly less impact on the final song output as the direction built by the LLM is largely what drives this workflow.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/cfg/\n\nSampler Name\nSampling controls how diffusion is run. As mentioned above, the diffusion process is ran in steps, the model passes over the latent object repeatedly until the defined number of steps is reached. Each pass reduces noise from the previous, refining the generation. The sampler determines how that denoising is applied within each step.\n\nScheduler\nThe scheduler is responsible for determining how each step is controlled, in other words, in step 1 we want to be aggressive and reduce noise in big sweeping passes, but by the time we hit step 15 we want to take smaller reductions, more fine tuned and surgical.\n\nThere are a large number of scheduler algorithms available and I won't pretend to understand the inner workings of them, but \"simple\" is a commonly used scheduler across many types of diffusion workflow and it works very well with this workflow.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/sampling/\n\nDenoise"
+      ],
+      "widgets_values_named": {
+        "value": "The sampler is where our actual song is built.\n\nWe've taken our input prompt, converted it to the embeddings via our text encoder, passed it through our LLM to generate exact direction on what the song should be and now the diffusion model will turn that direction into a real song (almost).\n\nThere are once again a set of parameters used to control the sampler, some will be familiar by now.\n\nSeed\nThe function of this seed is identical to the the one found in our LLM step, in this workflow it has significantly less impact on the final song output as the direction built by the LLM is largely what drives this workflow.\n\nSteps\nThe value entered here has the biggest impact upon generation time (assuming you're not offloading your model weights!) as it controls the number of passes the sampler will make over the latent object. Each additional step adds another full pass. There is a clear correlation between number of steps and quality of the final output supplied by the sampler. However, that doesn't mean you should crank the steps way up and wait for pure gold... in the case of this workflow, it's relatively harmless to use a high step count, but in my testing anything over 40 steps offered little noticeable improvement in quality. \n\nSome models and workflows will be harmed by step counts being too high and result in overprocessing of the latent object, always check what advice is given for the a specific model/workflow and fine tune it from there.\n\nCFG\nThe function of this CFG is identical to the the one found in our LLM step, in this workflow it has significantly less impact on the final song output as the direction built by the LLM is largely what drives this workflow.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/cfg/\n\nSampler Name\nSampling controls how diffusion is run. As mentioned above, the diffusion process is ran in steps, the model passes over the latent object repeatedly until the defined number of steps is reached. Each pass reduces noise from the previous, refining the generation. The sampler determines how that denoising is applied within each step.\n\nScheduler\nThe scheduler is responsible for determining how each step is controlled, in other words, in step 1 we want to be aggressive and reduce noise in big sweeping passes, but by the time we hit step 15 we want to take smaller reductions, more fine tuned and surgical.\n\nThere are a large number of scheduler algorithms available and I won't pretend to understand the inner workings of them, but \"simple\" is a commonly used scheduler across many types of diffusion workflow and it works very well with this workflow.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/sampling/\n\nDenoise"
+      },
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 3440,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -100,
+        10730
+      ],
+      "size": [
+        800,
+        370
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Its not for your hair.",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Conditioning",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Our LLM gives us the conditioning that we use to drive our sampler and \"seconds\" which we'll talk about below.\n\nConditioning\nConditioning is the instruction the LLM has made, based off our prompt, which will drive the sampler to build the song we've asked for. Many samplers require a positive and a negative conditioning set. Positive being what we do want and negative being what we don't want.\n\nHowever, not all diffusion models are built to work from positive/negative prompting, such as Minimax which is single prompt driven. The presence of the negative zero conditioning in this workflow is purely due to ComfyUI/node design limitations, we can't run the sampler without connecting something to its negative input.\n\nSeconds\nTypically a workflow would just supply the latent object immediately, however with this being a music generation workflow more control is desired over track duration. When we feed our sampler the conditioning, it needs to apply diffusion to the latent object until we reach our step limit (if that's confusing, wait till the next node set, it'll all get cleared up).\n\nIn order to 'shape' the track correctly, we need to ensure the latent object it denoises is already the correct size for our track. Therefore, we pre-define the maximum length again and hand it that latent ready for shaping. We're creating a blank basically.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/conditioning/"
+      ],
+      "widgets_values_named": {
+        "value": "Our LLM gives us the conditioning that we use to drive our sampler and \"seconds\" which we'll talk about below.\n\nConditioning\nConditioning is the instruction the LLM has made, based off our prompt, which will drive the sampler to build the song we've asked for. Many samplers require a positive and a negative conditioning set. Positive being what we do want and negative being what we don't want.\n\nHowever, not all diffusion models are built to work from positive/negative prompting, such as Minimax which is single prompt driven. The presence of the negative zero conditioning in this workflow is purely due to ComfyUI/node design limitations, we can't run the sampler without connecting something to its negative input.\n\nSeconds\nTypically a workflow would just supply the latent object immediately, however with this being a music generation workflow more control is desired over track duration. When we feed our sampler the conditioning, it needs to apply diffusion to the latent object until we reach our step limit (if that's confusing, wait till the next node set, it'll all get cleared up).\n\nIn order to 'shape' the track correctly, we need to ensure the latent object it denoises is already the correct size for our track. Therefore, we pre-define the maximum length again and hand it that latent ready for shaping. We're creating a blank basically.\n\nYou can read more here: https://comfyui.nomadoor.net/en/ai-capabilities/conditioning/"
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 3441,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        1700,
+        10130
+      ],
+      "size": [
+        500,
+        270
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Uwoe pq ih# Hoer it ps! Herp it is! Here it is! (yes, a diffusion joke)",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "The Diffusion Model",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "This node to the left loads the diffusion model.\n\nSignificantly smaller than our text encoder, this model is approx. 4.7GB, meaning it very comfortably fits onto my home GPU with no offloading required.\n\nAs mentioned, this workflow is really driven by the text encoder, a very top-down hierarchy where this diffusion model is just doing largely what it's been told to do.\n\nOther workflows are the opposite way around, where the sampling process using the diffusion model is the true driver of the final output."
+      ],
+      "widgets_values_named": {
+        "value": "This node to the left loads the diffusion model.\n\nSignificantly smaller than our text encoder, this model is approx. 4.7GB, meaning it very comfortably fits onto my home GPU with no offloading required.\n\nAs mentioned, this workflow is really driven by the text encoder, a very top-down hierarchy where this diffusion model is just doing largely what it's been told to do.\n\nOther workflows are the opposite way around, where the sampling process using the diffusion model is the true driver of the final output."
+      },
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 3442,
+      "type": "CLIPLoader",
+      "pos": [
+        -2400,
+        11430
+      ],
+      "size": [
+        900,
+        170
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "minimax_music3_text_encoder_fp8_e4m3fn.safetensors",
+        "minimax",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "minimax_music3_text_encoder_fp8_e4m3fn.safetensors",
+        "type": "minimax",
+        "device": "default"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3443,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        3200,
+        10430
+      ],
+      "size": [
+        800,
+        670
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Isn't that just another text encoder?",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Variational Autoencoder (VAE",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "The VAE is our final process within this workflow.\n\nVAEs operate similar to text encoders, in that they're largely translation tools transforming objects into/out-of embeddings, however VAEs are used for non-text objects.\n\nIn the case of this workflow, we're transforming our now denoised and refined latent into an actual audio file.\n\nOther workflows, such as those for modifying existing audio would use a VAE encoder earlier in the workflow to take that existing audio and translate it into embeddings for the LLM or sampler to reference. \n\nIn these workflows, it would be the same VAE typically that encodes and decodes, however this model family does not work from reference music so the VAE supplied is a decoder only.\n\nOnce we've decoded, we have a single audio output which we supply into a node that saves our track in the location and format desired.\n\nAnd that's it, it's that simple to end humanities creativity..."
+      ],
+      "widgets_values_named": {
+        "value": "The VAE is our final process within this workflow.\n\nVAEs operate similar to text encoders, in that they're largely translation tools transforming objects into/out-of embeddings, however VAEs are used for non-text objects.\n\nIn the case of this workflow, we're transforming our now denoised and refined latent into an actual audio file.\n\nOther workflows, such as those for modifying existing audio would use a VAE encoder earlier in the workflow to take that existing audio and translate it into embeddings for the LLM or sampler to reference. \n\nIn these workflows, it would be the same VAE typically that encodes and decodes, however this model family does not work from reference music so the VAE supplied is a decoder only.\n\nOnce we've decoded, we have a single audio output which we supply into a node that saves our track in the location and format desired.\n\nAnd that's it, it's that simple to end humanities creativity..."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3444,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        2700,
+        10730
+      ],
+      "size": [
+        400,
+        370
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Okay, last file name, looks simple...",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Variational Autoencoder (VAE",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "VAE files are often the smallest sized within a diffusion workflow.\n\nThis VAE for example is only 211MB, so 50+ times smaller than the FP8 text encoder we talked about at the start of this workflow.\n\nFor this reason, it is extremely uncommon to find quantized VAE models.\n\nAs with the previous models, we have the model family included in the name, \"minimax_music3_\" and the file type is again .safetensors. The new element here is \"dav\" which tells us it is meant for audio.\n\n\"dav\" meaning \"Decoder-Audio-VAE\""
+      ],
+      "widgets_values_named": {
+        "value": "VAE files are often the smallest sized within a diffusion workflow.\n\nThis VAE for example is only 211MB, so 50+ times smaller than the FP8 text encoder we talked about at the start of this workflow.\n\nFor this reason, it is extremely uncommon to find quantized VAE models.\n\nAs with the previous models, we have the model family included in the name, \"minimax_music3_\" and the file type is again .safetensors. The new element here is \"dav\" which tells us it is meant for audio.\n\n\"dav\" meaning \"Decoder-Audio-VAE\""
+      },
+      "color": "#322",
+      "bgcolor": "#533"
     }
   ],
   "links": [
@@ -1141,14 +1384,6 @@
       "AUDIO"
     ],
     [
-      1531,
-      3421,
-      0,
-      3422,
-      0,
-      "STRING"
-    ],
-    [
       1539,
       3433,
       0,
@@ -1176,12 +1411,12 @@
   "groups": [
     {
       "id": 1,
-      "title": "CLIP (Text Encoder)",
+      "title": "Text Encoder",
       "bounding": [
         -2500,
         10000,
         1200,
-        1200
+        1900
       ],
       "color": "#b58b2a",
       "flags": {}
@@ -1192,8 +1427,8 @@
       "bounding": [
         -1000,
         10000,
-        1400,
-        1800
+        1800,
+        1900
       ],
       "color": "#b06634",
       "flags": {}
@@ -1202,22 +1437,22 @@
       "id": 5,
       "title": "Sampler",
       "bounding": [
-        700,
+        1100,
         10000,
         1200,
-        1200
+        1900
       ],
       "color": "#a1309b",
       "flags": {}
     },
     {
       "id": 6,
-      "title": "LLM",
+      "title": "Decoding and Output",
       "bounding": [
-        2200,
+        2600,
         10000,
-        1200,
-        1200
+        1500,
+        1900
       ],
       "color": "#A88",
       "flags": {}
@@ -1226,10 +1461,10 @@
       "id": 7,
       "title": "Precision",
       "bounding": [
-        -420,
-        7400,
-        820,
-        1250
+        -2500,
+        8600,
+        1200,
+        1300
       ],
       "color": "#444",
       "flags": {}
@@ -1238,10 +1473,10 @@
       "id": 8,
       "title": "Natural Language to Embeddings",
       "bounding": [
-        500,
-        7400,
-        1220,
-        1950
+        -1000,
+        8000,
+        1800,
+        1900
       ],
       "color": "#444",
       "flags": {}
@@ -1254,7 +1489,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 8,
-          "lastNodeId": 3436,
+          "lastNodeId": 3444,
           "lastLinkId": 1543,
           "lastRerouteId": 0
         },
@@ -1395,7 +1630,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 8,
-          "lastNodeId": 3436,
+          "lastNodeId": 3444,
           "lastLinkId": 1543,
           "lastRerouteId": 0
         },
@@ -1562,7 +1797,7 @@
         "version": 1,
         "state": {
           "lastGroupId": 8,
-          "lastNodeId": 3436,
+          "lastNodeId": 3444,
           "lastLinkId": 1543,
           "lastRerouteId": 0
         },
@@ -1703,10 +1938,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.25937424601000864,
+      "scale": 0.28531167061102153,
       "offset": [
-        4680.256329511365,
-        -6884.190431587276
+        4658.663866299548,
+        -8739.845811309786
       ]
     },
     "frontendVersion": "1.49.6"
