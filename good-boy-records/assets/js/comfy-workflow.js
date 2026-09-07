@@ -134,7 +134,9 @@
   function WorkflowViewer(root) {
     this.root = root;
     this.stage = null;
+    this.panLayer = null;
     this.world = null;
+    this.linkSvg = null;
     this.workflow = null;
     this.nodeMap = new Map();
     this.shiftX = 0;
@@ -147,12 +149,15 @@
     this.drag = null;
     this.pointers = new Map();
     this.gesture = null;
+    this.wire = null;
+    this.userWireCount = 0;
     this.initialFitDone = false;
     this.lastStageWidth = 0;
     this.lastStageHeight = 0;
     this.lastTapAt = 0;
     this.focusNode = root.dataset.focus ? String(root.dataset.focus) : "";
     this.mediaRoot = String(root.dataset.mediaRoot || "assets/workflow-media").replace(/\/+$/, "");
+    this.useCssZoom = "zoom" in document.documentElement.style;
     this.buildShell();
     this.load();
   }
@@ -162,7 +167,7 @@
     this.root.style.setProperty("--cw-height", height + "px");
     this.root.innerHTML =
       '<div class="cw-toolbar">' +
-        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong><span class="cw-meta">Loading...</span><span class="cw-navhint">DRAG · PINCH · WHEEL</span></div>' +
+        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong><span class="cw-meta">Loading...</span><span class="cw-navhint">DRAG · PINCH · WHEEL · DRAW CABLES</span></div>' +
         '<div class="cw-actions">' +
           '<button type="button" data-cw-action="out" aria-label="Zoom out">−</button>' +
           '<button type="button" data-cw-action="in" aria-label="Zoom in">+</button>' +
@@ -256,6 +261,9 @@
 
     this.stage.addEventListener("pointerdown", function (event) {
       if (!self.world) return;
+      if (event.target && event.target.closest && event.target.closest(".cw-port-handle")) return;
+      if (event.target && event.target.closest && event.target.closest(".cw-user-link")) return;
+      if (event.target && event.target.closest && event.target.closest(".cw-text-selectable")) return;
       if (event.target && event.target.closest && event.target.closest(".cw-media-interactive")) return;
       /* Touch/pen pointer events do not need a mouse-button test. */
       if (event.pointerType === "mouse" && event.button !== 0) return;
@@ -269,6 +277,11 @@
     }, { passive: false });
 
     this.stage.addEventListener("pointermove", function (event) {
+      if (self.wire && self.wire.pointerId === event.pointerId) {
+        event.preventDefault();
+        self.updateWire(event);
+        return;
+      }
       if (!self.pointers.has(event.pointerId)) return;
       event.preventDefault();
       var p = point(event);
@@ -298,6 +311,10 @@
     }, { passive: false });
 
     function finishPointer(event) {
+      if (self.wire && self.wire.pointerId === event.pointerId) {
+        self.finishWire(event);
+        return;
+      }
       if (!self.pointers.has(event.pointerId)) return;
       var wasMoved = self.gesture && self.gesture.moved;
       self.pointers.delete(event.pointerId);
@@ -431,7 +448,8 @@
     this.worldWidth = Math.max(1, bounds.maxX - bounds.minX + margin * 2);
     this.worldHeight = Math.max(1, bounds.maxY - bounds.minY + margin * 2);
 
-    this.stage.innerHTML = '<div class="cw-world"></div>';
+    this.stage.innerHTML = '<div class="cw-pan-layer"><div class="cw-world"></div></div>';
+    this.panLayer = this.stage.querySelector(".cw-pan-layer");
     this.world = this.stage.querySelector(".cw-world");
     this.world.style.width = this.worldWidth + "px";
     this.world.style.height = this.worldHeight + "px";
@@ -439,11 +457,9 @@
     this.renderGroups();
     this.renderLinks();
     this.renderNodes();
+    this.bindWirePorts();
 
-    var nodes = Array.isArray(this.workflow.nodes) ? this.workflow.nodes.length : 0;
-    var links = Array.isArray(this.workflow.links) ? this.workflow.links.length : 0;
-    var meta = this.root.querySelector(".cw-meta");
-    if (meta) meta.textContent = nodes + " NODES / " + links + " LINKS / READ ONLY";
+    this.updateMeta();
 
     requestAnimationFrame(function () {
       var rect = self.stage.getBoundingClientRect();
@@ -493,6 +509,7 @@
     var svgNS = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(svgNS, "svg");
     svg.classList.add("cw-links");
+    this.linkSvg = svg;
     svg.setAttribute("width", this.worldWidth);
     svg.setAttribute("height", this.worldHeight);
     svg.setAttribute("viewBox", "0 0 " + this.worldWidth + " " + this.worldHeight);
@@ -537,25 +554,53 @@
       var title = node.title || node.type || ("Node " + node.id);
       var header = document.createElement("header");
       header.className = "cw-node-head";
-      header.innerHTML = '<strong>' + escapeHtml(title) + '</strong><span>#' + escapeHtml(node.id) + '</span>';
+      header.innerHTML = '<strong class="cw-text-selectable">' + escapeHtml(title) + '</strong><span class="cw-text-selectable">#' + escapeHtml(node.id) + '</span>';
       el.appendChild(header);
 
       var ports = document.createElement("div");
       ports.className = "cw-ports";
       var inputs = document.createElement("div");
       inputs.className = "cw-port-list cw-port-list--in";
-      (node.inputs || []).forEach(function (input) {
+      (node.inputs || []).forEach(function (input, slot) {
         var row = document.createElement("div");
         row.className = "cw-port";
-        row.innerHTML = '<i style="--port:' + escapeHtml(portColor(input.type)) + '"></i><span>' + escapeHtml(input.label || input.name || input.type || "input") + '</span>';
+        var dot = document.createElement("i");
+        dot.className = "cw-port-handle";
+        dot.style.setProperty("--port", portColor(input.type));
+        dot.dataset.nodeId = String(node.id);
+        dot.dataset.slot = String(slot);
+        dot.dataset.direction = "in";
+        dot.dataset.type = String(input.type || "");
+        dot.setAttribute("role", "button");
+        dot.setAttribute("tabindex", "0");
+        dot.setAttribute("aria-label", "Input " + (input.label || input.name || input.type || "port") + ". Drag a cable here.");
+        var label = document.createElement("span");
+        label.className = "cw-text-selectable";
+        label.textContent = input.label || input.name || input.type || "input";
+        row.appendChild(dot);
+        row.appendChild(label);
         inputs.appendChild(row);
       });
       var outputs = document.createElement("div");
       outputs.className = "cw-port-list cw-port-list--out";
-      (node.outputs || []).forEach(function (output) {
+      (node.outputs || []).forEach(function (output, slot) {
         var row = document.createElement("div");
         row.className = "cw-port";
-        row.innerHTML = '<span>' + escapeHtml(output.name || output.type || "output") + '</span><i style="--port:' + escapeHtml(portColor(output.type)) + '"></i>';
+        var label = document.createElement("span");
+        label.className = "cw-text-selectable";
+        label.textContent = output.name || output.type || "output";
+        var dot = document.createElement("i");
+        dot.className = "cw-port-handle";
+        dot.style.setProperty("--port", portColor(output.type));
+        dot.dataset.nodeId = String(node.id);
+        dot.dataset.slot = String(slot);
+        dot.dataset.direction = "out";
+        dot.dataset.type = String(output.type || "");
+        dot.setAttribute("role", "button");
+        dot.setAttribute("tabindex", "0");
+        dot.setAttribute("aria-label", "Output " + (output.name || output.type || "port") + ". Drag to an input to draw a cable.");
+        row.appendChild(label);
+        row.appendChild(dot);
         outputs.appendChild(row);
       });
       ports.appendChild(inputs);
@@ -622,24 +667,206 @@
           field.className = "cw-widget";
           var value = entry.value;
           var multiline = value.indexOf("\n") !== -1 || value.length > 90;
-          field.innerHTML = '<div class="cw-widget-key">' + escapeHtml(entry.key) + '</div>' +
-            '<div class="cw-widget-value' + (multiline ? ' cw-widget-value--multi' : '') + '">' + escapeHtml(value || "—") + '</div>';
+          field.innerHTML = '<div class="cw-widget-key cw-text-selectable">' + escapeHtml(entry.key) + '</div>' +
+            '<div class="cw-widget-value cw-text-selectable' + (multiline ? ' cw-widget-value--multi' : '') + '">' + escapeHtml(value || "—") + '</div>';
           body.appendChild(field);
         });
         el.appendChild(body);
       }
 
       var type = document.createElement("div");
-      type.className = "cw-node-type";
+      type.className = "cw-node-type cw-text-selectable";
       type.textContent = node.type || "Unknown node";
       el.appendChild(type);
       self.world.appendChild(el);
     });
   };
 
+  WorkflowViewer.prototype.updateMeta = function () {
+    var nodes = Array.isArray(this.workflow && this.workflow.nodes) ? this.workflow.nodes.length : 0;
+    var links = Array.isArray(this.workflow && this.workflow.links) ? this.workflow.links.length : 0;
+    var extra = this.userWireCount ? " + " + this.userWireCount + " PLAY CABLE" + (this.userWireCount === 1 ? "" : "S") : "";
+    var meta = this.root.querySelector(".cw-meta");
+    if (meta) meta.textContent = nodes + " NODES / " + links + " LINKS" + extra + " / SAFE SANDBOX";
+  };
+
+  WorkflowViewer.prototype.screenToWorld = function (clientX, clientY) {
+    var rect = this.stage.getBoundingClientRect();
+    return {
+      x: (clientX - rect.left - this.panX) / this.scale,
+      y: (clientY - rect.top - this.panY) / this.scale
+    };
+  };
+
+  WorkflowViewer.prototype.portPointFromElement = function (handle) {
+    var rect = handle.getBoundingClientRect();
+    return this.screenToWorld(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  };
+
+  WorkflowViewer.prototype.wirePath = function (a, b) {
+    var dx = b.x - a.x;
+    var bend = Math.max(55, Math.abs(dx) * 0.45);
+    var dir = dx >= 0 ? 1 : -1;
+    return "M " + a.x + " " + a.y +
+      " C " + (a.x + bend * dir) + " " + a.y +
+      ", " + (b.x - bend * dir) + " " + b.y +
+      ", " + b.x + " " + b.y;
+  };
+
+  WorkflowViewer.prototype.closestPortAt = function (clientX, clientY, exclude) {
+    var direct = document.elementFromPoint(clientX, clientY);
+    if (direct && direct.closest) {
+      var found = direct.closest(".cw-port-handle");
+      if (found && found !== exclude && this.root.contains(found)) return found;
+    }
+
+    var best = null;
+    var bestDistance = 24;
+    this.root.querySelectorAll(".cw-port-handle").forEach(function (handle) {
+      if (handle === exclude) return;
+      var rect = handle.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var d = Math.hypot(clientX - cx, clientY - cy);
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = handle;
+      }
+    });
+    return best;
+  };
+
+  WorkflowViewer.prototype.validWireTarget = function (source, target) {
+    if (!source || !target || source === target) return false;
+    if (source.dataset.direction === target.dataset.direction) return false;
+    var a = String(source.dataset.type || "");
+    var b = String(target.dataset.type || "");
+    if (!a || !b) return true;
+    return a === b || a === "*" || b === "*" || a === "ANY" || b === "ANY";
+  };
+
+  WorkflowViewer.prototype.bindWirePorts = function () {
+    var self = this;
+    this.root.querySelectorAll(".cw-port-handle").forEach(function (handle) {
+      handle.addEventListener("pointerdown", function (event) {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        event.preventDefault();
+        event.stopPropagation();
+        self.startWire(event, handle);
+      });
+      handle.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handle.classList.add("cw-port-handle--pulse");
+          setTimeout(function () { handle.classList.remove("cw-port-handle--pulse"); }, 260);
+        }
+      });
+    });
+  };
+
+  WorkflowViewer.prototype.startWire = function (event, handle) {
+    if (!this.linkSvg || this.wire) return;
+    var svgNS = "http://www.w3.org/2000/svg";
+    var start = this.portPointFromElement(handle);
+    var path = document.createElementNS(svgNS, "path");
+    path.classList.add("cw-wire-preview");
+    path.setAttribute("stroke", portColor(handle.dataset.type));
+    path.setAttribute("d", this.wirePath(start, start));
+    this.linkSvg.appendChild(path);
+
+    this.wire = {
+      pointerId: event.pointerId,
+      source: handle,
+      target: null,
+      path: path,
+      start: start
+    };
+    handle.classList.add("cw-port-handle--active");
+    this.stage.dataset.wiring = "true";
+    try { handle.setPointerCapture(event.pointerId); } catch (_) {}
+  };
+
+  WorkflowViewer.prototype.updateWire = function (event) {
+    if (!this.wire) return;
+    var target = this.closestPortAt(event.clientX, event.clientY, this.wire.source);
+    var valid = this.validWireTarget(this.wire.source, target);
+
+    if (this.wire.target && this.wire.target !== target) {
+      this.wire.target.classList.remove("cw-port-handle--target", "cw-port-handle--invalid");
+    }
+    this.wire.target = target || null;
+
+    var end = this.screenToWorld(event.clientX, event.clientY);
+    if (target) {
+      target.classList.add(valid ? "cw-port-handle--target" : "cw-port-handle--invalid");
+      if (valid) end = this.portPointFromElement(target);
+    }
+
+    this.wire.path.classList.toggle("cw-wire-preview--valid", !!valid);
+    this.wire.path.classList.toggle("cw-wire-preview--invalid", !!target && !valid);
+    this.wire.path.setAttribute("d", this.wirePath(this.wire.start, end));
+  };
+
+  WorkflowViewer.prototype.finishWire = function (event) {
+    if (!this.wire) return;
+    var wire = this.wire;
+    var target = this.closestPortAt(event.clientX, event.clientY, wire.source);
+    var valid = this.validWireTarget(wire.source, target);
+
+    if (wire.target) wire.target.classList.remove("cw-port-handle--target", "cw-port-handle--invalid");
+    wire.source.classList.remove("cw-port-handle--active");
+    this.stage.dataset.wiring = "false";
+
+    try { wire.source.releasePointerCapture(event.pointerId); } catch (_) {}
+
+    if (valid && target) {
+      var outHandle = wire.source.dataset.direction === "out" ? wire.source : target;
+      var inHandle = wire.source.dataset.direction === "in" ? wire.source : target;
+      var a = this.portPointFromElement(outHandle);
+      var b = this.portPointFromElement(inHandle);
+      wire.path.setAttribute("d", this.wirePath(a, b));
+      wire.path.classList.remove("cw-wire-preview", "cw-wire-preview--valid", "cw-wire-preview--invalid");
+      wire.path.classList.add("cw-user-link");
+      wire.path.setAttribute("stroke", portColor(outHandle.dataset.type || inHandle.dataset.type));
+      wire.path.setAttribute("data-from-node", outHandle.dataset.nodeId || "");
+      wire.path.setAttribute("data-to-node", inHandle.dataset.nodeId || "");
+      wire.path.setAttribute("aria-label", "Cosmetic user cable. Double click to remove.");
+      var self = this;
+      wire.path.addEventListener("dblclick", function (removeEvent) {
+        removeEvent.preventDefault();
+        removeEvent.stopPropagation();
+        if (wire.path.isConnected) {
+          wire.path.remove();
+          self.userWireCount = Math.max(0, self.userWireCount - 1);
+          self.updateMeta();
+        }
+      });
+      this.userWireCount += 1;
+      this.updateMeta();
+    } else {
+      wire.path.remove();
+    }
+
+    this.wire = null;
+  };
+
   WorkflowViewer.prototype.applyTransform = function () {
-    if (!this.world) return;
-    this.world.style.transform = "translate3d(" + this.panX + "px," + this.panY + "px,0) scale(" + this.scale + ")";
+    if (!this.world || !this.panLayer) return;
+
+    /* Do not magnify a cached transform layer. Chrome will happily turn text
+       into a bitmap and then enlarge the bitmap, which is why node copy looked
+       fuzzy at high zoom. Separate pan from scale and use layout zoom where the
+       browser supports it so text, controls and SVG are re-rendered crisply. */
+    this.panLayer.style.left = this.panX + "px";
+    this.panLayer.style.top = this.panY + "px";
+    if (this.useCssZoom) {
+      this.world.style.zoom = String(this.scale);
+      this.world.style.transform = "none";
+    } else {
+      this.world.style.zoom = "1";
+      this.world.style.transform = "scale(" + this.scale + ")";
+    }
+
     /* Move and scale the grid with the graph, including the coordinate shift
        introduced when we normalise negative ComfyUI canvas positions. */
     var gridX = this.panX + this.shiftX * this.scale;

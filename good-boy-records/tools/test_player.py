@@ -130,6 +130,15 @@ check("workflow viewer renders image video and audio media",
       and "document.createElement(\"audio\")" in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8"))
 check("workflow media CSS exposes interactive controls",
       ".cw-media-interactive" not in css or ".cw-media" in (ROOT / "assets/css/comfy-workflow.css").read_text(encoding="utf-8"))
+check("workflow zoom re-renders instead of magnifying a cached text layer",
+      "this.world.style.zoom" in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
+      and "will-change: transform" not in (ROOT / "assets/css/comfy-workflow.css").read_text(encoding="utf-8"))
+check("workflow text is selectable",
+      "cw-text-selectable" in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
+      and "user-select: text" in (ROOT / "assets/css/comfy-workflow.css").read_text(encoding="utf-8"))
+check("workflow ports support cosmetic patch cables",
+      "startWire" in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
+      and "cw-user-link" in (ROOT / "assets/css/comfy-workflow.css").read_text(encoding="utf-8"))
 
 # --- meters, console and power ---------------------------------------------
 check("meters are a side-by-side pair", "meterSplit" in js and "drawMeterFace" in js)

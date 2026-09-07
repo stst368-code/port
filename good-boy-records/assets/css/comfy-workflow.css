@@ -101,15 +101,22 @@
 }
 .cw-error { color: #e29878; }
 
+.cw-pan-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+}
 .cw-world {
   position: absolute;
   left: 0;
   top: 0;
   transform-origin: 0 0;
-  will-change: transform;
-  backface-visibility: hidden;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: auto;
 }
-.cw-world--animate { transition: transform 180ms ease; }
+.cw-world--animate { transition: none; }
 
 .cw-group {
   position: absolute;
@@ -159,7 +166,7 @@
   box-shadow: 0 8px 18px rgba(0,0,0,0.58), inset 0 0 0 1px rgba(255,255,255,0.055);
   color: #e9e5df;
   font: 12px/1.28 var(--mono, Consolas, monospace);
-  pointer-events: none;
+  pointer-events: auto;
   box-sizing: border-box;
 }
 .cw-node *, .cw-node *::before, .cw-node *::after { box-sizing: border-box; }
@@ -183,8 +190,17 @@
   text-overflow: ellipsis;
   font-size: 13px;
   line-height: 1;
+  color: #fff !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,.82);
 }
-.cw-node-head span { opacity: 0.58; font-size: 9px; line-height: 1; }
+.cw-node-head span {
+  opacity: 0.82;
+  font-size: 9px;
+  line-height: 1;
+  color: #f3ece4 !important;
+  text-shadow: 0 1px 2px #000;
+}
 
 .cw-ports {
   flex: 0 0 auto;
@@ -289,6 +305,72 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+/* Node copy is real DOM text, not a canvas texture. It stays selectable even
+   though dragging elsewhere in the node/canvas continues to pan the graph. */
+.cw-text-selectable {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  cursor: text;
+  pointer-events: auto;
+}
+
+.cw-port-handle {
+  position: relative;
+  pointer-events: auto;
+  cursor: crosshair;
+  outline: none;
+}
+.cw-port-handle::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+}
+.cw-port-handle:hover,
+.cw-port-handle:focus-visible,
+.cw-port-handle--active,
+.cw-port-handle--target,
+.cw-port-handle--pulse {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.52),
+    0 0 0 5px color-mix(in srgb, var(--port) 45%, transparent),
+    0 0 12px color-mix(in srgb, var(--port) 80%, transparent);
+}
+.cw-port-handle--invalid {
+  box-shadow: 0 0 0 5px rgba(215,73,62,.36), 0 0 12px rgba(215,73,62,.75);
+}
+
+.cw-stage[data-wiring="true"] { cursor: crosshair; }
+
+.cw-links .cw-wire-preview,
+.cw-links .cw-user-link {
+  stroke-width: 6;
+}
+.cw-links .cw-wire-preview {
+  opacity: .9;
+  stroke-dasharray: 12 8;
+  pointer-events: none;
+}
+.cw-links .cw-wire-preview--valid {
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,.24));
+}
+.cw-links .cw-wire-preview--invalid {
+  stroke: #d7493e !important;
+  opacity: .72;
+}
+.cw-links .cw-user-link {
+  opacity: .96;
+  pointer-events: stroke;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 1px rgba(0,0,0,.55));
+}
+.cw-links .cw-user-link:hover {
+  stroke-width: 9;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,.28));
 }
 
 .comfy-workflow:fullscreen {
