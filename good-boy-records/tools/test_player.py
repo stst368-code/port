@@ -139,6 +139,12 @@ check("workflow text is selectable",
 check("workflow ports support cosmetic patch cables",
       "startWire" in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
       and "cw-user-link" in (ROOT / "assets/css/comfy-workflow.css").read_text(encoding="utf-8"))
+check("workflow uses hybrid far and close zoom rendering",
+      "var closeView = this.useCssZoom && this.scale > 1.0" in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
+      and 'this.world.style.transform = "scale(" + this.scale + ")"' in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8"))
+check("workflow toolbar avoids diagnostic chatter",
+      'class="cw-meta"' not in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
+      and 'class="cw-navhint"' not in (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8"))
 
 # --- meters, console and power ---------------------------------------------
 check("meters are a side-by-side pair", "meterSplit" in js and "drawMeterFace" in js)

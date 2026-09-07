@@ -167,7 +167,7 @@
     this.root.style.setProperty("--cw-height", height + "px");
     this.root.innerHTML =
       '<div class="cw-toolbar">' +
-        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong><span class="cw-meta">Loading...</span><span class="cw-navhint">DRAG · PINCH · WHEEL · DRAW CABLES</span></div>' +
+        '<div class="cw-title"><strong>COMFYUI WORKFLOW</strong></div>' +
         '<div class="cw-actions">' +
           '<button type="button" data-cw-action="out" aria-label="Zoom out">−</button>' +
           '<button type="button" data-cw-action="in" aria-label="Zoom in">+</button>' +
@@ -853,13 +853,17 @@
   WorkflowViewer.prototype.applyTransform = function () {
     if (!this.world || !this.panLayer) return;
 
-    /* Do not magnify a cached transform layer. Chrome will happily turn text
-       into a bitmap and then enlarge the bitmap, which is why node copy looked
-       fuzzy at high zoom. Separate pan from scale and use layout zoom where the
-       browser supports it so text, controls and SVG are re-rendered crisply. */
+    /* Hybrid scaling deliberately uses two browser rendering paths.
+       At normal/zoomed-out views, transform scaling lets the browser render the
+       node at its natural size and downsample the finished result. That keeps
+       tiny text, borders and ports visually coherent when the whole graph is in
+       view. Once the user zooms in past 100%, switch to layout-level CSS zoom so
+       Chrome re-renders DOM text and SVG at the larger size instead of enlarging
+       a cached bitmap. This gives us the best behaviour at both ends. */
     this.panLayer.style.left = this.panX + "px";
     this.panLayer.style.top = this.panY + "px";
-    if (this.useCssZoom) {
+    var closeView = this.useCssZoom && this.scale > 1.0;
+    if (closeView) {
       this.world.style.zoom = String(this.scale);
       this.world.style.transform = "none";
     } else {
