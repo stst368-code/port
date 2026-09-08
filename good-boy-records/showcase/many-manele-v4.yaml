@@ -1,0 +1,94 @@
+title: many-manele
+version: 4
+model: minimax H3
+state: active
+genre: manele
+inspiration: 50 Cent - Many Men
+duration: 210
+cover: many-manele-v4.png
+caption: |
+  caption: |
+  Global Metadata
+  Basic Attributes: bpm is 115. key is G, and scale is minor. Modern Romanian manele is the dominant genre, with contemporary Balkan pop and restrained chalga influence. The track should sound unmistakably like dramatic modern manele rather than hip-hop adapted with Balkan instruments. Use an emotional minor-key melodic language, strong Romanian-style ornamentation, glossy keyboard textures, expressive accordion and clarinet, rapid darbuka percussion, and a deep club-oriented bass foundation.
+  Global Emotional Progression: Open with exaggerated melancholy and suspense, almost painfully serious, before abruptly revealing a swaggering dance-floor energy. Verses alternate between wounded dignity, conversational bravado, and increasingly triumphant confidence. Choruses should feel immediate, catchy, flamboyant and emotionally excessive, with each return becoming larger. The acoustic-guitar bridge briefly strips away the spectacle before the final chorus erupts at maximum intensity and resolves with a theatrical vocal and instrumental flourish.
+  Application Scenarios & Imagery: A lavish Romanian club performance at midnight, somewhere between heartbreak anthem, table-side dedication and triumphant live singalong.
+  Sonics & Production Profile: Polished modern manele production with a prominent controlled low end, bright percussion, forward vocals and glossy stereo keyboards. Preserve enough dynamic contrast for the sparse opening and bridge to feel genuinely separate from the dense choruses. Avoid reggaeton, trap, hip-hop drums, house, EDM supersaws, rock guitars, Balkan brass-band arrangements, polka, klezmer and cinematic orchestration.
+  Vocal Details
+  Vocal Gender & Timbre: Singer A (Male), a passionate high tenor with a slightly nasal, penetrating tone, strong Romanian vibrato and an emotionally strained upper register.
+  Vocal Style: Begin with conversational spoken-sung delivery, then move into increasingly ornamented melodic singing. Choruses use emphatic high-energy phrasing, rapid melisma, microtonal inflections, dramatic scoops and sustained vibrato. Verse 2 is quicker and more rhythmically agile; Verse 3 has the projected, celebratory character of a live dedication. The final chorus should sound almost recklessly committed rather than polished into restraint.
+  Harmony/Backing Vocals: Sparse male doubles may reinforce important chorus phrases and final-hook accents, but the lead remains unmistakably dominant. No female lead vocals.
+  Vocal FX: Use short polished reverb and occasional delay tails, expanding slightly during choruses and the final sustained note without obscuring articulation.
+  Arrangement
+  Instrument Lifecycle: The intro is rubato and percussion-free, led by crying solo accordion over melancholic Roland D-50-style synthesizer chords. The first bridge remains sparse and conversational, interrupted by abrupt gunshot sound effects before the first verse settles into restrained accompaniment. The first chorus locks decisively into the full 115 BPM manele groove with deep bass, fast darbuka, rapid Balkan percussion, bright keyboard chords and animated clarinet responses. The post-chorus retains the rhythm while a crying synth lead and vocal ornamentation briefly take focus.
+  Verse 2 keeps the full pulse but becomes lighter and bouncier, driven by articulate darbuka patterns, nylon-string guitar strumming and shorter accordion responses. Verse 3 increases the live-performance feeling with stronger percussion accents and instrumental answers around the vocal.
+  Later choruses become progressively denser: heavier bass, faster clarinet figures, brighter synthesizer layers and increasingly energetic percussion. The second bridge suddenly removes the club rhythm for solo nylon-string acoustic guitar, followed by a rising synthesizer crescendo. The final chorus restores every major element at maximum intensity with a believable live-concert atmosphere. The outro drops away beneath the sustained lead vocal, ending with one rapid accordion flourish and a sharp final percussion hit.
+lyrics: |
+  [intro]
+  [bridge]
+  Naiba, trebuie să mergem să mâncăm ceva, frate.
+  Îmi crapă mațele de foame, jur.
+  Hei, omule...
+  Naiba, de ce durează atât de mult, frate?
+  50, calmează-te, omule, vine el.
+  Ah (Ce naiba?)
+  Ah, frate, pleacă de-aici, pleacă!
+  nouăzeci și nouă bani!
+  [verse]
+  Mulți oameni vor să mă vadă căzut
+  Cu ochii pe mine, dar eu am trecut
+  Dumnezeu știe ce am în sufletul meu
+  Și cine-mi dorește răul mereu
+  [chorus]
+  Many manele
+  Many, many, many, many manele
+  Wish death upon manele
+  Doamne, nu mai plâng deloc (no cry no more)
+  Nu mai caut cerul-n loc
+  Ai milă de mine (have mercy on me)
+  Many manele
+  Many, many, many, many manele
+  Wish death upon me
+  [post-chorus]
+  Ai milă de sufletul meu
+  Lumea m-a făcut mai greu
+  Wish death upon me
+  [verse]
+  Vor să mă vadă la pământ, fără bani și fără nume
+  Dar când intru-n restaurant se întoarce toată lumea
+  Au pus vorbe, au pus invidie
+  Au vrut să-mi fure bucurie
+  Eu eram diamant ascuns
+  Sub noroi și sub apus
+  N-au crezut că voi ajunge
+  Unde astăzi am ajuns
+  [verse]
+  Ridic paharul pentru viață
+  Pentru frații care-au stat
+  Când mulți mi-au dorit sfârșitul
+  Eu mai tare m-am ridicat
+  [chorus]
+  Many manele
+  Many, many, many, many manele
+  Wish death upon me
+  Doamne, nu mai plâng deloc (no cry no more)
+  Nu mai caut cerul-n loc
+  Ai milă de mine (have mercy on me)
+  Ai milă de sufletul meu
+  Inima s-a făcut greu
+  Ai milă de mine
+  Many manele
+  Many, many, many, many manele
+  Wish death upon me
+  [bridge]
+  Toți vorbesc când urci prea sus
+  Toți dispar când e de dus
+  Dar eu merg pe drumul meu
+  Cu Dumnezeu
+  [chorus]
+  Many manele
+  Many, many, many, many manele
+  Wish death upon me
+  Dar încă sunt aici
+  Încă respir și încă zic
+  Doamne, ai milă de mine
+  [outro]

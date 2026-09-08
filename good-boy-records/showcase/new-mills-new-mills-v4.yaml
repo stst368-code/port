@@ -1,0 +1,64 @@
+title: new-mills-new-mills
+version: 4
+model: minimax H3
+state: active
+genre: classic
+inspiration: Frank Sinatra - New York New York
+duration: 298
+cover: new-mills-new-mills-v4.png
+caption: |
+  Global Metadata
+  Basic Attributes: bpm is approximately 109. key is D, and scale is major. 1950s traditional pop, vocal jazz, orchestral swing, and classic big-band crooner music. Begin as an intimate late-night supper-club performance and steadily expand into a glamorous, triumphant big-band finale. The emotional progression should move from relaxed nocturnal confidence through playful swagger and growing ambition, reaching an unabashedly grand final climax. Maintain a relaxed swinging 4/4 pocket even as the arrangement becomes larger and more forceful. Sonics should evoke a premium mid-century studio recording: warm vintage microphones, rich mono-inspired imaging, natural orchestral depth, restrained tape saturation, smooth transients, and no modern pop gloss. Avoid Broadway musical theatre, novelty lounge parody, rock instrumentation, electronic drums, synthesizer bass, or contemporary production.
+  Vocal Details
+  Singer A (Male): an intimate deep baritone crooner with warm chest resonance, elegant diction, effortless conversational phrasing, sophisticated jazz timing, controlled vibrato, and charismatic mid-century swagger. Early verses should feel close-miked, relaxed, and almost spoken in places, with phrases sitting slightly behind the beat. Each return should become progressively more confident and projected without changing singer identity. Later verses gain theatrical authority and stronger sustained notes. The bridge should prepare the voice for the final escalation, followed by a commanding final chorus with powerful full-voice projection, broad vibrato, elongated phrase endings, and a sustained climactic final note. Keep the performance masculine, polished, sincere, and commanding rather than comedic or exaggerated. No female lead and no prominent choir. Vocal processing should remain period-appropriate with subtle plate or chamber ambience and gentle analog compression.
+  Arrangement
+  Instrument Lifecycle: Open with sparse grand piano, warm upright bass, brushed drums, and a smoky muted trumpet answering the piano. During the first verse, keep the ensemble restrained and spacious. The second verse develops a clearer walking bass and slightly firmer brushed swing, with small piano fills and occasional muted brass responses. At the first chorus, restrained orchestral strings enter beneath the rhythm section, widening the harmony without overwhelming the vocal. The following verse retains this richer palette while brass begins appearing in short punctuating figures. The next chorus marks the first major expansion: full brass and reeds enter, drums move from brushes toward sticks, and the swing becomes more driving. The later verses alternate between brief reductions in density and increasingly bold orchestral responses, allowing the vocal swagger to remain central. Strings should swell more dramatically approaching the bridge. Strip the opening of the bridge back momentarily to create anticipation, then unleash an explosive horn passage, sweeping strings, rising drum fills, and a sustained orchestral crescendo. The final chorus is the maximum-energy payoff: full trumpets, trombones, saxophones, strings, piano, upright bass, and driving acoustic drums supporting the strongest vocal performance. End on the sustained final vocal note followed by an enormous synchronized brass flourish and decisive acoustic drum hit.
+lyrics: |
+  [intro]
+  [verse]
+  Start spreadin' the toys
+  I'm leavin' today
+  I want to be a part of it
+  New Mills, New Mills
+  [verse]
+  These vagabond paws
+  Are longin' to stray
+  Right through the very heart of it
+  New Mills, New Mills
+  [chorus]
+  I wanna wake up
+  In a town that's half a-sleep
+  And find I'm king of the hill
+  Top of the heap
+  [verse]
+  These little town blues
+  Are melting away
+  I'll make a brand new start of it
+  In old New Mills
+  [chorus]
+  If I can make it there
+  I'll make it anywhere
+  It's up to you
+  New Mills, New Mills
+  New Mills, New Mills
+  [verse]
+  I want to wake up
+  In a town that's half a-sleep
+  And find I'm A-number one
+  Top of the list
+  King of the hill
+  A-number one
+  [verse]
+  These little town blues
+  Are melting away
+  I'll make a brand new start of it
+  In old New Mills
+  [bridge]
+  [chorus]
+  Annddd-uh if I can make it there
+  I'm gonna make it anywhere
+  It's-up-to-you
+  New Millssss!
+  New Millssss!
+  New Mills!
+  [outro]

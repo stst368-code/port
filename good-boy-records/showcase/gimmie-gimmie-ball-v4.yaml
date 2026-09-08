@@ -1,0 +1,72 @@
+title: gimmie-gimmie-ball
+version: 4
+model: MiniMax Music 3 FP16
+state: active
+genre: disco
+inspiration: Abba - Gimmie Gimmie
+cover: gimmie-gimmie-ball-v4
+duration: 220
+caption: |
+  Global Metadata
+  Late-1970s Scandinavian disco-pop at approximately 120 BPM in D minor, steady 4/4 throughout. Urgent, nocturnal, glamorous and faintly melancholic, with the emotional tension of being awake and restless long after everyone else has gone to sleep. The central musical identity is a hypnotic repeating analogue synthesizer arpeggio introduced immediately and retained as a recurring thread throughout the song. Support it with melodic electric bass, acoustic disco drums, piano, warm orchestral strings and restrained rhythmic guitar or keyboard accents. The groove should remain firmly danceable without becoming modern club music. Production is polished but distinctly analogue: warm saturation, natural drum transients, rounded bass, wide strings, clear vocal separation and restrained plate ambience. Avoid modern EDM drops, house production, gated drums, synthwave, trap percussion, 808 bass, exaggerated sub-bass, aggressive side-chain pumping and contemporary hyper-compressed pop mastering.
+  Vocal Details
+  Singer A (Female), with a clear, bright, expressive mezzo-soprano timbre and precise melodic phrasing. Verses are intimate, controlled and slightly restless, with clean diction and restrained vibrato rather than modern melismatic singing. The pre-choruses increase urgency without becoming louder simply for impact. Choruses open into confident melodic ensemble vocals with rich female harmony stacks surrounding the lead. Use close doubles, thirds, octave reinforcement and wider chordal backing vocals, while keeping the main melody clearly centred. Harmonies should sound carefully arranged rather than choir-like. Use natural compression, gentle analogue saturation and moderate plate reverb. No male lead, robotic processing, obvious pitch correction or contemporary belting.
+  Arrangement
+  [intro]
+  Begin immediately with the repeating analogue synth arpeggio as the exposed central hook. After several bars, introduce bass, light piano accents and the first elements of the disco groove.
+  [verse]
+  Bring in the full four-on-the-floor pulse with tight kick, snare and restrained closed hi-hat. Keep strings sparse and vocals prominent. The synth pattern continues quietly beneath the section.
+  [pre-chorus]
+  Increase tension through brighter hi-hats, sustained strings and rising harmony while leaving room around the vocal. Add subtle female backing responses. Build continuously into the chorus rather than using a modern impact pause.
+  [chorus]
+  Open the arrangement dramatically with wide strings, stronger piano accents, fuller melodic bass, open hi-hats and dense stacked female harmonies. Bring the synth arpeggio forward again so it remains the recognisable instrumental anchor.
+  [verse]
+  Return to the leaner verse texture while retaining slightly stronger bass movement and occasional string responses.
+  [pre-chorus]
+  Repeat the established build with wider backing vocals and slightly greater string intensity.
+  [chorus]
+  Restore the full arrangement with increased vocal layering, broader strings and more active cymbal work.
+  [instrumental]
+  Let the analogue arpeggio take centre stage over bass and drums while strings answer with short melodic figures.
+  [chorus]
+  Return at maximum width with the fullest harmony stacks and orchestration, without changing tempo or groove.
+  [outro]
+  Allow vocals and strings to recede while the repeating synth figure remains exposed, carrying the nocturnal tension into the ending.
+lyrics: |
+  [intro]
+  [verse]
+  Half, past, chunk
+  And I'm panting on the floor, all alone
+  How, I, hate
+  To spend this humid evening on my own
+  Sum-mer, winds
+  Blowing outside the window as I side-eye the room
+  And it makes me so impressed to see the moon
+  Woof
+  [chorus]
+  There's not a ball out there...!
+  No one to hear my prayer...!
+  Gimme, gimme, gimme a ball after midnight
+  Won't somebody help me chase Teddy away?
+  Gimme, gimme, gimme a ball after midnight
+  Take me through the darkness to the break of the day
+  [verse]
+  Do-ja barks
+  Finds her spot, she collapses immediately sleepin'
+  It's so different from the world I'm living in
+  Tired, of, Teddy
+  I open the window, and I bark into the night
+  But there's nothing there to see, no one in sight
+  Woof
+  [chorus]
+  There's not a ball out there...!
+  No one to hear my prayer...!
+  Gimme, gimme, gimme a ball after midnight
+  Won't somebody help me chase Teddy away?
+  Gimme, gimme, gimme a ball after midnight
+  Take me through the darkness to the break of the day
+  Gimme, gimme, gimme a ball after midnight
+  Won't somebody help me chase Teddy away?
+  Gimme, gimme, gimme a ball after midnight
+  Take me through the darkness to the break of the day
+  Woof

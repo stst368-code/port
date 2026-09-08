@@ -1,0 +1,2262 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 2,
+  "title": "many-manele",
+  "song_version": 4,
+  "source_yaml": "many-manele-v4.yaml",
+  "source_audio": "many-manele-v4.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "runtime": {
+    "requested_device": "auto",
+    "demucs_device": "cuda",
+    "whisperx_device": "cuda",
+    "whisperx_compute_type": "float16",
+    "batch_size": 4,
+    "cpu_fallback_used": false
+  },
+  "generated_at": "2026-09-08T21:42:48+00:00",
+  "stats": {
+    "lyric_words": 294,
+    "recognised_words": 272,
+    "matched_words": 87,
+    "coverage": 0.2959
+  },
+  "quality": {
+    "rating": "poor",
+    "review_threshold": 0.8,
+    "review_required": true,
+    "approved": true,
+    "usable_for_live_lyrics": true
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "Naiba, trebuie să mergem să mâncăm ceva, frate.",
+      "start": 0.55,
+      "end": 30.627,
+      "words": [
+        {
+          "text": "Naiba,",
+          "start": 0.55,
+          "end": 18.361,
+          "matched": true
+        },
+        {
+          "text": "trebuie",
+          "start": 18.361,
+          "end": 20.113,
+          "matched": false
+        },
+        {
+          "text": "să",
+          "start": 20.113,
+          "end": 21.866,
+          "matched": false
+        },
+        {
+          "text": "mergem",
+          "start": 21.866,
+          "end": 23.618,
+          "matched": false
+        },
+        {
+          "text": "să",
+          "start": 23.618,
+          "end": 25.37,
+          "matched": false
+        },
+        {
+          "text": "mâncăm",
+          "start": 25.37,
+          "end": 27.122,
+          "matched": false
+        },
+        {
+          "text": "ceva,",
+          "start": 27.122,
+          "end": 28.875,
+          "matched": false
+        },
+        {
+          "text": "frate.",
+          "start": 28.875,
+          "end": 30.627,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "Îmi crapă mațele de foame, jur.",
+      "start": 30.627,
+      "end": 33.178,
+      "words": [
+        {
+          "text": "Îmi",
+          "start": 30.627,
+          "end": 30.727,
+          "matched": true
+        },
+        {
+          "text": "crapă",
+          "start": 30.727,
+          "end": 31.217,
+          "matched": false
+        },
+        {
+          "text": "mațele",
+          "start": 31.217,
+          "end": 31.707,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 31.707,
+          "end": 32.198,
+          "matched": false
+        },
+        {
+          "text": "foame,",
+          "start": 32.198,
+          "end": 32.688,
+          "matched": false
+        },
+        {
+          "text": "jur.",
+          "start": 32.688,
+          "end": 33.178,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "Hei, omule...",
+      "start": 33.178,
+      "end": 34.159,
+      "words": [
+        {
+          "text": "Hei,",
+          "start": 33.178,
+          "end": 33.669,
+          "matched": false
+        },
+        {
+          "text": "omule...",
+          "start": 33.669,
+          "end": 34.159,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "Naiba, de ce durează atât de mult, frate?",
+      "start": 34.159,
+      "end": 38.081,
+      "words": [
+        {
+          "text": "Naiba,",
+          "start": 34.159,
+          "end": 34.649,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 34.649,
+          "end": 35.139,
+          "matched": false
+        },
+        {
+          "text": "ce",
+          "start": 35.139,
+          "end": 35.63,
+          "matched": false
+        },
+        {
+          "text": "durează",
+          "start": 35.63,
+          "end": 36.12,
+          "matched": false
+        },
+        {
+          "text": "atât",
+          "start": 36.12,
+          "end": 36.61,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 36.61,
+          "end": 37.1,
+          "matched": false
+        },
+        {
+          "text": "mult,",
+          "start": 37.1,
+          "end": 37.59,
+          "matched": false
+        },
+        {
+          "text": "frate?",
+          "start": 37.59,
+          "end": 38.081,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "50, calmează-te, omule, vine el.",
+      "start": 38.081,
+      "end": 40.845,
+      "words": [
+        {
+          "text": "50,",
+          "start": 38.081,
+          "end": 38.571,
+          "matched": false
+        },
+        {
+          "text": "calmează-te,",
+          "start": 38.571,
+          "end": 39.012,
+          "matched": true
+        },
+        {
+          "text": "omule,",
+          "start": 39.012,
+          "end": 39.623,
+          "matched": false
+        },
+        {
+          "text": "vine",
+          "start": 39.623,
+          "end": 40.234,
+          "matched": false
+        },
+        {
+          "text": "el.",
+          "start": 40.234,
+          "end": 40.845,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "Ah (Ce naiba?)",
+      "start": 40.845,
+      "end": 42.679,
+      "words": [
+        {
+          "text": "Ah",
+          "start": 40.845,
+          "end": 41.456,
+          "matched": false
+        },
+        {
+          "text": "(Ce",
+          "start": 41.456,
+          "end": 42.068,
+          "matched": false
+        },
+        {
+          "text": "naiba?)",
+          "start": 42.068,
+          "end": 42.679,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "Ah, frate, pleacă de-aici, pleacă!",
+      "start": 42.679,
+      "end": 45.734,
+      "words": [
+        {
+          "text": "Ah,",
+          "start": 42.679,
+          "end": 43.29,
+          "matched": false
+        },
+        {
+          "text": "frate,",
+          "start": 43.29,
+          "end": 43.901,
+          "matched": false
+        },
+        {
+          "text": "pleacă",
+          "start": 43.901,
+          "end": 44.512,
+          "matched": false
+        },
+        {
+          "text": "de-aici,",
+          "start": 44.512,
+          "end": 45.123,
+          "matched": false
+        },
+        {
+          "text": "pleacă!",
+          "start": 45.123,
+          "end": 45.734,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "nouăzeci și nouă bani!",
+      "start": 45.734,
+      "end": 48.179,
+      "words": [
+        {
+          "text": "nouăzeci",
+          "start": 45.734,
+          "end": 46.345,
+          "matched": false
+        },
+        {
+          "text": "și",
+          "start": 46.345,
+          "end": 46.957,
+          "matched": false
+        },
+        {
+          "text": "nouă",
+          "start": 46.957,
+          "end": 47.568,
+          "matched": false
+        },
+        {
+          "text": "bani!",
+          "start": 47.568,
+          "end": 48.179,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "Mulți oameni vor să mă vadă căzut",
+      "start": 48.179,
+      "end": 52.457,
+      "words": [
+        {
+          "text": "Mulți",
+          "start": 48.179,
+          "end": 48.79,
+          "matched": false
+        },
+        {
+          "text": "oameni",
+          "start": 48.79,
+          "end": 49.401,
+          "matched": false
+        },
+        {
+          "text": "vor",
+          "start": 49.401,
+          "end": 50.012,
+          "matched": false
+        },
+        {
+          "text": "să",
+          "start": 50.012,
+          "end": 50.623,
+          "matched": false
+        },
+        {
+          "text": "mă",
+          "start": 50.623,
+          "end": 51.234,
+          "matched": false
+        },
+        {
+          "text": "vadă",
+          "start": 51.234,
+          "end": 51.845,
+          "matched": false
+        },
+        {
+          "text": "căzut",
+          "start": 51.845,
+          "end": 52.457,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "Cu ochii pe mine, dar eu am trecut",
+      "start": 52.457,
+      "end": 57.346,
+      "words": [
+        {
+          "text": "Cu",
+          "start": 52.457,
+          "end": 53.068,
+          "matched": false
+        },
+        {
+          "text": "ochii",
+          "start": 53.068,
+          "end": 53.679,
+          "matched": false
+        },
+        {
+          "text": "pe",
+          "start": 53.679,
+          "end": 54.29,
+          "matched": false
+        },
+        {
+          "text": "mine,",
+          "start": 54.29,
+          "end": 54.901,
+          "matched": false
+        },
+        {
+          "text": "dar",
+          "start": 54.901,
+          "end": 55.512,
+          "matched": false
+        },
+        {
+          "text": "eu",
+          "start": 55.512,
+          "end": 56.123,
+          "matched": false
+        },
+        {
+          "text": "am",
+          "start": 56.123,
+          "end": 56.734,
+          "matched": false
+        },
+        {
+          "text": "trecut",
+          "start": 56.734,
+          "end": 57.346,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "Dumnezeu știe ce am în sufletul meu",
+      "start": 57.346,
+      "end": 61.731,
+      "words": [
+        {
+          "text": "Dumnezeu",
+          "start": 57.346,
+          "end": 57.957,
+          "matched": false
+        },
+        {
+          "text": "știe",
+          "start": 57.957,
+          "end": 58.568,
+          "matched": false
+        },
+        {
+          "text": "ce",
+          "start": 58.568,
+          "end": 59.179,
+          "matched": false
+        },
+        {
+          "text": "am",
+          "start": 59.179,
+          "end": 59.79,
+          "matched": false
+        },
+        {
+          "text": "în",
+          "start": 59.79,
+          "end": 59.95,
+          "matched": true
+        },
+        {
+          "text": "sufletul",
+          "start": 59.95,
+          "end": 61.631,
+          "matched": false
+        },
+        {
+          "text": "meu",
+          "start": 61.631,
+          "end": 61.731,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "Și cine-mi dorește răul mereu",
+      "start": 61.731,
+      "end": 65.221,
+      "words": [
+        {
+          "text": "Și",
+          "start": 61.731,
+          "end": 62.429,
+          "matched": false
+        },
+        {
+          "text": "cine-mi",
+          "start": 62.429,
+          "end": 63.127,
+          "matched": false
+        },
+        {
+          "text": "dorește",
+          "start": 63.127,
+          "end": 63.825,
+          "matched": false
+        },
+        {
+          "text": "răul",
+          "start": 63.825,
+          "end": 64.523,
+          "matched": false
+        },
+        {
+          "text": "mereu",
+          "start": 64.523,
+          "end": 65.221,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "Many manele",
+      "start": 65.221,
+      "end": 66.617,
+      "words": [
+        {
+          "text": "Many",
+          "start": 65.221,
+          "end": 65.919,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 65.919,
+          "end": 66.617,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "Many, many, many, many manele",
+      "start": 66.617,
+      "end": 70.108,
+      "words": [
+        {
+          "text": "Many,",
+          "start": 66.617,
+          "end": 67.316,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 67.316,
+          "end": 68.014,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 68.014,
+          "end": 68.712,
+          "matched": false
+        },
+        {
+          "text": "many",
+          "start": 68.712,
+          "end": 69.41,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 69.41,
+          "end": 70.108,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "Wish death upon manele",
+      "start": 70.108,
+      "end": 72.9,
+      "words": [
+        {
+          "text": "Wish",
+          "start": 70.108,
+          "end": 70.806,
+          "matched": false
+        },
+        {
+          "text": "death",
+          "start": 70.806,
+          "end": 71.504,
+          "matched": false
+        },
+        {
+          "text": "upon",
+          "start": 71.504,
+          "end": 72.202,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 72.202,
+          "end": 72.9,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Doamne, nu mai plâng deloc (no cry no more)",
+      "start": 72.9,
+      "end": 75.201,
+      "words": [
+        {
+          "text": "Doamne,",
+          "start": 72.9,
+          "end": 73.32,
+          "matched": true
+        },
+        {
+          "text": "nu",
+          "start": 73.34,
+          "end": 73.46,
+          "matched": true
+        },
+        {
+          "text": "mai",
+          "start": 73.48,
+          "end": 73.62,
+          "matched": true
+        },
+        {
+          "text": "plâng",
+          "start": 73.64,
+          "end": 73.841,
+          "matched": true
+        },
+        {
+          "text": "deloc",
+          "start": 73.881,
+          "end": 74.301,
+          "matched": true
+        },
+        {
+          "text": "(no",
+          "start": 74.381,
+          "end": 74.521,
+          "matched": true
+        },
+        {
+          "text": "cry",
+          "start": 74.561,
+          "end": 74.761,
+          "matched": true
+        },
+        {
+          "text": "no",
+          "start": 74.801,
+          "end": 74.921,
+          "matched": true
+        },
+        {
+          "text": "more)",
+          "start": 74.961,
+          "end": 75.201,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "Nu mai caut cerul-n loc",
+      "start": 75.321,
+      "end": 77.223,
+      "words": [
+        {
+          "text": "Nu",
+          "start": 75.321,
+          "end": 75.442,
+          "matched": true
+        },
+        {
+          "text": "mai",
+          "start": 75.462,
+          "end": 75.642,
+          "matched": true
+        },
+        {
+          "text": "caut",
+          "start": 75.662,
+          "end": 76.042,
+          "matched": true
+        },
+        {
+          "text": "cerul-n",
+          "start": 76.062,
+          "end": 76.562,
+          "matched": true
+        },
+        {
+          "text": "loc",
+          "start": 76.942,
+          "end": 77.223,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Ai milă de mine (have mercy on me)",
+      "start": 77.303,
+      "end": 80.144,
+      "words": [
+        {
+          "text": "Ai",
+          "start": 77.303,
+          "end": 77.483,
+          "matched": true
+        },
+        {
+          "text": "milă",
+          "start": 77.523,
+          "end": 77.843,
+          "matched": true
+        },
+        {
+          "text": "de",
+          "start": 77.883,
+          "end": 78.003,
+          "matched": true
+        },
+        {
+          "text": "mine",
+          "start": 78.063,
+          "end": 78.383,
+          "matched": true
+        },
+        {
+          "text": "(have",
+          "start": 78.623,
+          "end": 78.864,
+          "matched": true
+        },
+        {
+          "text": "mercy",
+          "start": 78.944,
+          "end": 79.544,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 79.664,
+          "end": 79.804,
+          "matched": true
+        },
+        {
+          "text": "me)",
+          "start": 79.884,
+          "end": 80.144,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "Many manele",
+      "start": 80.585,
+      "end": 81.505,
+      "words": [
+        {
+          "text": "Many",
+          "start": 80.585,
+          "end": 80.905,
+          "matched": true
+        },
+        {
+          "text": "manele",
+          "start": 80.965,
+          "end": 81.505,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "Many, many, many, many manele",
+      "start": 81.505,
+      "end": 83.506,
+      "words": [
+        {
+          "text": "Many,",
+          "start": 81.505,
+          "end": 81.885,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 81.885,
+          "end": 82.205,
+          "matched": true
+        },
+        {
+          "text": "many,",
+          "start": 82.246,
+          "end": 82.586,
+          "matched": true
+        },
+        {
+          "text": "many",
+          "start": 82.626,
+          "end": 82.946,
+          "matched": true
+        },
+        {
+          "text": "manele",
+          "start": 82.986,
+          "end": 83.506,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "Wish death upon me",
+      "start": 83.546,
+      "end": 84.787,
+      "words": [
+        {
+          "text": "Wish",
+          "start": 83.546,
+          "end": 83.806,
+          "matched": true
+        },
+        {
+          "text": "death",
+          "start": 83.866,
+          "end": 84.107,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 84.167,
+          "end": 84.527,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 84.587,
+          "end": 84.787,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "Ai milă de sufletul meu",
+      "start": 86.068,
+      "end": 87.849,
+      "words": [
+        {
+          "text": "Ai",
+          "start": 86.068,
+          "end": 86.248,
+          "matched": true
+        },
+        {
+          "text": "milă",
+          "start": 86.288,
+          "end": 86.608,
+          "matched": true
+        },
+        {
+          "text": "de",
+          "start": 86.648,
+          "end": 86.768,
+          "matched": true
+        },
+        {
+          "text": "sufletul",
+          "start": 86.788,
+          "end": 87.489,
+          "matched": true
+        },
+        {
+          "text": "meu",
+          "start": 87.529,
+          "end": 87.849,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "Lumea m-a făcut mai greu",
+      "start": 87.889,
+      "end": 89.27,
+      "words": [
+        {
+          "text": "Lumea",
+          "start": 87.889,
+          "end": 88.229,
+          "matched": true
+        },
+        {
+          "text": "m-a",
+          "start": 88.269,
+          "end": 88.389,
+          "matched": true
+        },
+        {
+          "text": "făcut",
+          "start": 88.429,
+          "end": 88.809,
+          "matched": true
+        },
+        {
+          "text": "mai",
+          "start": 88.829,
+          "end": 88.969,
+          "matched": true
+        },
+        {
+          "text": "greu",
+          "start": 88.989,
+          "end": 89.27,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "Wish death upon me",
+      "start": 89.33,
+      "end": 90.63,
+      "words": [
+        {
+          "text": "Wish",
+          "start": 89.33,
+          "end": 89.61,
+          "matched": true
+        },
+        {
+          "text": "death",
+          "start": 89.69,
+          "end": 89.93,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 89.99,
+          "end": 90.35,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 90.43,
+          "end": 90.63,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "Vor să mă vadă la pământ, fără bani și fără nume",
+      "start": 92.251,
+      "end": 96.514,
+      "words": [
+        {
+          "text": "Vor",
+          "start": 92.251,
+          "end": 92.472,
+          "matched": true
+        },
+        {
+          "text": "să",
+          "start": 92.552,
+          "end": 92.772,
+          "matched": true
+        },
+        {
+          "text": "mă",
+          "start": 92.792,
+          "end": 92.972,
+          "matched": true
+        },
+        {
+          "text": "vadă",
+          "start": 92.992,
+          "end": 93.432,
+          "matched": true
+        },
+        {
+          "text": "la",
+          "start": 93.492,
+          "end": 93.672,
+          "matched": true
+        },
+        {
+          "text": "pământ,",
+          "start": 93.712,
+          "end": 94.253,
+          "matched": true
+        },
+        {
+          "text": "fără",
+          "start": 94.413,
+          "end": 94.893,
+          "matched": true
+        },
+        {
+          "text": "bani",
+          "start": 94.933,
+          "end": 95.153,
+          "matched": true
+        },
+        {
+          "text": "și",
+          "start": 95.173,
+          "end": 95.353,
+          "matched": true
+        },
+        {
+          "text": "fără",
+          "start": 95.413,
+          "end": 95.934,
+          "matched": true
+        },
+        {
+          "text": "nume",
+          "start": 95.994,
+          "end": 96.514,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "Dar când intru-n restaurant se întoarce toată lumea",
+      "start": 96.514,
+      "end": 102.356,
+      "words": [
+        {
+          "text": "Dar",
+          "start": 96.514,
+          "end": 97.673,
+          "matched": false
+        },
+        {
+          "text": "când",
+          "start": 97.673,
+          "end": 98.833,
+          "matched": false
+        },
+        {
+          "text": "intru-n",
+          "start": 98.833,
+          "end": 99.992,
+          "matched": false
+        },
+        {
+          "text": "restaurant",
+          "start": 99.992,
+          "end": 101.032,
+          "matched": true
+        },
+        {
+          "text": "se",
+          "start": 101.032,
+          "end": 101.363,
+          "matched": false
+        },
+        {
+          "text": "întoarce",
+          "start": 101.363,
+          "end": 101.694,
+          "matched": false
+        },
+        {
+          "text": "toată",
+          "start": 101.694,
+          "end": 102.025,
+          "matched": false
+        },
+        {
+          "text": "lumea",
+          "start": 102.025,
+          "end": 102.356,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "Au pus vorbe, au pus invidie",
+      "start": 102.356,
+      "end": 104.343,
+      "words": [
+        {
+          "text": "Au",
+          "start": 102.356,
+          "end": 102.688,
+          "matched": false
+        },
+        {
+          "text": "pus",
+          "start": 102.688,
+          "end": 103.019,
+          "matched": false
+        },
+        {
+          "text": "vorbe,",
+          "start": 103.019,
+          "end": 103.35,
+          "matched": false
+        },
+        {
+          "text": "au",
+          "start": 103.35,
+          "end": 103.681,
+          "matched": false
+        },
+        {
+          "text": "pus",
+          "start": 103.681,
+          "end": 104.012,
+          "matched": false
+        },
+        {
+          "text": "invidie",
+          "start": 104.012,
+          "end": 104.343,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "Au vrut să-mi fure bucurie",
+      "start": 104.343,
+      "end": 105.999,
+      "words": [
+        {
+          "text": "Au",
+          "start": 104.343,
+          "end": 104.674,
+          "matched": false
+        },
+        {
+          "text": "vrut",
+          "start": 104.674,
+          "end": 105.005,
+          "matched": false
+        },
+        {
+          "text": "să-mi",
+          "start": 105.005,
+          "end": 105.336,
+          "matched": false
+        },
+        {
+          "text": "fure",
+          "start": 105.336,
+          "end": 105.667,
+          "matched": false
+        },
+        {
+          "text": "bucurie",
+          "start": 105.667,
+          "end": 105.999,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "Eu eram diamant ascuns",
+      "start": 105.999,
+      "end": 107.323,
+      "words": [
+        {
+          "text": "Eu",
+          "start": 105.999,
+          "end": 106.33,
+          "matched": false
+        },
+        {
+          "text": "eram",
+          "start": 106.33,
+          "end": 106.661,
+          "matched": false
+        },
+        {
+          "text": "diamant",
+          "start": 106.661,
+          "end": 106.992,
+          "matched": false
+        },
+        {
+          "text": "ascuns",
+          "start": 106.992,
+          "end": 107.323,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "Sub noroi și sub apus",
+      "start": 107.323,
+      "end": 108.978,
+      "words": [
+        {
+          "text": "Sub",
+          "start": 107.323,
+          "end": 107.654,
+          "matched": false
+        },
+        {
+          "text": "noroi",
+          "start": 107.654,
+          "end": 107.985,
+          "matched": false
+        },
+        {
+          "text": "și",
+          "start": 107.985,
+          "end": 108.316,
+          "matched": false
+        },
+        {
+          "text": "sub",
+          "start": 108.316,
+          "end": 108.647,
+          "matched": false
+        },
+        {
+          "text": "apus",
+          "start": 108.647,
+          "end": 108.978,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "N-au crezut că voi ajunge",
+      "start": 108.978,
+      "end": 110.634,
+      "words": [
+        {
+          "text": "N-au",
+          "start": 108.978,
+          "end": 109.31,
+          "matched": false
+        },
+        {
+          "text": "crezut",
+          "start": 109.31,
+          "end": 109.641,
+          "matched": false
+        },
+        {
+          "text": "că",
+          "start": 109.641,
+          "end": 109.972,
+          "matched": false
+        },
+        {
+          "text": "voi",
+          "start": 109.972,
+          "end": 110.303,
+          "matched": false
+        },
+        {
+          "text": "ajunge",
+          "start": 110.303,
+          "end": 110.634,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "Unde astăzi am ajuns",
+      "start": 110.634,
+      "end": 112.545,
+      "words": [
+        {
+          "text": "Unde",
+          "start": 110.634,
+          "end": 111.034,
+          "matched": true
+        },
+        {
+          "text": "astăzi",
+          "start": 111.034,
+          "end": 111.538,
+          "matched": false
+        },
+        {
+          "text": "am",
+          "start": 111.538,
+          "end": 112.041,
+          "matched": false
+        },
+        {
+          "text": "ajuns",
+          "start": 112.041,
+          "end": 112.545,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l33",
+      "text": "Ridic paharul pentru viață",
+      "start": 112.545,
+      "end": 114.559,
+      "words": [
+        {
+          "text": "Ridic",
+          "start": 112.545,
+          "end": 113.048,
+          "matched": false
+        },
+        {
+          "text": "paharul",
+          "start": 113.048,
+          "end": 113.552,
+          "matched": false
+        },
+        {
+          "text": "pentru",
+          "start": 113.552,
+          "end": 114.056,
+          "matched": false
+        },
+        {
+          "text": "viață",
+          "start": 114.056,
+          "end": 114.559,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l34",
+      "text": "Pentru frații care-au stat",
+      "start": 114.559,
+      "end": 116.574,
+      "words": [
+        {
+          "text": "Pentru",
+          "start": 114.559,
+          "end": 115.063,
+          "matched": false
+        },
+        {
+          "text": "frații",
+          "start": 115.063,
+          "end": 115.566,
+          "matched": false
+        },
+        {
+          "text": "care-au",
+          "start": 115.566,
+          "end": 116.07,
+          "matched": false
+        },
+        {
+          "text": "stat",
+          "start": 116.07,
+          "end": 116.574,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l35",
+      "text": "Când mulți mi-au dorit sfârșitul",
+      "start": 116.574,
+      "end": 119.092,
+      "words": [
+        {
+          "text": "Când",
+          "start": 116.574,
+          "end": 117.077,
+          "matched": false
+        },
+        {
+          "text": "mulți",
+          "start": 117.077,
+          "end": 117.581,
+          "matched": false
+        },
+        {
+          "text": "mi-au",
+          "start": 117.581,
+          "end": 118.085,
+          "matched": false
+        },
+        {
+          "text": "dorit",
+          "start": 118.085,
+          "end": 118.588,
+          "matched": false
+        },
+        {
+          "text": "sfârșitul",
+          "start": 118.588,
+          "end": 119.092,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l36",
+      "text": "Eu mai tare m-am ridicat",
+      "start": 119.092,
+      "end": 121.61,
+      "words": [
+        {
+          "text": "Eu",
+          "start": 119.092,
+          "end": 119.595,
+          "matched": false
+        },
+        {
+          "text": "mai",
+          "start": 119.595,
+          "end": 120.099,
+          "matched": false
+        },
+        {
+          "text": "tare",
+          "start": 120.099,
+          "end": 120.603,
+          "matched": false
+        },
+        {
+          "text": "m-am",
+          "start": 120.603,
+          "end": 121.106,
+          "matched": false
+        },
+        {
+          "text": "ridicat",
+          "start": 121.106,
+          "end": 121.61,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l37",
+      "text": "Many manele",
+      "start": 121.61,
+      "end": 122.617,
+      "words": [
+        {
+          "text": "Many",
+          "start": 121.61,
+          "end": 122.113,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 122.113,
+          "end": 122.617,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l38",
+      "text": "Many, many, many, many manele",
+      "start": 122.617,
+      "end": 133.124,
+      "words": [
+        {
+          "text": "Many,",
+          "start": 122.617,
+          "end": 122.697,
+          "matched": true
+        },
+        {
+          "text": "many,",
+          "start": 122.697,
+          "end": 125.304,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 125.304,
+          "end": 127.91,
+          "matched": false
+        },
+        {
+          "text": "many",
+          "start": 127.91,
+          "end": 130.517,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 130.517,
+          "end": 133.124,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l39",
+      "text": "Wish death upon me",
+      "start": 133.124,
+      "end": 134.345,
+      "words": [
+        {
+          "text": "Wish",
+          "start": 133.124,
+          "end": 133.385,
+          "matched": true
+        },
+        {
+          "text": "death",
+          "start": 133.445,
+          "end": 133.685,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 133.765,
+          "end": 134.105,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 134.185,
+          "end": 134.345,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l40",
+      "text": "Doamne, nu mai plâng deloc (no cry no more)",
+      "start": 134.345,
+      "end": 136.546,
+      "words": [
+        {
+          "text": "Doamne,",
+          "start": 134.345,
+          "end": 134.597,
+          "matched": false
+        },
+        {
+          "text": "nu",
+          "start": 134.597,
+          "end": 134.849,
+          "matched": false
+        },
+        {
+          "text": "mai",
+          "start": 134.849,
+          "end": 135.102,
+          "matched": false
+        },
+        {
+          "text": "plâng",
+          "start": 135.102,
+          "end": 135.354,
+          "matched": false
+        },
+        {
+          "text": "deloc",
+          "start": 135.354,
+          "end": 135.606,
+          "matched": false
+        },
+        {
+          "text": "(no",
+          "start": 135.606,
+          "end": 135.766,
+          "matched": true
+        },
+        {
+          "text": "cry",
+          "start": 135.786,
+          "end": 135.986,
+          "matched": true
+        },
+        {
+          "text": "no",
+          "start": 136.026,
+          "end": 136.166,
+          "matched": true
+        },
+        {
+          "text": "more)",
+          "start": 136.206,
+          "end": 136.546,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l41",
+      "text": "Nu mai caut cerul-n loc",
+      "start": 136.546,
+      "end": 136.579,
+      "words": [
+        {
+          "text": "Nu",
+          "start": 136.546,
+          "end": 136.553,
+          "matched": false
+        },
+        {
+          "text": "mai",
+          "start": 136.553,
+          "end": 136.559,
+          "matched": false
+        },
+        {
+          "text": "caut",
+          "start": 136.559,
+          "end": 136.566,
+          "matched": false
+        },
+        {
+          "text": "cerul-n",
+          "start": 136.566,
+          "end": 136.573,
+          "matched": false
+        },
+        {
+          "text": "loc",
+          "start": 136.573,
+          "end": 136.579,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l42",
+      "text": "Ai milă de mine (have mercy on me)",
+      "start": 136.579,
+      "end": 137.887,
+      "words": [
+        {
+          "text": "Ai",
+          "start": 136.579,
+          "end": 136.586,
+          "matched": false
+        },
+        {
+          "text": "milă",
+          "start": 136.586,
+          "end": 136.593,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 136.593,
+          "end": 136.599,
+          "matched": false
+        },
+        {
+          "text": "mine",
+          "start": 136.599,
+          "end": 136.606,
+          "matched": false
+        },
+        {
+          "text": "(have",
+          "start": 136.606,
+          "end": 136.966,
+          "matched": true
+        },
+        {
+          "text": "mercy",
+          "start": 137.086,
+          "end": 137.446,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 137.566,
+          "end": 137.646,
+          "matched": true
+        },
+        {
+          "text": "me)",
+          "start": 137.666,
+          "end": 137.887,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l43",
+      "text": "Ai milă de sufletul meu",
+      "start": 137.887,
+      "end": 140.848,
+      "words": [
+        {
+          "text": "Ai",
+          "start": 137.887,
+          "end": 138.607,
+          "matched": false
+        },
+        {
+          "text": "milă",
+          "start": 138.607,
+          "end": 139.327,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 139.327,
+          "end": 140.048,
+          "matched": false
+        },
+        {
+          "text": "sufletul",
+          "start": 140.048,
+          "end": 140.768,
+          "matched": false
+        },
+        {
+          "text": "meu",
+          "start": 140.768,
+          "end": 140.848,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l44",
+      "text": "Inima s-a făcut greu",
+      "start": 140.848,
+      "end": 146.564,
+      "words": [
+        {
+          "text": "Inima",
+          "start": 140.848,
+          "end": 142.277,
+          "matched": false
+        },
+        {
+          "text": "s-a",
+          "start": 142.277,
+          "end": 143.706,
+          "matched": false
+        },
+        {
+          "text": "făcut",
+          "start": 143.706,
+          "end": 145.135,
+          "matched": false
+        },
+        {
+          "text": "greu",
+          "start": 145.135,
+          "end": 146.564,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l45",
+      "text": "Ai milă de mine",
+      "start": 146.564,
+      "end": 152.279,
+      "words": [
+        {
+          "text": "Ai",
+          "start": 146.564,
+          "end": 147.993,
+          "matched": false
+        },
+        {
+          "text": "milă",
+          "start": 147.993,
+          "end": 149.422,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 149.422,
+          "end": 150.851,
+          "matched": false
+        },
+        {
+          "text": "mine",
+          "start": 150.851,
+          "end": 152.279,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l46",
+      "text": "Many manele",
+      "start": 152.279,
+      "end": 155.137,
+      "words": [
+        {
+          "text": "Many",
+          "start": 152.279,
+          "end": 153.708,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 153.708,
+          "end": 155.137,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l47",
+      "text": "Many, many, many, many manele",
+      "start": 155.137,
+      "end": 162.282,
+      "words": [
+        {
+          "text": "Many,",
+          "start": 155.137,
+          "end": 156.566,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 156.566,
+          "end": 157.995,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 157.995,
+          "end": 159.424,
+          "matched": false
+        },
+        {
+          "text": "many",
+          "start": 159.424,
+          "end": 160.853,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 160.853,
+          "end": 162.282,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l48",
+      "text": "Wish death upon me",
+      "start": 162.282,
+      "end": 163.543,
+      "words": [
+        {
+          "text": "Wish",
+          "start": 162.282,
+          "end": 162.542,
+          "matched": true
+        },
+        {
+          "text": "death",
+          "start": 162.602,
+          "end": 162.842,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 162.922,
+          "end": 163.263,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 163.323,
+          "end": 163.543,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l49",
+      "text": "Toți vorbesc când urci prea sus",
+      "start": 163.543,
+      "end": 173.543,
+      "words": [
+        {
+          "text": "Toți",
+          "start": 163.543,
+          "end": 165.21,
+          "matched": false
+        },
+        {
+          "text": "vorbesc",
+          "start": 165.21,
+          "end": 166.876,
+          "matched": false
+        },
+        {
+          "text": "când",
+          "start": 166.876,
+          "end": 168.543,
+          "matched": false
+        },
+        {
+          "text": "urci",
+          "start": 168.543,
+          "end": 170.21,
+          "matched": false
+        },
+        {
+          "text": "prea",
+          "start": 170.21,
+          "end": 171.877,
+          "matched": false
+        },
+        {
+          "text": "sus",
+          "start": 171.877,
+          "end": 173.543,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l50",
+      "text": "Toți dispar când e de dus",
+      "start": 173.543,
+      "end": 178.46,
+      "words": [
+        {
+          "text": "Toți",
+          "start": 173.543,
+          "end": 175.21,
+          "matched": false
+        },
+        {
+          "text": "dispar",
+          "start": 175.21,
+          "end": 175.731,
+          "matched": true
+        },
+        {
+          "text": "când",
+          "start": 175.731,
+          "end": 176.413,
+          "matched": false
+        },
+        {
+          "text": "e",
+          "start": 176.413,
+          "end": 177.095,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 177.095,
+          "end": 177.778,
+          "matched": false
+        },
+        {
+          "text": "dus",
+          "start": 177.778,
+          "end": 178.46,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l51",
+      "text": "Dar eu merg pe drumul meu",
+      "start": 178.46,
+      "end": 182.553,
+      "words": [
+        {
+          "text": "Dar",
+          "start": 178.46,
+          "end": 179.142,
+          "matched": false
+        },
+        {
+          "text": "eu",
+          "start": 179.142,
+          "end": 179.824,
+          "matched": false
+        },
+        {
+          "text": "merg",
+          "start": 179.824,
+          "end": 180.506,
+          "matched": false
+        },
+        {
+          "text": "pe",
+          "start": 180.506,
+          "end": 181.189,
+          "matched": false
+        },
+        {
+          "text": "drumul",
+          "start": 181.189,
+          "end": 181.871,
+          "matched": false
+        },
+        {
+          "text": "meu",
+          "start": 181.871,
+          "end": 182.553,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l52",
+      "text": "Cu Dumnezeu",
+      "start": 182.553,
+      "end": 183.918,
+      "words": [
+        {
+          "text": "Cu",
+          "start": 182.553,
+          "end": 183.235,
+          "matched": false
+        },
+        {
+          "text": "Dumnezeu",
+          "start": 183.235,
+          "end": 183.918,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l53",
+      "text": "Many manele",
+      "start": 183.918,
+      "end": 185.282,
+      "words": [
+        {
+          "text": "Many",
+          "start": 183.918,
+          "end": 184.6,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 184.6,
+          "end": 185.282,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l54",
+      "text": "Many, many, many, many manele",
+      "start": 185.282,
+      "end": 188.693,
+      "words": [
+        {
+          "text": "Many,",
+          "start": 185.282,
+          "end": 185.964,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 185.964,
+          "end": 186.646,
+          "matched": false
+        },
+        {
+          "text": "many,",
+          "start": 186.646,
+          "end": 187.329,
+          "matched": false
+        },
+        {
+          "text": "many",
+          "start": 187.329,
+          "end": 188.011,
+          "matched": false
+        },
+        {
+          "text": "manele",
+          "start": 188.011,
+          "end": 188.693,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l55",
+      "text": "Wish death upon me",
+      "start": 188.693,
+      "end": 189.934,
+      "words": [
+        {
+          "text": "Wish",
+          "start": 188.693,
+          "end": 188.973,
+          "matched": true
+        },
+        {
+          "text": "death",
+          "start": 189.033,
+          "end": 189.273,
+          "matched": true
+        },
+        {
+          "text": "upon",
+          "start": 189.333,
+          "end": 189.674,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 189.754,
+          "end": 189.934,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l56",
+      "text": "Dar încă sunt aici",
+      "start": 189.934,
+      "end": 191.294,
+      "words": [
+        {
+          "text": "Dar",
+          "start": 189.934,
+          "end": 190.274,
+          "matched": false
+        },
+        {
+          "text": "încă",
+          "start": 190.274,
+          "end": 190.614,
+          "matched": false
+        },
+        {
+          "text": "sunt",
+          "start": 190.614,
+          "end": 190.954,
+          "matched": false
+        },
+        {
+          "text": "aici",
+          "start": 190.954,
+          "end": 191.294,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l57",
+      "text": "Încă respir și încă zic",
+      "start": 191.294,
+      "end": 192.994,
+      "words": [
+        {
+          "text": "Încă",
+          "start": 191.294,
+          "end": 191.634,
+          "matched": false
+        },
+        {
+          "text": "respir",
+          "start": 191.634,
+          "end": 191.974,
+          "matched": false
+        },
+        {
+          "text": "și",
+          "start": 191.974,
+          "end": 192.314,
+          "matched": false
+        },
+        {
+          "text": "încă",
+          "start": 192.314,
+          "end": 192.654,
+          "matched": false
+        },
+        {
+          "text": "zic",
+          "start": 192.654,
+          "end": 192.994,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l58",
+      "text": "Doamne, ai milă de mine",
+      "start": 192.994,
+      "end": 194.694,
+      "words": [
+        {
+          "text": "Doamne,",
+          "start": 192.994,
+          "end": 193.334,
+          "matched": false
+        },
+        {
+          "text": "ai",
+          "start": 193.334,
+          "end": 193.674,
+          "matched": false
+        },
+        {
+          "text": "milă",
+          "start": 193.674,
+          "end": 194.014,
+          "matched": false
+        },
+        {
+          "text": "de",
+          "start": 194.014,
+          "end": 194.354,
+          "matched": false
+        },
+        {
+          "text": "mine",
+          "start": 194.354,
+          "end": 194.694,
+          "matched": false
+        }
+      ]
+    }
+  ]
+}
