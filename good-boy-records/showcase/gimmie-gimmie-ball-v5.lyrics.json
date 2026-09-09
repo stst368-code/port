@@ -1,0 +1,1532 @@
+{
+  "format": "gbr-word-lyrics-v1",
+  "version": 2,
+  "title": "gimmie-gimmie-ball",
+  "song_version": 5,
+  "source_yaml": "gimmie-gimmie-ball-v5.yaml",
+  "source_audio": "gimmie-gimmie-ball-v5.flac",
+  "language": "en",
+  "engine": "demucs:htdemucs+whisperx:large-v3",
+  "runtime": {
+    "requested_device": "auto",
+    "demucs_device": "cuda",
+    "whisperx_device": "cuda",
+    "whisperx_compute_type": "float16",
+    "batch_size": 4,
+    "cpu_fallback_used": false
+  },
+  "generated_at": "2026-09-09T05:34:11+00:00",
+  "stats": {
+    "lyric_words": 207,
+    "recognised_words": 250,
+    "matched_words": 201,
+    "coverage": 0.971
+  },
+  "quality": {
+    "rating": "excellent",
+    "review_threshold": 0.8,
+    "review_required": false,
+    "approved": false,
+    "usable_for_live_lyrics": true
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "Half, past, chunk",
+      "start": 15.616,
+      "end": 17.798,
+      "words": [
+        {
+          "text": "Half,",
+          "start": 15.616,
+          "end": 15.976,
+          "matched": true
+        },
+        {
+          "text": "past,",
+          "start": 16.777,
+          "end": 17.177,
+          "matched": true
+        },
+        {
+          "text": "chunk",
+          "start": 17.177,
+          "end": 17.798,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "text": "And I'm panting on the floor, all alone",
+      "start": 17.798,
+      "end": 21.381,
+      "words": [
+        {
+          "text": "And",
+          "start": 17.798,
+          "end": 17.958,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 18.058,
+          "end": 18.138,
+          "matched": true
+        },
+        {
+          "text": "panting",
+          "start": 18.198,
+          "end": 18.939,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 19.059,
+          "end": 19.139,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 19.179,
+          "end": 19.279,
+          "matched": true
+        },
+        {
+          "text": "floor,",
+          "start": 19.339,
+          "end": 19.76,
+          "matched": true
+        },
+        {
+          "text": "all",
+          "start": 20.701,
+          "end": 20.861,
+          "matched": true
+        },
+        {
+          "text": "alone",
+          "start": 20.961,
+          "end": 21.381,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "text": "How, I, hate",
+      "start": 23.103,
+      "end": 25.065,
+      "words": [
+        {
+          "text": "How,",
+          "start": 23.103,
+          "end": 23.483,
+          "matched": true
+        },
+        {
+          "text": "I,",
+          "start": 24.484,
+          "end": 24.604,
+          "matched": true
+        },
+        {
+          "text": "hate",
+          "start": 24.724,
+          "end": 25.065,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "text": "To spend this humid evening on my own",
+      "start": 25.225,
+      "end": 27.947,
+      "words": [
+        {
+          "text": "To",
+          "start": 25.225,
+          "end": 25.345,
+          "matched": true
+        },
+        {
+          "text": "spend",
+          "start": 25.385,
+          "end": 25.685,
+          "matched": true
+        },
+        {
+          "text": "this",
+          "start": 25.705,
+          "end": 25.825,
+          "matched": true
+        },
+        {
+          "text": "humid",
+          "start": 25.885,
+          "end": 26.486,
+          "matched": true
+        },
+        {
+          "text": "evening",
+          "start": 26.566,
+          "end": 26.906,
+          "matched": true
+        },
+        {
+          "text": "on",
+          "start": 27.146,
+          "end": 27.287,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 27.367,
+          "end": 27.627,
+          "matched": true
+        },
+        {
+          "text": "own",
+          "start": 27.727,
+          "end": 27.947,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "text": "Sum-mer, winds",
+      "start": 30.59,
+      "end": 31.731,
+      "words": [
+        {
+          "text": "Sum-mer,",
+          "start": 30.59,
+          "end": 31.29,
+          "matched": true
+        },
+        {
+          "text": "winds",
+          "start": 31.39,
+          "end": 31.731,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "text": "Blowing outside the window as I side-eye the room",
+      "start": 31.791,
+      "end": 35.414,
+      "words": [
+        {
+          "text": "Blowing",
+          "start": 31.791,
+          "end": 32.291,
+          "matched": true
+        },
+        {
+          "text": "outside",
+          "start": 32.371,
+          "end": 32.972,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 33.012,
+          "end": 33.212,
+          "matched": true
+        },
+        {
+          "text": "window",
+          "start": 33.292,
+          "end": 33.973,
+          "matched": true
+        },
+        {
+          "text": "as",
+          "start": 34.093,
+          "end": 34.173,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 34.233,
+          "end": 34.293,
+          "matched": true
+        },
+        {
+          "text": "side-eye",
+          "start": 34.373,
+          "end": 34.733,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 34.914,
+          "end": 35.034,
+          "matched": true
+        },
+        {
+          "text": "room",
+          "start": 35.094,
+          "end": 35.414,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "text": "And it makes me so impressed to see the moon",
+      "start": 37.616,
+      "end": 42.04,
+      "words": [
+        {
+          "text": "And",
+          "start": 37.616,
+          "end": 37.776,
+          "matched": true
+        },
+        {
+          "text": "it",
+          "start": 37.796,
+          "end": 37.836,
+          "matched": true
+        },
+        {
+          "text": "makes",
+          "start": 37.956,
+          "end": 38.317,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 38.377,
+          "end": 38.497,
+          "matched": true
+        },
+        {
+          "text": "so",
+          "start": 38.597,
+          "end": 38.877,
+          "matched": true
+        },
+        {
+          "text": "impressed",
+          "start": 38.957,
+          "end": 39.518,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 39.558,
+          "end": 39.678,
+          "matched": true
+        },
+        {
+          "text": "see",
+          "start": 39.778,
+          "end": 41.119,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 41.239,
+          "end": 41.539,
+          "matched": true
+        },
+        {
+          "text": "moon",
+          "start": 41.68,
+          "end": 42.04,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "text": "Woof",
+      "start": 43.51,
+      "end": 43.85,
+      "words": [
+        {
+          "text": "Woof",
+          "start": 43.51,
+          "end": 43.85,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "text": "There's not a ball out there...!",
+      "start": 43.95,
+      "end": 45.951,
+      "words": [
+        {
+          "text": "There's",
+          "start": 43.95,
+          "end": 44.19,
+          "matched": true
+        },
+        {
+          "text": "not",
+          "start": 44.23,
+          "end": 44.53,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 44.55,
+          "end": 44.59,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 44.711,
+          "end": 45.211,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 45.411,
+          "end": 45.591,
+          "matched": true
+        },
+        {
+          "text": "there...!",
+          "start": 45.651,
+          "end": 45.951,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "text": "No one to hear my prayer...!",
+      "start": 45.971,
+      "end": 49.813,
+      "words": [
+        {
+          "text": "No",
+          "start": 45.971,
+          "end": 46.011,
+          "matched": true
+        },
+        {
+          "text": "one",
+          "start": 47.972,
+          "end": 48.232,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 48.252,
+          "end": 48.292,
+          "matched": true
+        },
+        {
+          "text": "hear",
+          "start": 48.432,
+          "end": 48.792,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 48.912,
+          "end": 49.312,
+          "matched": true
+        },
+        {
+          "text": "prayer...!",
+          "start": 49.373,
+          "end": 49.813,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "text": "Gimme, gimme, gimme a ball after midnight",
+      "start": 52.194,
+      "end": 55.515,
+      "words": [
+        {
+          "text": "Gimme,",
+          "start": 52.194,
+          "end": 52.694,
+          "matched": true
+        },
+        {
+          "text": "gimme,",
+          "start": 52.714,
+          "end": 53.134,
+          "matched": true
+        },
+        {
+          "text": "gimme",
+          "start": 53.154,
+          "end": 53.694,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 53.714,
+          "end": 53.734,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 53.854,
+          "end": 54.335,
+          "matched": true
+        },
+        {
+          "text": "after",
+          "start": 54.435,
+          "end": 54.695,
+          "matched": true
+        },
+        {
+          "text": "midnight",
+          "start": 54.815,
+          "end": 55.515,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "text": "Won't somebody help me chase Teddy away?",
+      "start": 55.935,
+      "end": 58.877,
+      "words": [
+        {
+          "text": "Won't",
+          "start": 55.935,
+          "end": 56.155,
+          "matched": true
+        },
+        {
+          "text": "somebody",
+          "start": 56.175,
+          "end": 56.836,
+          "matched": true
+        },
+        {
+          "text": "help",
+          "start": 56.896,
+          "end": 57.116,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 57.156,
+          "end": 57.276,
+          "matched": true
+        },
+        {
+          "text": "chase",
+          "start": 57.356,
+          "end": 57.736,
+          "matched": true
+        },
+        {
+          "text": "Teddy",
+          "start": 57.796,
+          "end": 58.436,
+          "matched": true
+        },
+        {
+          "text": "away?",
+          "start": 58.496,
+          "end": 58.877,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l13",
+      "text": "Gimme, gimme, gimme a ball after midnight",
+      "start": 58.897,
+      "end": 63.038,
+      "words": [
+        {
+          "text": "Gimme,",
+          "start": 58.897,
+          "end": 60.197,
+          "matched": true
+        },
+        {
+          "text": "gimme,",
+          "start": 60.217,
+          "end": 60.657,
+          "matched": true
+        },
+        {
+          "text": "gimme",
+          "start": 60.697,
+          "end": 61.218,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 61.238,
+          "end": 61.258,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 61.378,
+          "end": 61.858,
+          "matched": true
+        },
+        {
+          "text": "after",
+          "start": 61.938,
+          "end": 62.198,
+          "matched": true
+        },
+        {
+          "text": "midnight",
+          "start": 62.338,
+          "end": 63.038,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l14",
+      "text": "Take me through the darkness to the break of the day",
+      "start": 63.459,
+      "end": 66.36,
+      "words": [
+        {
+          "text": "Take",
+          "start": 63.459,
+          "end": 63.699,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 63.739,
+          "end": 63.859,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 63.899,
+          "end": 64.199,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 64.239,
+          "end": 64.339,
+          "matched": true
+        },
+        {
+          "text": "darkness",
+          "start": 64.399,
+          "end": 64.839,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 64.879,
+          "end": 65.139,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 65.179,
+          "end": 65.279,
+          "matched": true
+        },
+        {
+          "text": "break",
+          "start": 65.359,
+          "end": 65.699,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 65.739,
+          "end": 65.82,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 65.88,
+          "end": 65.98,
+          "matched": true
+        },
+        {
+          "text": "day",
+          "start": 66.06,
+          "end": 66.36,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l15",
+      "text": "Do-ja barks",
+      "start": 66.36,
+      "end": 73.973,
+      "words": [
+        {
+          "text": "Do-ja",
+          "start": 66.36,
+          "end": 73.573,
+          "matched": false
+        },
+        {
+          "text": "barks",
+          "start": 73.573,
+          "end": 73.973,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l16",
+      "text": "Finds her spot, she collapses immediately sleepin'",
+      "start": 74.033,
+      "end": 77.994,
+      "words": [
+        {
+          "text": "Finds",
+          "start": 74.033,
+          "end": 74.253,
+          "matched": true
+        },
+        {
+          "text": "her",
+          "start": 74.313,
+          "end": 74.413,
+          "matched": true
+        },
+        {
+          "text": "spot,",
+          "start": 74.433,
+          "end": 74.873,
+          "matched": true
+        },
+        {
+          "text": "she",
+          "start": 74.933,
+          "end": 75.153,
+          "matched": true
+        },
+        {
+          "text": "collapses",
+          "start": 75.213,
+          "end": 76.174,
+          "matched": true
+        },
+        {
+          "text": "immediately",
+          "start": 76.254,
+          "end": 77.214,
+          "matched": true
+        },
+        {
+          "text": "sleepin'",
+          "start": 77.274,
+          "end": 77.994,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l17",
+      "text": "It's so different from the world I'm living in",
+      "start": 78.755,
+      "end": 82.196,
+      "words": [
+        {
+          "text": "It's",
+          "start": 78.755,
+          "end": 78.915,
+          "matched": true
+        },
+        {
+          "text": "so",
+          "start": 78.955,
+          "end": 79.135,
+          "matched": true
+        },
+        {
+          "text": "different",
+          "start": 79.215,
+          "end": 79.835,
+          "matched": true
+        },
+        {
+          "text": "from",
+          "start": 79.895,
+          "end": 80.115,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 80.175,
+          "end": 80.315,
+          "matched": true
+        },
+        {
+          "text": "world",
+          "start": 80.395,
+          "end": 80.836,
+          "matched": true
+        },
+        {
+          "text": "I'm",
+          "start": 81.036,
+          "end": 81.236,
+          "matched": true
+        },
+        {
+          "text": "living",
+          "start": 81.336,
+          "end": 82.136,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 82.156,
+          "end": 82.196,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l18",
+      "text": "Tired, of, Teddy",
+      "start": 83.177,
+      "end": 84.657,
+      "words": [
+        {
+          "text": "Tired,",
+          "start": 83.177,
+          "end": 83.717,
+          "matched": true
+        },
+        {
+          "text": "of,",
+          "start": 83.857,
+          "end": 83.977,
+          "matched": true
+        },
+        {
+          "text": "Teddy",
+          "start": 84.117,
+          "end": 84.657,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l19",
+      "text": "I open the window, and I bark into the night",
+      "start": 84.757,
+      "end": 88.279,
+      "words": [
+        {
+          "text": "I",
+          "start": 84.757,
+          "end": 84.857,
+          "matched": true
+        },
+        {
+          "text": "open",
+          "start": 85.057,
+          "end": 85.518,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 85.578,
+          "end": 85.678,
+          "matched": true
+        },
+        {
+          "text": "window,",
+          "start": 85.818,
+          "end": 86.518,
+          "matched": true
+        },
+        {
+          "text": "and",
+          "start": 86.638,
+          "end": 86.758,
+          "matched": true
+        },
+        {
+          "text": "I",
+          "start": 86.818,
+          "end": 86.878,
+          "matched": true
+        },
+        {
+          "text": "bark",
+          "start": 86.958,
+          "end": 87.218,
+          "matched": true
+        },
+        {
+          "text": "into",
+          "start": 87.258,
+          "end": 87.638,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 87.678,
+          "end": 87.838,
+          "matched": true
+        },
+        {
+          "text": "night",
+          "start": 87.918,
+          "end": 88.279,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l20",
+      "text": "But there's nothing there to see, no one in sight",
+      "start": 90.019,
+      "end": 95.628,
+      "words": [
+        {
+          "text": "But",
+          "start": 90.019,
+          "end": 90.139,
+          "matched": true
+        },
+        {
+          "text": "there's",
+          "start": 90.199,
+          "end": 90.44,
+          "matched": true
+        },
+        {
+          "text": "nothing",
+          "start": 90.5,
+          "end": 91.12,
+          "matched": true
+        },
+        {
+          "text": "there",
+          "start": 91.18,
+          "end": 91.44,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 91.48,
+          "end": 91.56,
+          "matched": true
+        },
+        {
+          "text": "see,",
+          "start": 91.64,
+          "end": 92.0,
+          "matched": true
+        },
+        {
+          "text": "no",
+          "start": 92.12,
+          "end": 92.56,
+          "matched": true
+        },
+        {
+          "text": "one",
+          "start": 93.581,
+          "end": 93.801,
+          "matched": true
+        },
+        {
+          "text": "in",
+          "start": 93.801,
+          "end": 94.715,
+          "matched": false
+        },
+        {
+          "text": "sight",
+          "start": 94.715,
+          "end": 95.628,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l21",
+      "text": "Woof",
+      "start": 95.628,
+      "end": 96.542,
+      "words": [
+        {
+          "text": "Woof",
+          "start": 95.628,
+          "end": 96.542,
+          "matched": false
+        }
+      ]
+    },
+    {
+      "id": "l22",
+      "text": "There's not a ball out there...!",
+      "start": 96.542,
+      "end": 98.543,
+      "words": [
+        {
+          "text": "There's",
+          "start": 96.542,
+          "end": 96.782,
+          "matched": true
+        },
+        {
+          "text": "not",
+          "start": 96.822,
+          "end": 97.122,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 97.142,
+          "end": 97.162,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 97.282,
+          "end": 97.762,
+          "matched": true
+        },
+        {
+          "text": "out",
+          "start": 97.983,
+          "end": 98.143,
+          "matched": true
+        },
+        {
+          "text": "there...!",
+          "start": 98.223,
+          "end": 98.543,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l23",
+      "text": "No one to hear my prayer...!",
+      "start": 100.302,
+      "end": 102.273,
+      "words": [
+        {
+          "text": "No",
+          "start": 100.302,
+          "end": 100.543,
+          "matched": true
+        },
+        {
+          "text": "one",
+          "start": 100.643,
+          "end": 100.744,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 100.764,
+          "end": 100.925,
+          "matched": true
+        },
+        {
+          "text": "hear",
+          "start": 100.985,
+          "end": 101.367,
+          "matched": true
+        },
+        {
+          "text": "my",
+          "start": 101.488,
+          "end": 101.83,
+          "matched": true
+        },
+        {
+          "text": "prayer...!",
+          "start": 101.931,
+          "end": 102.273,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l24",
+      "text": "Gimme, gimme, gimme a ball after midnight",
+      "start": 104.76,
+      "end": 108.081,
+      "words": [
+        {
+          "text": "Gimme,",
+          "start": 104.76,
+          "end": 105.24,
+          "matched": true
+        },
+        {
+          "text": "gimme,",
+          "start": 105.26,
+          "end": 105.68,
+          "matched": true
+        },
+        {
+          "text": "gimme",
+          "start": 105.72,
+          "end": 106.26,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 106.28,
+          "end": 106.3,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 106.421,
+          "end": 106.881,
+          "matched": true
+        },
+        {
+          "text": "after",
+          "start": 106.981,
+          "end": 107.261,
+          "matched": true
+        },
+        {
+          "text": "midnight",
+          "start": 107.381,
+          "end": 108.081,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l25",
+      "text": "Won't somebody help me chase Teddy away?",
+      "start": 108.461,
+      "end": 111.482,
+      "words": [
+        {
+          "text": "Won't",
+          "start": 108.461,
+          "end": 108.701,
+          "matched": true
+        },
+        {
+          "text": "somebody",
+          "start": 108.761,
+          "end": 109.381,
+          "matched": true
+        },
+        {
+          "text": "help",
+          "start": 109.461,
+          "end": 109.681,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 109.722,
+          "end": 109.842,
+          "matched": true
+        },
+        {
+          "text": "chase",
+          "start": 109.902,
+          "end": 110.242,
+          "matched": true
+        },
+        {
+          "text": "Teddy",
+          "start": 110.382,
+          "end": 110.902,
+          "matched": true
+        },
+        {
+          "text": "away?",
+          "start": 111.022,
+          "end": 111.482,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l26",
+      "text": "Gimme, gimme, gimme a ball after midnight",
+      "start": 111.502,
+      "end": 115.603,
+      "words": [
+        {
+          "text": "Gimme,",
+          "start": 111.502,
+          "end": 111.602,
+          "matched": true
+        },
+        {
+          "text": "gimme,",
+          "start": 112.282,
+          "end": 113.203,
+          "matched": true
+        },
+        {
+          "text": "gimme",
+          "start": 113.243,
+          "end": 113.763,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 113.783,
+          "end": 113.803,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 113.923,
+          "end": 114.403,
+          "matched": true
+        },
+        {
+          "text": "after",
+          "start": 114.503,
+          "end": 114.763,
+          "matched": true
+        },
+        {
+          "text": "midnight",
+          "start": 114.883,
+          "end": 115.603,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l27",
+      "text": "Take me through the darkness to the break of the day",
+      "start": 116.003,
+      "end": 119.024,
+      "words": [
+        {
+          "text": "Take",
+          "start": 116.003,
+          "end": 116.243,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 116.303,
+          "end": 116.404,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 116.464,
+          "end": 116.764,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 116.804,
+          "end": 116.884,
+          "matched": true
+        },
+        {
+          "text": "darkness",
+          "start": 116.944,
+          "end": 117.384,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 117.384,
+          "end": 117.744,
+          "matched": false
+        },
+        {
+          "text": "the",
+          "start": 117.744,
+          "end": 117.824,
+          "matched": true
+        },
+        {
+          "text": "break",
+          "start": 117.924,
+          "end": 118.244,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 118.304,
+          "end": 118.424,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 118.444,
+          "end": 118.504,
+          "matched": true
+        },
+        {
+          "text": "day",
+          "start": 118.604,
+          "end": 119.024,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l28",
+      "text": "Gimme, gimme, gimme a ball after midnight",
+      "start": 119.044,
+      "end": 123.106,
+      "words": [
+        {
+          "text": "Gimme,",
+          "start": 119.044,
+          "end": 119.144,
+          "matched": true
+        },
+        {
+          "text": "gimme,",
+          "start": 119.785,
+          "end": 120.705,
+          "matched": true
+        },
+        {
+          "text": "gimme",
+          "start": 120.745,
+          "end": 121.285,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 121.305,
+          "end": 121.325,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 121.445,
+          "end": 121.865,
+          "matched": true
+        },
+        {
+          "text": "after",
+          "start": 121.885,
+          "end": 122.285,
+          "matched": true
+        },
+        {
+          "text": "midnight",
+          "start": 122.405,
+          "end": 123.106,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l29",
+      "text": "Won't somebody help me chase Teddy away?",
+      "start": 123.526,
+      "end": 126.467,
+      "words": [
+        {
+          "text": "Won't",
+          "start": 123.526,
+          "end": 123.726,
+          "matched": true
+        },
+        {
+          "text": "somebody",
+          "start": 123.786,
+          "end": 124.406,
+          "matched": true
+        },
+        {
+          "text": "help",
+          "start": 124.466,
+          "end": 124.706,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 124.726,
+          "end": 124.866,
+          "matched": true
+        },
+        {
+          "text": "chase",
+          "start": 124.906,
+          "end": 125.286,
+          "matched": true
+        },
+        {
+          "text": "Teddy",
+          "start": 125.386,
+          "end": 125.926,
+          "matched": true
+        },
+        {
+          "text": "away?",
+          "start": 126.066,
+          "end": 126.467,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l30",
+      "text": "Gimme, gimme, gimme a ball after midnight",
+      "start": 126.487,
+      "end": 193.83,
+      "words": [
+        {
+          "text": "Gimme,",
+          "start": 126.487,
+          "end": 126.587,
+          "matched": true
+        },
+        {
+          "text": "gimme,",
+          "start": 127.287,
+          "end": 127.767,
+          "matched": true
+        },
+        {
+          "text": "gimme",
+          "start": 127.787,
+          "end": 128.787,
+          "matched": true
+        },
+        {
+          "text": "a",
+          "start": 191.688,
+          "end": 191.708,
+          "matched": true
+        },
+        {
+          "text": "ball",
+          "start": 191.848,
+          "end": 192.348,
+          "matched": true
+        },
+        {
+          "text": "after",
+          "start": 192.429,
+          "end": 192.689,
+          "matched": true
+        },
+        {
+          "text": "midnight",
+          "start": 192.809,
+          "end": 193.83,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l31",
+      "text": "Take me through the darkness to the break of the day",
+      "start": 193.93,
+      "end": 196.892,
+      "words": [
+        {
+          "text": "Take",
+          "start": 193.93,
+          "end": 194.17,
+          "matched": true
+        },
+        {
+          "text": "me",
+          "start": 194.21,
+          "end": 194.31,
+          "matched": true
+        },
+        {
+          "text": "through",
+          "start": 194.37,
+          "end": 194.65,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 194.71,
+          "end": 194.79,
+          "matched": true
+        },
+        {
+          "text": "darkness",
+          "start": 194.87,
+          "end": 195.311,
+          "matched": true
+        },
+        {
+          "text": "to",
+          "start": 195.351,
+          "end": 195.591,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 195.651,
+          "end": 195.731,
+          "matched": true
+        },
+        {
+          "text": "break",
+          "start": 195.811,
+          "end": 196.131,
+          "matched": true
+        },
+        {
+          "text": "of",
+          "start": 196.192,
+          "end": 196.312,
+          "matched": true
+        },
+        {
+          "text": "the",
+          "start": 196.352,
+          "end": 196.412,
+          "matched": true
+        },
+        {
+          "text": "day",
+          "start": 196.532,
+          "end": 196.892,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "id": "l32",
+      "text": "Woof",
+      "start": 197.693,
+      "end": 197.993,
+      "words": [
+        {
+          "text": "Woof",
+          "start": 197.693,
+          "end": 197.993,
+          "matched": true
+        }
+      ]
+    }
+  ]
+}
