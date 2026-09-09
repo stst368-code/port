@@ -4,7 +4,7 @@ model: MiniMax Music 3 FP16
 state: active
 genre: disco
 inspiration: Abba - Gimmie Gimmie
-cover: gimmie-gimmie-ball-v4
+cover: gimmie-gimmie-ball-v4.png
 duration: 220
 caption: |
   Global Metadata
