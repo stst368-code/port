@@ -101,18 +101,38 @@ check("insert sound stays off the program graph and meters",
       "fxContext" in js and "own AudioContext" in js)
 check("insert sound follows the output level", "clamp(0, audio.volume, 1)" in js)
 
-# --- side folders -----------------------------------------------------------
+# --- top pull-down information rack ----------------------------------------
+folder_builder = (ROOT / "tools/build_folders.py").read_text(encoding="utf-8")
+docs_builder = (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")
+workflow_js = (ROOT / "assets/js/comfy-workflow.js").read_text(encoding="utf-8")
+workflow_css = (ROOT / "assets/css/comfy-workflow.css").read_text(encoding="utf-8")
+
 check("folder tabs are built from markdown", (ROOT / "tools/build_folders.py").exists())
 check("template has a folder slot", "{{FOLDERS}}" in template)
 check("folders are wired into the single build command",
       "build_folders" in (ROOT / "tools/build_catalogue.py").read_text(encoding="utf-8"))
-check("folder drawer is styled as paper", ".gbr-folder-sheet" in css and ".gbr-folder-tab" in css)
-check("shell reserves a gutter for the tabs", ".gbr-app:has(> .gbr-folders)" in css)
-check("folders are a tablist with escape and focus return",
-      'role="tablist"' in (ROOT / "tools/build_folders.py").read_text(encoding="utf-8")
+check("information rack is a horizontal top rail",
+      'aria-orientation="horizontal"' in folder_builder
+      and "--folder-rail-h" in css
+      and "overflow-x: auto" in css)
+check("old right-side gutter is removed", ".gbr-app:has(> .gbr-folders)" not in css)
+check("drawer height is user adjustable",
+      'aria-label="Resize page drawer height"' in folder_builder
+      and "gbr:folder-height" in js
+      and "cursor: ns-resize" in css)
+check("folders retain tab semantics, escape and focus return",
+      'role="tablist"' in folder_builder
       and "closeFolders(true)" in js)
 check("playback keys are inert while a folder is open",
       "if (folders.root && folders.root.dataset.open) return;" in js)
+check("nested Markdown lists are rendered as real subtrees",
+      "_render_list_block" in docs_builder
+      and "li > ul" in css)
+check("workflow prompt widgets keep textarea geometry when blank",
+      "MULTILINE_WIDGET_NAMES" in workflow_js
+      and "caption|lyrics?" in workflow_js
+      and "cw-widget--textarea" in workflow_js
+      and ".cw-widget--textarea" in workflow_css)
 check("Spotify Markdown directive is supported",
       "[spotify:" in (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")
       and "open.spotify.com/embed" in (ROOT / "tools/build_docs.py").read_text(encoding="utf-8")

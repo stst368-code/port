@@ -2138,25 +2138,42 @@
   }
 
   /* ============================================================ FOLDERS == */
-  /* Tabs down the right edge pull out a single drawer; switching tabs swaps
-     the sheet inside it rather than closing and reopening. Absent from the
-     page entirely when content-source/folders is empty, so everything here
-     no-ops rather than guarding at every call site. */
+  /* Engraved tabs under the top fascia pull an equipment drawer downward.
+     Switching pages swaps the sheet in place. Audio keeps running. */
 
   var folders = { root: null, drawer: null, resizer: null, tabs: [], sheets: [], lastTab: null, resize: null };
 
+  function syncFolderTop() {
+    if (!folders.root) return 0;
+    var bottom = Math.max(0, folders.root.getBoundingClientRect().bottom);
+    folders.root.style.setProperty("--folder-drawer-top", Math.round(bottom) + "px");
+    return bottom;
+  }
+
   function setFolder(id) {
     if (!folders.root) return;
+    syncFolderTop();
     folders.root.dataset.open = id || "";
     folders.tabs.forEach(function (tab) {
-      tab.setAttribute("aria-selected", tab.dataset.folder === id ? "true" : "false");
+      var active = tab.dataset.folder === id;
+      tab.setAttribute("aria-selected", active ? "true" : "false");
+      if (active) {
+        tab.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "nearest",
+          inline: "center"
+        });
+      }
     });
     folders.sheets.forEach(function (sheet) {
       sheet.hidden = sheet.id !== "gbr-folder-" + id;
     });
     if (!id) return;
     var open = document.getElementById("gbr-folder-" + id);
-    if (open) { open.scrollTop = 0; open.focus({ preventScroll: true }); }
+    if (open) {
+      open.scrollTop = 0;
+      open.focus({ preventScroll: true });
+    }
   }
 
   function closeFolders(restoreFocus) {
@@ -2165,43 +2182,36 @@
     if (restoreFocus && folders.lastTab) folders.lastTab.focus();
   }
 
-  function folderWidthLimits() {
-    var tabWidth = parseFloat(getComputedStyle(folders.root).getPropertyValue("--tab-w")) || 34;
-    var max = Math.max(220, window.innerWidth - tabWidth - 14);
-    /* Desktop keeps a sensible reading width. On touch-sized screens allow the
-       sheet to contract to roughly 55% of the viewport, so dragging the rail
-       actually has somewhere to go rather than being a decorative lie. */
+  function folderHeightLimits() {
+    var top = syncFolderTop();
+    var max = Math.max(180, window.innerHeight - top - 8);
     var mobile = window.matchMedia("(max-width: 860px)").matches;
-    var desiredMin = mobile ? Math.max(220, window.innerWidth * 0.55) : 420;
-    var min = Math.min(desiredMin, max);
-    return { min: min, max: max };
+    var desiredMin = mobile ? Math.max(200, window.innerHeight * 0.36) : 300;
+    return { min: Math.min(desiredMin, max), max: max };
   }
 
-  function setFolderWidth(width, save) {
+  function setFolderHeight(height, save) {
     if (!folders.root || !folders.drawer) return;
-    var limits = folderWidthLimits();
-    width = clamp(limits.min, Number(width) || 760, limits.max);
-    folders.root.style.setProperty("--folder-drawer-width", Math.round(width) + "px");
+    var limits = folderHeightLimits();
+    height = clamp(limits.min, Number(height) || Math.min(760, limits.max), limits.max);
+    folders.root.style.setProperty("--folder-drawer-height", Math.round(height) + "px");
     if (folders.resizer) {
       folders.resizer.setAttribute("aria-valuemin", String(Math.round(limits.min)));
       folders.resizer.setAttribute("aria-valuemax", String(Math.round(limits.max)));
-      folders.resizer.setAttribute("aria-valuenow", String(Math.round(width)));
+      folders.resizer.setAttribute("aria-valuenow", String(Math.round(height)));
     }
-    if (save) remember("gbr:folder-width", String(Math.round(width)));
+    if (save) remember("gbr:folder-height", String(Math.round(height)));
   }
 
-  function resetFolderWidth() {
-    try { localStorage.removeItem("gbr:folder-width"); } catch (_) {}
-    setFolderWidth(760, false);
+  function resetFolderHeight() {
+    try { localStorage.removeItem("gbr:folder-height"); } catch (_) {}
+    var limits = folderHeightLimits();
+    setFolderHeight(Math.min(760, limits.max), false);
   }
 
   function initFolderResize() {
     if (!folders.drawer) return;
 
-    /* Older generated pages do not contain the resize separator because the
-       drawer existed before resizing was added.  Create it at runtime so a
-       CSS/JS drop-in patch upgrades those pages too, instead of requiring the
-       whole site to be regenerated merely to obtain one div. */
     folders.resizer = $("gbr-folder-resizer");
     if (!folders.resizer) {
       folders.resizer = document.createElement("div");
@@ -2209,33 +2219,31 @@
       folders.resizer.id = "gbr-folder-resizer";
       folders.resizer.setAttribute("role", "separator");
       folders.resizer.setAttribute("tabindex", "0");
-      folders.resizer.setAttribute("aria-orientation", "vertical");
-      folders.resizer.setAttribute("aria-label", "Resize notes panel");
+      folders.resizer.setAttribute("aria-orientation", "horizontal");
+      folders.resizer.setAttribute("aria-label", "Resize page drawer height");
       folders.resizer.setAttribute("title", "Drag to resize; double-click to reset");
-      folders.drawer.insertBefore(folders.resizer, folders.drawer.firstChild);
+      folders.drawer.appendChild(folders.resizer);
     }
 
-    var savedWidth = parseFloat(recall("gbr:folder-width"));
-    setFolderWidth(Number.isFinite(savedWidth) ? savedWidth : 760, false);
+    var limits = folderHeightLimits();
+    var savedHeight = parseFloat(recall("gbr:folder-height"));
+    setFolderHeight(Number.isFinite(savedHeight) ? savedHeight : Math.min(760, limits.max), false);
 
     function moveResize(event) {
       if (!folders.resize || event.pointerId !== folders.resize.pointerId) return;
-      /* Use the drawer's fixed right edge rather than accumulating deltas. This
-         keeps the handle glued to the pointer even if the browser drops or
-         coalesces pointermove events while crossing the scrim/workflow. */
       event.preventDefault();
-      setFolderWidth(folders.resize.right - event.clientX, false);
+      setFolderHeight(event.clientY - folders.resize.top, false);
     }
 
     function finishResize(event) {
       if (!folders.resize || (event.pointerId != null && event.pointerId !== folders.resize.pointerId)) return;
       var pointerId = folders.resize.pointerId;
-      var width = folders.drawer.getBoundingClientRect().width;
+      var height = folders.drawer.getBoundingClientRect().height;
       folders.resize = null;
       folders.root.dataset.resizing = "false";
       document.documentElement.classList.remove("gbr-folder-resize-active");
       try { folders.resizer.releasePointerCapture(pointerId); } catch (_) {}
-      setFolderWidth(width, true);
+      setFolderHeight(height, true);
     }
 
     folders.resizer.addEventListener("pointerdown", function (event) {
@@ -2243,16 +2251,13 @@
       event.preventDefault();
       event.stopPropagation();
       var rect = folders.drawer.getBoundingClientRect();
-      folders.resize = { right: rect.right, pointerId: event.pointerId };
+      folders.resize = { top: rect.top, pointerId: event.pointerId };
       folders.root.dataset.resizing = "true";
       document.documentElement.classList.add("gbr-folder-resize-active");
       try { folders.resizer.setPointerCapture(event.pointerId); } catch (_) {}
       moveResize(event);
     });
 
-    /* Track globally as well as using pointer capture. It is deliberately
-       redundant: resize should continue when the pointer crosses the dimmed
-       page, an iframe, or the workflow canvas instead of mysteriously dying. */
     window.addEventListener("pointermove", moveResize, { passive: false });
     window.addEventListener("pointerup", finishResize);
     window.addEventListener("pointercancel", finishResize);
@@ -2262,25 +2267,27 @@
 
     folders.resizer.addEventListener("dblclick", function (event) {
       event.preventDefault();
-      resetFolderWidth();
+      resetFolderHeight();
     });
 
     folders.resizer.addEventListener("keydown", function (event) {
-      var current = folders.drawer.getBoundingClientRect().width;
-      var limits = folderWidthLimits();
+      var current = folders.drawer.getBoundingClientRect().height;
+      var limits = folderHeightLimits();
       var next = current;
-      if (event.key === "ArrowLeft") next = current + (event.shiftKey ? 100 : 40);
-      else if (event.key === "ArrowRight") next = current - (event.shiftKey ? 100 : 40);
+      if (event.key === "ArrowUp") next = current - (event.shiftKey ? 100 : 40);
+      else if (event.key === "ArrowDown") next = current + (event.shiftKey ? 100 : 40);
       else if (event.key === "Home") next = limits.min;
       else if (event.key === "End") next = limits.max;
       else return;
       event.preventDefault();
-      setFolderWidth(next, true);
+      setFolderHeight(next, true);
     });
 
     window.addEventListener("resize", function () {
-      var current = parseFloat(recall("gbr:folder-width")) || folders.drawer.getBoundingClientRect().width || 760;
-      setFolderWidth(current, false);
+      syncFolderTop();
+      var saved = parseFloat(recall("gbr:folder-height"));
+      var current = Number.isFinite(saved) ? saved : folders.drawer.getBoundingClientRect().height || 760;
+      setFolderHeight(current, false);
     });
   }
 
@@ -2288,9 +2295,10 @@
     folders.root = $("gbr-folders");
     if (!folders.root) return;
     folders.drawer = $("gbr-folder-drawer");
-    initFolderResize();
     folders.tabs = Array.prototype.slice.call(folders.root.querySelectorAll(".gbr-folder-tab"));
     folders.sheets = Array.prototype.slice.call(folders.root.querySelectorAll(".gbr-folder-sheet"));
+    syncFolderTop();
+    initFolderResize();
 
     folders.tabs.forEach(function (tab, index) {
       tab.addEventListener("click", function () {
@@ -2298,12 +2306,17 @@
         var id = tab.dataset.folder;
         setFolder(folders.root.dataset.open === id ? "" : id);
       });
-      /* Roving arrow keys along the tab strip, as a tablist should. */
+
       tab.addEventListener("keydown", function (event) {
-        var step = event.key === "ArrowDown" ? 1 : (event.key === "ArrowUp" ? -1 : 0);
-        if (!step) return;
+        var next = index;
+        if (event.key === "ArrowLeft") next = mod(index - 1, folders.tabs.length);
+        else if (event.key === "ArrowRight") next = mod(index + 1, folders.tabs.length);
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = folders.tabs.length - 1;
+        else return;
         event.preventDefault();
-        folders.tabs[mod(index + step, folders.tabs.length)].focus();
+        folders.tabs[next].focus();
+        folders.tabs[next].scrollIntoView({ block: "nearest", inline: "center" });
       });
     });
 

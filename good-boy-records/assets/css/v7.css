@@ -50,7 +50,7 @@
   --sans:  "Helvetica Neue", Arial, sans-serif;
   --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
 
-  --folder-tab-w: 42px;
+  --folder-rail-h: 39px;
 
   --radius:    8px;
   --radius-sm: 5px;
@@ -103,12 +103,6 @@ button { cursor: pointer; }
     max(0.45rem, env(safe-area-inset-right))
     max(0.45rem, env(safe-area-inset-bottom))
     max(0.45rem, env(safe-area-inset-left));
-}
-
-/* The folder tabs are fixed over the right edge, so the shell gives up that
-   strip whenever any folders exist. */
-.gbr-app:has(> .gbr-folders) {
-  padding-right: calc(var(--folder-tab-w) + max(0.45rem, env(safe-area-inset-right)));
 }
 
 /* ------------------------------------------------------------- top bar -- */
@@ -1630,279 +1624,372 @@ input:disabled { opacity: 0.4; }
 }
 
 /* ============================================================= FOLDERS == */
-/* Manila tabs down the right edge, pulling out a paper sheet over the
-   machine. Paper is the one light material in this interface, which is
-   already established by the VU faces, so long-form text gets a readable
-   surface without inventing a new visual language for it. */
+/* Engraved page handles sit below the main fascia and pull an equipment drawer
+   down over the player. Ten-ish pages remain one horizontal rail; on narrow
+   screens the rail scrolls instead of wrapping into a tiny-label catastrophe. */
 
 .gbr-folders {
-  --tab-w: var(--folder-tab-w);
-  position: fixed;
-  inset: 0;
+  --folder-drawer-top: 84px;
+  --folder-drawer-height: min(760px, calc(100dvh - var(--folder-drawer-top) - 10px));
+  position: relative;
   z-index: 1500;
+  flex: 0 0 var(--folder-rail-h);
+  min-height: var(--folder-rail-h);
+  width: 100%;
   pointer-events: none;
 }
 
-.gbr-folder-scrim {
+.gbr-folder-tabs {
   position: absolute;
   inset: 0;
-  background: rgba(4, 2, 1, 0.62);
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 5px 10px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  pointer-events: auto;
+  border-inline: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-hi);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.018), transparent 16%, rgba(255,255,255,.012) 57%, transparent),
+    linear-gradient(180deg, #17100b, #080503 78%, #160c06);
+  box-shadow:
+    inset 0 1px rgba(255, 196, 103, .045),
+    inset 0 -1px rgba(238, 149, 28, .08),
+    0 4px 12px rgba(0,0,0,.46);
+}
+.gbr-folder-tabs::-webkit-scrollbar { display: none; }
+
+.gbr-folder-tab {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 86px;
+  max-width: 156px;
+  height: 31px;
+  padding: 5px 13px 6px 26px;
+  border: 1px solid #4b3420;
+  border-bottom-color: #70451f;
+  border-radius: 4px 4px 7px 7px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.035), transparent 26%, rgba(255,255,255,.015) 72%, transparent),
+    linear-gradient(180deg, #2a1b10, #100a06);
+  color: #98836a;
+  box-shadow:
+    0 3px 7px rgba(0,0,0,.42),
+    inset 0 1px rgba(255,225,174,.05);
+  font: 700 clamp(.54rem, .68vw, .66rem)/1 var(--mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition:
+    transform 170ms cubic-bezier(.2,.75,.3,1),
+    color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background 150ms ease;
+}
+.gbr-folder-tab::before {
+  content: attr(data-order);
+  position: absolute;
+  left: 8px;
+  top: 9px;
+  color: #675642;
+  font: 700 7px/1 var(--mono);
+  letter-spacing: .03em;
+}
+.gbr-folder-tab::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 5px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #6d573d;
+  box-shadow: 0 0 0 1px #100b07;
+}
+.gbr-folder-tab:hover,
+.gbr-folder-tab:focus-visible {
+  color: #d6c6ad;
+  border-color: #74502b;
+}
+.gbr-folder-tab:focus-visible {
+  outline: 2px solid var(--amber-hi);
+  outline-offset: -2px;
+}
+.gbr-folder-tab[aria-selected="true"] {
+  transform: translateY(4px);
+  color: var(--amber-hi);
+  border-color: #a76727;
+  background:
+    linear-gradient(rgba(238,149,28,.06), rgba(238,149,28,.015)),
+    linear-gradient(180deg, #342014, #100905);
+  box-shadow:
+    0 5px 11px rgba(0,0,0,.55),
+    0 0 15px rgba(238,149,28,.08),
+    inset 0 1px rgba(255,215,147,.08);
+  text-shadow: 0 0 10px rgba(255,192,90,.32);
+}
+.gbr-folder-tab[aria-selected="true"]::before { color: #b57936; }
+
+.gbr-folder-scrim {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 0, rgba(55,31,13,.18), transparent 36%),
+    rgba(2,1,1,.66);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 260ms ease;
-  z-index: 1;
+  transition: opacity 240ms ease;
 }
 .gbr-folders[data-open]:not([data-open=""]) .gbr-folder-scrim {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* --------------------------------------------------------------- tabs -- */
-
-.gbr-folder-tabs {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  pointer-events: auto;
-  z-index: 4;
-}
-
-.gbr-folder-tab {
-  writing-mode: vertical-rl;
-  width: var(--tab-w);
-  min-height: 92px;
-  padding: 1rem 0;
-  border: 1px solid #7a5628;
-  border-right: 0;
-  border-radius: 6px 0 0 6px;
-  background: linear-gradient(90deg, #d8bd88, #b8975e);
-  color: #33240f;
-  font: 700 clamp(0.62rem, 0.82vw, 0.75rem)/1 var(--mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-align: center;
-  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.65), inset 1px 0 rgba(255, 244, 214, 0.5);
-  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
-}
-.gbr-folder-tab:focus-visible { outline: 3px solid #e4b768; outline-offset: -3px; }
-
-.gbr-folder-tab:hover { transform: translateX(-4px); }
-.gbr-folder-tab[aria-selected="true"] {
-  background: linear-gradient(90deg, #f2e2bd, #e3cd9f);
-  transform: translateX(-2px);
-  box-shadow: -4px 0 14px rgba(0, 0, 0, 0.7);
-}
-
-/* ------------------------------------------------------------- drawer -- */
-
 .gbr-folder-drawer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: var(--tab-w);
-  width: min(var(--folder-drawer-width, 760px), calc(100vw - var(--tab-w) - 14px));
-  min-width: min(420px, calc(100vw - var(--tab-w)));
-  transform: translateX(calc(100% + var(--tab-w) + 20px));
-  pointer-events: none;
-  border-left: 1px solid #8a6430;
-  background:
-    repeating-linear-gradient(180deg, rgba(120, 92, 48, 0.07) 0 1px, transparent 1px 30px),
-    linear-gradient(115deg, #f4e7c9 0%, #ecdcba 45%, #ddc99f 100%);
-  box-shadow: -22px 0 60px rgba(0, 0, 0, 0.75);
-  transition: transform 300ms cubic-bezier(0.22, 0.75, 0.2, 1);
+  position: fixed;
   z-index: 3;
+  left: 50%;
+  top: var(--folder-drawer-top);
+  width: min(1420px, calc(100vw - 22px));
+  height: min(var(--folder-drawer-height), calc(100dvh - var(--folder-drawer-top) - 8px));
+  min-height: min(300px, calc(100dvh - var(--folder-drawer-top) - 8px));
+  transform: translate(-50%, calc(-100% - var(--folder-drawer-top) - 16px));
+  pointer-events: none;
+  overflow: hidden;
+  border: 1px solid #50351e;
+  border-top: 0;
+  border-radius: 0 0 11px 11px;
+  background:
+    radial-gradient(circle at 18% -5%, rgba(238,149,28,.045), transparent 29%),
+    linear-gradient(90deg, rgba(255,255,255,.013), transparent 15%, rgba(255,255,255,.009) 61%, transparent),
+    linear-gradient(180deg, #13100d, #090706);
+  box-shadow:
+    0 28px 66px rgba(0,0,0,.72),
+    inset 0 -1px rgba(255,255,255,.035);
+  transition: transform 430ms cubic-bezier(.18,.82,.22,1.02);
 }
 .gbr-folders[data-open]:not([data-open=""]) .gbr-folder-drawer {
-  transform: translateX(0);
+  transform: translate(-50%, 0);
   pointer-events: auto;
 }
-
-/* The drawer is anchored to the right, so dragging its left edge leftwards
-   makes it wider and dragging rightwards gives the player its space back.
-   Keep the handle INSIDE the drawer edge. When the drawer is full-width on a
-   phone there is literally no off-canvas space to draw into, which made the
-   previous negative-left handle look as though it did not exist. */
-.gbr-folder-resizer {
-  position: absolute;
-  z-index: 20;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 54px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: ew-resize;
-  touch-action: none;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
-}
-/* The first version relied on a small pseudo-element at x=0. That was easy to
-   lose against the paper edge and, on older generated pages, the separator
-   element did not exist at all. This one is intentionally unmistakable: a
-   full-height brass rail plus a centred grab block that sits inside the
-   drawer. */
-.gbr-folder-resizer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 14px;
-  border-right: 2px solid #5a3614;
-  background:
-    linear-gradient(90deg,
-      #3b210b 0 2px,
-      #9d652c 2px 5px,
-      #e0b66e 5px 8px,
-      #8c5421 8px 11px,
-      #f4d79c 11px 14px);
-  box-shadow:
-    3px 0 0 rgba(66, 39, 13, 0.28),
-    7px 0 16px rgba(50, 28, 8, 0.26);
-}
-.gbr-folder-resizer::after {
-  content: "⇔";
-  position: absolute;
-  left: 11px;
-  top: 50%;
-  width: 42px;
-  height: 118px;
-  transform: translateY(-50%);
-  display: grid;
-  place-items: center;
-  border: 2px solid #5b3716;
-  border-left-width: 3px;
-  border-radius: 0 10px 10px 0;
-  background: linear-gradient(90deg, #b77c39, #f1d49b 52%, #c68e49);
-  color: #2f1b08;
-  box-shadow:
-    4px 5px 18px rgba(29, 16, 4, 0.52),
-    inset 1px 0 rgba(255, 248, 224, 0.82);
-  font: 900 1.35rem/1 var(--mono);
-  opacity: 1;
-  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
-}
-.gbr-folder-resizer:hover::after,
-.gbr-folder-resizer:focus-visible::after,
-.gbr-folders[data-resizing="true"] .gbr-folder-resizer::after {
-  transform: translateY(-50%) scale(1.07);
-  filter: brightness(1.12);
-  box-shadow:
-    4px 5px 22px rgba(29, 16, 4, 0.58),
-    0 0 0 3px rgba(190, 126, 53, 0.28);
-}
-.gbr-folder-resizer:focus-visible { outline: 3px solid #c77e31; outline-offset: -4px; }
 .gbr-folders[data-resizing="true"] .gbr-folder-drawer { transition: none; }
-.gbr-folders[data-resizing="true"] .gbr-folder-sheet { user-select: none; }
-html.gbr-folder-resize-active,
-html.gbr-folder-resize-active * { cursor: ew-resize !important; }
-html.gbr-folder-resize-active { user-select: none; }
 
+.gbr-folder-drawer-cap {
+  position: absolute;
+  z-index: 6;
+  inset: 0 0 auto 0;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  padding: 0 106px 0 16px;
+  border-bottom: 1px solid #3d2b1b;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.02), transparent 33%, rgba(255,255,255,.012) 71%, transparent),
+    #0d0906;
+  color: #6f5b44;
+  font: 700 .52rem/1 var(--mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
 
 .gbr-folder-close {
   position: absolute;
-  top: 10px;
-  right: 12px;
-  z-index: 2;
-  width: 44px;
-  height: 44px;
-  border: 1px solid #9a7642;
-  border-radius: 4px;
-  background: rgba(255, 246, 224, 0.6);
-  color: #4a3419;
-  font-size: 1.55rem;
-  line-height: 1;
+  z-index: 8;
+  top: 5px;
+  right: 8px;
+  height: 22px;
+  min-width: 82px;
+  padding: 0 9px;
+  border: 1px solid #4d3722;
+  border-radius: 3px;
+  background: linear-gradient(#24170e, #0f0906);
+  color: #92785d;
+  font: 700 .51rem/1 var(--mono);
+  letter-spacing: .11em;
 }
-.gbr-folder-close:hover { background: #fff6e0; color: #241806; }
-
-/* -------------------------------------------------------------- sheet -- */
+.gbr-folder-close:hover,
+.gbr-folder-close:focus-visible {
+  color: var(--amber-hi);
+  border-color: #9b612a;
+  outline: none;
+}
 
 .gbr-folder-sheet {
   height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: clamp(1.4rem, 4vw, 2.9rem) clamp(1.1rem, 3.5vw, 3rem) clamp(1.4rem, 4vw, 2.9rem) clamp(3.6rem, 5vw, 4.4rem);
-  color: #352714;
+  padding:
+    clamp(3.25rem, 5vw, 4.1rem)
+    clamp(1.2rem, 4vw, 3.7rem)
+    clamp(3.2rem, 5vw, 4rem);
+  color: #d7cdbc;
   font-family: var(--serif);
-  font-size: clamp(0.9rem, 1.05vw, 1.02rem);
-  line-height: 1.62;
+  font-size: clamp(.92rem, 1.03vw, 1.03rem);
+  line-height: 1.66;
+  scrollbar-color: #5b4126 #0b0806;
 }
 .gbr-folder-sheet[hidden] { display: none; }
 
 .gbr-folder-title {
-  margin: 0 0 1.2rem;
-  /* Clears the close button, so a long title never runs under it. */
-  padding: 0 3rem 0.5rem 0;
-  border-bottom: 2px solid #a87c3e;
-  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  max-width: min(86ch, 100%);
+  margin: 0 0 1.25rem;
+  padding: 0 7rem .65rem 0;
+  border-bottom: 1px solid #604321;
+  color: #eadcc4;
+  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
   font-weight: 400;
-  line-height: 1.15;
-  color: #2a1c0c;
+  line-height: 1.16;
+  text-shadow: 0 1px 2px #000;
 }
 
 .gbr-folder-body { max-width: min(82ch, 100%); }
+.gbr-folder-body:has(.comfy-workflow),
+.gbr-folder-body:has(.gbr-spotify-embed),
+.gbr-folder-body:has(.gbr-feedback-embed) { max-width: none; }
+
 .gbr-folder-body > *:first-child { margin-top: 0; }
-.gbr-folder-body p, .gbr-folder-body ul, .gbr-folder-body ol { margin: 0 0 1rem; }
-.gbr-folder-body h2, .gbr-folder-body h3, .gbr-folder-body h4 {
-  margin: 1.7rem 0 0.6rem;
-  font-weight: 600;
+.gbr-folder-body p,
+.gbr-folder-body ul,
+.gbr-folder-body ol { margin: 0 0 1rem; }
+.gbr-folder-body h2,
+.gbr-folder-body h3,
+.gbr-folder-body h4 {
+  margin: 1.7rem 0 .62rem;
+  font-family: var(--mono);
+  font-weight: 700;
   line-height: 1.25;
-  color: #2a1c0c;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #d59a4e;
 }
-.gbr-folder-body h2 { font-size: 1.28em; }
-.gbr-folder-body h3 { font-size: 1.1em; }
-.gbr-folder-body h4 { font-size: 1em; }
-.gbr-folder-body li { margin-bottom: 0.35rem; }
-.gbr-folder-body a { color: #9a4a12; text-underline-offset: 2px; }
-.gbr-folder-body strong { color: #241806; }
-.gbr-folder-body em { color: #5c4526; }
+.gbr-folder-body h2 { font-size: 1.12em; }
+.gbr-folder-body h3 { font-size: 1em; }
+.gbr-folder-body h4 { font-size: .92em; }
+.gbr-folder-body li { margin-bottom: .38rem; }
+.gbr-folder-body a {
+  color: #e1ad67;
+  text-decoration-color: rgba(225,173,103,.38);
+  text-underline-offset: 3px;
+}
+.gbr-folder-body a:hover { color: #ffd79b; }
+.gbr-folder-body strong { color: #eee1ca; }
+.gbr-folder-body em { color: #bda98d; }
 .gbr-folder-body blockquote {
   margin: 1.2rem 0;
-  padding: 0.1rem 0 0.1rem 1rem;
-  border-left: 3px solid #b48a4c;
-  color: #5a442a;
+  padding: .1rem 0 .1rem 1rem;
+  border-left: 3px solid #8d5a2c;
+  color: #bcae9a;
 }
 .gbr-folder-body code {
-  padding: 0.1em 0.34em;
+  padding: .1em .34em;
+  border: 1px solid rgba(132,88,39,.28);
   border-radius: 3px;
-  background: rgba(96, 70, 32, 0.14);
-  font: 0.86em/1.5 var(--mono);
-  color: #402c11;
+  background: rgba(0,0,0,.28);
+  font: .86em/1.5 var(--mono);
+  color: #e6bd82;
 }
 .gbr-folder-body pre {
   margin: 0 0 1.1rem;
-  padding: 0.85rem 1rem;
+  padding: .85rem 1rem;
   overflow-x: auto;
-  border: 1px solid rgba(120, 92, 48, 0.4);
+  border: 1px solid rgba(132,88,39,.42);
   border-radius: 4px;
-  background: rgba(96, 70, 32, 0.1);
+  background: rgba(0,0,0,.28);
 }
-.gbr-folder-body pre code { padding: 0; background: none; }
-.gbr-folder-body table { width: 100%; border-collapse: collapse; margin: 0 0 1.1rem; font-size: 0.92em; }
-.gbr-folder-body th, .gbr-folder-body td {
-  padding: 0.45rem 0.6rem;
-  border-bottom: 1px solid rgba(120, 92, 48, 0.35);
+.gbr-folder-body pre code { padding: 0; border: 0; background: none; }
+.gbr-folder-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.1rem;
+  font-size: .92em;
+}
+.gbr-folder-body th,
+.gbr-folder-body td {
+  padding: .48rem .62rem;
+  border-bottom: 1px solid rgba(132,88,39,.28);
   text-align: left;
 }
-.gbr-folder-body th { font-weight: 600; color: #2a1c0c; }
-.gbr-folder-body hr { border: 0; border-top: 1px solid rgba(120, 92, 48, 0.4); margin: 1.6rem 0; }
+.gbr-folder-body th { font-weight: 600; color: #eadcc4; }
+.gbr-folder-body hr {
+  border: 0;
+  border-top: 1px solid rgba(132,88,39,.34);
+  margin: 1.6rem 0;
+}
 .gbr-folder-body img { max-width: 100%; height: auto; border-radius: 4px; }
 
+/* Nested lists become a proper technical component tree. */
+.gbr-folder-body ul:has(> li > ul) {
+  list-style: none;
+  padding-left: 0;
+  max-width: min(100%, 102ch);
+}
+.gbr-folder-body ul:has(> li > ul) li { position: relative; }
+.gbr-folder-body ul:has(> li > ul) ul {
+  list-style: none;
+  margin: .48rem 0 .7rem 1.05rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(213,154,78,.38);
+}
+.gbr-folder-body ul:has(> li > ul) ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.25rem;
+  top: .82em;
+  width: .78rem;
+  border-top: 1px solid rgba(213,154,78,.38);
+}
+.gbr-folder-body ul:has(> li > ul) > li {
+  margin: .42rem 0;
+}
+.gbr-folder-body ul:has(> li > ul) > li > a {
+  font-weight: 700;
+  color: #f0c37c;
+}
+.gbr-folder-body ul:has(> li > ul) > li > ul > li > strong {
+  display: inline-block;
+  margin: .1rem 0 .2rem;
+  color: #c59b66;
+  font: 700 .74rem/1.2 var(--mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.gbr-folder-body ul:has(> li > ul) ul ul {
+  margin-top: .3rem;
+  margin-bottom: .55rem;
+  border-left-color: rgba(213,154,78,.22);
+}
+.gbr-folder-body ul:has(> li > ul) ul ul > li::before {
+  border-top-color: rgba(213,154,78,.22);
+}
+.gbr-folder-body ul:has(> li > ul) ul ul a {
+  display: inline-block;
+  max-width: 100%;
+  padding: .14rem .42rem;
+  border: 1px solid rgba(126,85,42,.22);
+  border-radius: 3px;
+  background: rgba(0,0,0,.18);
+  font: .79rem/1.42 var(--mono);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
 
-/* Markdown [spotify: ...] embeds.  Spotify owns the player chrome; the GBR
-   wrapper merely gives it sensible geometry inside the resizable paper drawer. */
 .gbr-spotify-embed {
-  width: 100%;
+  width: min(100%, 1100px);
   margin: 0 0 1.25rem;
-  border-radius: 12px;
+  border: 1px solid #382719;
+  border-radius: 10px;
   overflow: hidden;
-  background: #181818;
-  box-shadow: 0 8px 24px rgba(54, 34, 10, 0.18);
+  background: #111;
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
 }
 .gbr-spotify-embed iframe {
   display: block;
@@ -1910,48 +1997,126 @@ html.gbr-folder-resize-active { user-select: none; }
   height: 352px;
   border: 0;
 }
-.gbr-folder-body:has(.gbr-spotify-embed) { max-width: min(1100px, 100%); }
 
-/* Markdown [feedback-form: ...] embeds. Microsoft owns the form UI; this
-   wrapper simply makes it behave like a first-class GBR drawer component. */
 .gbr-feedback-embed {
-  width: 100%;
+  width: min(100%, 1100px);
   margin: 0 0 1.25rem;
 }
 .gbr-feedback-embed iframe {
   display: block;
   width: 100%;
-  height: min(760px, 76vh);
-  min-height: 560px;
-  border: 1px solid rgba(120, 92, 48, 0.38);
-  border-radius: 10px;
+  height: min(760px, 70vh);
+  min-height: 520px;
+  border: 1px solid #50391f;
+  border-radius: 8px;
   background: #fff;
-  box-shadow: 0 8px 24px rgba(54, 34, 10, 0.14);
+  box-shadow: 0 10px 30px rgba(0,0,0,.26);
 }
 .gbr-feedback-fallback {
-  margin: 0.7rem 0 0;
-  font-size: 0.86em;
-  color: #6a5030;
+  margin: .7rem 0 0;
+  font-size: .86em;
+  color: #9b8c77;
 }
-.gbr-folder-body:has(.gbr-feedback-embed) { max-width: min(1100px, 100%); }
 .gbr-embed-error {
-  padding: 0.7rem 0.85rem;
-  border: 1px solid rgba(143, 70, 22, 0.35);
-  background: rgba(143, 70, 22, 0.08);
+  padding: .7rem .85rem;
+  border: 1px solid rgba(191,91,38,.4);
+  background: rgba(143,70,22,.12);
 }
 
+.gbr-folder-resizer {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  cursor: ns-resize;
+  touch-action: none;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+.gbr-folder-resizer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  border-top: 1px solid #6a431f;
+  background:
+    linear-gradient(180deg,
+      #1a1009 0 1px,
+      #815129 1px 3px,
+      #c28b49 3px 5px,
+      #5a3518 5px 7px,
+      #17100b 7px 10px);
+  box-shadow: 0 -4px 10px rgba(0,0,0,.28);
+}
+.gbr-folder-resizer::after {
+  content: "↕";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 112px;
+  height: 22px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  border: 1px solid #68441f;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(180deg, #3b2716, #160d08);
+  color: #a87b45;
+  box-shadow: 0 -3px 8px rgba(0,0,0,.36), inset 0 1px rgba(255,222,162,.05);
+  font: 700 .78rem/1 var(--mono);
+  transition: color 120ms ease, transform 120ms ease, border-color 120ms ease;
+}
+.gbr-folder-resizer:hover::after,
+.gbr-folder-resizer:focus-visible::after,
+.gbr-folders[data-resizing="true"] .gbr-folder-resizer::after {
+  color: var(--amber-hi);
+  border-color: #a6692c;
+  transform: translateX(-50%) translateY(-1px);
+}
+.gbr-folder-resizer:focus-visible { outline: 2px solid var(--amber-hi); outline-offset: -4px; }
+.gbr-folders[data-resizing="true"] .gbr-folder-sheet { user-select: none; }
+html.gbr-folder-resize-active,
+html.gbr-folder-resize-active * { cursor: ns-resize; }
+html.gbr-folder-resize-active { user-select: none; }
+
 @media (max-width: 860px) {
-  :root { --folder-tab-w: 40px; }
-  .gbr-folder-tab { min-height: 84px; padding: 0.9rem 0; font-size: 0.62rem; letter-spacing: 0.11em; }
-  /* Keep the drawer full-width by default, but let the JS-set width shrink it.
-     The resize handle stays visible and touchable on phones/tablets. */
-  .gbr-folder-drawer { min-width: 0; }
-  .gbr-folder-resizer { width: 58px; }
-  .gbr-folder-resizer::after { width: 44px; height: 112px; font-size: 1.35rem; }
-  .gbr-folder-sheet { padding-left: clamp(3.8rem, 12vw, 4.6rem); }
-  .gbr-feedback-embed iframe { height: 72vh; min-height: 520px; }
+  :root { --folder-rail-h: 38px; }
+  .gbr-folder-tabs { justify-content: flex-start; padding-inline: 5px; gap: 4px; }
+  .gbr-folder-tab {
+    min-width: 78px;
+    max-width: 132px;
+    height: 30px;
+    padding-inline: 23px 10px;
+    font-size: .54rem;
+  }
+  .gbr-folder-drawer {
+    width: calc(100vw - 10px);
+    min-height: min(240px, calc(100dvh - var(--folder-drawer-top) - 5px));
+  }
+  .gbr-folder-sheet {
+    padding: 3.05rem 1.05rem 3.25rem;
+    font-size: .92rem;
+  }
+  .gbr-folder-title { padding-right: 5.8rem; }
+  .gbr-folder-drawer-cap { padding-left: 10px; font-size: .45rem; }
+  .gbr-folder-close { min-width: 72px; font-size: .47rem; }
+  .gbr-feedback-embed iframe { height: 68vh; min-height: 460px; }
+}
+
+@media (max-height: 620px) {
+  .gbr-folder-drawer-cap { height: 26px; }
+  .gbr-folder-sheet { padding-top: 2.7rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gbr-folder-drawer, .gbr-folder-scrim, .gbr-folder-tab { transition-duration: 1ms; }
+  .gbr-folder-drawer,
+  .gbr-folder-scrim,
+  .gbr-folder-tab { transition-duration: 1ms !important; }
 }
+

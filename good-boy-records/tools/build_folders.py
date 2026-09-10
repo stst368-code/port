@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
-"""Build the side folder tabs from `content-source/folders/*.md`.
+"""Build the Good Boy Records pull-down page drawer from Markdown.
 
-Each file is one tab. Frontmatter:
+Each file under `content-source/folders/*.md` is one page. Frontmatter:
 
     ---
-    tab: Notes            # short label on the tab itself, keep it to ~12 chars
-    title: Production notes
+    tab: About
+    title: About Good Boy Records
     order: 1
     ---
 
-    Body markdown here.
+`tab` is the short engraved label on the top rail. `order` controls its
+left-to-right position. The rail scrolls horizontally when the page count
+outgrows the viewport, so adding the intended ~10 pages requires no template
+changes.
 
-Ordering is by `order`, then filename. Files with no frontmatter are skipped
-with a warning rather than failing the build, so a half-written note cannot
-break the site. If the directory is missing or empty, no tabs are emitted and
-the player renders exactly as it did before the feature existed.
-
-Markdown goes through `build_docs.render_markdown`, the same conservative
-dependency-free subset the written pages use.
+Markdown is rendered by `build_docs.render_markdown`, including GBR's Spotify,
+Microsoft Forms and read-only ComfyUI workflow directives.
 """
 from __future__ import annotations
 
@@ -33,8 +31,6 @@ ROOT = Path(__file__).resolve().parent.parent
 FOLDERS_SOURCE = ROOT / "content-source" / "folders"
 
 SLUG_SAFE = re.compile(r"[^a-z0-9]+")
-# Files are usually named 01-about.md so they sort; the ordering prefix
-# should not end up in the element id.
 ORDER_PREFIX = re.compile(r"^\d+[-_]")
 
 
@@ -57,11 +53,12 @@ def read_folder(path: Path, warn) -> dict | None:
 
     title = str(meta.get("title") or path.stem.replace("-", " ").title())
     tab = str(meta.get("tab") or title)
+    order = meta.get("order", 999)
     return {
         "id": slug(str(meta.get("slug") or path.stem)),
         "tab": tab,
         "title": title,
-        "order": meta.get("order", 999),
+        "order": order,
         "body": build_docs.render_markdown(text[match.end():]),
     }
 
@@ -86,9 +83,12 @@ def render(folders: list[dict]) -> str:
     sheets = []
     for folder in folders:
         fid = folder["id"]
+        order = folder["order"] if isinstance(folder["order"], int) else 999
+        order_label = f"{order:02d}" if 0 <= order <= 99 else str(order)
         tabs.append(
             f'<button class="gbr-folder-tab" type="button" role="tab"'
-            f' id="gbr-tab-{fid}" data-folder="{fid}"'
+            f' id="gbr-tab-{fid}" data-folder="{fid}" data-order="{html.escape(order_label)}"'
+            f' title="{html.escape(folder["title"], quote=True)}"'
             f' aria-controls="gbr-folder-{fid}" aria-selected="false">'
             f'<span>{html.escape(folder["tab"])}</span></button>'
         )
@@ -102,15 +102,23 @@ def render(folders: list[dict]) -> str:
 
     return (
         '<aside class="gbr-folders" id="gbr-folders" data-open="">\n'
-        '  <div class="gbr-folder-scrim" id="gbr-folder-scrim"></div>\n'
-        '  <div class="gbr-folder-tabs" role="tablist" aria-label="Sleeve notes">\n    '
+        '  <div class="gbr-folder-tabs" role="tablist" aria-orientation="horizontal"'
+        ' aria-label="Good Boy Records pages">\n    '
         + "\n    ".join(tabs)
         + '\n  </div>\n'
-        '  <div class="gbr-folder-drawer" id="gbr-folder-drawer">\n'
+        '  <div class="gbr-folder-scrim" id="gbr-folder-scrim"></div>\n'
+        '  <section class="gbr-folder-drawer" id="gbr-folder-drawer"'
+        ' aria-label="Good Boy Records page drawer">\n'
+        '    <div class="gbr-folder-drawer-cap" aria-hidden="true">'
+        '<span>GOOD BOY RECORDS / INFORMATION RACK</span></div>\n'
         '    <button class="gbr-folder-close" type="button" id="gbr-folder-close"'
-        ' aria-label="Close notes">&times;</button>\n    '
+        ' aria-label="Retract page drawer">RETRACT</button>\n    '
         + "\n    ".join(sheets)
-        + "\n  </div>\n</aside>"
+        + '\n    <div class="gbr-folder-resizer" id="gbr-folder-resizer" role="separator" tabindex="0"'
+        ' aria-orientation="horizontal" aria-label="Resize page drawer height"'
+        ' title="Drag to resize; double-click to reset"></div>\n'
+        "  </section>\n"
+        "</aside>"
     )
 
 
@@ -120,4 +128,4 @@ def build(warn=print) -> str:
 
 if __name__ == "__main__":
     found = discover()
-    print(f"{len(found)} folder(s): " + ", ".join(f["tab"] for f in found))
+    print(f"{len(found)} page(s): " + ", ".join(f["tab"] for f in found))

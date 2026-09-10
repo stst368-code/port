@@ -77,6 +77,71 @@ def _inline_markdown(text: str) -> str:
     return text
 
 
+_LIST_ITEM = re.compile(r"^(?P<indent>[ \t]*)(?P<marker>[-+*]|\d+[.)])\s+(?P<text>.+?)\s*$")
+
+
+def _indent_width(prefix: str) -> int:
+    """Return a stable indentation width for list nesting (tabs = four spaces)."""
+    return len(prefix.expandtabs(4))
+
+
+def _render_list_block(lines: list[str], start: int) -> tuple[list[str], int]:
+    """Render a consecutive Markdown list block, preserving nested structure."""
+    items: list[tuple[int, str, str]] = []
+    i = start
+    while i < len(lines):
+        match = _LIST_ITEM.match(lines[i])
+        if not match:
+            break
+        marker = match.group("marker")
+        kind = "ol" if marker[0].isdigit() else "ul"
+        items.append((_indent_width(match.group("indent")), kind, match.group("text")))
+        i += 1
+
+    if not items:
+        return [], start
+
+    out: list[str] = []
+    stack: list[dict[str, object]] = []
+
+    for indent, kind, text in items:
+        while stack and indent < int(stack[-1]["indent"]):
+            if stack[-1]["li_open"]:
+                out.append("</li>")
+            out.append(f'</{stack[-1]["kind"]}>')
+            stack.pop()
+
+        if not stack:
+            out.append(f"<{kind}>")
+            stack.append({"indent": indent, "kind": kind, "li_open": False})
+        elif indent > int(stack[-1]["indent"]):
+            out.append(f"<{kind}>")
+            stack.append({"indent": indent, "kind": kind, "li_open": False})
+        else:
+            current = stack[-1]
+            if current["kind"] != kind:
+                if current["li_open"]:
+                    out.append("</li>")
+                out.append(f'</{current["kind"]}>')
+                stack.pop()
+                out.append(f"<{kind}>")
+                stack.append({"indent": indent, "kind": kind, "li_open": False})
+            elif current["li_open"]:
+                out.append("</li>")
+                current["li_open"] = False
+
+        out.append(f"<li>{_inline_markdown(text)}")
+        stack[-1]["li_open"] = True
+
+    while stack:
+        if stack[-1]["li_open"]:
+            out.append("</li>")
+        out.append(f'</{stack[-1]["kind"]}>')
+        stack.pop()
+
+    return out, i
+
+
 def render_markdown(source: str) -> str:
     """Render the Markdown subset used by the documentation with stdlib only.
 
@@ -289,18 +354,11 @@ def render_markdown(source: str) -> str:
             out.append(f"<blockquote><p>{_inline_markdown(' '.join(quoted))}</p></blockquote>")
             continue
 
-        bullet = re.match(r"^[-+*]\s+(.+)$", stripped)
-        ordered = re.match(r"^\d+[.)]\s+(.+)$", stripped)
-        if bullet or ordered:
+        if _LIST_ITEM.match(raw):
             flush_paragraph()
-            wanted = "ul" if bullet else "ol"
-            if list_type != wanted:
-                close_list()
-                list_type = wanted
-                out.append(f"<{wanted}>")
-            item = bullet.group(1) if bullet else ordered.group(1)
-            out.append(f"<li>{_inline_markdown(item)}</li>")
-            i += 1
+            close_list()
+            rendered_list, i = _render_list_block(lines, i)
+            out.extend(rendered_list)
             continue
 
         paragraph.append(stripped)

@@ -131,6 +131,16 @@
     });
   }
 
+  var MULTILINE_WIDGET_NAMES = /(?:^|_)(?:caption|lyrics?|prompt|text|description|instructions?|system_prompt|user_prompt|negative_prompt|positive_prompt)(?:$|_)/i;
+
+  function isMultilineWidget(node, entry) {
+    var key = String(entry && entry.key || "");
+    var value = String(entry && entry.value == null ? "" : entry.value);
+    if (node && node.type === "PrimitiveStringMultiline") return true;
+    if (MULTILINE_WIDGET_NAMES.test(key)) return true;
+    return value.indexOf("\n") !== -1 || value.length > 90;
+  }
+
   function WorkflowViewer(root) {
     this.root = root;
     this.stage = null;
@@ -657,18 +667,23 @@
         var body = document.createElement("div");
         body.className = "cw-widgets";
         var multiCount = widgets.reduce(function (count, entry) {
-          var value = String(entry.value == null ? "" : entry.value);
-          return count + ((value.indexOf("\n") !== -1 || value.length > 90) ? 1 : 0);
+          return count + (isMultilineWidget(node, entry) ? 1 : 0);
         }, 0);
         if (widgets.length === 1 && multiCount === 1) body.classList.add("cw-widgets--single-multi");
-        if (widgets.length >= 3) body.classList.add("cw-widgets--dense");
+        if (widgets.length > multiCount && multiCount > 0) body.classList.add("cw-widgets--mixed-multi");
+        if (widgets.length >= 3 && multiCount === 0) body.classList.add("cw-widgets--dense");
+
         widgets.forEach(function (entry) {
           var field = document.createElement("div");
-          field.className = "cw-widget";
-          var value = entry.value;
-          var multiline = value.indexOf("\n") !== -1 || value.length > 90;
-          field.innerHTML = '<div class="cw-widget-key cw-text-selectable">' + escapeHtml(entry.key) + '</div>' +
-            '<div class="cw-widget-value cw-text-selectable' + (multiline ? ' cw-widget-value--multi' : '') + '">' + escapeHtml(value || "—") + '</div>';
+          var value = String(entry.value == null ? "" : entry.value);
+          var multiline = isMultilineWidget(node, entry);
+          field.className = "cw-widget" + (multiline ? " cw-widget--textarea" : "");
+          field.innerHTML =
+            '<div class="cw-widget-key cw-text-selectable">' + escapeHtml(entry.key) + '</div>' +
+            '<div class="cw-widget-value cw-text-selectable' + (multiline ? ' cw-widget-value--multi' : '') + '"' +
+            ' role="textbox" aria-readonly="true" aria-label="' + escapeHtml(entry.key) + '">' +
+            (value ? escapeHtml(value) : (multiline ? "" : "—")) +
+            '</div>';
           body.appendChild(field);
         });
         el.appendChild(body);

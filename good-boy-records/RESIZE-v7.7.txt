@@ -1,0 +1,6 @@
+Good Boy Records v7.7 drawer resize fix
+
+The resize control is now created by JavaScript when older generated HTML does not contain it.
+The drawer edge uses a permanent full-height brass rail and a large ⇔ grip.
+
+This makes the CSS/JS patch sufficient for existing deployed pages.

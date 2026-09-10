@@ -20,6 +20,113 @@
     </div>
   </header>
 
+<aside class="gbr-folders" id="gbr-folders" data-open="">
+  <div class="gbr-folder-tabs" role="tablist" aria-orientation="horizontal" aria-label="Good Boy Records pages">
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-about" data-folder="about" data-order="01" title="About Good Boy Records" aria-controls="gbr-folder-about" aria-selected="false"><span>About</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-idea" data-folder="idea" data-order="02" title="Where&#x27;d the idea come from" aria-controls="gbr-folder-idea" aria-selected="false"><span>Origin</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-technology" data-folder="technology" data-order="03" title="The tools and tech used" aria-controls="gbr-folder-technology" aria-selected="false"><span>Tech</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-workflow" data-folder="workflow" data-order="04" title="MiniMax Music 3 workflow" aria-controls="gbr-folder-workflow" aria-selected="false"><span>Music Workflow</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-output-analysis" data-folder="output-analysis" data-order="05" title="Output Analysis" aria-controls="gbr-folder-output-analysis" aria-selected="false"><span>Output Analysis</span></button>
+    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-requests" data-folder="requests" data-order="10" title="Requests" aria-controls="gbr-folder-requests" aria-selected="false"><span>Requests</span></button>
+  </div>
+  <div class="gbr-folder-scrim" id="gbr-folder-scrim"></div>
+  <section class="gbr-folder-drawer" id="gbr-folder-drawer" aria-label="Good Boy Records page drawer">
+    <div class="gbr-folder-drawer-cap" aria-hidden="true"><span>GOOD BOY RECORDS / INFORMATION RACK</span></div>
+    <button class="gbr-folder-close" type="button" id="gbr-folder-close" aria-label="Retract page drawer">RETRACT</button>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-about" aria-labelledby="gbr-tab-about" tabindex="-1" hidden><h2 class="gbr-folder-title">About Good Boy Records</h2><div class="gbr-folder-body"><p>Good Boy Records is run out of a converted mill in Derbyshire by two golden retrievers with strong opinions about seating arrangements and a passion for chasing balls beyond the gate.</p>
+<p>Each cassette on the wall is one generated take. Songs usually have several versions; they sit together in the magazine so you can hear how a track changed between attempts, models or styles.</p>
+<p>This page documents how the music is made and acts as a general introduction to AI, generative models and diffusion.</p>
+<p>Whilst we are two good dogs, we do have to warn you: some songs, and some of the songs linked from this page, contain explicit language or cover subject matter that may offend.</p>
+<p>Please don't play this around your children.</p></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-idea" aria-labelledby="gbr-tab-idea" tabindex="-1" hidden><h2 class="gbr-folder-title">Where&#x27;d the idea come from</h2><div class="gbr-folder-body"><p>I've always enjoyed covers, especially when someone completely changes the style or language of the original.</p>
+<p>Through the magic of YouTube recommendations, I came across AI covers in 2024. They were quite bad, but very entertaining.</p>
+<p>I've kept my eyes and ears open as the technology and the processes have developed, and with some confidence I can state that what you see here at Good Boy Records is the cutting edge of what's available at the time of writing this (Sept. 2026).</p>
+<p>I can equally, confidently, state that six months from now this will look like a dog playing a recorder, so enjoy it whilst it's good.</p>
+<p>For some frame of reference, here are a few AI cover artists and tracks I thought were doing this particularly well before I started building my own:</p>
+<div class="gbr-spotify-embed"><iframe src="https://open.spotify.com/embed/playlist/2goJQmLGvz08hNlQqse7FC" title="Spotify playlist player" loading="lazy" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<p>And, whilst not AI, on the theme of covers, I have to give a shout to Scott:</p>
+<div class="gbr-spotify-embed"><iframe src="https://open.spotify.com/embed/artist/5HYNPEO2NNBONQkp3Mvwvc" title="Spotify artist player" loading="lazy" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-technology" aria-labelledby="gbr-tab-technology" tabindex="-1" hidden><h2 class="gbr-folder-title">The tools and tech used</h2><div class="gbr-folder-body"><p>Below is a quick overview of the tools and technologies used to build the workflow, design the music, set up this website and construct its contents.</p>
+<h3 id="languages">Languages</h3>
+<ul>
+<li><a href="https://www.python.org/">Python</a>
+</li>
+</ul>
+<h3 id="software">Software</h3>
+<ul>
+<li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a>
+</li>
+<li><a href="https://github.com/comfy-org/comfyui">ComfyUI</a>
+</li>
+<li><a href="https://notepad-plus-plus.org/">Notepad++</a>
+</li>
+</ul>
+<h3 id="ai">AI</h3>
+<ul>
+<li><a href="https://github.com/ace-step/ACE-Step-1.5">ACE-Step 1.5</a>
+</li>
+<li><a href="https://github.com/MiniMax-AI/MiniMax-Music3">MiniMax Music 3</a>
+<ul>
+<li><strong>Text Encoders</strong>
+<ul>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/text_encoders/minimax_music3_text_encoder_bf16.safetensors">minimax_music3_text_encoder_bf16.safetensors</a>
+</li>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/text_encoders/minimax_music3_text_encoder_pruned_bf16.safetensors">minimax_music3_text_encoder_pruned_bf16.safetensors</a>
+</li>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/text_encoders/minimax_music3_text_encoder_pruned_int8_convrot.safetensors">minimax_music3_text_encoder_pruned_int8_convrot.safetensors</a>
+</li>
+</ul>
+</li>
+<li><strong>Diffusion Transformers</strong>
+<ul>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/diffusion_models/minimax_music3_dit_fp16.safetensors">minimax_music3_dit_fp16.safetensors</a>
+</li>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/diffusion_models/minimax_music3_dit_fp32.safetensors">minimax_music3_dit_fp32.safetensors</a>
+</li>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/diffusion_models/minimax_music3_dit_int8_convrot.safetensors">minimax_music3_dit_int8_convrot.safetensors</a>
+</li>
+</ul>
+</li>
+<li><strong>VAE</strong>
+<ul>
+<li><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/vae/minimax_music3_dav.safetensors">minimax_music3_dav.safetensors</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://huggingface.co/openai/whisper-large-v3">Whisper</a>
+</li>
+<li><a href="https://github.com/adefossez/demucs">Demucs</a>
+</li>
+</ul>
+<h3 id="services">Services</h3>
+<ul>
+<li><a href="https://www.runpod.io/">RunPod</a>
+</li>
+<li><a href="https://github.com/">GitHub</a> (you're here!)
+</li>
+</ul>
+<h3 id="data-storage-formats">Data storage formats</h3>
+<ul>
+<li><code>.yaml</code>
+</li>
+<li><code>.json</code>
+</li>
+<li><code>.md</code>
+</li>
+</ul></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-workflow" aria-labelledby="gbr-tab-workflow" tabindex="-1" hidden><h2 class="gbr-folder-title">MiniMax Music 3 workflow</h2><div class="gbr-folder-body"><p>This is the ComfyUI workflow used for music generation. I've simplified the graph to make it easier to understand, but all of the essential elements remain.</p>
+<p>Each section and node is accompanied by a description of what it does. Follow the graph from left to right to see how these songs are made.</p>
+<div class="comfy-workflow" data-workflow="assets/workflows/LLMExplanation.json" data-height="850"></div>
+<p>Drag to pan. On a touchscreen, pinch to zoom; on desktop, use the mouse wheel or the <strong>+/-</strong> buttons. Use <strong>FIT</strong> or <strong>FULLSCREEN</strong> when you want to inspect the whole graph.</p></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-output-analysis" aria-labelledby="gbr-tab-output-analysis" tabindex="-1" hidden><h2 class="gbr-folder-title">Output Analysis</h2><div class="gbr-folder-body"><p>So, now we've generated some music, how do we define what is "good"? What tools can we use to quantify "good" music?</p></div></article>
+    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-requests" aria-labelledby="gbr-tab-requests" tabindex="-1" hidden><h2 class="gbr-folder-title">Requests</h2><div class="gbr-folder-body"><p>If you've got a request for a cover, or anything else you'd like to hear, drop it into the form below.</p>
+<div class="gbr-feedback-embed"><iframe src="https://forms.cloud.microsoft/r/Gwx8tMhHke" title="Good Boy Records request form" loading="lazy" frameborder="0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="gbr-feedback-fallback">If the form does not appear here, <a href="https://forms.cloud.microsoft/r/Gwx8tMhHke" target="_blank" rel="noopener noreferrer">open it in a new tab</a>.</p></div></div></article>
+    <div class="gbr-folder-resizer" id="gbr-folder-resizer" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize page drawer height" title="Drag to resize; double-click to reset"></div>
+  </section>
+</aside>
+
   <div class="gbr-machine">
 
     <section class="gbr-magazine" id="gbr-magazine" aria-label="Cassette magazine">
@@ -152,40 +259,6 @@
     <div class="gbr-popup-head"><strong>TECHNICAL</strong><button type="button" id="gbr-tech-close" aria-label="Close technical details">×</button></div>
     <div id="gbr-tech-content" class="gbr-tech-content"><p>No cassette latched.</p></div>
   </aside>
-
-<aside class="gbr-folders" id="gbr-folders" data-open="">
-  <div class="gbr-folder-scrim" id="gbr-folder-scrim"></div>
-  <div class="gbr-folder-tabs" role="tablist" aria-label="Sleeve notes">
-    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-about" data-folder="about" aria-controls="gbr-folder-about" aria-selected="false"><span>About</span></button>
-    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-process" data-folder="process" aria-controls="gbr-folder-process" aria-selected="false"><span>Process</span></button>
-    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-notes" data-folder="notes" aria-controls="gbr-folder-notes" aria-selected="false"><span>Notes</span></button>
-    <button class="gbr-folder-tab" type="button" role="tab" id="gbr-tab-workflow" data-folder="workflow" aria-controls="gbr-folder-workflow" aria-selected="false"><span>Workflow</span></button>
-  </div>
-  <div class="gbr-folder-drawer" id="gbr-folder-drawer">
-    <button class="gbr-folder-close" type="button" id="gbr-folder-close" aria-label="Close notes">&times;</button>
-    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-about" aria-labelledby="gbr-tab-about" tabindex="-1" hidden><h2 class="gbr-folder-title">About Good Boy Records</h2><div class="gbr-folder-body"><p><em>Placeholder — replace this file with your own words.</em></p>
-<p>Good Boy Records is a made-up label for AI-generated music, run out of a converted mill in Derbyshire by two golden retrievers with strong opinions about seating arrangements.</p>
-<p>Each cassette on the wall is one generated take. Songs usually have several versions; they sit together in the magazine so you can hear how a track moved between attempts.</p></div></article>
-    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-process" aria-labelledby="gbr-tab-process" tabindex="-1" hidden><h2 class="gbr-folder-title">How the records get made</h2><div class="gbr-folder-body"><p><em>Placeholder — replace this file with your own words.</em></p>
-<p>Somewhere to write up the pipeline: prompt construction, which model produced what, how many attempts a track took, what got thrown away.</p>
-<p>The <strong>Tech</strong> button in the corner already shows the per-track parameters — model, CFG, steps, seed. This folder is for the parts that do not fit in a metadata table.</p></div></article>
-    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-notes" aria-labelledby="gbr-tab-notes" tabindex="-1" hidden><h2 class="gbr-folder-title">Sleeve notes</h2><div class="gbr-folder-body"><p><em>Placeholder — replace this file with your own words.</em></p>
-<h2 id="adding-your-own-folders">Adding your own folders</h2>
-<p>Drop a Markdown file into <code>content-source/folders/</code> and rebuild:</p>
-<pre><code>python tools/build_catalogue.py</code></pre>
-<p>Each file needs frontmatter:</p>
-<pre><code>---
-tab: Notes
-title: Sleeve notes
-order: 3
----</code></pre>
-<p><code>tab</code> is the label down the side, so keep it short — about twelve characters before it starts to crowd the others. <code>order</code> sorts the tabs top to bottom.</p>
-<p>The body takes the usual Markdown: headings, lists, tables, quotes, links, <code>inline code</code> and fenced blocks. Delete a file to remove its tab; remove them all and the tabs disappear entirely.</p></div></article>
-    <article class="gbr-folder-sheet" role="tabpanel" id="gbr-folder-workflow" aria-labelledby="gbr-tab-workflow" tabindex="-1" hidden><h2 class="gbr-folder-title">MiniMax Music 3 workflow</h2><div class="gbr-folder-body"><p>This is the actual ComfyUI workflow used for the explanation, rendered directly from the saved workflow JSON. It is <strong>read-only</strong>: drag to pan, use the mouse wheel or the +/- buttons to zoom, and use <strong>FIT</strong> or <strong>FULLSCREEN</strong> when you want to inspect the whole graph.</p>
-<div class="comfy-workflow" data-workflow="assets/workflows/LLMExplanation.json" data-height="650"></div>
-<p>The viewer reads the node positions, groups, links, inputs, outputs and saved widget values from the workflow file. It does not need ComfyUI, any custom nodes, the model files, or a Python backend in order to display it.</p></div></article>
-  </div>
-</aside>
 
   <audio id="gbr-audio" preload="metadata"></audio>
 </main>
