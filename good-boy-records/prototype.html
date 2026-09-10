@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Good Boy Records - top pull-down pages prototype</title>
+<link rel="stylesheet" href="assets/css/gbr-page-drawer.css">
+<style>html, body { min-height: 100%; }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 17%, rgba(185,119,44,.10), transparent 24%),
+        radial-gradient(circle at 25% 52%, rgba(118,71,30,.09), transparent 26%),
+        linear-gradient(#080706, #030303 70%);
+    color: #d8d1c5;
+}
+.demo-stage {
+    min-height: 100vh;
+    padding: 118px 7vw 80px;
+    box-sizing: border-box;
+}
+.demo-sign {
+    width: min(780px, 90vw);
+    margin: 0 auto 65px;
+    text-align: center;
+    color: #a79b89;
+    font: 10px/1.5 ui-monospace, Consolas, monospace;
+    letter-spacing: .22em;
+}
+.demo-sign strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #e5b96d;
+    font: 600 clamp(30px,5vw,60px)/1 Georgia, serif;
+    letter-spacing: .03em;
+}
+.demo-deck {
+    width: min(950px, 92vw);
+    min-height: 330px;
+    margin: auto;
+    border: 1px solid #26221d;
+    border-radius: 11px;
+    background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,.012), transparent),
+        linear-gradient(#141210,#080706);
+    box-shadow: 0 25px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.03);
+    display: grid;
+    place-items: center;
+}
+.demo-deck__slot {
+    width: min(480px, 72%);
+    height: 138px;
+    border: 1px solid #2f2a23;
+    border-radius: 9px;
+    background: #050504;
+    box-shadow: inset 0 8px 20px rgba(0,0,0,.75);
+    display: grid;
+    place-items: center;
+    color: #655c50;
+    font: 10px/1.4 ui-monospace, Consolas, monospace;
+    letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main class="demo-stage">
+  <div class="demo-sign">
+    <strong>GOOD BOY RECORDS</strong>
+    TOP PULL-DOWN INFORMATION RACK PROTOTYPE
+  </div>
+  <section class="demo-deck" aria-label="Placeholder for existing cassette player">
+    <div class="demo-deck__slot">EXISTING CASSETTE / VINYL EXPERIENCE REMAINS HERE</div>
+  </section>
+</main>
+<!--
+  GENERATED EXAMPLE FROM THE CURRENT GBR PAGE FRONT MATTER.
+  In the real build, keep using your existing Markdown/custom-widget renderer
+  for the template bodies. The drawer only needs tab/title/order + rendered HTML.
+-->
+<nav class="gbr-page-rail" data-gbr-page-rail aria-label="Good Boy Records information pages">
+  <div class="gbr-page-rail__track">
+    <button class="gbr-page-tab" type="button"
+        data-gbr-page="about" data-gbr-title="About Good Boy Records"
+        aria-controls="gbr-page-drawer" aria-expanded="false">About</button>
+<button class="gbr-page-tab" type="button"
+        data-gbr-page="origin" data-gbr-title="Where&#x27;d the idea come from"
+        aria-controls="gbr-page-drawer" aria-expanded="false">Origin</button>
+<button class="gbr-page-tab" type="button"
+        data-gbr-page="tech" data-gbr-title="The tools and tech used"
+        aria-controls="gbr-page-drawer" aria-expanded="false">Tech</button>
+<button class="gbr-page-tab" type="button"
+        data-gbr-page="music-workflow" data-gbr-title="MiniMax Music 3 workflow"
+        aria-controls="gbr-page-drawer" aria-expanded="false">Music Workflow</button>
+<button class="gbr-page-tab" type="button"
+        data-gbr-page="output-analysis" data-gbr-title="Output Analysis"
+        aria-controls="gbr-page-drawer" aria-expanded="false">Output Analysis</button>
+<button class="gbr-page-tab" type="button"
+        data-gbr-page="requests" data-gbr-title="Requests"
+        aria-controls="gbr-page-drawer" aria-expanded="false">Requests</button>
+  </div>
+</nav>
+
+<button class="gbr-page-scrim" data-gbr-page-scrim type="button"
+        aria-label="Close information drawer" tabindex="-1"></button>
+
+<aside class="gbr-page-drawer" id="gbr-page-drawer"
+       data-gbr-page-drawer data-open="false" aria-hidden="true">
+  <header class="gbr-page-drawer__head">
+    <div>
+      <p class="gbr-page-drawer__eyebrow">GOOD BOY RECORDS / INFORMATION RACK</p>
+      <h2 class="gbr-page-drawer__title" data-gbr-drawer-title>Information</h2>
+    </div>
+    <button class="gbr-page-drawer__close" data-gbr-drawer-close type="button">RETRACT</button>
+  </header>
+  <div class="gbr-page-drawer__body" data-gbr-drawer-body></div>
+  <div class="gbr-page-drawer__foot" aria-hidden="true"></div>
+</aside>
+
+<template id="gbr-page-template-about">
+<p>Good Boy Records is run out of a converted mill in Derbyshire by two golden retrievers with strong opinions about seating arrangements and a passion for chasing balls beyond the gate.</p>
+<p>Each cassette on the wall is one generated take. Songs usually have several versions; they sit together in the magazine so you can hear how a track changed between attempts, models or styles.</p>
+<p>This page documents how the music is made and acts as a general introduction to AI, generative models and diffusion.</p>
+<p>Whilst we are two good dogs, we do have to warn you: some songs, and some of the songs linked from this page, contain explicit language or cover subject matter that may offend.</p>
+<p>Please don&#x27;t play this around your children.</p>
+</template>
+<template id="gbr-page-template-origin">
+<p>I&#x27;ve always enjoyed covers, especially when someone completely changes the style or language of the original.</p>
+<p>Through the magic of YouTube recommendations, I came across AI covers in 2024. They were quite bad, but very entertaining.</p>
+<p>I&#x27;ve kept my eyes and ears open as the technology and the processes have developed, and with some confidence I can state that what you see here at Good Boy Records is the cutting edge of what&#x27;s available at the time of writing this (Sept. 2026).</p>
+<p>I can equally, confidently, state that six months from now this will look like a dog playing a recorder, so enjoy it whilst it&#x27;s good.</p>
+<p>For some frame of reference, here are a few AI cover artists and tracks I thought were doing this particularly well before I started building my own:</p>
+<div class="gbr-demo-widget"><span class="gbr-demo-widget__lamp"></span><strong>SPOTIFY EMBED</strong><span>https://open.spotify.com/playlist/2goJQmLGvz08hNlQqse7FC</span></div>
+<p>And, whilst not AI, on the theme of covers, I have to give a shout to Scott:</p>
+<div class="gbr-demo-widget"><span class="gbr-demo-widget__lamp"></span><strong>SPOTIFY EMBED</strong><span>https://open.spotify.com/artist/5HYNPEO2NNBONQkp3Mvwvc</span></div>
+</template>
+<template id="gbr-page-template-tech">
+<p>Below is a quick overview of the tools and technologies used to build the workflow, design the music, set up this website and construct its contents.</p>
+<h3>Languages</h3>
+<ul>
+<li><a href="https://www.python.org/" target="_blank" rel="noopener">Python</a></li>
+</ul>
+<h3>Software</h3>
+<ul>
+<li><a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">PyCharm</a></li>
+<li><a href="https://github.com/comfy-org/comfyui" target="_blank" rel="noopener">ComfyUI</a></li>
+<li><a href="https://notepad-plus-plus.org/" target="_blank" rel="noopener">Notepad++</a></li>
+</ul>
+<h3>AI</h3>
+<ul>
+<li><a href="https://github.com/ace-step/ACE-Step-1.5" target="_blank" rel="noopener">ACE-Step 1.5</a></li>
+<li><a href="https://github.com/MiniMax-AI/MiniMax-Music3" target="_blank" rel="noopener">MiniMax Music 3</a></li>
+</ul>
+<div class="gbr-demo-indent">Text Encoders:</div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/text_encoders/minimax_music3_text_encoder_bf16.safetensors" target="_blank" rel="noopener">minimax_music3_text_encoder_bf16.safetensors</a></div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/text_encoders/minimax_music3_text_encoder_pruned_bf16.safetensors" target="_blank" rel="noopener">minimax_music3_text_encoder_pruned_bf16.safetensors</a></div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/text_encoders/minimax_music3_text_encoder_pruned_int8_convrot.safetensors" target="_blank" rel="noopener">minimax_music3_text_encoder_pruned_int8_convrot.safetensors</a></div>
+<div class="gbr-demo-indent">Diffusion Transformers:</div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/diffusion_models/minimax_music3_dit_fp16.safetensors" target="_blank" rel="noopener">minimax_music3_dit_fp16.safetensors</a></div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/diffusion_models/minimax_music3_dit_fp32.safetensors" target="_blank" rel="noopener">minimax_music3_dit_fp32.safetensors</a></div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/diffusion_models/minimax_music3_dit_int8_convrot.safetensors" target="_blank" rel="noopener">minimax_music3_dit_int8_convrot.safetensors</a></div>
+<div class="gbr-demo-indent">VAE:</div>
+<div class="gbr-demo-indent"><a href="https://huggingface.co/Comfy-Org/MiniMax-Music-3/blob/main/vae/minimax_music3_dav.safetensors" target="_blank" rel="noopener">minimax_music3_dav.safetensors</a></div>
+<ul>
+<li><a href="https://huggingface.co/openai/whisper-large-v3" target="_blank" rel="noopener">Whisper</a></li>
+<li><a href="https://github.com/adefossez/demucs" target="_blank" rel="noopener">Demucs</a></li>
+</ul>
+<h3>Services</h3>
+<ul>
+<li><a href="https://www.runpod.io/" target="_blank" rel="noopener">RunPod</a></li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> (you&#x27;re here!)</li>
+</ul>
+<h3>Data storage formats</h3>
+<ul>
+<li>`.yaml`</li>
+<li>`.json`</li>
+<li>`.md`</li>
+</ul>
+</template>
+<template id="gbr-page-template-music-workflow">
+<p>This is the ComfyUI workflow used for music generation. I&#x27;ve simplified the graph to make it easier to understand, but all of the essential elements remain.</p>
+<p>Each section and node is accompanied by a description of what it does. Follow the graph from left to right to see how these songs are made.</p>
+<div class="gbr-demo-widget gbr-demo-widget--large"><span class="gbr-demo-widget__lamp"></span><strong>COMFYUI WORKFLOW VIEWER</strong><span>Existing custom renderer remains in charge here.</span></div>
+<p>Drag to pan. On a touchscreen, pinch to zoom; on desktop, use the mouse wheel or the <strong>+/-</strong> buttons. Use <strong>FIT</strong> or <strong>FULLSCREEN</strong> when you want to inspect the whole graph.</p>
+</template>
+<template id="gbr-page-template-output-analysis">
+<p>So, now we&#x27;ve generated some music, how do we define what is &quot;good&quot;? What tools can we use to quantify &quot;good&quot; music?</p>
+</template>
+<template id="gbr-page-template-requests">
+<p>If you&#x27;ve got a request for a cover, or anything else you&#x27;d like to hear, drop it into the form below.</p>
+<div class="gbr-demo-widget"><span class="gbr-demo-widget__lamp"></span><strong>REQUEST FORM</strong><span>https://forms.cloud.microsoft/r/Gwx8tMhHke</span></div>
+</template>
+
+<script src="assets/js/gbr-page-drawer.js"></script>
+</body>
+</html>

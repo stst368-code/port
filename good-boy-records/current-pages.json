@@ -1,0 +1,44 @@
+[
+  {
+    "order": 1,
+    "tab": "About",
+    "title": "About Good Boy Records",
+    "slug": "about",
+    "source": "01-about(1).md"
+  },
+  {
+    "order": 2,
+    "tab": "Origin",
+    "title": "Where'd the idea come from",
+    "slug": "origin",
+    "source": "02-Idea(1).md"
+  },
+  {
+    "order": 3,
+    "tab": "Tech",
+    "title": "The tools and tech used",
+    "slug": "tech",
+    "source": "03-Technology(1).md"
+  },
+  {
+    "order": 4,
+    "tab": "Music Workflow",
+    "title": "MiniMax Music 3 workflow",
+    "slug": "music-workflow",
+    "source": "04-workflow(1).md"
+  },
+  {
+    "order": 5,
+    "tab": "Output Analysis",
+    "title": "Output Analysis",
+    "slug": "output-analysis",
+    "source": "05-output-analysis.md"
+  },
+  {
+    "order": 10,
+    "tab": "Requests",
+    "title": "Requests",
+    "slug": "requests",
+    "source": "10-requests.md"
+  }
+]

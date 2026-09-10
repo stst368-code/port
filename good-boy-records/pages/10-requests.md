@@ -1,7 +1,7 @@
 ---
 tab: Requests
 title: Requests
-order: 5
+order: 10
 ---
 
 If you've got a request for a cover, or anything else you'd like to hear, drop it
